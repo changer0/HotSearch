@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:paddingStart="@dimen/padding_L2"
+    android:paddingEnd="@dimen/padding_L2"
+    android:paddingTop="@dimen/padding_L2"
+    android:paddingBottom="@dimen/padding_L8">
+
+    <ImageView
+        android:id="@+id/tv_subtitle_img"
+        android:layout_width="@dimen/common_dp_24"
+        android:layout_height="@dimen/common_dp_24"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_subtitle_title"
+        style="@style/BaseText.T0_C106"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_L8"
+        tools:text="T2MC106"
+        tools:ignore="RtlHardcoded"
+        app:layout_constraintStart_toEndOf="@id/tv_subtitle_img"
+        app:qq_font="siyuansong"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_category"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        style="@style/Category"
+        tools:text="分类标签"
+        android:maxLines="1"
+        tools:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/tv_subtitle_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_subtitle_title"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_subtitle_title"
+        android:layout_marginStart="@dimen/margin_L8"
+        android:visibility="gone"/>
+
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_subtitle_desc"
+        style="@style/BaseText.T4_C104"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_L8"
+        tools:text="T3C105"
+        android:layout_marginTop="@dimen/margin_L7"
+        app:layout_constraintTop_toBottomOf="@id/tv_subtitle_title"
+        app:layout_constraintStart_toEndOf="@id/tv_subtitle_img"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_subtitle_more"
+        style="@style/BaseText.T4_C105"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_L8"
+        android:layout_marginStart="@dimen/margin_L1"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_subtitle_arrow"
+        app:layout_constraintTop_toTopOf="@+id/tv_subtitle_arrow"
+        app:layout_constraintEnd_toStartOf="@+id/tv_subtitle_arrow"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/tv_subtitle_desc"
+        tools:text="T3MC201"
+        tools:visibility="visible" />
+
+
+    <ImageView
+        android:id="@+id/tv_subtitle_arrow"
+        style="@style/RightGreyArrow"
+        android:src="@drawable/arrow_right_grey"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tv_subtitle_desc"
+        app:layout_constraintTop_toTopOf="@id/tv_subtitle_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/arrow_right_grey"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

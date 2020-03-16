@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/spacing_L2"
+    android:layout_marginRight="@dimen/spacing_L2">
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/iv_cover"
+        android:layout_marginTop="@dimen/spacing_L2"
+        android:layout_marginBottom="@dimen/spacing_L2"
+        android:layout_width="@dimen/common_dp_90"
+        android:layout_height="@dimen/common_dp_90"
+        android:scaleType="fitXY"
+        app:drawBorder="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:src="@color/color_C201" />
+
+    <View
+        android:id="@+id/top_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_L6"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        />
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title"
+        style="@style/Card_Feed_Interest_Reader_Title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/iv_cover"
+        app:layout_constraintTop_toBottomOf="@id/top_spacing"
+        tools:text="dsjfklsdjfksldfjdzsklfjdskjfldskjfkdsjfldksjfkdjfsdkjfdskjf" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_content"
+        style="@style/Card_Feed_Interest_Reader_Info"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/iv_cover"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        tools:text="中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_time"
+        style="@style/Card_Feed_Interest_Reader_Time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/iv_cover"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="发表于 7/11 10:02" />
+    <View
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time"
+        android:id="@+id/divider"
+        style="@style/DividerInCard"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

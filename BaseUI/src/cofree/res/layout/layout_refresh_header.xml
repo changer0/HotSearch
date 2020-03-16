@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="bottom">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="86dp">
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_view"
+            android:layout_width="86dp"
+            android:layout_height="56dp"
+            app:lottie_loop="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/loadingText"
+            style="@style/BaseText.T4"
+            android:textColor="#4d11141A"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_L9"
+            android:text="@string/xlistview_header_hint_loading"
+            app:layout_constraintTop_toBottomOf="@id/lottie_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="正在加载..." />
+
+<!--        <com.qq.reader.widget.ReaderTextView-->
+<!--            android:id="@+id/refresh_intro"-->
+<!--            style="@style/BaseText.T5_C105"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/margin_L8"-->
+<!--            android:text="@string/refresh_last_refresh_time"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@id/refresh_time"-->
+<!--            app:layout_constraintHorizontal_chainStyle="packed"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/loadingText" />-->
+
+<!--        <com.qq.reader.widget.ReaderTextView-->
+<!--            android:id="@+id/refresh_time"-->
+<!--            style="@style/BaseText.T5_C105"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/refresh_intro"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@id/refresh_intro"-->
+<!--            app:layout_constraintTop_toTopOf="@id/refresh_intro"-->
+<!--            tools:text="10分钟前" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

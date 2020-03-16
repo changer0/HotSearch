@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 墨水屏模式引导页 -->
+    <dimen name="ink_screen_tip_width">52dp</dimen>
+    <dimen name="ink_screen_tip_height">78dp</dimen>
+</resources>

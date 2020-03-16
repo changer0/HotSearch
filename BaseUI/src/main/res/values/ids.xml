@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--RecyclerView相关-->
+    <item name="BaseQuickAdapter_viewholder_support" type="id"/>
+    <item name="BaseQuickAdapter_swiping_support" type="id"/>
+    <item name="BaseQuickAdapter_dragging_support" type="id"/>
+    <item name="BaseQuickAdapter_databinding_support" type="id"/>
+    <!--RecyclerView相关 end-->
+
+    <!--RefreshLayout相关-->
+    <item name="refresh_target_view" type="id" />
+    <item name="web_browser" type="id" />
+    
+</resources>

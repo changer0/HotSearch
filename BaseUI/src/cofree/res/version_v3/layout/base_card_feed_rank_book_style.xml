@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    style="@style/CardFeedBook"
+    android:paddingTop="@dimen/spacing_L2"
+    android:paddingBottom="@dimen/spacing_L2"
+    android:paddingLeft="@dimen/spacing_L6"
+    android:paddingRight="@dimen/spacing_L6">
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text1_1"
+        style="@style/Card_FeedBook_Serial"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        android:text="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_text2_1"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text1_2"
+        style="@style/Card_FeedBook_Name"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_L4"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_text1_1"
+        app:layout_constraintLeft_toRightOf="@id/tv_text1_1"
+        app:layout_constraintStart_toEndOf="@id/tv_text1_1"
+        tool:text="asdfsdfsdfdsfds" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text1_3"
+        style="@style/Card_FeedBook_Desc"
+        android:layout_marginLeft="@dimen/spacing_L7"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_text1_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_text1_2"
+        app:layout_constraintStart_toEndOf="@id/tv_text1_2"
+        tool:text="awiegjoangsdsdfdsfsdfdsfsdfdsfdsf" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text2_1"
+        style="@style/Card_FeedBook_Serial"
+        android:text="2"
+        android:paddingTop="@dimen/spacing_L7"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_text1_1"
+        app:layout_constraintBottom_toTopOf="@+id/tv_text3_1"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text2_2"
+        style="@style/Card_FeedBook_Name"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_L4"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_text2_1"
+        app:layout_constraintLeft_toRightOf="@id/tv_text2_1"
+        app:layout_constraintStart_toEndOf="@id/tv_text2_1"
+        tool:text="awiegjoangagegwagegaeg" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text2_3"
+        style="@style/Card_FeedBook_Desc"
+        android:layout_width="0dp"
+        android:layout_marginLeft="@dimen/spacing_L7"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_text2_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_text2_2"
+        app:layout_constraintStart_toEndOf="@id/tv_text2_2"
+        tool:text="awiegjoangfewafagawggeag" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text3_1"
+        style="@style/Card_FeedBook_Serial"
+        android:text="3"
+        android:paddingTop="@dimen/spacing_L7"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_text2_1"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text3_2"
+        style="@style/Card_FeedBook_Name"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_L4"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_text3_1"
+        app:layout_constraintLeft_toRightOf="@id/tv_text3_1"
+        app:layout_constraintStart_toEndOf="@id/tv_text3_1"
+        tool:text="awiegjoantersdfsdfdsdfdsfsftg" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text3_3"
+        style="@style/Card_FeedBook_Desc"
+        android:layout_width="0dp"
+        android:layout_marginLeft="@dimen/spacing_L7"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_text3_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_text3_2"
+        app:layout_constraintStart_toEndOf="@id/tv_text3_2"
+        tool:text="awiegjoang" />
+</androidx.constraintlayout.widget.ConstraintLayout>

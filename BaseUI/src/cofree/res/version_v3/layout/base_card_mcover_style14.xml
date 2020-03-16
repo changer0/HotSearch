@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/padding_L6">
+
+    <include layout="@layout/base_card_mcover_style6"
+        android:id="@+id/book_root_view"/>
+
+    <include layout="@layout/base_card_mcover_style12"
+        app:layout_constraintTop_toBottomOf="@id/book_root_view"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/four_book_layout0"/>
+
+    <include layout="@layout/base_card_mcover_style12"
+        app:layout_constraintTop_toBottomOf="@id/four_book_layout0"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/four_book_layout1"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

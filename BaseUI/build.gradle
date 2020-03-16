@@ -1,0 +1,113 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+def config = rootProject.ext.android
+def libraries = rootProject.ext.dependencies
+
+android {
+
+    dataBinding {
+        enabled = true
+    }
+
+    // 编译SDK的版本
+    compileSdkVersion config.compileSdkVersion
+    // build tools的版本
+    useLibrary 'org.apache.http.legacy'
+    defaultConfig {
+        //minSDk
+        minSdkVersion config.minSdkVersion
+        //targetSdk
+        targetSdkVersion config.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res',
+                    'src/main/res/version_v3'
+            ]
+            assets.srcDirs = [
+                    'src/main/assets'
+            ]
+        }
+        cofree {
+            res.srcDirs = [
+                    'src/cofree/res',
+                    'src/cofree/res/version_v3'
+            ]
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release_with_sign {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "normal"
+    productFlavors{
+        cofree{
+            dimension 'normal'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.so', '*.jar'], dir: 'libs')
+    implementation libraries.constraintLayout
+    api libraries.recyclerview
+
+    //oppo
+//    oppoApi project(':colorsupportappcompat')
+    //华为UI相关
+    //    huaweiApi (name: 'hwresources-0.1', ext: 'aar')
+//    huaweiApi(name: 'hwresources-0.2', ext: 'aar')
+//    huaweiApi(name: 'hwtextview-0.1', ext: 'aar')
+//    huaweiApi(name: 'hwbottomnavigationview-0.2', ext: 'aar')
+
+    //common
+//    commonApi(name: 'hwresources-0.2', ext: 'aar')
+//    commonApi(name: 'hwtextview-0.1', ext: 'aar')
+//    commonApi(name: 'hwbottomnavigationview-0.2', ext: 'aar')
+
+    //Glide
+    api (libraries.glide,{
+        exclude group: 'com.android.support'
+    })
+    api (libraries.glideTransformations,{
+        exclude group: 'com.android.support'
+    })
+    annotationProcessor libraries.glideCompiler
+    implementation 'androidx.fragment:fragment:1.0.0'
+
+    implementation libraries.supportV7
+    //    implementation project(':CoreModule')
+    implementation libraries.yuewenCoreModule
+    //    implementation project(':CommonModule')
+    implementation libraries.yuewenCommonModule
+
+    implementation project(':RouteModule')
+
+    implementation project(':StatisticsModule')
+
+    implementation libraries.yuewenBadgeModule
+
+    api (libraries.lottie) {
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
+
+}

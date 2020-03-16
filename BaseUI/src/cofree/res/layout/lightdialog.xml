@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <!--
+    <RelativeLayout
+        android:id="@+id/light_num"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/light_num_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/popup_box"
+            android:gravity="center"
+            android:textColor="@color/text_color_c104"
+            android:textSize="@dimen/text_size_class_5" />
+    </RelativeLayout>
+    -->
+
+    <RelativeLayout
+        android:id="@+id/light"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#eaeaea"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
+
+        <com.qq.reader.widget.ReaderButton
+            android:id="@+id/left_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/light_button_left"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <com.qq.reader.widget.ReaderButton
+            android:id="@+id/right_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/light_button_right"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <SeekBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/right_button"
+            android:layout_toRightOf="@id/left_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:maxHeight="10dip"
+            android:minHeight="10dip"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:progressDrawable="@drawable/seekbar_style"
+            android:thumb="@drawable/seekbar_thumb"
+            android:thumbOffset="10dip" />
+        <!--
+         <LinearLayout
+            android:id="@+id/progress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/right_button"
+            android:layout_toRightOf="@id/left_button"
+            android:orientation="vertical"
+         />
+        -->
+    </RelativeLayout>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/choose_font_title"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/light"
+        android:background="#1F1F1F" />
+
+    <RelativeLayout
+        android:id="@+id/just_light_setting"
+        android:layout_width="fill_parent"
+        android:layout_height="68dp"
+        android:layout_below="@id/choose_font_title"
+        android:background="#eaeaea" >
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/just_light_setting_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="@string/up_down_sliding_brightness"
+            android:textColor="#555555"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/just_light_open_close"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/reader_dialog_setting_radiogroup_bg"
+            android:clickable="true" >
+
+            <com.qq.reader.widget.ReaderButton
+                android:id="@+id/just_light_open"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_margin="2dp"
+                android:background="@drawable/dialog_setting_btn_transparent"
+                android:gravity="center"
+                android:text="@string/open"
+                android:textColor="#ff8d8b83" />
+
+            <com.qq.reader.widget.ReaderButton
+                android:id="@+id/just_light_close"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_margin="2dp"
+                android:background="@drawable/dialog_setting_btn_transparent"
+                android:gravity="center"
+                android:text="@string/close"
+                android:textColor="#ff8d8b83" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/system_light_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/just_light_setting"
+        android:background="#1F1F1F" />
+
+    <RelativeLayout
+        android:id="@+id/follow_system_lighting"
+        android:layout_width="fill_parent"
+        android:layout_height="68dp"
+        android:layout_below="@id/system_light_divider"
+        android:background="#eaeaea" >
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/follow_system_lighting_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="@string/use_sys_brightness"
+            android:textColor="#555555"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/follow_system_lighting_open_close"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/reader_dialog_setting_radiogroup_bg"
+            android:clickable="true" >
+
+            <com.qq.reader.widget.ReaderButton
+                android:id="@+id/follow_system_lighting_open"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_margin="2dp"
+                android:background="@drawable/dialog_setting_btn_transparent"
+                android:gravity="center"
+                android:text="@string/open"
+                android:textColor="#ff8d8b83" />
+
+            <com.qq.reader.widget.ReaderButton
+                android:id="@+id/follow_system_lighting_close"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_margin="2dp"
+                android:background="@drawable/dialog_setting_btn_transparent"
+                android:gravity="center"
+                android:text="@string/close"
+                android:textColor="#ff8d8b83" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

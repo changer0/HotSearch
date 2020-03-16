@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="baseCard"
+            type="com.qq.reader.common.utils.DataBindingBeanFactory.CardSCoverStyle1" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.qq.reader.view.CoverImageView
+            android:id="@+id/iv_cover"
+            style="@style/Cover.SCover"
+            android:layout_marginStart="@dimen/margin_L2"
+            android:layout_marginTop="@dimen/margin_L4"
+            android:localstoreIconUrl="@{baseCard.mCover}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/tv_title"
+            style="@style/BaseText.T2.SingleLineEllipsize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/margin_L2"
+            android:layout_marginTop="@dimen/margin_L7"
+            android:text="@{baseCard.mTitle}"
+            android:textColor="@color/color_C106"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_cover"
+            app:layout_constraintTop_toTopOf="@+id/iv_cover"
+            tools:text="中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试"/>
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/tv_content"
+            style="@style/BaseText.T3.SingleLineEllipsize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/margin_L2"
+            android:text="@{baseCard.mContent}"
+            android:layout_marginTop="@dimen/margin_L8"
+            android:textColor="@color/color_C105"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_cover"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试"/>
+
+
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/tv_author"
+            style="@style/BaseText.T4_C105"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/margin_L2"
+            android:text="@{baseCard.mAuthor}"
+            android:textColor="@color/color_C105"
+            app:layout_constraintEnd_toStartOf="@+id/tv_tag1"
+            app:layout_constraintStart_toEndOf="@+id/iv_cover"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+            tools:text="中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试"/>
+
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/tv_tag1"
+            style="@style/Category"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@{baseCard.mTag1}"
+            android:visibility="@{baseCard.isShowTag1 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+            tools:text="完结" />
+
+        <ImageView
+            android:id="@id/img_tag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_L8"
+            android:layout_marginStart="@dimen/margin_L8"
+            android:src="@drawable/icon_listen_tag"
+            android:visibility="@{baseCard.isShowImgTag1 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_cover" />
+
+        <View
+            android:id="@+id/divider"
+            style="@style/DividerInCard"
+            app:layout_constraintTop_toBottomOf="@+id/iv_cover"
+            android:layout_marginTop="@dimen/margin_L4"
+            android:layout_marginStart="@dimen/margin_L2"
+            android:layout_marginEnd="@dimen/margin_L2"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

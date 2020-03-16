@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StateChangeTitler">
+        <attr name="layout" format="reference"/>
+        <attr name="available" format="boolean"/>
+        <attr name="setbackgroundnull" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="DrawDelLine">
+        <attr name="delLine" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="LoadingIndicatorView">
+        <attr name="minWidth" format="dimension" />
+        <attr name="maxWidth" format="dimension"/>
+        <attr name="minHeight" format="dimension" />
+        <attr name="maxHeight" format="dimension"/>
+        <attr name="indicatorName" format="string"/>
+        <attr name="indicatorColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="RefreshView">
+        <attr name="footerDividersEnabled" format="boolean"/>
+        <attr name="headerDividersEnabled" format="boolean"/>
+        <attr name="refreshDivider" format="reference|color"/>
+        <attr name="dividerHeight" format="dimension|float"/>
+        <attr name="listBackground" format="reference|color"/>
+    </declare-styleable>
+
+    <declare-styleable name="PullToRefresh">
+        <attr name="mode_" format="reference" >
+            <flag name="pullDownFromTop" value="0x1" />
+            <flag name="pullUpFromBottom" value="0x2" />
+            <flag name="both" value="0x3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ReaderTextView">
+        <attr name="qq_font">
+            <enum name="siyuansong" value="0" /><!-- 这个值相当于字体文件的id，不能随意添加 -->
+            <enum name="din_bold" value="1" /><!-- 这个值相当于字体文件的id，不能随意添加 -->
+        </attr>
+    </declare-styleable>
+</resources>

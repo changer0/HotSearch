@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardAdv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:drawBorder="true"
+        app:imageRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/space"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@color/color_C201" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_L6"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:src="@drawable/adv_image"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+        app:layout_constraintRight_toRightOf="@id/iv_cover"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_L2"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/iv_cover" />
+
+    <View
+        android:id="@+id/localstore_adv_divider"
+        style="@style/DividerInCard"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

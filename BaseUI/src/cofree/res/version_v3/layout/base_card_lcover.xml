@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_card_selector"
+    android:paddingBottom="0dp"
+    android:paddingLeft="@dimen/spacing_L2"
+    android:paddingRight="@dimen/spacing_L2"
+    android:paddingTop="@dimen/spacing_L6"
+    tools:background="#ffffff">
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/iv_cover"
+        style="@style/Cover.LCover"
+        android:layout_marginBottom="@dimen/spacing_L6"
+        android:layout_marginEnd="@dimen/margin_L2"
+        android:layout_marginRight="@dimen/margin_L2"
+        android:scaleType="fitXY"
+        app:drawBorder="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@color/color_C201" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_score"
+        style="@style/Score"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginRight="@dimen/margin_L6"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+        app:layout_constraintRight_toRightOf="@id/iv_cover"
+        tools:text="9.0"
+        tools:visibility="visible" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title"
+        style="@style/Card_Lcover_Title"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginLeft="@dimen/margin_L2"
+        android:layout_marginStart="@dimen/margin_L2"
+        android:layout_marginTop="@dimen/margin_L7"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_cover"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="dsjfklsdjfksldfjdzsklfjdskjfldskjfkdsjfldksjfkdjfsdkjfdskjf" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_content"
+        style="@style/Card_Lcover_Content"
+        android:layout_marginLeft="@dimen/margin_L2"
+        android:layout_marginStart="@dimen/margin_L2"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:layout_toRightOf="@+id/iv_cover"
+        android:maxLines="3"
+        app:layout_constraintLeft_toRightOf="@+id/iv_cover"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        tools:text="中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_author"
+        style="@style/BaseText.T4_C105"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_width="0dp"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginEnd="@dimen/margin_L6"
+        android:layout_marginLeft="@dimen/margin_L2"
+        android:layout_marginRight="@dimen/margin_L6"
+        android:layout_marginStart="@dimen/margin_L2"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+        app:layout_constraintEnd_toStartOf="@+id/tv_tag1"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintLeft_toRightOf="@+id/iv_cover"
+        app:layout_constraintRight_toLeftOf="@+id/tv_tag1"
+        app:layout_constraintStart_toEndOf="@+id/iv_cover"
+        tools:text="搜索非精确命fsdfds"
+        tools:visibility="gone"/>
+
+    <!--搜索非精确命中时，显示搜索Card-->
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_has_read"
+        style="@style/BaseText.T4_C105"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_width="0dp"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginEnd="@dimen/margin_L6"
+        android:layout_marginLeft="@dimen/margin_L2"
+        android:layout_marginRight="@dimen/margin_L6"
+        android:layout_marginStart="@dimen/margin_L2"
+        android:textColor="@color/color_C401"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toStartOf="@+id/tv_tag1"
+        app:layout_constraintStart_toEndOf="@+id/iv_cover"
+        tools:text="49%的用户还读了在动荡的用户还读了在动荡" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_tag1"
+        style="@style/Card_Lcover_Tag"
+        android:layout_height="16dp"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginRight="@dimen/margin_L8"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+        app:layout_constraintRight_toLeftOf="@+id/tv_tag2"
+        tools:text="54.7万字"
+        tools:visibility="visible" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_tag2"
+        style="@style/Card_Lcover_Tag"
+        android:layout_height="16dp"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginRight="@dimen/margin_L8"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+        app:layout_constraintRight_toLeftOf="@+id/tv_tag3"
+        app:layout_goneMarginRight="0dp"
+        tools:text="东方玄幻"
+        tools:visibility="visible" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_tag3"
+        style="@style/Card_Lcover_Tag"
+        android:layout_height="16dp"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginRight="@dimen/margin_L8"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+        app:layout_constraintRight_toLeftOf="@+id/tv_special"
+        tools:text="玄幻"
+        tools:visibility="visible" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_special"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:textSize="@dimen/text_size_4"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="小编"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/img_tag1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginStart="@dimen/margin_L6"
+        android:src="@drawable/icon_listen_tag"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_cover"
+        tools:visibility="visible" />
+
+    <!--todo 既然这是通用ui，个人感觉就不应该将具体的图标放到Common里，因为图标一般情况下是不同的-->
+    <ImageView
+        android:id="@+id/img_tag2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:layout_marginRight="@dimen/margin_L6"
+        android:layout_marginEnd="@dimen/margin_L6"
+        android:src="@drawable/icon_listen_tag"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/iv_cover"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/divider"
+        style="@style/DividerInCard"
+        android:layout_width="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_content"
+        app:layout_constraintStart_toStartOf="@+id/tv_content"
+        tools:visibility="visible"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

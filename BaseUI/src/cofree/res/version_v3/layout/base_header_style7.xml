@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:id="@+id/title_container"
+    android:paddingTop="@dimen/padding_L2"
+    android:paddingStart="@dimen/padding_L2"
+    android:paddingEnd="@dimen/padding_L2">
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_subtitle_title"
+        style="@style/BaseText.T0_C106"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_vertical"
+        app:qq_font="siyuansong"
+        tools:text="T1C106"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

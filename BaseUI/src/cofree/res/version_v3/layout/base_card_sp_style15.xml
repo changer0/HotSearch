@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="@dimen/padding_L2"
+    android:paddingLeft="@dimen/padding_L2">
+
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img1"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/img2"
+        tools:src="@color/color_C201"
+        android:layout_marginEnd="@dimen/margin_L4"
+        android:scaleType="centerCrop"/>
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img1_mask"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/img1"
+        app:layout_constraintStart_toStartOf="@id/img1"
+        app:layout_constraintEnd_toEndOf="@id/img1"
+        app:layout_constraintBottom_toBottomOf="@id/img1"
+        android:background="@drawable/bg_c109_selector"
+        tools:src="@color/color_C201"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/book_shadow_height"
+        android:background="@drawable/book_shadow"
+        app:layout_constraintTop_toBottomOf="@id/img1"
+        app:layout_constraintStart_toStartOf="@id/img1"
+        app:layout_constraintEnd_toEndOf="@id/img1"/>
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img2"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        tools:src="@color/color_C201"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img1"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"/>
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img2_mask"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:src="@color/color_C201"
+        android:background="@drawable/bg_c109_selector"
+        app:layout_constraintTop_toTopOf="@id/img2"
+        app:layout_constraintStart_toStartOf="@id/img2"
+        app:layout_constraintEnd_toEndOf="@id/img2"
+        app:layout_constraintBottom_toBottomOf="@id/img2"
+        android:scaleType="centerCrop"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/book_shadow_height"
+        android:background="@drawable/book_shadow"
+        app:layout_constraintTop_toBottomOf="@id/img2"
+        app:layout_constraintStart_toStartOf="@id/img2"
+        app:layout_constraintEnd_toEndOf="@id/img2"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

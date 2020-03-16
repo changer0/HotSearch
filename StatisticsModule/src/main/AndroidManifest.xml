@@ -1,0 +1,27 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.qq.reader.statistics">
+
+    <application
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <!-- QM统计 TODO 如果不想支持，这里要手动删除? 在编译时执行 -->
+        <service
+            android:name="com.q.m.QS"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":QS">
+            <intent-filter>
+                <action android:name="com.sijla.server" />
+            </intent-filter>
+        </service>
+
+        <!--//艾瑞统计-->
+        <!--艾瑞appkey-->
+        <meta-data
+            android:name="HMT_APPKEY"
+            android:value="UA-yuewen-260001" />
+
+    </application>
+
+</manifest>

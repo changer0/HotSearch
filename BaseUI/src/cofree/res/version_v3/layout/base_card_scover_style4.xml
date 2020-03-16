@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/padding_L6"
+    android:paddingLeft="@dimen/padding_L2"
+    android:paddingRight="@dimen/padding_L2"
+    android:paddingTop="@dimen/padding_L6">
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/iv_cover"
+        style="@style/Cover.SCover"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:foreground="@drawable/bg_iv_cover_selector"
+        app:layout_constraintEnd_toStartOf="@id/iv_cover1"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content"
+        tools:scaleType="fitXY"
+        tools:src="@color/color_C201" />
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/iv_cover1"
+        style="@style/Cover.SCover"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:foreground="@drawable/bg_iv_cover_selector"
+        app:layout_constraintEnd_toStartOf="@id/iv_cover2"
+        app:layout_constraintStart_toEndOf="@id/iv_cover"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content1"
+        tools:scaleType="fitXY"
+        tools:src="@color/color_C201" />
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/iv_cover2"
+        style="@style/Cover.SCover"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:foreground="@drawable/bg_iv_cover_selector"
+        app:layout_constraintEnd_toStartOf="@id/iv_cover3"
+        app:layout_constraintStart_toEndOf="@id/iv_cover1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content2"
+        tools:scaleType="fitXY"
+        tools:src="@color/color_C201" />
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/iv_cover3"
+        style="@style/Cover.SCover"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:foreground="@drawable/bg_iv_cover_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_cover2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content3"
+        tools:scaleType="fitXY"
+        tools:src="@color/color_C201" />
+
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title"
+        style="@style/BaseText.T2_C106"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxWidth="56dp"
+        app:layout_constraintEnd_toEndOf="@id/iv_cover"
+        app:layout_constraintStart_toStartOf="@id/iv_cover"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="啊啊啊啊啊啊" />
+
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title1"
+        style="@style/BaseText.T2_C106"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintStart_toStartOf="@id/iv_cover1"
+        app:layout_constraintEnd_toEndOf="@id/iv_cover1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="啊啊啊啊啊啊" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title2"
+        style="@style/BaseText.T2_C106"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/iv_cover2"
+        app:layout_constraintStart_toStartOf="@id/iv_cover2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="啊啊啊啊啊啊" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title3"
+        style="@style/BaseText.T2_C106"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/iv_cover3"
+        app:layout_constraintStart_toStartOf="@id/iv_cover3"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="啊啊啊啊啊啊" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_content"
+        style="@style/BaseText.T3_C105"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L9"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/color_C105"
+        app:layout_constraintEnd_toEndOf="@id/iv_cover"
+        app:layout_constraintStart_toStartOf="@id/iv_cover"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        tools:text="共140,100册" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_content1"
+        style="@style/BaseText.T3_C105"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L9"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/color_C105"
+        app:layout_constraintEnd_toEndOf="@id/iv_cover1"
+        app:layout_constraintStart_toStartOf="@id/iv_cover1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title1"
+        tools:text="共140,100册"
+        app:layout_constraintVertical_chainStyle="spread_inside"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_content2"
+        style="@style/BaseText.T3_C105"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L9"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/color_C105"
+        app:layout_constraintEnd_toEndOf="@id/iv_cover2"
+        app:layout_constraintStart_toStartOf="@id/iv_cover2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title2"
+        tools:text="共140,100册" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_content3"
+        style="@style/BaseText.T3_C105"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L9"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/color_C105"
+        app:layout_constraintEnd_toEndOf="@id/iv_cover3"
+        app:layout_constraintStart_toStartOf="@id/iv_cover3"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title3"
+        tools:text="共140,100册" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

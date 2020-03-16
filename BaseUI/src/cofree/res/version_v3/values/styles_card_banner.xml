@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Banner card 样式 -->
+
+    <style name="Card.Banner">
+        <item name="android:paddingLeft">@dimen/padding_L2</item>
+        <item name="android:paddingRight">@dimen/padding_L2</item>
+        <item name="android:paddingTop">@dimen/padding_L2</item>
+        <item name="android:paddingBottom">@dimen/padding_L6</item>
+    </style>
+
+
+    <style name="Card_Banner_Style1_Title" parent="BaseText.T2">
+        <item name="android:textColor">@color/color_C106</item>
+    </style>
+
+    <!--banner-27:7 content-->
+    <style name="Card_Banner_Style1_Content" parent="BaseText.T3">
+        <item name="android:textColor">@color/color_C105</item>
+    </style>
+
+    <style name="Card_Banner_style2_title" parent="BaseText.T3">
+        <item name="android:textColor">@color/color_C106</item>
+    </style>
+
+
+
+</resources>

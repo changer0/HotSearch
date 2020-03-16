@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/common_dp_20">
+
+        <com.qq.reader.widget.CooperateLoadingView
+            android:id="@+id/progress_bar"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:maxHeight="28dp"
+            android:maxWidth="28dp"
+            android:minHeight="28dp"
+            android:minWidth="28dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:text="@string/load_more_status_loading"
+            android:textColor="@color/new_oppo_color_c106"
+            android:textSize="@dimen/oppo_text_size_class_3"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/view_load_fail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_dp_20"
+        android:text="@string/load_more_status_fail"
+        android:textColor="@color/new_oppo_color_c106"
+        android:textSize="@dimen/oppo_text_size_class_3"/>
+
+    <LinearLayout
+        android:id="@+id/view_load_end_bottom"
+        android:paddingTop="@dimen/margin_L2"
+        android:paddingBottom="@dimen/margin_L2"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:background="@color/color_C104"
+            android:layout_marginEnd="@dimen/margin_L4"
+            android:layout_width="12dp"
+            android:layout_height="0.5dp"/>
+
+
+        <ImageView
+            android:src="@drawable/icon_load_more_end_channel"
+            android:layout_marginEnd="@dimen/margin_L8"
+            android:layout_width="12dp"
+            android:layout_height="12dp" />
+
+        <TextView
+            android:id="@+id/view_load_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/load_more_status_end"
+            style="@style/BaseText.T5_C104" />
+
+        <View
+            android:background="@color/color_C104"
+            android:layout_marginStart="@dimen/margin_L4"
+            android:layout_width="12dp"
+            android:layout_height="0.5dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

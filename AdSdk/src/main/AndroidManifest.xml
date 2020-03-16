@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.yuewen.adsdk">
+    <!--所有广告需要的通用权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- 只有 穿山甲、广点通、OPPO、聚合广告 需要的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- 只有 穿山甲、OPPO、聚合广告 需要的权限-->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <!-- 只有 穿山甲、聚合广告 需要的权限-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- 只有 OPPO 需要的权限-->
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <application
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true">
+
+        <!-- 通用集成 start =========================================================================-->
+
+        <!-- application标签中添加 android:usesCleartextTraffic="true" -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name="com.yuewen.cooperate.adsdk.view.AdRewardVideoActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <!-- 通用集成 end ***************************************************************************-->
+
+        <!-- M+ 需要集成 start =====================================================================-->
+        <activity
+            android:name="com.yuewen.cooperate.adsdk.mplus.activity.MplusVideoActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <!-- M+需要集成 end ************************************************************************-->
+
+        <!-- 穿山甲需要集成 start ===================================================================-->
+        <!-- 穿山甲适配Anroid7.0以及8.0 -->
+        <!-- 穿山甲多进程provider配置 -->
+        <provider
+            android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
+            android:authorities="${applicationId}.TTFileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <provider
+            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
+            android:authorities="${applicationId}.TTMultiProvider"
+            android:exported="false" />
+        <!-- 穿山甲需要集成 end *********************************************************************-->
+
+        <!-- 穿山甲小游戏需要集成 start ===================================================================-->
+        <activity
+            android:name="com.yuewen.cooperate.adsdk.csjgames.view.CSJMiniGameActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+
+        <!-- 穿山甲小游戏需要集成 end *********************************************************************-->
+
+        <!-- 广点通需要集成 start ====================================================================-->
+        <!--<service-->
+            <!--android:name="com.qq.e.comm.DownloadService"-->
+            <!--android:exported="false" /> &lt;!&ndash; 请开发者注意字母的大小写，ADActivity，而不是 AdActivity &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.qq.e.ads.ADActivity"-->
+            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />-->
+        <!--<activity-->
+            <!--android:name="com.qq.e.ads.PortraitADActivity"-->
+            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenSize"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.qq.e.ads.LandscapeADActivity"-->
+            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenSize"-->
+            <!--android:screenOrientation="landscape" />-->
+
+        <provider
+            android:name="com.yuewen.cooperate.adsdk.gdt.provider.GDTFileProvider"
+            android:authorities="com.yuewen.cooperate.reader.free.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/gdt_file_path" />
+        </provider>
+        <!-- 广点通需要集成 end **********************************************************************-->
+
+        <!-- OPPO需要集成 start ====================================================================-->
+        <activity android:name="com.oppo.mobad.activity.AdActivity" />
+        <service android:name="com.oppo.mobad.service.AdService" />
+        <!--如果奖励视频不需要随机器旋转⽽而旋转的请将 VideoActivity 设置android:screenOrientation="sensor"修改横屏或竖屏-->
+        <activity
+            android:name="com.oppo.mobad.activity.VideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <!-- OPPO需要集成 end **********************************************************************-->
+
+        <!-- 聚合广告SDK 需要集成 start ================================================================-->
+
+        <!-- 聚合广告：广点通广告sdk start ===============================================================-->
+
+        <!-- 由于咱们自己已经有了广点通的广告SDK，所以聚合广告和广点通共用一套配置-->
+
+        <!-- 聚合广告：广点通广告sdk end ***************************************************************-->
+
+        <!-- 聚合广告：百度广告sdk start ===============================================================-->
+        <activity
+            android:name="com.baidu.mobads.production.rewardvideo.MobRewardVideoActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <provider
+            android:name="com.baidu.mobads.openad.FileProvider"
+            android:authorities="com.yuewen.cooperate.reader.free.bd.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/bd_file_paths"
+                tools:replace="name,resource" />
+        </provider>
+
+        <activity
+            android:name="com.baidu.mobads.AppActivity"
+            android:configChanges="screenSize|keyboard|keyboardHidden|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- 聚合广告：百度广告sdk end ******************************************************************-->
+
+        <!-- 聚合广告SDK 需要集成 end ******************************************************************-->
+    </application>
+
+</manifest>
+
+

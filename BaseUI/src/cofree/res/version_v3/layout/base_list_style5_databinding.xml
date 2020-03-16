@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="list"
+            type="com.qq.reader.common.utils.DataBindingBeanFactory.ListStyle5" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/list_layout"
+        style="@style/List.MiddleItem"
+        android:layout_width="match_parent"
+        android:visibility="@{list.isShowList ? View.VISIBLE : View.GONE}">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_L2"
+            android:layout_marginRight="@dimen/margin_L2"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv_text"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.qq.reader.widget.ReaderTextView
+                android:id="@+id/tv_title"
+                style="@style/BaseText.T2_C106"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Single Text"
+                android:text="@{list.mTitle}"/>
+
+            <com.qq.reader.widget.ReaderTextView
+                android:id="@+id/tv_content"
+                style="@style/BaseText.T3_C105"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Single Text"
+                android:text="@{list.mContent}"/>
+
+        </LinearLayout>
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/tv_text"
+            style="@style/BaseText.T3_C105"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/padding_L8"
+            android:paddingRight="@dimen/padding_L8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/img_right_arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Single Text"
+            android:text="@{list.mRightText}"
+            android:visibility="@{list.isShowRightIcon ? View.VISIBLE : View.GONE}"/>
+
+        <ImageView
+            android:id="@+id/img_right_arrow"
+            android:layout_width="12dp"
+            android:layout_height="24dp"
+            android:src="@drawable/arrow_right_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{list.isShowRightIcon ? View.VISIBLE : View.GONE}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

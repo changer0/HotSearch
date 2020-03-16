@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/bg_shadow1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toStartOf="@id/bg_shadow2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/margin_L3"
+        android:layout_marginBottom="@dimen/margin_L3"
+        android:layout_marginEnd="36dp"/>
+
+    <View
+        android:id="@+id/bg_shadow2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/margin_L3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/margin_L3"
+        app:layout_constraintStart_toEndOf="@id/bg_shadow1" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/BaseText.T7_C106"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="豪门"
+        android:layout_marginLeft="@dimen/margin_L2"
+        app:layout_constraintStart_toStartOf="@id/bg_shadow1"
+        app:layout_constraintTop_toTopOf="@id/img_cover1"
+        app:layout_constraintEnd_toStartOf="@id/img_cover1"
+        android:layout_marginEnd="@dimen/margin_L6"/>
+
+    <ImageView
+        android:id="@+id/iv_icon1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_fire"
+        app:layout_constraintStart_toStartOf="@id/tv_title1"
+        app:layout_constraintTop_toTopOf="@+id/tv_subtitle1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_subtitle1"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_subtitle1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/BaseText.T4_C301"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@id/iv_icon1"
+        tools:text="45万人在读"
+        android:layout_marginStart="@dimen/margin_L9"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title1"
+        app:layout_constraintEnd_toEndOf="@id/tv_title1"/>
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img_cover1"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
+        android:src="@color/color_C301"
+        app:layout_constraintBottom_toBottomOf="@id/img_cover2"
+        app:layout_constraintEnd_toEndOf="@id/img_cover2"
+        android:layout_marginEnd="21dp"/>
+
+    <View
+        android:layout_width="12dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_shadow_left"
+        app:layout_constraintTop_toTopOf="@+id/img_cover1"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toStartOf="@+id/img_cover1"/>
+
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img_cover2"
+        android:layout_width="39dp"
+        android:layout_height="52dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@id/bg_shadow1"
+        app:layout_constraintTop_toTopOf="@+id/bg_shadow1"
+        app:layout_constraintEnd_toEndOf="@id/bg_shadow1"
+        android:src="@color/color_C201" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/book_shadow_height"
+        android:background="@drawable/book_shadow"
+        app:layout_constraintTop_toBottomOf="@id/img_cover1"
+        app:layout_constraintStart_toStartOf="@id/img_cover1"
+        app:layout_constraintEnd_toEndOf="@id/img_cover2"
+        app:layout_constraintBottom_toBottomOf="@id/bg_shadow1"/>
+
+
+    <!--******************************分割线*************************************-->
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/BaseText.T7_C106"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="豪门"
+        app:layout_constraintStart_toStartOf="@id/bg_shadow2"
+        app:layout_constraintTop_toTopOf="@id/img_cover3"
+        app:layout_constraintEnd_toStartOf="@id/img_cover3"
+        android:layout_marginEnd="@dimen/margin_L6"/>
+
+    <ImageView
+        android:id="@+id/iv_icon2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_fire"
+        app:layout_constraintStart_toStartOf="@id/tv_title2"
+        app:layout_constraintTop_toTopOf="@+id/tv_subtitle2"
+        app:layout_constraintBottom_toBottomOf="@id/tv_subtitle2"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_subtitle2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/BaseText.T4_C301"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@id/iv_icon2"
+        tools:text="45万人在读"
+        android:layout_marginStart="@dimen/margin_L9"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title2"
+        app:layout_constraintEnd_toEndOf="@id/tv_title2"/>
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img_cover3"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:src="@color/color_C301"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@id/img_cover4"
+        app:layout_constraintEnd_toEndOf="@id/img_cover4"
+        android:layout_marginEnd="21dp"/>
+
+    <View
+        android:layout_width="12dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_shadow_left"
+        app:layout_constraintTop_toTopOf="@+id/img_cover3"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toStartOf="@+id/img_cover3"/>
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img_cover4"
+        android:layout_width="39dp"
+        android:layout_height="52dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@id/bg_shadow2"
+        app:layout_constraintTop_toTopOf="@+id/bg_shadow2"
+        app:layout_constraintEnd_toEndOf="@id/bg_shadow2"
+        android:layout_marginEnd="@dimen/margin_L2"
+        android:src="@color/color_C201"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/book_shadow_height"
+        android:background="@drawable/book_shadow"
+        app:layout_constraintTop_toBottomOf="@id/img_cover3"
+        app:layout_constraintStart_toStartOf="@id/img_cover3"
+        app:layout_constraintEnd_toEndOf="@id/img_cover4"
+        app:layout_constraintBottom_toBottomOf="@id/bg_shadow2"/>
+
+
+    <View
+        android:id="@+id/click_mask1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/click_mask2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/bg_c107_selector"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <View
+        android:id="@+id/click_mask2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_c107_selector"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/click_mask1"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

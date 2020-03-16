@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Card_Feed_Interest_Reader_Title" parent="BaseText.T2_C106">
+        <item name="android:paddingTop">@dimen/spacing_L6</item>
+        <item name="android:paddingRight">@dimen/spacing_L2</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <style name="Card_Feed_Interest_Reader_Info" parent="BaseText.T3_C105">
+        <item name="android:paddingTop">@dimen/spacing_L6</item>
+        <item name="android:paddingRight">@dimen/spacing_L2</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <style name="Card_Feed_Interest_Reader_Time" parent="BaseText.T5_C105">
+        <item name="android:paddingTop">@dimen/spacing_L6</item>
+        <item name="android:paddingBottom">@dimen/spacing_L6</item>
+        <item name="android:paddingRight">@dimen/spacing_L2</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- 榜单 书单 -->
+    <style name="CardFeedBook" parent="Card">
+        <item name="android:layout_marginLeft">@dimen/margin_L2</item>
+        <item name="android:layout_marginRight">@dimen/margin_L2</item>
+        <item name="android:background">@drawable/bg_feed_rank_book</item>
+    </style>
+    <style name="Card_FeedBook_Serial" parent="BaseText.T2_C105">
+    </style>
+    <style name="Card_FeedBook_Name" parent="BaseText.T2_C106">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Card_FeedBook_Desc" parent="BaseText.T3_C105">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <!-- 榜单 书封 -->
+    <style name="CardFeedCover">
+        <item name="android:layout_marginLeft">@dimen/margin_L2</item>
+        <item name="android:layout_marginRight">@dimen/margin_L2</item>
+    </style>
+    <style name="Card_FeedCover_Img">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+</resources>

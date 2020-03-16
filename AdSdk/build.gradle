@@ -1,0 +1,98 @@
+apply plugin: 'com.android.library'
+
+
+def config = rootProject.ext.android
+def libraries = rootProject.ext.dependencies
+
+android {
+    compileSdkVersion config.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        //Routeע�����ɴ�����Ҫ
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+    publishNonDefault true
+    flavorDimensions "normal"
+    productFlavors {
+        cofree {
+            dimension 'normal'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    buildTypes {
+
+        release_with_sign {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+
+//    //广点通需要引用的jar包
+//    api libraries.adGDTAar
+//    //穿山甲需要引用的aar包，已上传到我们内部的maven库了。
+//    api libraries.plGif
+//    api libraries.adCSJAar
+//    api libraries.adCSJMiniGamesAar
+//    api libraries.adCSJMiniGamesX5FitAar
+//    api libraries.kotlinStdlibJdk
+//    //OPPO需要引用的jar包
+//    api libraries.adOppoAar
+//    api files('libs/wire-runtime-2.2.0.jar')
+//    //聚合广告需要引入的包
+//    api libraries.adJHAar
+//    api libraries.adJHBaiduAar
+
+    implementation libraries.yuewenCommonModule
+    implementation libraries.yuewenCoreModule
+    implementation libraries.constraintLayout
+    implementation project(':StatisticsModule')
+    implementation project(':BaseUI')
+
+    //广告库
+    api libraries.yuewenExternalAdSdk
+    api libraries.yuewenExternalAdSdkMPLUS
+    api libraries.yuewenExternalAdSdkCSJ
+    api libraries.yuewenExternalAdSdkCSJGames
+    api libraries.yuewenExternalAdSdkGDT
+    api libraries.yuewenExternalAdSdkOPPO
+    api libraries.yuewenExternalAdSdkJH
+    api libraries.yuewenExternalAdSdkZT
+
+}

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    style="@style/Card.SPCover"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tool:background="#ffffff">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal_line_per_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1" />
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img_left"
+        style="@style/Cover.ValuePackBehind"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@id/horizontal_line_per_1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tool:src="@color/color_C401"/>
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img_right"
+        style="@style/Cover.ValuePackBehind"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@id/horizontal_line_per_1"
+        app:layout_constraintLeft_toRightOf="@+id/img_left"
+        tool:src="@color/color_C201"/>
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img_center"
+        style="@style/Cover.SCover"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tool:src="@color/color_C501"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal_line_per_0.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text1"
+        style="@style/Card_SPCover_Title"
+        android:layout_marginBottom="1dp"
+        android:layout_marginEnd="@dimen/margin_L2"
+        android:layout_marginLeft="@dimen/margin_L2"
+        android:layout_marginRight="@dimen/margin_L2"
+        android:layout_marginStart="@dimen/margin_L2"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal_line_per_0.5"
+        app:layout_constraintLeft_toRightOf="@+id/img_right"
+        app:layout_constraintRight_toLeftOf="@+id/tv_text3"
+        tool:text="超值包"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text2"
+        style="@style/Card_SPCover_Content"
+        android:layout_marginLeft="@dimen/margin_L2"
+        android:layout_marginRight="@dimen/margin_L2"
+        android:layout_marginTop="1dp"
+        android:maxWidth="130dp"
+        app:layout_constraintLeft_toRightOf="@+id/img_right"
+        app:layout_constraintRight_toLeftOf="@+id/tv_text3"
+        app:layout_constraintTop_toBottomOf="@+id/horizontal_line_per_0.5"
+        tool:text="超值包超值包超值包超"
+        android:maxLines="1"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text3"
+        style="@style/Card_SPCover_Content"
+        android:layout_marginEnd="@dimen/margin_L8"
+        android:layout_marginLeft="@dimen/margin_L2"
+        android:layout_marginRight="@dimen/margin_L8"
+        android:layout_marginStart="@dimen/margin_L2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/img_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:text="20004本"
+        android:maxLines="1"/>
+
+    <ImageView
+        android:id="@+id/img_arrow"
+        android:layout_width="12dp"
+        android:layout_height="24dp"
+        android:src="@drawable/arrow_right_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

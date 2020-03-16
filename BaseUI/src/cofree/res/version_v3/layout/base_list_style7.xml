@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    style="@style/List.MiddleItem"
+    android:layout_width="match_parent">
+
+    <com.qq.reader.view.UserCircleImageView
+        android:id="@+id/img_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text"
+        style="@style/BaseText.T2_C106"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_L2"
+        android:layout_marginStart="@dimen/margin_L2"
+        tool:text="Single Text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/img_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

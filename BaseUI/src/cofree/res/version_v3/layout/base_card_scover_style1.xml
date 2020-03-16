@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/padding_L2"
+    android:paddingEnd="@dimen/padding_L2"
+    android:paddingTop="@dimen/padding_L4"
+    android:paddingBottom="@dimen/padding_L4">
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/iv_billboard_booklibrary_scover"
+        style="@style/Cover.SCover"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_billboard_booklibrary_title"
+        style="@style/BaseText.T2.SingleLineEllipsize"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_L2"
+        android:layout_marginTop="@dimen/margin_L7"
+        android:textColor="@color/color_C106"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_billboard_booklibrary_scover"
+        app:layout_constraintTop_toTopOf="@+id/iv_billboard_booklibrary_scover"
+        tools:text="中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试"
+        tools:ignore="RtlHardcoded" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_billboard_booklibrary_contentline1"
+        style="@style/BaseText.T3.SingleLineEllipsize"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_L2"
+        android:layout_marginTop="@dimen/margin_L8"
+        android:textColor="@color/color_C105"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_billboard_booklibrary_scover"
+        app:layout_constraintTop_toBottomOf="@+id/tv_billboard_booklibrary_title"
+        tools:text="中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_billboard_booklibrary_tag"
+        style="@style/Category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_billboard_booklibrary_scover"
+        tools:text="完结" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_billboard_booklibrary_contentline2"
+        style="@style/BaseText.T3.SingleLineEllipsize"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_L2"
+        android:textColor="@color/color_C105"
+        app:layout_constraintEnd_toStartOf="@+id/tv_billboard_booklibrary_tag"
+        android:layout_marginEnd="@dimen/margin_L2"
+        app:layout_goneMarginEnd="0dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_billboard_booklibrary_scover"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_billboard_booklibrary_scover"
+        tools:text="中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

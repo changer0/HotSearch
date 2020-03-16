@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Subtitle.Normal"
+    android:id="@+id/cons_root">
+
+    <ImageView
+        android:id="@+id/img_left"
+        style="@style/ItemStatusPic"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginLeft="@dimen/margin_L2"
+        android:layout_marginStart="@dimen/margin_L2"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text1"
+        style="@style/BaseText.T2_C106"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginEnd="@dimen/margin_L2"
+        android:layout_marginLeft="@dimen/margin_L2"
+        android:layout_marginRight="@dimen/margin_L2"
+        android:layout_marginStart="@dimen/margin_L2"
+        android:layout_marginTop="@dimen/margin_L6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_left"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_text2"
+        app:layout_goneMarginRight="@dimen/margin_L2"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="T2C106T2C106T2C106T2C106T2C106T2C106T2C106T2C106T2C106T2C106T2C106T2C106T2C106T2C106T2C106T2C106" />
+
+    <ImageView
+        android:id="@+id/img_reddot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_L8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_text1"
+        android:src="@drawable/bookshelf_news_newtip" />
+
+    <ImageView
+        android:id="@+id/img_right_arrow"
+        style="@style/RightGreyArrow"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginEnd="@dimen/margin_L2"
+        android:layout_marginRight="@dimen/margin_L2"
+        android:layout_marginTop="@dimen/margin_L6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/arrow_right_grey" />
+
+
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text2"
+        style="@style/BaseText.T3_C105"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginEnd="@dimen/margin_L8"
+        android:layout_marginRight="@dimen/margin_L8"
+        android:layout_marginTop="@dimen/margin_L6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/img_right_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="T3C105" />
+
+    <View
+        android:id="@+id/divider"
+        style="@style/DividerInCard"
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/img_right_arrow"
+        app:layout_constraintStart_toStartOf="@+id/tv_text1"
+        android:visibility="gone"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

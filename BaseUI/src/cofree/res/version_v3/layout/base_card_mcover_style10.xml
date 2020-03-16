@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/base_card_mcover_style6"
+        android:id="@+id/book_root_view"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title0"
+        style="@style/BaseText.T8_C106"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:layout_marginLeft="@dimen/margin_L2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginRight="@dimen/margin_L1"
+        app:layout_constraintTop_toBottomOf="@id/book_root_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_title1"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        tools:text="呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_lable_count0"
+        style="@style/BaseText.T5_C301"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintStart_toStartOf="@id/tv_title0"
+        app:layout_constraintTop_toBottomOf="@id/tv_title0"
+        tools:text="9.7分"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_author0"
+        style="@style/BaseText.T5_C104"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxLength="9"
+        app:layout_constraintTop_toBottomOf="@id/tv_title0"
+        app:layout_constraintStart_toEndOf="@id/tv_lable_count0"
+        tools:text=" | 金手指"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_lable0"
+        style="@style/BaseText.T5_C104"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@id/tv_title0"
+        app:layout_constraintStart_toEndOf="@id/tv_author0"
+        app:layout_constraintEnd_toEndOf="@id/tv_title0"
+        tools:text=" | 豪门"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_content0"
+        style="@style/BaseText.T4_C105"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:lineSpacingMultiplier="1.2"
+        app:layout_constraintTop_toBottomOf="@id/tv_lable0"
+        app:layout_constraintStart_toStartOf="@id/tv_title0"
+        app:layout_constraintEnd_toEndOf="@id/tv_title0"
+        app:layout_constraintEnd_toStartOf="@id/iv_cover0"
+        tools:text="呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵"/>
+
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/iv_cover0"
+        style="@style/Cover.SSCover"
+        tools:background="@color/color_C201"
+        app:layout_constraintTop_toTopOf="@id/tv_content0"
+        app:layout_constraintEnd_toEndOf="@id/tv_title0"
+        app:layout_constraintStart_toEndOf="@id/tv_content0"
+        android:layout_marginStart="@dimen/margin_L6"
+        tools:scaleType="fitXY"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/book_shadow_height"
+        android:background="@drawable/book_shadow"
+        app:layout_constraintTop_toBottomOf="@id/iv_cover0"
+        app:layout_constraintStart_toStartOf="@id/iv_cover0"
+        app:layout_constraintEnd_toEndOf="@id/iv_cover0"/>
+
+    <View
+        android:id="@+id/click_mask0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_c107_selector"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@id/book_root_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/click_mask1"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title1"
+        style="@style/BaseText.T8_C106"
+        android:layout_marginEnd="@dimen/margin_L2"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@id/book_root_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_title0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        tools:text="呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_lable_count1"
+        style="@style/BaseText.T5_C301"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintStart_toStartOf="@id/tv_title1"
+        app:layout_constraintTop_toBottomOf="@id/tv_title1"
+        tools:text="9.7分"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_author1"
+        style="@style/BaseText.T5_C104"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxLength="9"
+        app:layout_constraintTop_toBottomOf="@id/tv_title1"
+        app:layout_constraintStart_toEndOf="@id/tv_lable_count1"
+        tools:text=" | 金手指"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_lable1"
+        style="@style/BaseText.T5_C104"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxLength="7"
+        app:layout_constraintTop_toBottomOf="@id/tv_title1"
+        app:layout_constraintStart_toEndOf="@id/tv_author1"
+        app:layout_constraintEnd_toEndOf="@id/tv_title1"
+        tools:text=" | 豪门"/>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_content1"
+        style="@style/BaseText.T4_C105"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:lineSpacingMultiplier="1.2"
+        app:layout_constraintTop_toBottomOf="@id/tv_lable1"
+        app:layout_constraintStart_toStartOf="@id/tv_title1"
+        app:layout_constraintEnd_toEndOf="@id/tv_title1"
+        app:layout_constraintEnd_toStartOf="@id/iv_cover1"
+        tools:text="呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵"/>
+
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/iv_cover1"
+        style="@style/Cover.SSCover"
+        tools:background="@color/color_C201"
+        app:layout_constraintTop_toTopOf="@id/tv_content1"
+        app:layout_constraintEnd_toEndOf="@id/tv_title1"
+        app:layout_constraintStart_toEndOf="@id/tv_content1"
+        android:layout_marginStart="@dimen/margin_L6"
+        tools:scaleType="fitXY"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/book_shadow_height"
+        android:background="@drawable/book_shadow"
+        app:layout_constraintTop_toBottomOf="@id/iv_cover1"
+        app:layout_constraintStart_toStartOf="@id/iv_cover1"
+        app:layout_constraintEnd_toEndOf="@id/iv_cover1"/>
+
+    <View
+        android:id="@+id/click_mask1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_c107_selector"
+        app:layout_constraintTop_toBottomOf="@id/book_root_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/click_mask0"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

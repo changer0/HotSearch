@@ -36,4 +36,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation 'com.yuewen.cooperate.provider:provider:1.0.14'
+    implementation 'com.yuewen.cooperate.common:common-unity:1.0.62'
+    implementation 'com.yuewen.cooperate.core:core-unity:1.0.60'
+
+    annotationProcessor  "com.alibaba:arouter-compiler:1.1.4"
 }

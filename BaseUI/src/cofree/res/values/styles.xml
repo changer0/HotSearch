@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="popBottomDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@android:color/transparent</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+        <!--<item name="android:windowIsTranslucent">false</item>&lt;!&ndash;半透明&ndash;&gt;-->
+        <!--<item name="android:backgroundDimEnabled">false</item>&lt;!&ndash;模糊&ndash;&gt;-->
+        <!--<item name="android:windowFrame">@null</item>&lt;!&ndash;边框&ndash;&gt;-->
+    </style>
+
+    <style name="Animation.menuAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/options_panel_enter</item>
+        <item name="android:windowExitAnimation">@anim/options_panel_exit</item>
+    </style>
+
+    <style name="Animation.alphaAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_out</item>
+    </style>
+
+
+    <style name="Animation.lampcordAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/lampcord_enter</item>
+        <item name="android:windowExitAnimation">@anim/lampcord_out</item>
+    </style>
+
+
+    <style name="Animation.scalepointAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/scale_point_enter</item>
+        <item name="android:windowExitAnimation">@anim/scale_point_out</item>
+    </style>
+
+
+    <style name="Animation.topbarAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/topbar_enter</item>
+        <item name="android:windowExitAnimation">@anim/topbar_out</item>
+    </style>
+
+    <style name="Animation.dropdownAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dropdown_enter</item>
+        <item name="android:windowExitAnimation">@anim/dropdown_out</item>
+    </style>
+
+
+    <style name="Animation.orientationLockAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/orientation_lock_enter</item>
+        <item name="android:windowExitAnimation">@anim/orientation_lock_out</item>
+    </style>
+
+    <!-- 顶部搜索条 -->
+    <style name="SearchHeaderContainer">
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:background">@drawable/search_tip_bg</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="SearchHeaderHint">
+        <!--<item name="android:layout_centerHorizontal">true</item>-->
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:hint">@string/search_tip_top</item>
+        <item name="android:textColorHint">@color/oppo_search_hint_color</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="SearchHeaderIcon">
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ReaderCheckBoxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/alert_dialog_choice_cb_sel</item>
+    </style>
+
+    <style name="LoadingIndicatorView">
+        <item name="minWidth">24dip</item>
+        <item name="maxWidth">24dip</item>
+        <item name="minHeight">24dip</item>
+        <item name="maxHeight">24dip</item>
+    </style>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginRight="@dimen/margin_L6"
+    android:layout_marginTop="@dimen/margin_L7"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/menu_icon"
+        android:layout_width="@dimen/common_dp_24"
+        android:layout_height="@dimen/common_dp_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/menu_name"
+        android:layout_width="@dimen/common_dp_70"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L9"
+        android:textSize="@dimen/text_size_5"
+        android:textColor="@color/bottom_menu_item_text_color_selector"
+        app:layout_constraintTop_toBottomOf="@+id/menu_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center_horizontal"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

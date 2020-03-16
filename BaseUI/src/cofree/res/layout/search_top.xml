@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:id="@+id/search_header_root"
+    android:visibility="visible">
+
+    <ImageView
+        android:id="@+id/websearch_header_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/spacing_L4"
+        android:clickable="true"
+        android:src="@drawable/public_back"
+        tools:visibility="visible"
+        android:visibility="gone" />
+
+
+    <TextView
+        android:id="@+id/search_header_right_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/spacing_L2"
+        android:clickable="true"
+        android:gravity="center"
+        tools:visibility="visible"
+        android:src="@drawable/public_more"
+        tools:src="@drawable/search_bar_icon"
+        style="@style/BaseText.T2_C106"
+        android:text="搜索"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rl_search_request_focus"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:layout_toLeftOf="@id/search_header_right_text"
+        android:layout_toRightOf="@+id/websearch_header_back">
+
+        <requestFocus />
+
+        <ImageButton
+            android:id="@+id/searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:paddingLeft="@dimen/padding_L6"
+            android:paddingRight="@dimen/padding_L6"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_search_top_inner" />
+
+        <ImageButton
+            android:id="@+id/clearTextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:paddingLeft="@dimen/padding_L6"
+            android:paddingRight="@dimen/padding_L6"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            android:src="@drawable/search_clear" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/clearTextBtn"
+            android:layout_toRightOf="@+id/searchBtn">
+
+            <com.qq.reader.module.bookstore.search.DropDownEditText
+                android:id="@+id/searchBar"
+                style="@style/BaseText.T2_C106"
+                android:layout_width="320dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:dropDownWidth="fill_parent"
+                android:dropDownHeight="match_parent"
+                android:dropDownHorizontalOffset="-200dp"
+                android:ellipsize="start"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center_vertical"
+                android:imeOptions="actionSearch"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:textColorHint="@color/text_color_c103"
+                android:textColorHighlight="#4D58C2F5"
+                android:textCursorDrawable="@drawable/edit_text_cursor_shap"
+                android:visibility="gone"
+                tools:text="测试"
+                tools:visibility="visible" />
+
+            <com.qq.reader.widget.ReaderTextView
+                android:id="@+id/searchBarText"
+                style="@style/BaseText.T3_C106"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:maxLength="20"
+                android:singleLine="true"
+                tools:visibility="gone"
+                android:textColorHint="@color/text_color_c103" />
+        </FrameLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

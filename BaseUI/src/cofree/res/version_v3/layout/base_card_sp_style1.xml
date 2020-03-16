@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    style="@style/Card.SPCover"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tool:background="#ffffff">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="60dp" />
+
+    <ImageView
+        android:id="@+id/img_left"
+        style="@style/Cover.MCover"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:scaleType="fitXY"
+        app:layout_constraintRight_toLeftOf="@+id/guideline_v"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:src="@color/color_C401" />
+
+    <ImageView
+        android:id="@+id/img_right"
+        style="@style/Cover.MCover"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="9dp"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toRightOf="@+id/guideline_v"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:src="@color/color_C501" />
+
+    <com.qq.reader.view.QRImageView
+        android:id="@+id/img_center"
+        style="@style/Cover.LCover"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tool:src="@color/color_C201" />
+
+<!--    <com.qq.reader.widget.ReaderTextView-->
+<!--        android:id="@+id/tv_score"-->
+<!--        style="@style/Score"-->
+<!--        android:layout_marginTop="36dp"-->
+<!--        app:layout_constraintRight_toLeftOf="@+id/img_right"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/guideline_h"-->
+<!--        tool:text="9.0" />-->
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_score"
+        android:layout_width="30dp"
+        android:layout_height="16dp"
+        style="@style/BaseText.T5_C101"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="@+id/img_center"
+        app:layout_constraintBottom_toBottomOf="@+id/img_center"
+        android:background="@drawable/bg_book_score"
+        android:gravity="center"
+        android:maxLines="1"
+        android:visibility="gone"
+        tool:visibility="visible"
+        tool:text="8.5分" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text1"
+        style="@style/Card_SPCover_Title"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin_L2"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_center"
+        tool:text="唐家三少" />
+
+    <LinearLayout
+        android:id="@+id/ll_book_brief"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L8"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_text1">
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/tv_text2"
+            style="@style/Card_SPCover_Content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/margin_L8"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            tool:text="110万字" />
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/parting_line"
+            android:layout_width="1dp"
+            android:layout_height="12dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/color_C104" />
+
+        <com.qq.reader.widget.ReaderTextView
+            android:id="@+id/tv_text3"
+            style="@style/Card_SPCover_Content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/margin_L8"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            tool:text="5书币/千字" />
+    </LinearLayout>
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text4"
+        style="@style/Card_SPCover_Content"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:maxLines="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_book_brief"
+        tool:text="TextView 15spTextView 15spTextView 15spTextView 15spTextView 15spTextView 15spTextView 15spT" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

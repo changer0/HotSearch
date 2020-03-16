@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CardAdv" parent="Card">
+        <item name="android:paddingLeft">@dimen/spacing_L2</item>
+        <item name="android:paddingRight">@dimen/spacing_L2</item>
+        <item name="android:background">@color/color_C101</item>
+    </style>
+    <style name="Card_Adv_Title" parent="BaseText.T2_C106">
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <style name="Card_Adv_Info" parent="BaseText.T3_C105">
+        <item name="android:layout_marginTop">@dimen/margin_L6</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+</resources>

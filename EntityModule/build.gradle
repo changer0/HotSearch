@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+
+
+def config = rootProject.ext.android
+def libraries = rootProject.ext.dependencies
+android {
+    compileOptions.encoding = config.compileOptionsEncoding
+    // 编译SDK的版本
+    compileSdkVersion config.compileSdkVersion
+
+    defaultConfig {
+
+        //minSDk
+        minSdkVersion config.minSdkVersion
+        //targetSdk
+        targetSdkVersion config.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release_with_sign {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    flavorDimensions "normal"
+    productFlavors{
+        cofree{
+            dimension 'normal'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.so','*.jar'], dir: 'libs')
+    implementation libraries.yuewenCommonModule
+    implementation libraries.yuewenCoreModule
+    // 单元测试依赖
+    testImplementation libraries.junit
+    testImplementation libraries.mockitoCore//请勿随意升级版本号，会影响单元测试使用
+    testImplementation libraries.powermockModule
+    testImplementation libraries.powermockApi
+    androidTestImplementation(libraries.espressoCore , {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+}

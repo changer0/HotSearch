@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CoverImageView">
+
+        <attr name="drawBorder" format="boolean" />
+        <attr name="imageRadius" format="dimension"/>
+        <attr name="top_left" format="boolean" />
+        <attr name="top_right" format="boolean" />
+        <attr name="bottom_left" format="boolean" />
+        <attr name="bottom_right" format="boolean" />
+    </declare-styleable>
+
+</resources>

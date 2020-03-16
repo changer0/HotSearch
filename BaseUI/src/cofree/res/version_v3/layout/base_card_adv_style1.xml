@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardAdv"
+    android:paddingTop="@dimen/spacing_L2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title"
+        style="@style/Card_Adv_Title"
+        android:paddingBottom="@dimen/spacing_L6"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="dsjfklsdjfksldfjdzsklfjdskjfldskjfkdsjfldksjfkdjfsdkjfdskjf" />
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:drawBorder="true"
+        app:layout_constraintDimensionRatio="2:1"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:src="@color/color_C201"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginRight="@dimen/margin_L6"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+        app:layout_constraintRight_toRightOf="@id/iv_cover"
+        android:src="@drawable/adv_image"
+        tools:visibility="visible" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_content"
+        style="@style/Card_Adv_Info"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_cover"
+        tools:text="中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试中文超长测试" />
+    <View
+        android:id="@+id/bottom_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_L2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <View
+        android:id="@+id/localstore_adv_divider"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_spacing"
+        android:visibility="gone"
+        style="@style/DividerInCard"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

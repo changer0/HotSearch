@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Card.Lcover"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/translucent"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    tools:background="#ffffff">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_book1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.qq.reader.view.CoverImageView
+                    android:id="@+id/iv_cover"
+                    android:layout_width="104dp"
+                    android:layout_height="139dp"
+                    android:layout_marginLeft="@dimen/spacing_L2"
+                    android:layout_marginStart="@dimen/spacing_L2"
+                    android:scaleType="fitXY"
+                    app:layout_constraintDimensionRatio="3:4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:src="@color/color_C201" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_score"
+                    style="@style/Score"
+                    android:layout_marginBottom="@dimen/margin_L6"
+                    android:layout_marginEnd="@dimen/margin_L6"
+                    android:layout_marginRight="@dimen/margin_L6"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    tools:text="9.0" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@+id/tv_title"
+                    style="@style/Card_Lcover_H3_Title"
+                    android:layout_marginTop="@dimen/margin_L6"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_cover"
+                    tools:text="asdfsdafsdafsdfgdfgdfg" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@+id/tv_text1"
+                    style="@style/Card_Lcover_H3_Info"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                    tools:text="asdfsdafsdafs" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@+id/tv_text2"
+                    style="@style/Card_Lcover_H3_Info2"
+                    android:layout_marginTop="@dimen/margin_L9"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_text1"
+                    tools:text="asdfsdafsdafs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_book2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.qq.reader.view.CoverImageView
+                    android:id="@id/iv_cover"
+                    android:layout_width="104dp"
+                    android:layout_height="139dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintDimensionRatio="3:4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:src="@color/color_C201" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@+id/tv_score"
+                    style="@style/Score"
+                    android:layout_marginBottom="@dimen/margin_L6"
+                    android:layout_marginEnd="@dimen/margin_L6"
+                    android:layout_marginRight="@dimen/margin_L6"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    tools:text="9.0" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_title"
+                    style="@style/Card_Lcover_H3_Title"
+                    android:layout_marginTop="@dimen/margin_L6"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_cover"
+                    tools:text="@string/app_name" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_text1"
+                    style="@style/Card_Lcover_H3_Info"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                    tools:text="asdfsdafsdafs" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_text2"
+                    style="@style/Card_Lcover_H3_Info2"
+                    android:layout_marginTop="@dimen/margin_L9"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_text1"
+                    tools:text="asdfsdafsdafs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_book3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.qq.reader.view.CoverImageView
+                    android:id="@id/iv_cover"
+                    android:layout_width="106dp"
+                    android:layout_height="139dp"
+                    android:layout_marginStart="8dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintDimensionRatio="3:4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:src="@color/color_C201" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_score"
+                    style="@style/Score"
+                    android:layout_marginBottom="@dimen/margin_L6"
+                    android:layout_marginEnd="@dimen/margin_L6"
+                    android:layout_marginRight="@dimen/margin_L6"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    tools:text="9.0" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_title"
+                    style="@style/Card_Lcover_H3_Title"
+                    android:layout_marginBottom="@dimen/margin_L6"
+                    android:layout_marginTop="@dimen/margin_L6"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_cover"
+                    tools:text="@string/app_name" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_text1"
+                    style="@style/Card_Lcover_H3_Info"
+                    android:layout_marginBottom="@dimen/margin_L6"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                    tools:text="asdfsdafsdafs" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_text2"
+                    style="@style/Card_Lcover_H3_Info2"
+                    android:layout_marginTop="@dimen/margin_L9"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_text1"
+                    tools:text="asdfsdafsdafs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_book4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.qq.reader.view.CoverImageView
+                    android:id="@id/iv_cover"
+                    android:layout_width="104dp"
+                    android:layout_height="139dp"
+                    android:layout_marginEnd="@dimen/margin_L2"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="@dimen/margin_L2"
+                    android:layout_marginStart="8dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintDimensionRatio="3:4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:src="@color/color_C201" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_score"
+                    style="@style/Score"
+                    android:layout_marginBottom="@dimen/margin_L6"
+                    android:layout_marginEnd="@dimen/margin_L6"
+                    android:layout_marginRight="@dimen/margin_L6"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    tools:text="9.0" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_title"
+                    style="@style/Card_Lcover_H3_Title"
+                    android:layout_marginBottom="@dimen/margin_L6"
+                    android:layout_marginTop="@dimen/margin_L6"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_cover"
+                    tools:text="@string/app_name" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_text1"
+                    style="@style/Card_Lcover_H3_Info"
+                    android:layout_marginBottom="@dimen/margin_L6"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                    tools:text="asdfsdafsdafs" />
+
+                <com.qq.reader.widget.ReaderTextView
+                    android:id="@id/tv_text2"
+                    style="@style/Card_Lcover_H3_Info2"
+                    android:layout_marginTop="@dimen/margin_L9"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/iv_cover"
+                    app:layout_constraintLeft_toLeftOf="@id/iv_cover"
+                    app:layout_constraintRight_toRightOf="@id/iv_cover"
+                    app:layout_constraintStart_toStartOf="@id/iv_cover"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_text1"
+                    tools:text="asdfsdafsdafs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Card" />
+
+    <!--书封相关 start-->
+    <style name="Cover">
+        <item name="android:background">@color/color_C109</item>
+        <item name="android:padding">1px</item>
+        <item name="android:radius">@dimen/radius_m</item>
+    </style>
+
+    <!--特大书封-->
+    <style name="Cover.XLCover">
+        <item name="android:layout_width">104dp</item>
+        <item name="android:layout_height">139dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <!--大书封-->
+    <style name="Cover.LCover">
+        <item name="android:layout_width">90dp</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <!--中书封-->
+    <style name="Cover.MCover">
+        <item name="android:layout_width">72dp</item>
+        <item name="android:layout_height">96dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <!--小书封-->
+    <style name="Cover.SCover">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <!--特小书封-->
+    <style name="Cover.SSCover">
+        <item name="android:layout_width">43dp</item>
+        <item name="android:layout_height">58dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <!--特特小书封-->
+    <style name="Cover.SSSCover">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <!--书单推荐-->
+    <style name="Cover.BookList">
+        <item name="android:layout_width">96dp</item>
+        <item name="android:layout_height">79dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <!--榜单-->
+    <style name="Cover.BookRank">
+        <item name="android:layout_width">104dp</item>
+        <item name="android:layout_height">104dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <!--超值包书封前图SSCover,后图是两张单独的图片，仅用在超值包中-->
+    <style name="Cover.ValuePackBehind">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <!--作家主页前图LCover,后图MCover,可以直接引用-->
+    <!--书封相关 end-->
+    <!--###########################################分割线#############################################-->
+
+    <!--TOP样式-->
+    <style name="Top">
+        <item name="android:textColor">@color/color_C101</item>
+        <item name="android:textSize">@dimen/text_size_5</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">38dp</item>
+        <item name="android:layout_height">16dp</item>
+    </style>
+
+    <!--排行的统一用这些背景，之后别的标签也可以复用-->
+    <!--Top样式1-->
+    <style name="Top.Style1">
+        <item name="android:background">@drawable/bg_tag_red</item>
+    </style>
+
+    <!--Top样式2-->
+    <style name="Top.Style2">
+        <item name="android:background">@drawable/bg_tag_yellow</item>
+    </style>
+
+    <!--Top样式3-->
+    <style name="Top.Style3">
+        <item name="android:background">@drawable/bg_tag_orange</item>
+    </style>
+
+    <!--标签样式 一般在书籍右上角-->
+    <style name="BookTag">
+        <item name="android:textSize">@dimen/text_size_5</item>
+        <item name="android:textColor">@color/color_C101</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/padding_L8</item>
+    </style>
+
+    <!--BookTag Red-->
+    <style name="BookTag.BookTag1">
+        <item name="android:background">@drawable/bg_book_tag_red</item>
+    </style>
+
+    <!--BookTag Blue-->
+    <style name="BookTag.BookTag2">
+        <item name="android:background">@drawable/bg_book_tag_blue</item>
+    </style>
+
+    <!--BookTag Green-->
+    <style name="BookTag.BookTag3">
+        <item name="android:background">@drawable/bg_book_tag_green</item>
+    </style>
+
+
+    <!--注意左侧阴影6dp-->
+    <style name="BookTag.BookTag4">
+        <item name="android:background">@drawable/icon_category_boy</item>
+    </style>
+
+    <!--注意左侧阴影6dp-->
+    <style name="BookTag.BookTag5">
+        <item name="android:background">@drawable/icon_category_girl</item>
+    </style>
+
+    <!--评分样式-->
+    <style name="Score" parent="BaseText.T5">
+        <item name="android:background">@drawable/bg_score</item>
+        <item name="android:textColor">@color/color_C101</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/padding_L8</item>
+        <item name="android:paddingRight">@dimen/padding_L8</item>
+    </style>
+
+    <!-- 分类标签样式 -->
+    <style name="Category" parent="BaseText.T6">
+        <item name="android:background">@drawable/bg_tag_category</item>
+        <item name="android:textColor">@color/color_C105</item>
+        <item name="android:minWidth">24dp</item>
+        <item name="android:paddingLeft">@dimen/padding_L8</item>
+        <item name="android:paddingRight">@dimen/padding_L8</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!--标签相关 end-->
+
+    <!--###########################################分割线#############################################-->
+    <style name="CoverButton">
+        <item name="android:layout_width">75dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:background">@drawable/bg_enter_reading</item>
+    </style>
+
+    <style name="CoverButtonText" parent="BaseText.T4">
+        <item name="android:textColor">@color/color_C101</item>
+    </style>
+    
+    <!--星评分样式  是否要提取出公共的 ？ -->
+    <style name="ScoreStarText" parent="BaseText.T5">
+        <item name="android:textColor">@color/color_C501</item>
+    </style>
+
+    <!--竖分割线-->
+    <style name="DividerVertical">
+        <item name="android:background">@color/color_C103</item>
+        <item name="android:layout_height">12dp</item>
+        <item name="android:layout_width">0.5dp</item>
+    </style>
+
+    <style name="BaseText.T2.SingleLineEllipsize" parent="BaseText.T2">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="BaseText.T3.SingleLineEllipsize" parent="BaseText.T3">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+</resources>

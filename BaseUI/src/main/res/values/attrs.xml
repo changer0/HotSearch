@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RefreshLayout">
+        <attr name="refresh_enabled" format="boolean" />
+        <attr name="load_more_enabled" format="boolean" />
+        <attr name="custom_header_enable" format="boolean" />
+
+        <attr name="swipe_style" format="enum">
+            <enum name="classic" value="0" />
+            <enum name="above" value="1" />
+            <enum name="blew" value="2" />
+            <enum name="scale" value="3" />
+        </attr>
+
+        <attr name="drag_ratio" format="float" />
+
+        <attr name="refresh_trigger_offset" format="dimension" />
+        <attr name="load_more_trigger_offset" format="dimension" />
+        <attr name="refresh_final_drag_offset" format="dimension" />
+        <attr name="load_more_final_drag_offset" format="dimension" />
+
+        <attr name="swiping_to_refresh_to_default_scrolling_duration" format="integer" />
+        <attr name="release_to_refreshing_scrolling_duration" format="integer" />
+        <attr name="refresh_complete_delay_duration" format="integer" />
+        <attr name="refresh_complete_to_default_scrolling_duration" format="integer" />
+        <attr name="default_to_refreshing_scrolling_duration" format="integer" />
+        <attr name="swiping_to_load_more_to_default_scrolling_duration" format="integer" />
+        <attr name="release_to_loading_more_scrolling_duration" format="integer" />
+        <attr name="load_more_complete_delay_duration" format="integer" />
+        <attr name="load_more_complete_to_default_scrolling_duration" format="integer" />
+        <attr name="default_to_loading_more_scrolling_duration" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="EmptyPage">
+        <attr name="reloadText" format="string"/>
+        <attr name="buttonText" format="string"/>
+        <attr name="contentTitle" format="string"/>
+        <attr name="contentText" format="string"/>
+        <attr name="viewBackground" format="reference|color"/>
+        <attr name="view_marginLeft" format="dimension"/>
+        <attr name="view_marginRight" format="dimension"/>
+        <attr name="icon" format="reference"/>
+        <attr name="footerDividerEnable" format="boolean"/>
+        <attr name="autoCenterInListView" format="boolean"/>
+        <attr name="type" format="integer">
+            <enum name="singleText" value="0" />
+            <enum name="titleText" value="1" />
+            <enum name="reloadText" value="2" />
+            <enum name="buttonText" value="3" />
+            <enum name="buttonTitleText" value="4" />
+            <enum name="buttonTwoText" value="5" />
+            <enum name="singleButton" value="6" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="SearchTopView">
+        <attr name="hasDivider" format="boolean"/>
+        <attr name="isLight" format="boolean"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="CustomTailIconTextview">
+        <attr name="maxLine" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="UserCircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+        <attr name="border_overlay" format="boolean" />
+        <attr name="circle_background_color" format="color" />
+    </declare-styleable>
+</resources>

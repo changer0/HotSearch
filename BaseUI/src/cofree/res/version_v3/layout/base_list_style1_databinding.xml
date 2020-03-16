@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="list"
+            type="com.qq.reader.common.utils.DataBindingBeanFactory.ListStyle1" />
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Subtitle.Normal">
+
+    <ImageView
+        android:id="@+id/img_left"
+        style="@style/ItemStatusPic"
+        android:layout_marginBottom="@dimen/spacing_L6"
+        android:layout_marginLeft="@dimen/spacing_L2"
+        android:layout_marginStart="@dimen/spacing_L2"
+        android:layout_marginTop="@dimen/spacing_L6"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text1"
+        style="@style/BaseText.T2_C106"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_L6"
+        android:layout_marginEnd="@dimen/spacing_L2"
+        android:layout_marginLeft="@dimen/spacing_L2"
+        android:layout_marginRight="@dimen/spacing_L2"
+        android:layout_marginStart="@dimen/spacing_L2"
+        android:layout_marginTop="@dimen/spacing_L6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_text2"
+        app:layout_constraintStart_toEndOf="@+id/img_left"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginRight="@dimen/spacing_L2"
+        android:text="@{list.mTitle}"
+        tools:text="T2C1061111111111111111111" />
+
+    <ImageView
+        android:id="@+id/img_right_arrow"
+        style="@style/RightGreyArrow"
+        android:layout_marginBottom="@dimen/spacing_L6"
+        android:layout_marginEnd="@dimen/spacing_L2"
+        android:layout_marginRight="@dimen/spacing_L2"
+        android:layout_marginTop="@dimen/spacing_L6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_right_grey" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_text2"
+        style="@style/BaseText.T3_C105"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_L6"
+        android:layout_marginEnd="@dimen/spacing_L8"
+        android:layout_marginRight="@dimen/spacing_L8"
+        android:layout_marginTop="@dimen/spacing_L6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/img_right_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="T3C105"
+        android:visibility="gone"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

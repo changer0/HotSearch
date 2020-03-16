@@ -1,0 +1,172 @@
+ext {
+    versions = [
+            versionName     : "2.0.2.300",
+            versionNameDebug: "2.0.2.300_dev",
+            versionCode     : 20002300,
+            applicationId   : "com.yuewen.cooperate.reader.free",
+            buglyAppID      : "0c21bb6d09",
+            buglyAppKey     : "15b4e90f-7984-4b36-be5a-c29f1e5320d1"
+    ]
+
+    android = [
+            compileOptionsEncoding: "UTF-8",
+            // 编译SDK的版本
+            compileSdkVersion     : 28,
+            //这里oppo、vivo是14，华为是19
+            minSdkVersion         : 17,
+            targetSdkVersion      : 28,
+    ]
+
+    dependencies = [
+            //kotlin依赖库
+            kotlinStdlibJdk            : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            kotlinReflect              : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
+            kotlinCoroutinesCore       : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2",
+            kotlinCoroutinesAndroid    : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2",
+
+            //360 的replugin依赖库
+            repluginHostLib            : "com.yuewen.cooperate.plugin:replugin-host-library:1.0.4",
+
+            //Android原生库
+            supportV4                  : "androidx.legacy:legacy-support-v4:1.0.0",
+            supportV7                  : 'androidx.appcompat:appcompat:1.0.0',
+            recyclerview               : 'androidx.recyclerview:recyclerview:1.0.0',
+            constraintLayout           : 'androidx.constraintlayout:constraintlayout:1.1.3',
+            espressoCore               : 'androidx.test.espresso:espresso-core:3.1.0',
+            espressoIntents            : 'androidx.test.espresso:espresso-intents:3.1.0',
+            palette                    : 'androidx.palette:palette:1.0.0',
+            flexbox                    : "com.google.android:flexbox:1.0.0",
+            material                   : "com.google.android.material:material:1.0.0-rc01",
+
+            //Arouter
+            arouterApi                 : "com.alibaba:arouter-api:1.3.1",
+            arouterCompiler            : "com.alibaba:arouter-compiler:1.1.4",
+
+            //其他第三方库
+            junit                      : "junit:junit:4.12",
+            mockitoCore                : "org.mockito:mockito-core:2.8.9",
+            powermockModule            : "org.powermock:powermock-module-junit4:1.7.1",
+            powermockApi               : "org.powermock:powermock-api-mockito2:1.7.1",
+            okhttp3_loggingInterceptor : "com.squareup.okhttp3:logging-interceptor:3.11.0",
+            lottie                     : "com.airbnb.android:lottie:3.3.0",
+            plGif                      : "pl.droidsonroids.gif:android-gif-drawable:1.2.18",
+            rxJava                     : "io.reactivex.rxjava2:rxandroid:2.1.0",
+            rxAndroid                  : "io.reactivex.rxjava2:rxandroid:2.1.0",
+
+            //Glideproject.groupIdproject.groupId
+            glide                      : "com.github.bumptech.glide:glide:4.8.0",
+            glideCompiler              : "com.github.bumptech.glide:compiler:4.8.0",
+            glideTransformations       : "jp.wasabeef:glide-transformations:4.0.1",
+
+            //Room数据库依赖
+            room                       : 'androidx.room:room-runtime:2.0.0',
+            roomCompiler               : 'androidx.room:room-compiler:2.0.0',
+
+            //阅文依赖
+            yuewenXLog                 : "com.yuewen.cooperate.xlog:xlog-oppo:1.0.9",
+            yuewenPush                 : "com.yuewen.push:YWPush:1.2.0",
+            yuewenLogin                : "com.yuewen.cooperate.login:login-unite:1.2.21",
+            yuewenProviderModule       : "com.yuewen.cooperate.provider:provider:1.0.14",
+            yuewenBadgeModule          : "com.yuewen.cooperate.badge:badge-cofree:1.0.2",
+
+            //第三方广告依赖
+            adCSJAar                   : "com.yuewen.cooperate.adsdk:csj-aar:2.7.5.4",
+            adCSJMiniGamesAar          : "com.yuewen.cooperate.adsdk:csj-mini-games-aar:1.1.8",
+            adCSJMiniGamesX5FitAar     : "com.yuewen.cooperate.adsdk:csj-mini-games-x5fit-aar:1.1.8",
+            adGDTAar                   : "com.yuewen.cooperate.adsdk:gdt-aar:4.165.1035",
+            adOppoAar                  : "com.yuewen.cooperate.adsdk:oppo-jar:3.1.3_20190516",
+            adJHAar                    : "com.yuewen.cooperate.adsdk:jh-aar:v1500002",
+            adJHBaiduAar               : "com.yuewen.cooperate.adsdk:jh-baidu-aar:v18003",
+            adHuaWeiAar                : 'com.yuewen.cooperate.adsdk:huawei-aar:13.4.27.308',
+
+            //阅文核心库依赖
+            yuewenCommonModule         : "com.yuewen.cooperate.common:common-unity:1.0.62",
+            yuewenCoreModule           : "com.yuewen.cooperate.core:core-unity:1.0.60",
+
+            //阅文插件库依赖
+            yuewenPluginModule         : "com.yuewen.cooperate.plugin:plugin-cofree:1.0.19",
+            //阅文登录Module
+            yuewenLoginModule          : "com.yuewen.cooperate.login:login-cofree:1.0.9",
+            //网络监控模块
+            yuewenNetMonitor           : "com.yuewen.cooperate.netmonitor:netmonitor:1.0.14",
+
+            //阅文广告框架依赖
+            yuewenExternalAdSdk        : "com.yuewen.cooperate.adsdk:external-adsdk-flavor-cofree:1.5.11",
+            yuewenExternalAdSdkMPLUS   : "com.yuewen.cooperate.adsdk:external-adsdk-mplus-flavor-cofree:1.5.10",
+            yuewenExternalAdSdkCSJ     : "com.yuewen.cooperate.adsdk:external-adsdk-csj-flavor-cofree:1.5.11",
+            yuewenExternalAdSdkCSJGames: "com.yuewen.cooperate.adsdk:external-adsdk-csjgames-flavor-cofree:1.5.11",
+            yuewenExternalAdSdkGDT     : "com.yuewen.cooperate.adsdk:external-adsdk-gdt-flavor-cofree:1.5.11",
+            yuewenExternalAdSdkOPPO    : "com.yuewen.cooperate.adsdk:external-adsdk-oppo-flavor-cofree:1.5.11",
+            yuewenExternalAdSdkJH      : "com.yuewen.cooperate.adsdk:external-adsdk-jh-flavor-cofree:1.5.11",
+            yuewenExternalAdSdkZT      : "com.yuewen.cooperate.adsdk:external-adsdk-zt-flavor-cofree:1.5.10",
+
+    ]
+
+    //核心库
+    if (isCoreModuleSourceCode.toBoolean()) {
+        dependencies.yuewenCoreModule = project(':CooperateCoreModule')
+    }
+    if (isCommonModuleSourceCode.toBoolean()) {
+        dependencies.yuewenCommonModule = project(':CooperateCommonModule')
+    }
+
+    //provider库
+    if (isProviderSourceCode.toBoolean()) {
+        dependencies.yuewenProviderModule = project(':ProviderModule')
+    }
+
+    //badge库
+    if (isBadgeModuleSourceCode.toBoolean()) {
+        dependencies.yuewenBadgeModule = project(':BadgeModule')
+    }
+
+    //登录库
+    if (isLoginSourceCode.toBoolean()) {
+        dependencies.yuewenLoginModule = project(":LoginModule")
+    }
+
+    //网络监控库
+    if (isNetMonitorDebug.toBoolean()) {
+        dependencies.yuewenNetMonitor = project(":NetMonitor")
+    }
+
+    //插件库
+    if (isPluginModuleSourceCode.toBoolean()) {
+        dependencies.yuewenPluginModule = project(':NewPluginModule')
+    }
+
+    //广告库
+    if (isAdModuleSourceCode.toBoolean()) {
+        dependencies.yuewenExternalAdSdk = project(':ExternalAdSdk')
+        dependencies.yuewenExternalAdSdkOPPO = project(':ExternalAdSdk_OPPO')
+        dependencies.yuewenExternalAdSdkMPLUS = project(':ExternalAdSdk_MPlus')
+        dependencies.yuewenExternalAdSdkGDT = project(':ExternalAdSdk_GDT')
+        dependencies.yuewenExternalAdSdkCSJ = project(':ExternalAdSdk_CSJ')
+        dependencies.yuewenExternalAdSdkCSJGames = project(':ExternalAdSdk_CSJGames')
+        dependencies.yuewenExternalAdSdkJH = project(':ExternalAdSdk_JH')
+        dependencies.yuewenExternalAdSdkZT = project(':ExternalAdSdk_ZT')
+    }
+}
+
+
+configurations {
+    //将不同的flavor的编译关联起来
+    oppoDebugImplementation
+    oppoRelease_with_signImplementation
+    oppoReleaseImplementation
+    vivoDebugImplementation
+    vivoReleaseImplementation
+    vivoRelease_with_signImplementation
+    huaweiDebugImplementation
+    huaweiReleaseImplementation
+    huaweiRelease_with_signImplementation
+    samsungDebugImplementation
+    samsungReleaseImplementation
+    samsungRelease_with_signImplementation
+    commonDebugImplementation
+    commonsamsungReleaseImplementation
+    commonRelease_with_signImplementation
+    cofreeDebugImplementation
+    cofreesamsungReleaseImplementation
+    cofreeRelease_with_signImplementation
+}

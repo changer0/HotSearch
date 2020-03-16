@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.qq.reader.view.CoverImageView
+        android:id="@+id/img_cover"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        tools:background="@color/color_C201"
+        app:layout_constraintDimensionRatio="3:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_L6"
+        android:layout_marginStart="@dimen/margin_L6"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:src="@drawable/icon_listen_tag"
+        app:layout_constraintBottom_toBottomOf="@+id/img_cover"
+        app:layout_constraintStart_toStartOf="@+id/img_cover" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_title"
+        style="@style/Card_Banner_Style1_Title"
+        android:layout_marginTop="@dimen/margin_L6"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/img_cover"
+        app:layout_constraintTop_toBottomOf="@+id/img_cover"
+        tools:text="择天记啊"
+        tools:visibility="visible" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_content"
+        style="@style/Card_Banner_Style1_Content"
+        android:layout_marginTop="@dimen/margin_L8"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/img_cover"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        tools:text="择天记啊择天记啊择天记啊择天记啊择天记啊"
+        tools:visibility="visible" />
+
+    <com.qq.reader.widget.ReaderTextView
+        android:id="@+id/tv_content2"
+        style="@style/Card_Banner_Style1_Content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/img_cover"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content"
+        tools:text="择天记啊择天记啊择天记啊择天记啊择天记啊" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

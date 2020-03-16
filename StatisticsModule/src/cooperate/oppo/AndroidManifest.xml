@@ -1,0 +1,30 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.qq.reader.statistics">
+
+    <application
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <!-- 如果merge冲突请删除 app中的 APPKEY_DENGTA meta-data标签 value在 statisticModule中修改-->
+        <meta-data
+            android:name="APPKEY_DENGTA"
+            android:value="0I100WXUIF1STLJ3"
+            tools:node="strict" />
+
+        <!--oppo 相关 start-->
+        <!-- OPPO统计 -->
+        <meta-data android:name="AppCode" android:value="55" />
+        <service
+            android:name="com.oppo.statistics.upload.UploadService"
+            android:enabled="true"
+            android:process=":dcs" >
+            <intent-filter>
+                <action android:name="com.oppo.statistics.upload.action"/>
+            </intent-filter>
+        </service>
+
+
+    </application>
+
+</manifest>
