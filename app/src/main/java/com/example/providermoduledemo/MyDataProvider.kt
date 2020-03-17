@@ -15,7 +15,8 @@ class MyDataProvider(requestBean: MyRequestBean)
 
     override fun composeUrl(p0: MyRequestBean?): String {
         //拼接 URL
-
+        return "https://free.reader.qq.com/bookstore/get?sex=0&actionId=604&type=3&index=0&recommendFlag=0&num=10"
+        //return "https://www.baidu.com"
     }
 
 }

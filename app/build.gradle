@@ -1,17 +1,21 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
+def libraries = rootProject.ext.dependencies
+def config = rootProject.ext.android
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion config.compileSdkVersion
+    //buildToolsVersion config.buildToolsVersion
 
     defaultConfig {
         applicationId "com.example.providermoduledemo"
-        minSdkVersion 19
-        targetSdkVersion 29
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        // Enabling multidex support.
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -21,6 +25,26 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        pickFirst 'lib/armeabi/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        exclude 'META-INF/proguard/coroutines.pro'
+
+        //接入移动联盟获取oaid
+        doNotStrip "*/armeabi-v7a/*.so"
+        doNotStrip "*/x86/*.so"
+        doNotStrip "*/arm64-v8a/*.so"
+        doNotStrip "*/x86_64/*.so"
+        doNotStrip "armeabi.so"
     }
 
 }
@@ -35,9 +59,14 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'com.yuewen.cooperate.provider:provider:1.0.14'
-    implementation 'com.yuewen.cooperate.common:common-unity:1.0.62'
-    implementation 'com.yuewen.cooperate.core:core-unity:1.0.60'
+    implementation libraries.recyclerview
 
-    annotationProcessor  "com.alibaba:arouter-compiler:1.1.4"
+    implementation libraries.yuewenProviderModule
+    implementation libraries.yuewenCoreModule
+    implementation libraries.yuewenCommonModule
+
+    //。。。
+    implementation libraries.yuewenNetMonitor
+    implementation libraries.yuewenLoginModule
+    implementation project(':StatisticsModule')
 }
