@@ -18,6 +18,9 @@ android {
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //设置运行环境
+        buildConfigField "Integer", "RUN_ENV", "${getRunEnv()}"
     }
 
     buildTypes {
@@ -69,4 +72,10 @@ dependencies {
     implementation libraries.yuewenNetMonitor
     implementation libraries.yuewenLoginModule
     implementation project(':StatisticsModule')
+}
+
+//获取编译环境
+int getRunEnv() {
+    //println "当前运行环境: ${RUN_ENV}"
+    return hasProperty("RUN_ENV") ? RUN_ENV.toInteger() : default_run_env.toInteger()
 }
