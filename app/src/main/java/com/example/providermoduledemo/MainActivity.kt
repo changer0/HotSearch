@@ -39,6 +39,16 @@ class MainActivity : AppCompatActivity() {
 
         reloadData.setOnClickListener {
             ReaderDataLoader.getInstance().loadData(provider, loadParams)
+            content.text = "加载中"
+        }
+
+        modifyCacheModel.setOnClickListener {
+            content.text = "加载中"
+            loadParams.cacheMode++
+            if (loadParams.cacheMode > 3) {
+                loadParams.cacheMode = 0
+            }
+            ReaderDataLoader.getInstance().loadData(provider, loadParams)
         }
     }
 
