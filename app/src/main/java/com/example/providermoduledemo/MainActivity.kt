@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity() {
                 content.text = jsonObj.toString(4)
                 Log.d(TAG, "接受数据：${it.provider.jsonStr}")
             } else {
+                urlTv.text = it.provider.url
+                cacheModeTv.text = loadParams.cacheMode.toString()
+                isCacheTv.text = it.provider.isCache.toString()
                 content.text = "加载失败！"
                 Log.d(TAG, "数据异常")
             }
