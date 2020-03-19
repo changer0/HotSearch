@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
                 content.text = jsonObj.toString(4)
                 Log.d(TAG, "接受数据：${it.provider.jsonStr}")
             } else {
+                content.text = "加载失败！"
                 Log.d(TAG, "数据异常")
             }
         }
