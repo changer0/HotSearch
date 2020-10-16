@@ -1,2 +1,6 @@
 rootProject.name='ProviderModuleDemo'
 include ':app', ':EntityModule', ':AdSdk', ':RouteModule', ':StatisticsModule', ':BaseUI'
+
+if (isProviderSourceCode.toBoolean()) {
+    include ':ProviderModule'
+}

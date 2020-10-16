@@ -100,6 +100,8 @@ ext {
             yuewenExternalAdSdkJH      : "com.yuewen.cooperate.adsdk:external-adsdk-jh-flavor-cofree:1.5.11",
             yuewenExternalAdSdkZT      : "com.yuewen.cooperate.adsdk:external-adsdk-zt-flavor-cofree:1.5.10",
 
+            baseQuickAdapter           : "com.yuewen.cooperate.base-ui-component:basequickadapter:1.0.0"
+
     ]
 
     //核心库
@@ -146,6 +148,12 @@ ext {
         dependencies.yuewenExternalAdSdkJH = project(':ExternalAdSdk_JH')
         dependencies.yuewenExternalAdSdkZT = project(':ExternalAdSdk_ZT')
     }
+
+    //RecyclerView
+    if (isBaseQuickAdapterSourceCode.toBoolean()) {
+        dependencies.baseQuickAdapter = project(':BaseQuickAdapter')
+    }
+
 }
 
 
