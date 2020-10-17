@@ -15,7 +15,7 @@ class ListActivity : ReaderBaseListProviderActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        provider = ListDataProvider(ListRequestBean())
+        provider = ListDataProvider(ListRequestDataBean())
         loadParams = DataLoaderParams()
         //缓存模式
         loadParams.cacheMode = CacheMode.CACHE_MODE_USE_CACHE_PRIORITY

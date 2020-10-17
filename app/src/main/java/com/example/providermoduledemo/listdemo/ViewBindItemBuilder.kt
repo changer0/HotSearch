@@ -1,13 +1,13 @@
 package com.example.providermoduledemo.listdemo
 
 import com.qq.reader.provider.BaseViewBindItem
-import com.qq.reader.provider.bean.BaseBean
+import com.qq.reader.provider.bean.BaseDataBean
 
 object ViewBindItemBuilder {
 
     @JvmStatic
-    fun buildViewBindItem(data: ListResponseBean): List<BaseViewBindItem<out BaseBean>> {
-        val viewBindItemList = mutableListOf<BaseViewBindItem<out BaseBean>>()
+    fun buildViewBindItem(data: ListResponseDataBean): List<BaseViewBindItem<out BaseDataBean>> {
+        val viewBindItemList = mutableListOf<BaseViewBindItem<out BaseDataBean>>()
         if (data.dataItemList == null) {
             return viewBindItemList
         }

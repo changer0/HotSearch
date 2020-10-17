@@ -1,7 +1,6 @@
 package com.qq.reader.pagelist;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.providermoduledemo.R;
 import com.qq.reader.common.utils.CommonUtility;
 import com.qq.reader.provider.BaseViewBindItem;
-import com.qq.reader.provider.bean.BaseBean;
+import com.qq.reader.provider.bean.BaseDataBean;
 import com.qq.reader.view.EmptyView;
 import com.qq.reader.view.ReaderLoadMoreView;
 import com.qq.reader.widget.recyclerview.base.BaseQuickAdapter;
@@ -31,7 +30,7 @@ public abstract class ReaderBaseListProviderActivity extends AppCompatActivity i
 
     private static final String TAG = "ReaderBaseListProvider";
     protected RecyclerView mRecyclerView;
-    protected BaseQuickAdapter<BaseViewBindItem<? extends BaseBean>, BaseViewHolder> mAdapter;
+    protected BaseQuickAdapter<BaseViewBindItem<? extends BaseDataBean>, BaseViewHolder> mAdapter;
     protected LinearLayoutManager mLayoutManager;
 
     //进入时调用
@@ -82,7 +81,7 @@ public abstract class ReaderBaseListProviderActivity extends AppCompatActivity i
         hideDataErrorView();
     }
 
-    protected BaseQuickAdapter<BaseViewBindItem<? extends BaseBean>, BaseViewHolder> initAdapter() {
+    protected BaseQuickAdapter<BaseViewBindItem<? extends BaseDataBean>, BaseViewHolder> initAdapter() {
         return new NativeBookStoreAdapterForRecyclerView(this, null);
     }
 

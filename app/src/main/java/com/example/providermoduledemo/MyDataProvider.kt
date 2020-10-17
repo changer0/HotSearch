@@ -7,13 +7,13 @@ import com.qq.reader.provider.BaseDataProvider
  * for DataProvider 实现类
  */
 
-class MyDataProvider(requestBean: MyRequestBean)
-    : BaseDataProvider<MyRequestBean, MyResponseBean>(requestBean, MyResponseBean::class.java) {
+class MyDataProvider(requestBean: MyRequestDataBean)
+    : BaseDataProvider<MyRequestDataBean, MyResponseDataBean>(requestBean, MyResponseDataBean::class.java) {
     override fun fillData() {
         //填充数据
     }
 
-    override fun composeUrl(p0: MyRequestBean?): String {
+    override fun composeUrl(p0: MyRequestDataBean?): String {
         //拼接 URL
         return "https://free.reader.qq.com/bookstore/get?sex=0&actionId=604&type=3&index=0&recommendFlag=0&num=10"
         //return "https://www.baidu.com"

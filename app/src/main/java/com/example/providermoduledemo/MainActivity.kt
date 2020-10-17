@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val provider = MyDataProvider(MyRequestBean())
+        val provider = MyDataProvider(MyRequestDataBean())
         val loadParams = DataLoaderParams()
         //缓存模式
         loadParams.cacheMode = CacheMode.CACHE_MODE_USE_CACHE_PRIORITY
