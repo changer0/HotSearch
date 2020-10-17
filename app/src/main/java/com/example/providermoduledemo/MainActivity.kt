@@ -1,8 +1,10 @@
 package com.example.providermoduledemo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.providermoduledemo.listdemo.ListActivity
 import com.qq.reader.provider.loader.CacheMode
 import com.qq.reader.provider.loader.DataLoaderParams
 import com.qq.reader.provider.loader.ProviderObserverEntity
@@ -56,6 +58,9 @@ class MainActivity : AppCompatActivity() {
                 loadParams.cacheMode = 0
             }
             ReaderDataLoader.getInstance().loadData(provider, loadParams)
+        }
+        listActivity.setOnClickListener {
+            startActivity(Intent(this, ListActivity::class.java))
         }
     }
 
