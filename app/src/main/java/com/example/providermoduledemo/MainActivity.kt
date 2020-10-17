@@ -8,7 +8,7 @@ import com.example.providermoduledemo.listdemo.ListActivity
 import com.qq.reader.provider.loader.CacheMode
 import com.qq.reader.provider.loader.DataLoaderParams
 import com.qq.reader.provider.loader.ProviderObserverEntity
-import com.qq.reader.provider.loader.ReaderDataLoader
+import com.qq.reader.provider.loader.DataProviderLoader
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
@@ -40,14 +40,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //val it  = CommonLiveData
-        ReaderDataLoader.getInstance().loadData(provider, loadParams)
+        DataProviderLoader.getInstance().loadData(provider, loadParams)
 
         removeCacheBtn.setOnClickListener {
             provider.removeCache()
         }
 
         reloadData.setOnClickListener {
-            ReaderDataLoader.getInstance().loadData(provider, loadParams)
+            DataProviderLoader.getInstance().loadData(provider, loadParams)
             content.text = "加载中"
         }
 
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             if (loadParams.cacheMode > 3) {
                 loadParams.cacheMode = 0
             }
-            ReaderDataLoader.getInstance().loadData(provider, loadParams)
+            DataProviderLoader.getInstance().loadData(provider, loadParams)
         }
         listActivity.setOnClickListener {
             startActivity(Intent(this, ListActivity::class.java))
