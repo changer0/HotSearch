@@ -47,7 +47,7 @@
 
 1. 添加一个继承自 ReaderBaseDataProvider 的类，指定请求Bean和响应Bean泛型；
 2. 实现 composeUrl() 用于拼接协议地址；
-3. 实现 fillData() 用于构建 DataItem，添加到 mDataItems 中；
+3. 实现 fillData() 用于构建 ViewBindItem，添加到 mDataItems 中；
 4. 根据需求添加继承自 BaseDataItem 的类；
 5. 实现 getResLayoutId() 方法，返回当前 Item 的布局文件；
 6. 实现 attachView() 方法，用于将 Data 绑定到 View；
