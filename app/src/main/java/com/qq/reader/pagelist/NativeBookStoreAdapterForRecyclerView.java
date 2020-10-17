@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
-import com.qq.reader.common.gsonbean.BaseBean;
 import com.qq.reader.core.BuildConfig;
 import com.qq.reader.provider.BaseViewBindItem;
+import com.qq.reader.provider.bean.BaseBean;
 import com.qq.reader.widget.recyclerview.base.BaseQuickAdapter;
 import com.qq.reader.widget.recyclerview.base.BaseViewHolder;
 import com.tencent.mars.xlog.Log;

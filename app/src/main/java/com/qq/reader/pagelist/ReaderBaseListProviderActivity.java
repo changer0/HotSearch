@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.providermoduledemo.R;
-import com.qq.reader.activity.ReaderBaseActivity;
-import com.qq.reader.common.gsonbean.BaseBean;
 import com.qq.reader.common.utils.CommonUtility;
 import com.qq.reader.provider.BaseViewBindItem;
+import com.qq.reader.provider.bean.BaseBean;
 import com.qq.reader.view.EmptyView;
 import com.qq.reader.view.ReaderLoadMoreView;
 import com.qq.reader.widget.recyclerview.base.BaseQuickAdapter;

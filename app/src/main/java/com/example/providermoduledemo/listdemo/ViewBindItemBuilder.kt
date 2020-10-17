@@ -1,7 +1,7 @@
 package com.example.providermoduledemo.listdemo
 
-import com.qq.reader.common.gsonbean.BaseBean
 import com.qq.reader.provider.BaseViewBindItem
+import com.qq.reader.provider.bean.BaseBean
 
 object ViewBindItemBuilder {
 

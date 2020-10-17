@@ -1,10 +1,9 @@
 package com.example.providermoduledemo.listdemo
 
-import com.qq.reader.common.gsonbean.BaseBean
-import com.qq.reader.provider.bean.BaseProviderResponseBean
+import com.qq.reader.provider.bean.BaseBean
 import java.io.Serializable
 
-class ListResponseBean : BaseProviderResponseBean() {
+class ListResponseBean : BaseBean() {
     /**
      * footer : 永久免费·就是这么任性
      * floatball : {"bookSort":0,"bookType":0,"category":2,"contentOpacity":0,"currentTime":0,"effectiveObject":0,"elements":[{"activityBook":0,"content":"","id":70472080,"img":["https://16dd-advertise-1252317822.image.myqcloud.com/BookAd/02ab_2020-09-22/1600757623793_336420.png"],"qurl":"https://engine.raisinsta.com/index/activity?appKey=2BibrGFjEZJ3MsjN3NjRf7GuGZQg&adslotId=328031","title":"","type":3,"csbid":0,"isGift":0,"isHotLable":0,"itemSex":0,"lableId":0,"percent":0,"price":0,"rankDiff":0,"rankGroupId":0,"rankGroupSeq":0,"rankNum":0}],"endTime":0,"id":204352,"ifShowBtn":false,"keyBid":0,"nNum":0,"nameListType":0,"numBagIdType":0,"style":0,"title":"","titleColor":"#000000","titleIcon":[],"type":0,"userTagType":0}
