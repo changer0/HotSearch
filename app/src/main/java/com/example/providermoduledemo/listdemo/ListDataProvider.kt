@@ -1,6 +1,6 @@
 package com.example.providermoduledemo.listdemo
 
-import com.qq.reader.provider.ReaderBaseDataProvider
+import com.qq.reader.provider.BaseDataProvider
 
 /**
  * Created by zhanglulu on 2020/3/16.
@@ -8,7 +8,7 @@ import com.qq.reader.provider.ReaderBaseDataProvider
  */
 
 class ListDataProvider(requestBean: ListRequestBean)
-    : ReaderBaseDataProvider<ListRequestBean, ListResponseBean>(requestBean, ListResponseBean::class.java) {
+    : BaseDataProvider<ListRequestBean, ListResponseBean>(requestBean, ListResponseBean::class.java) {
     override fun fillData() {
         //填充数据
         mDataItems = ViewBindItemBuilder.buildViewBindItem(mData)

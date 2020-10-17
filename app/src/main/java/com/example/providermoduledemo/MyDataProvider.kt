@@ -1,6 +1,6 @@
 package com.example.providermoduledemo
 
-import com.qq.reader.provider.ReaderBaseDataProvider
+import com.qq.reader.provider.BaseDataProvider
 
 /**
  * Created by zhanglulu on 2020/3/16.
@@ -8,7 +8,7 @@ import com.qq.reader.provider.ReaderBaseDataProvider
  */
 
 class MyDataProvider(requestBean: MyRequestBean)
-    : ReaderBaseDataProvider<MyRequestBean, MyResponseBean>(requestBean, MyResponseBean::class.java) {
+    : BaseDataProvider<MyRequestBean, MyResponseBean>(requestBean, MyResponseBean::class.java) {
     override fun fillData() {
         //填充数据
     }
