@@ -1,6 +1,6 @@
 package com.example.providermoduledemo
 
-import com.qq.reader.module.bookstore.dataprovider.bean.BaseProviderResponseBean
+import com.qq.reader.provider.bean.BaseProviderResponseBean
 
 /**
  * Created by zhanglulu on 2020/3/16.

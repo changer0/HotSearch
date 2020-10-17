@@ -1,6 +1,6 @@
 package com.example.providermoduledemo
 
-import com.qq.reader.module.bookstore.dataprovider.ReaderBaseDataProvider
+import com.qq.reader.provider.ReaderBaseDataProvider
 
 /**
  * Created by zhanglulu on 2020/3/16.
