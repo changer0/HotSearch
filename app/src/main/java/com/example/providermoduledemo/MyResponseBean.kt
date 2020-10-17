@@ -7,5 +7,5 @@ import com.qq.reader.provider.bean.BaseProviderResponseBean
  * for
  */
 class MyResponseBean : BaseProviderResponseBean() {
-
+    var expireTime: Long = 0
 }

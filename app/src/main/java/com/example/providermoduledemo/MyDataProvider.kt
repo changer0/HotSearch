@@ -19,4 +19,8 @@ class MyDataProvider(requestBean: MyRequestBean)
         //return "https://www.baidu.com"
     }
 
+    override fun getExpiredTime(): Long {
+        return mData.expireTime
+    }
+
 }

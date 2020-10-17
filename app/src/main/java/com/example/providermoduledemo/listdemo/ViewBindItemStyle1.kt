@@ -16,7 +16,7 @@ class ViewBindItemStyle1 : BaseViewBindItem<ListResponseBean.DataItemListBean>()
         }
         val holder: BaseViewHolder = mViewHolder.get() ?: return false
 
-        holder.getView<TextView>(R.id.text1).text = "${mItemData.title}: ${mItemData.content}"
+        holder.getView<TextView>(R.id.text1).text = "${mItemData.title}  ${mItemData.content}"
         return true
     }
 }

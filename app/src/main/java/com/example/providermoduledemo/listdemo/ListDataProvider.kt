@@ -20,4 +20,11 @@ class ListDataProvider(requestBean: ListRequestBean)
         //return "https://www.baidu.com"
     }
 
+    override fun getExpiredTime(): Long {
+        if (mData == null) {
+            return 0
+        }
+        return mData.expireTime
+    }
+
 }

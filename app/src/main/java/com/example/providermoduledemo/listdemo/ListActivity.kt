@@ -9,21 +9,34 @@ import com.qq.reader.provider.loader.DataLoaderParams
 import com.qq.reader.provider.loader.DataProviderLoader
 
 class ListActivity : ReaderBaseListProviderActivity() {
+    lateinit var provider: ListDataProvider
+    lateinit var loadParams: DataLoaderParams
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val provider = ListDataProvider(ListRequestBean())
-        val loadParams = DataLoaderParams()
+        provider = ListDataProvider(ListRequestBean())
+        loadParams = DataLoaderParams()
         //缓存模式
         loadParams.cacheMode = CacheMode.CACHE_MODE_USE_CACHE_PRIORITY
         loadParams.liveData.observe(this, Observer {
             if (it.isSuccess) {
-                mAdapter.setNewData(it.provider.dataItems)
-                hideLoadingView()
+                if (mRecyclerViewState == STATE_ENTER_INIT) {
+                    mAdapter.setNewData(it.provider.dataItems)
+                    hideLoadingView()
+                } else if (mRecyclerViewState == STATE_UP_LOAD_MORE) {
+                    mAdapter.addData(it.provider.dataItems)
+                }
+                mAdapter.loadMoreComplete()
             } else {
                 Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show()
             }
         })
+        DataProviderLoader.getInstance().loadData(provider, loadParams)
+    }
+
+    override fun onLoadMoreRequested() {
+        super.onLoadMoreRequested()
         DataProviderLoader.getInstance().loadData(provider, loadParams)
     }
 }
