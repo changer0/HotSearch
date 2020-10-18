@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.providermoduledemo.listdemo.ListActivity
-import com.qq.reader.provider.loader.CacheMode
+import com.qq.reader.provider.cache.CacheMode
 import com.qq.reader.provider.loader.DataLoaderParams
 import com.qq.reader.provider.loader.ProviderObserverEntity
 import com.qq.reader.provider.loader.DataProviderLoader
