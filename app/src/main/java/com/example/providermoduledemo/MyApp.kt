@@ -20,9 +20,18 @@ class MyApp: BaseApplication() {
         initLogin()
         //添加统一header到拦截器管理类中，此初始化要在多进程之前，保证多进程正常能通过拦截器获取登录态
         HeadInterceptorManager.getInstance().add(HeadInterceptor())
-        DataProviderConfig.init(this) { url, requestMethod, contentType, requestContent ->
-            Http.doRequest(url, requestContent, false, requestMethod, null, contentType, null, null)
-            ""
+        DataProviderConfig.init(this) {params ->
+            val doRequest = Http.doRequest(
+                params.url,
+                params.requestContent,
+                false,
+                params.requestMethod,
+                null,
+                params.contentType,
+                null,
+                null
+            )
+            doRequest.body()?.byteStream()
         }
     }
 }
