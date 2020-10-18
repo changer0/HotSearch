@@ -21,11 +21,12 @@ class ListActivity : ReaderBaseListProviderActivity() {
         loadParams.cacheMode = CacheMode.CACHE_MODE_USE_CACHE_PRIORITY
         loadParams.liveData.observe(this, Observer {
             if (it.isSuccess) {
+                var dataItems = it.provider.dataItems
                 if (mRecyclerViewState == STATE_ENTER_INIT) {
-                    mAdapter.setNewData(it.provider.dataItems)
+                    mAdapter.setNewData(dataItems)
                     hideLoadingView()
                 } else if (mRecyclerViewState == STATE_UP_LOAD_MORE) {
-                    mAdapter.addData(it.provider.dataItems)
+                    mAdapter.addData(dataItems)
                 }
                 mAdapter.loadMoreComplete()
             } else {

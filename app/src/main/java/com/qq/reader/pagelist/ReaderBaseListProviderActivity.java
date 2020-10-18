@@ -30,7 +30,7 @@ public abstract class ReaderBaseListProviderActivity extends AppCompatActivity i
 
     private static final String TAG = "ReaderBaseListProvider";
     protected RecyclerView mRecyclerView;
-    protected BaseQuickAdapter<BaseViewBindItem<? extends BaseDataBean>, BaseViewHolder> mAdapter;
+    protected BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> mAdapter;
     protected LinearLayoutManager mLayoutManager;
 
     //进入时调用
@@ -81,7 +81,7 @@ public abstract class ReaderBaseListProviderActivity extends AppCompatActivity i
         hideDataErrorView();
     }
 
-    protected BaseQuickAdapter<BaseViewBindItem<? extends BaseDataBean>, BaseViewHolder> initAdapter() {
+    protected BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> initAdapter() {
         return new NativeBookStoreAdapterForRecyclerView(this, null);
     }
 

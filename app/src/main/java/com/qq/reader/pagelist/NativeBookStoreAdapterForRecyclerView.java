@@ -20,12 +20,12 @@ import java.util.List;
  * @author zhanglulu on 2019/2/28.
  * for RecyclerView Adapter
  */
-public class NativeBookStoreAdapterForRecyclerView extends BaseQuickAdapter<BaseViewBindItem<? extends BaseDataBean>, BaseViewHolder> {
+public class NativeBookStoreAdapterForRecyclerView extends BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> {
 
     private static final String TAG = "NativeBookStoreAdapterF";
     private Context mContext;
 
-    public NativeBookStoreAdapterForRecyclerView(Context context, @Nullable List<BaseViewBindItem<? extends BaseDataBean>> data) {
+    public NativeBookStoreAdapterForRecyclerView(Context context, @Nullable List<BaseViewBindItem> data) {
         super(data);
         mContext = context;
     }
@@ -33,7 +33,7 @@ public class NativeBookStoreAdapterForRecyclerView extends BaseQuickAdapter<Base
 
     @Override
     protected void convert(BaseViewHolder holder, int position) {
-        BaseViewBindItem item = getItem(position);
+        BaseViewBindItem<? extends BaseDataBean, BaseViewHolder> item = getItem(position);
         if (item != null) {
             item.setIndex(position);
             try {
@@ -65,7 +65,7 @@ public class NativeBookStoreAdapterForRecyclerView extends BaseQuickAdapter<Base
     @Override
     protected int getDefItemViewType(int position) {
         int type = 0;
-        BaseViewBindItem item = getItem(position);
+        BaseViewBindItem<? extends BaseDataBean, BaseViewHolder> item = getItem(position);
         if (item != null) {
             type = item.getResLayoutId();
         }
