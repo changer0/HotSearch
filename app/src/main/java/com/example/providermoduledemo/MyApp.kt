@@ -1,37 +1,26 @@
 package com.example.providermoduledemo
 
-import com.qq.reader.appconfig.AppDebug
-import com.qq.reader.appconfig.HeadInterceptor
-import com.qq.reader.common.login.LoginManager.Companion.initLogin
-import com.qq.reader.core.BaseApplication
-import com.qq.reader.core.http.HeadInterceptorManager
-import com.qq.reader.core.http.Http
+import android.app.Application
 import com.qq.reader.provider.DataProviderConfig
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by zhanglulu on 2020/3/16.
  * for
  */
-class MyApp: BaseApplication() {
+class MyApp: Application() {
+    val client = OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build()//1
     override fun onCreate() {
         super.onCreate()
-        AppDebug.env = BuildConfig.RUN_ENV
-        FlavorConfig.init()
-        initLogin()
-        //添加统一header到拦截器管理类中，此初始化要在多进程之前，保证多进程正常能通过拦截器获取登录态
-        HeadInterceptorManager.getInstance().add(HeadInterceptor())
-        DataProviderConfig.init(this) {params ->
-            val doRequest = Http.doRequest(
-                params.url,
-                params.requestContent,
-                false,
-                params.requestMethod,
-                null,
-                params.contentType,
-                null,
-                null
-            )
-            doRequest.body()?.byteStream()
+        DataProviderConfig.init(this) { params ->
+            val request = Request.Builder()
+                .url(params.url)
+                .get().build()//2
+            val call = client.newCall(request)//3
+            val response = call.execute()//4
+            response.body()?.byteStream()
         }
     }
 }

@@ -7,5 +7,11 @@ import com.qq.reader.provider.bean.BaseDataBean
  * for
  */
 class MyResponseDataBean : BaseDataBean() {
-    var expireTime: Long = 0
+    var time: Long = 0
+
+    class ListData {
+        var style: Int = -1
+        var name: String = ""
+        var content: String = ""
+    }
 }

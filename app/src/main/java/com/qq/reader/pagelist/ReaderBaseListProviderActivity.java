@@ -11,13 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.providermoduledemo.R;
-import com.qq.reader.common.utils.CommonUtility;
 import com.qq.reader.provider.BaseViewBindItem;
-import com.qq.reader.provider.bean.BaseDataBean;
-import com.qq.reader.view.EmptyView;
-import com.qq.reader.view.ReaderLoadMoreView;
 import com.qq.reader.widget.recyclerview.base.BaseQuickAdapter;
 import com.qq.reader.widget.recyclerview.base.BaseViewHolder;
+import com.qq.reader.widget.recyclerview.loadmore.LoadMoreView;
+import com.qq.reader.widget.recyclerview.loadmore.SimpleLoadMoreView;
 
 /**
  * @author zhanglulu on 2019/9/10.
@@ -41,10 +39,10 @@ public abstract class ReaderBaseListProviderActivity extends AppCompatActivity i
     protected static final int STATE_UP_LOAD_MORE = 2;
     protected int mRecyclerViewState = STATE_ENTER_INIT;
 
-    protected ReaderLoadMoreView mLoadMoreView;
+    protected LoadMoreView mLoadMoreView;
 
     protected View mLoadingView;
-    protected EmptyView mDataErrorView;
+    protected View mDataErrorView;
 
 
     @Override
@@ -72,10 +70,10 @@ public abstract class ReaderBaseListProviderActivity extends AppCompatActivity i
         }
 
         mLoadingView = findViewById(R.id.loading_view);
-        mDataErrorView = (EmptyView) findViewById(R.id.data_error_view);
+        mDataErrorView =  findViewById(R.id.data_error_view);
 
         showLoadingView();
-        mDataErrorView.setButtonOnclick(v -> {
+        mDataErrorView.setOnClickListener(v -> {
             dataErrorReload();
         });
         hideDataErrorView();
@@ -87,26 +85,20 @@ public abstract class ReaderBaseListProviderActivity extends AppCompatActivity i
 
     //----------------------------------------------------------------------------------------------
     // Loading More View 控制
-    public ReaderLoadMoreView getLoadMoreView() {
-        return new ReaderLoadMoreView();
+    public LoadMoreView getLoadMoreView() {
+        return new SimpleLoadMoreView();
     }
 
     //----------------------------------------------------------------------------------------------
     // Net Error View 控制
     public void showDataErrorView() {
         if (mDataErrorView != null) {
-            mDataErrorView.setEmptyViewType(EmptyView.BUTTON_TEXT);
-            mDataErrorView.setIcon(R.drawable.detail_load_failed);
-            mDataErrorView.setContent(CommonUtility.getStringById(R.string.loading_data_fail_text));
             mDataErrorView.setVisibility(View.VISIBLE);
         }
     }
 
     public void showNetErrorView() {
         if (mDataErrorView != null) {
-            mDataErrorView.setEmptyViewType(EmptyView.BUTTON_TWO_TEXT);
-            mDataErrorView.setIcon(R.drawable.empty_net_failed);
-            mDataErrorView.setContent(CommonUtility.getStringById(R.string.loading_fail_text));
             mDataErrorView.setVisibility(View.VISIBLE);
         }
     }

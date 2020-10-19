@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,24 +12,24 @@
         android:overScrollMode="never" />
 
 
-    <include
+    <TextView
         android:id="@+id/loading_view"
-        layout="@layout/base_loading_style2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_L5"
-        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        android:textSize="20dp"
+        android:text="加载中"/>
 
-    <com.qq.reader.view.EmptyView
+    <TextView
         android:id="@+id/data_error_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:buttonText="@string/click_retry"
-        app:contentText="@string/loading_data_fail_text"
-        app:icon="@drawable/detail_load_failed"
-        app:reloadText="@string/setting_net"
-        app:type="buttonText" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20dp"
+        android:text="数据加载出错"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

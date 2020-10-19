@@ -7,12 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
-import com.qq.reader.core.BuildConfig;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.bean.BaseDataBean;
 import com.qq.reader.widget.recyclerview.base.BaseQuickAdapter;
 import com.qq.reader.widget.recyclerview.base.BaseViewHolder;
-import com.tencent.mars.xlog.Log;
 
 import java.util.List;
 
@@ -42,11 +40,7 @@ public class NativeBookStoreAdapterForRecyclerView extends BaseQuickAdapter<Base
                 //如果发生异常, 该item不显示
                 holder.itemView.setVisibility(View.GONE);
                 item.hideItemView();
-                if (BuildConfig.DEBUG) {
-
-                }
                 e.printStackTrace();
-                Log.printErrStackTrace("NativeBookStoreAdapterForRecyclerView", e, null, null);
             }
         }
 

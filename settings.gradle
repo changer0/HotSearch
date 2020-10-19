@@ -1,5 +1,5 @@
 rootProject.name='ProviderModuleDemo'
-include ':app', ':EntityModule', ':AdSdk', ':RouteModule', ':StatisticsModule', ':BaseUI'
+include ':app'
 
 if (isProviderSourceCode.toBoolean()) {
     include ':ProviderModule'

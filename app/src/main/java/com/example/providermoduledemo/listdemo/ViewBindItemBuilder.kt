@@ -10,10 +10,10 @@ object ViewBindItemBuilder {
     @JvmStatic
     fun buildViewBindItem(data: ListResponseDataBean): List<BaseViewBindItem<out BaseDataBean, out RecyclerView.ViewHolder>> {
         val viewBindItemList = mutableListOf<BaseViewBindItem<out BaseDataBean, BaseViewHolder>>()
-        if (data.dataItemList == null) {
+        if (data.list == null) {
             return viewBindItemList
         }
-        for (item in data.dataItemList!!) {
+        for (item in data.list!!) {
             val viewBindItemStyle1 = ViewBindItemStyle1()
             viewBindItemStyle1.data = item
             viewBindItemList.add(viewBindItemStyle1)

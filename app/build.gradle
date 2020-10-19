@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-def libraries = rootProject.ext.dependencies
 def config = rootProject.ext.android
 android {
     compileSdkVersion config.compileSdkVersion
@@ -34,21 +33,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        pickFirst 'lib/armeabi/libc++_shared.so'
-        pickFirst 'lib/arm64-v8a/libc++_shared.so'
-        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
-        exclude 'META-INF/proguard/coroutines.pro'
-
-        //接入移动联盟获取oaid
-        doNotStrip "*/armeabi-v7a/*.so"
-        doNotStrip "*/x86/*.so"
-        doNotStrip "*/arm64-v8a/*.so"
-        doNotStrip "*/x86_64/*.so"
-        doNotStrip "armeabi.so"
-    }
 
 }
 
@@ -62,17 +46,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation libraries.recyclerview
 
-    implementation libraries.yuewenProviderModule
-    implementation libraries.yuewenCoreModule
-    implementation libraries.yuewenCommonModule
+    implementation 'com.yuewen.cooperate.base-ui-component:basequickadapter:1.0.0'
+    implementation project(':ProviderModule')
 
-    //。。。
-    implementation libraries.yuewenNetMonitor
-    implementation libraries.yuewenLoginModule
-    implementation project(':StatisticsModule')
-    implementation project(':BaseUI')
+    //OkHttp 库
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 }
 
 //获取编译环境

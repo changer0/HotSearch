@@ -15,12 +15,12 @@ class MyDataProvider(requestBean: MyRequestDataBean)
 
     override fun composeUrl(p0: MyRequestDataBean?): String {
         //拼接 URL
-        return "https://free.reader.qq.com/bookstore/get?sex=0&actionId=604&type=3&index=0&recommendFlag=0&num=10"
+        return "https://gitee.com/luluzhang/publish-json/raw/master/list_json.json"
         //return "https://www.baidu.com"
     }
 
     override fun getExpiredTime(): Long {
-        return mData.expireTime
+        return mData.time
     }
 
 }

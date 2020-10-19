@@ -27,10 +27,6 @@ allprojects {
         }
         google()
         jcenter()
-        flatDir {
-            dirs project(':AdSdk').file('libs/aar')
-            dirs project(':StatisticsModule').file('libs/aar')
-        }
     }
 }
 
