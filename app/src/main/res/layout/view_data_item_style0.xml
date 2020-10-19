@@ -9,21 +9,22 @@
     <TextView
         android:id="@+id/text1"
         android:textSize="20dp"
-        android:textColor="#000"
+        android:textColor="#FFF"
+        android:background="@drawable/ic_launcher_background"
+        android:gravity="center"
         tools:text="书名"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="match_parent"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/text2"
         android:textSize="20dp"
-        android:textColor="#FFF"
-        android:background="@drawable/ic_launcher_background"
-        android:gravity="center"
-        android:text="xxxx"
+        android:textColor="#000"
+        android:text="xxx"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
