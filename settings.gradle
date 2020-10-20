@@ -1,6 +1,3 @@
 rootProject.name='ProviderModuleDemo'
 include ':app'
-
-if (isProviderSourceCode.toBoolean()) {
-    include ':ProviderModule'
-}
+include ':ProviderModule'
