@@ -1,9 +1,14 @@
 package com.example.providermoduledemo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.qq.reader.module.bookstore.dataprovider.loader.*
+import com.example.providermoduledemo.listdemo.ListActivity
+import com.qq.reader.provider.cache.CacheMode
+import com.qq.reader.provider.loader.DataLoaderParams
+import com.qq.reader.provider.loader.ProviderObserverEntity
+import com.qq.reader.provider.loader.DataProviderLoader
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
@@ -14,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val provider = MyDataProvider(MyRequestBean())
+        val provider = MyDataProvider(MyRequestDataBean())
         val loadParams = DataLoaderParams()
         //缓存模式
         loadParams.cacheMode = CacheMode.CACHE_MODE_USE_CACHE_PRIORITY
@@ -35,14 +40,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //val it  = CommonLiveData
-        ReaderDataLoader.getInstance().loadData(provider, loadParams)
+        DataProviderLoader.getInstance().loadData(provider, loadParams)
 
         removeCacheBtn.setOnClickListener {
             provider.removeCache()
         }
 
         reloadData.setOnClickListener {
-            ReaderDataLoader.getInstance().loadData(provider, loadParams)
+            DataProviderLoader.getInstance().loadData(provider, loadParams)
             content.text = "加载中"
         }
 
@@ -52,7 +57,10 @@ class MainActivity : AppCompatActivity() {
             if (loadParams.cacheMode > 3) {
                 loadParams.cacheMode = 0
             }
-            ReaderDataLoader.getInstance().loadData(provider, loadParams)
+            DataProviderLoader.getInstance().loadData(provider, loadParams)
+        }
+        listActivity.setOnClickListener {
+            startActivity(Intent(this, ListActivity::class.java))
         }
     }
 

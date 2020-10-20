@@ -1,2 +1,3 @@
 rootProject.name='ProviderModuleDemo'
-include ':app', ':EntityModule', ':AdSdk', ':RouteModule', ':StatisticsModule', ':BaseUI'
+include ':app'
+include ':ProviderModule'
