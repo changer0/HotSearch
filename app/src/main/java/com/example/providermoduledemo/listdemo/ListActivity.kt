@@ -3,7 +3,7 @@ package com.example.providermoduledemo.listdemo
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.qq.reader.pagelist.ReaderBaseListProviderActivity
+import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
 import com.qq.reader.provider.cache.CacheMode
 import com.qq.reader.provider.loader.DataLoaderParams
 import com.qq.reader.provider.loader.DataProviderLoader

@@ -1,4 +1,4 @@
-package com.qq.reader.pagelist;
+package com.example.providermoduledemo.pagelist;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

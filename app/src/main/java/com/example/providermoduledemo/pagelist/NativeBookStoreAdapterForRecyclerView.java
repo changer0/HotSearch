@@ -1,4 +1,4 @@
-package com.qq.reader.pagelist;
+package com.example.providermoduledemo.pagelist;
 
 import android.content.Context;
 import android.view.LayoutInflater;
