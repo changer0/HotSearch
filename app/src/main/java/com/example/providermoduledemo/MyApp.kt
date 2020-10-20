@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
  * for
  */
 class MyApp: Application() {
-    val client = OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build()//1
+    private val client = OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build()//1
     override fun onCreate() {
         super.onCreate()
         DataProviderConfig.init(this) { params ->

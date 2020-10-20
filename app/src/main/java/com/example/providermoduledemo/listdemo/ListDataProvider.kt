@@ -17,7 +17,6 @@ class ListDataProvider(requestBean: ListRequestDataBean)
     override fun composeUrl(p0: ListRequestDataBean?): String {
         //拼接 URL
         return "https://gitee.com/luluzhang/publish-json/raw/master/list_json.json"
-        //return "https://www.baidu.com"
     }
 
     override fun getExpiredTime(): Long {
@@ -26,5 +25,4 @@ class ListDataProvider(requestBean: ListRequestDataBean)
         }
         return mData.time
     }
-
 }
