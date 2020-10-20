@@ -11,7 +11,7 @@ class ListDataProvider(requestBean: ListRequestDataBean)
     : BaseDataProvider<ListRequestDataBean, ListResponseDataBean>(requestBean, ListResponseDataBean::class.java) {
     override fun fillData() {
         //填充数据
-        mDataItems = ViewBindItemBuilder.buildViewBindItem(mData)
+        mViewBindItems = ViewBindItemBuilder.buildViewBindItem(mData)
     }
 
     override fun composeUrl(p0: ListRequestDataBean?): String {
