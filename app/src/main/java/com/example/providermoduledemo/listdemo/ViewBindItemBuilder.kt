@@ -8,12 +8,12 @@ object ViewBindItemBuilder {
 
     @JvmStatic
     fun buildViewBindItem(data: ListResponseDataBean): List<BaseViewBindItem<out BaseDataBean, BaseViewHolder>> {
-        val viewBindItemList = mutableListOf<BaseViewBindItem<out BaseDataBean, BaseViewHolder>>()
+        val viewBindItemList = mutableListOf<BaseViewBindItem<ListResponseDataBean.ListData, BaseViewHolder>>()
         if (data.list == null) {
             return viewBindItemList
         }
         for (item in data.list!!) {
-            var bindViewItem : BaseViewBindItem<out BaseDataBean, BaseViewHolder>? = null
+            var bindViewItem : BaseViewBindItem<ListResponseDataBean.ListData, BaseViewHolder>? = null
             when (item.style) {
                 0 -> {
                     bindViewItem = ViewBindItemStyle0()
@@ -26,7 +26,6 @@ object ViewBindItemBuilder {
                 it.data = item
                 viewBindItemList.add(it)
             }
-
         }
         return viewBindItemList
     }

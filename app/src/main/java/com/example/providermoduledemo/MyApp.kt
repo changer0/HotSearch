@@ -14,7 +14,7 @@ class MyApp: Application() {
     private val client = OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build()//1
     override fun onCreate() {
         super.onCreate()
-        DataProviderConfig.init(this) { params ->
+        DataProviderConfig.init(this, true) { params ->
             val request = Request.Builder()
                 .url(params.url)
                 .get().build()//2
