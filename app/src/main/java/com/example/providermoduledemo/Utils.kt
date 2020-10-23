@@ -7,7 +7,7 @@ import android.util.Log
  * for
  */
 object Utils {
-    fun getResIdByString(idStr: String?, c: Class<*>): Int {
+    fun getResIdByString(idStr: String, c: Class<*>): Int {
         return try {
             val idField = c.getDeclaredField(idStr)
             idField.getInt(idField)
