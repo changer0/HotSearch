@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
 import com.example.providermoduledemo.listdemo.ListActivity
+import com.example.providermoduledemo.viewmodel.ViewModelActivity
 import com.qq.reader.provider.loader.DataProviderLoader
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
@@ -40,6 +41,9 @@ class MainActivity : AppCompatActivity() {
         }
         listActivity.setOnClickListener {
             startActivity(Intent(this, ListActivity::class.java))
+        }
+        viewModelActivity.setOnClickListener {
+            startActivity(Intent(this, ViewModelActivity::class.java))
         }
 
         provider.liveData.observe(this, Observer {

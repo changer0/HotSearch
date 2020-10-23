@@ -7,7 +7,7 @@ import com.example.providermoduledemo.R
 import com.qq.reader.provider.BaseViewBindItem
 import com.qq.reader.widget.recyclerview.base.BaseViewHolder
 
-class ViewBindItemStyle1 : BaseViewBindItem<ListResponseDataBean.ListData, BaseViewHolder>() {
+class ViewBindItemStyle1 : BaseViewBindItem<ListResponseDataBean.ItemData, BaseViewHolder>() {
     override fun getResLayoutId(): Int {
         return R.layout.view_data_item_style1
     }
