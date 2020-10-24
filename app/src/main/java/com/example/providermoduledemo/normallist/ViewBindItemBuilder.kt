@@ -1,4 +1,4 @@
-package com.example.providermoduledemo.listdemo
+package com.example.providermoduledemo.normallist
 
 import com.qq.reader.provider.BaseViewBindItem
 import com.qq.reader.provider.bean.BaseDataBean
@@ -7,13 +7,13 @@ import com.qq.reader.widget.recyclerview.base.BaseViewHolder
 object ViewBindItemBuilder {
 
     @JvmStatic
-    fun buildViewBindItem(data: ListResponseDataBean): List<BaseViewBindItem<out BaseDataBean, BaseViewHolder>> {
-        val viewBindItemList = mutableListOf<BaseViewBindItem<ListResponseDataBean.ItemData, BaseViewHolder>>()
+    fun buildViewBindItem(data: NormalResponseDataBean): List<BaseViewBindItem<out BaseDataBean, BaseViewHolder>> {
+        val viewBindItemList = mutableListOf<BaseViewBindItem<NormalResponseDataBean.ItemData, BaseViewHolder>>()
         if (data.list == null) {
             return viewBindItemList
         }
         for (item in data.list!!) {
-            var bindViewItem : BaseViewBindItem<ListResponseDataBean.ItemData, BaseViewHolder>? = null
+            var bindViewItem : BaseViewBindItem<NormalResponseDataBean.ItemData, BaseViewHolder>? = null
             when (item.style) {
                 0 -> {
                     bindViewItem = ViewBindItemStyle0()

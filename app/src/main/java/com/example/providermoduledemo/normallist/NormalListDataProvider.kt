@@ -1,4 +1,4 @@
-package com.example.providermoduledemo.listdemo
+package com.example.providermoduledemo.normallist
 
 import com.qq.reader.provider.BaseDataProvider
 
@@ -7,14 +7,14 @@ import com.qq.reader.provider.BaseDataProvider
  * for DataProvider 实现类
  */
 
-class ListDataProvider(requestBean: ListRequestDataBean)
-    : BaseDataProvider<ListRequestDataBean, ListResponseDataBean>(requestBean, ListResponseDataBean::class.java) {
+class NormalListDataProvider(requestBean: NormalRequestDataBean)
+    : BaseDataProvider<NormalRequestDataBean, NormalResponseDataBean>(requestBean, NormalResponseDataBean::class.java) {
     override fun fillData() {
         //填充数据
         mViewBindItems = ViewBindItemBuilder.buildViewBindItem(mData)
     }
 
-    override fun composeUrl(p0: ListRequestDataBean?): String {
+    override fun composeUrl(p0: NormalRequestDataBean?): String {
         //拼接 URL
         return "https://gitee.com/luluzhang/publish-json/raw/master/list_json.json"
     }

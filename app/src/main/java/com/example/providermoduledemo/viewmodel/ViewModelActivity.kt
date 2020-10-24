@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.providermoduledemo.R
-import com.example.providermoduledemo.listdemo.ListRequestDataBean
 import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
 import com.qq.reader.provider.loader.DataProviderLoader
 import com.qq.reader.provider.log.Logger
@@ -17,7 +16,7 @@ class ViewModelActivity : ReaderBaseListProviderActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        provider = ViewModelDataProvider(ListRequestDataBean())
+        provider = ViewModelDataProvider(ViewModelRequestDataBean())
         provider.liveData.observe(this, Observer {
             if (it.isSuccess) {
                 Logger.d("ViewModelActivity isCache：", it.provider.isCache.toString())

@@ -1,4 +1,4 @@
-package com.example.providermoduledemo.listdemo
+package com.example.providermoduledemo.normallist
 
 import com.qq.reader.provider.bean.BaseDataBean
 
@@ -7,6 +7,6 @@ import com.qq.reader.provider.bean.BaseDataBean
  * for
  */
 
-class ListRequestDataBean : BaseDataBean() {
+class NormalRequestDataBean : BaseDataBean() {
 
 }

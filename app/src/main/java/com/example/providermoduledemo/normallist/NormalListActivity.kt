@@ -1,4 +1,4 @@
-package com.example.providermoduledemo.listdemo
+package com.example.providermoduledemo.normallist
 
 import android.os.Bundle
 import android.view.Menu
@@ -9,13 +9,13 @@ import com.example.providermoduledemo.R
 import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
 import com.qq.reader.provider.loader.DataProviderLoader
 
-class ListActivity : ReaderBaseListProviderActivity() {
-    lateinit var provider: ListDataProvider
+class NormalListActivity : ReaderBaseListProviderActivity() {
+    lateinit var provider: NormalListDataProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        provider = ListDataProvider(ListRequestDataBean())
+        provider = NormalListDataProvider(NormalRequestDataBean())
         provider.liveData.observe(this, Observer {
             if (it.isSuccess) {
                 val dataItems = it.provider.dataItems
