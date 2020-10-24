@@ -1,28 +1,43 @@
 package com.example.providermoduledemo.viewmodel
 
-import android.app.Activity
-import android.widget.TextView
 import com.example.providermoduledemo.R
-import com.example.providermoduledemo.Utils
-import com.qq.reader.provider.BaseViewBindModelItem
-import com.qq.reader.widget.recyclerview.base.BaseViewHolder
+import com.qq.reader.provider.viewmodel.BindUIView
 
-class ViewModelBindItemStyle0 : BaseViewBindModelItem<ViewModelResponseDataBean.ItemData, BaseViewHolder>() {
+class ViewModelBindItemStyle0 : BaseViewBindModelItem<ViewModelResponseDataBean.ItemData>() {
+
     override fun getResLayoutId(): Int {
         return R.layout.view_model_data_item_style0
     }
 
-    override fun buildViewModelList(
-        holder: BaseViewHolder,
-        activity: Activity,
-        viewModelList: MutableList<VM>
-    ) {
-        for (book in mItemData.bookList!!.withIndex()) {
-            val view = holder.getView<SingleBookView>(Utils.getResIdByString("singleBook${book.index}", R.id::class.java))
-            val model = SingleBookModel(book.value.name, book.value.content)
-            viewModelList.add(VM(view, model))
+    @BindUIView(targetView = R.id.singleBook0)
+    private lateinit var model0: SingleBookModel
+
+    @BindUIView(targetView = R.id.singleBook1)
+    private lateinit var model1: SingleBookModel
+
+
+    @BindUIView(targetView = R.id.singleBook2)
+    private lateinit var model2: SingleBookModel
+
+    @BindUIView(targetView = R.id.title)
+    private lateinit var titleModel: ItemTitleModel
+
+    override fun onCreateModel(data: ViewModelResponseDataBean.ItemData?) {
+        val bookList = data?.bookList!!
+        titleModel = ItemTitleModel(data.title)
+        val size = bookList.size
+        if (size < 1) {
+            return
         }
-        //添加标题的 VM
-        viewModelList.add(VM(holder.getView<ItemTitleView>(R.id.title), ItemTitleModel(mItemData.title)))
+        model0 = SingleBookModel(bookList[0].name, bookList[0].content)
+        if (size < 2) {
+            return
+        }
+        model1 = SingleBookModel(bookList[1].name, bookList[1].content)
+        if (size < 3) {
+            return
+        }
+        model2 = SingleBookModel(bookList[2].name, bookList[2].content)
     }
+
 }
