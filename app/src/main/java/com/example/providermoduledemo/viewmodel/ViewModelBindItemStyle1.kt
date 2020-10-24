@@ -11,7 +11,7 @@ class ViewModelBindItemStyle1 : BaseViewBindModelItem<ViewModelResponseDataBean.
         return R.layout.view_model_data_item_style1
     }
 
-    override fun buildViewModelMap(
+    override fun buildViewModelList(
         holder: BaseViewHolder,
         activity: Activity,
         viewModelList: MutableList<VM>
