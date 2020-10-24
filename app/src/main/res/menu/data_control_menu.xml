@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/clearCache" android:title="清除缓存"/>
+    <item android:id="@+id/reloadData" android:title="重新加载"/>
+    <item android:id="@+id/modifyCacheModel" android:title="修改缓存模式"/>
+</menu>

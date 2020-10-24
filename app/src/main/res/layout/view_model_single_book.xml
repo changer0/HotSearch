@@ -8,7 +8,7 @@
         android:id="@+id/text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:textColor="#000"
         android:text="测试View"
         android:padding="20dp"

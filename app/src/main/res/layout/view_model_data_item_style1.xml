@@ -8,21 +8,21 @@
     android:padding="10dp">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="#0FF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.example.providermoduledemo.viewmodel.SingleBookView
             android:id="@+id/singleBook0"
-            android:layout_width="match_parent"
+            android:layout_width="120dp"
             android:layout_height="wrap_content" />
         <com.example.providermoduledemo.viewmodel.SingleBookView
             android:id="@+id/singleBook1"
-            android:layout_width="match_parent"
+            android:layout_width="120dp"
             android:layout_height="wrap_content" />
         <com.example.providermoduledemo.viewmodel.SingleBookView
             android:id="@+id/singleBook2"
-            android:layout_width="match_parent"
+            android:layout_width="120dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
