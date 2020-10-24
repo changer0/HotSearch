@@ -28,6 +28,7 @@ class ViewModelActivity : ReaderBaseListProviderActivity() {
                     mAdapter.addData(dataItems)
                 }
                 mAdapter.loadMoreComplete()
+                showCacheMode(provider.isCache)
             } else {
                 Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show()
             }
@@ -38,6 +39,12 @@ class ViewModelActivity : ReaderBaseListProviderActivity() {
     override fun onLoadMoreRequested() {
         super.onLoadMoreRequested()
         DataProviderLoader.getInstance().loadData(provider)
+    }
+
+    private fun showCacheMode(cache: Boolean) {
+        if (supportActionBar != null) {
+            supportActionBar!!.title = "Provider 缓存：(${cache})"
+        }
     }
 
 
