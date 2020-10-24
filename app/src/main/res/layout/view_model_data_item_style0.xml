@@ -7,6 +7,12 @@
     android:orientation="vertical"
     android:padding="10dp">
 
+
+    <com.example.providermoduledemo.viewmodel.ItemTitleView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:orientation="vertical"
         android:background="#FF0"

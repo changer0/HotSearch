@@ -7,23 +7,33 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:background="#0FF"
+    <com.example.providermoduledemo.viewmodel.ItemTitleView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.example.providermoduledemo.viewmodel.SingleBookView
-            android:id="@+id/singleBook0"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content" />
-        <com.example.providermoduledemo.viewmodel.SingleBookView
-            android:id="@+id/singleBook1"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content" />
-        <com.example.providermoduledemo.viewmodel.SingleBookView
-            android:id="@+id/singleBook2"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="#0FF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.example.providermoduledemo.viewmodel.SingleBookView
+                android:id="@+id/singleBook0"
+                android:layout_width="150dp"
+                android:layout_height="100dp" />
+            <com.example.providermoduledemo.viewmodel.SingleBookView
+                android:id="@+id/singleBook1"
+                android:layout_width="150dp"
+                android:layout_height="100dp" />
+            <com.example.providermoduledemo.viewmodel.SingleBookView
+                android:id="@+id/singleBook2"
+                android:layout_width="150dp"
+                android:layout_height="100dp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
 
 </LinearLayout>

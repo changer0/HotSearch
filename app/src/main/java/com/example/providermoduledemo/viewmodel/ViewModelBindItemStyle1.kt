@@ -21,6 +21,8 @@ class ViewModelBindItemStyle1 : BaseViewBindModelItem<ViewModelResponseDataBean.
             val model = SingleBookModel(book.value.name, book.value.content)
             viewModelList.add(VM(view, model))
         }
+        //添加标题的 VM
+        viewModelList.add(VM(holder.getView<ItemTitleView>(R.id.title), ItemTitleModel(mItemData.title)))
     }
 
 }

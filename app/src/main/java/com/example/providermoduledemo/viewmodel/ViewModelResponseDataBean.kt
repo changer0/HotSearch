@@ -7,6 +7,7 @@ class ViewModelResponseDataBean : BaseDataBean() {
     var list: List<ItemData>? = null
     class ItemData : BaseDataBean(){
         var style: Int = -1
+        var title: String? = null
         var bookList: List<Book>? = null
         class Book: BaseDataBean() {
             var name: String? = null
