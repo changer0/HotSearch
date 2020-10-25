@@ -65,7 +65,7 @@ public abstract class BaseViewBindModelItem
                 continue;
             }
             BindUIView fieldAnnotation = field.getAnnotation(BindUIView.class);
-            viewIds.add(fieldAnnotation.targetView());
+            viewIds.add(fieldAnnotation.value());
             models.add(model);
         }
     }

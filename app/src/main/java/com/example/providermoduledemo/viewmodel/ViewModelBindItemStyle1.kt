@@ -9,17 +9,17 @@ class ViewModelBindItemStyle1 : BaseViewBindModelItem<ViewModelResponseDataBean.
         return R.layout.view_model_data_item_style1
     }
 
-    @BindUIView(targetView = R.id.singleBook0)
+    @BindUIView(R.id.singleBook0)
     private lateinit var model0: SingleBookModel
 
-    @BindUIView(targetView = R.id.singleBook1)
+    @BindUIView(R.id.singleBook1)
     private lateinit var model1: SingleBookModel
 
 
-    @BindUIView(targetView = R.id.singleBook2)
+    @BindUIView(R.id.singleBook2)
     private lateinit var model2: SingleBookModel
 
-    @BindUIView(targetView = R.id.title)
+    @BindUIView(R.id.title)
     private lateinit var titleModel: ItemTitleModel
 
     override fun onCreateModel(data: ViewModelResponseDataBean.ItemData?) {
