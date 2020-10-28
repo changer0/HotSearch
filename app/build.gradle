@@ -57,6 +57,7 @@ dependencies {
     //implementation(name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')
     //implementation 'com.yuewen.cooperate.base-ui-component:basequickadapter:1.0.0'
     implementation project(':provider_viewmodel')
+
     //OkHttp 库
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 }

@@ -8,9 +8,7 @@ import androidx.annotation.NonNull;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.bean.BaseDataBean;
 import com.qq.reader.provider.log.Logger;
-import com.qq.reader.provider.viewmodel.BindUIView;
-import com.qq.reader.provider.viewmodel.IModel;
-import com.qq.reader.provider.viewmodel.IView;
+import com.qq.reader.provider.viewmodel.annotations.BindView;
 import com.qq.reader.widget.recyclerview.base.BaseViewHolder;
 
 import java.lang.reflect.Field;
@@ -52,7 +50,7 @@ public abstract class BaseViewBindModelItem
         }
         Field[] fields = this.getClass().getDeclaredFields();
         for (Field field : fields) {
-            if (!field.isAnnotationPresent(BindUIView.class)) {
+            if (!field.isAnnotationPresent(BindView.class)) {
                 continue;
             }
             field.setAccessible(true);
@@ -65,7 +63,7 @@ public abstract class BaseViewBindModelItem
             if (model == null) {
                 continue;
             }
-            BindUIView fieldAnnotation = field.getAnnotation(BindUIView.class);
+            BindView fieldAnnotation = field.getAnnotation(BindView.class);
             viewIds.add(fieldAnnotation.value());
             models.add(model);
         }

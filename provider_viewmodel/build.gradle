@@ -49,6 +49,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     api project(":provider_core")
+    api project(':lib_provider_annotations')
     //api(name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')
     api 'com.yuewen.cooperate.base-ui-component:basequickadapter:1.0.0'
 }

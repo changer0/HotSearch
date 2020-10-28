@@ -9,6 +9,5 @@ java {
 
 dependencies {
     implementation 'com.squareup:javapoet:1.12.1'
-    implementation project(':lib_provider_annotations')
     implementation 'androidx.annotation:annotation:1.1.0'
 }

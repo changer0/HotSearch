@@ -2,24 +2,24 @@ package com.example.providermoduledemo.viewmodel
 
 import com.example.providermoduledemo.R
 import com.qq.reader.provider.viewmodel.BaseViewBindModelItem
-import com.qq.reader.provider.viewmodel.BindUIView
+import com.qq.reader.provider.viewmodel.annotations.BindView
 
 class ViewModelBindItemStyle1 : BaseViewBindModelItem<ViewModelResponseDataBean.ItemData>() {
     override fun getResLayoutId(): Int {
         return R.layout.view_model_data_item_style1
     }
 
-    @BindUIView(R.id.singleBook0)
+    @BindView(R.id.singleBook0)
     private lateinit var model0: SingleBookModel
 
-    @BindUIView(R.id.singleBook1)
+    @BindView(R.id.singleBook1)
     private lateinit var model1: SingleBookModel
 
 
-    @BindUIView(R.id.singleBook2)
+    @BindView(R.id.singleBook2)
     private lateinit var model2: SingleBookModel
 
-    @BindUIView(R.id.title)
+    @BindView(R.id.title)
     private lateinit var titleModel: ItemTitleModel
 
     override fun onCreateModel(data: ViewModelResponseDataBean.ItemData?) {
