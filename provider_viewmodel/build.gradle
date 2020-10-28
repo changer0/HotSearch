@@ -1,7 +1,7 @@
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-}
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion 30
@@ -50,6 +50,7 @@ dependencies {
 
     api project(":provider_core")
     api project(':lib_provider_annotations')
+
     //api(name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')
     api 'com.yuewen.cooperate.base-ui-component:basequickadapter:1.0.0'
 }
