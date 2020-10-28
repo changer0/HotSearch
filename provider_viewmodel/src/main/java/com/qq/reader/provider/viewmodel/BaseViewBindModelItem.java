@@ -1,8 +1,9 @@
-package com.example.providermoduledemo.viewmodel;
+package com.qq.reader.provider.viewmodel;
 
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
+
 
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.bean.BaseDataBean;

@@ -1,6 +1,7 @@
 package com.example.providermoduledemo.viewmodel
 
 import com.example.providermoduledemo.R
+import com.qq.reader.provider.viewmodel.BaseViewBindModelItem
 import com.qq.reader.provider.viewmodel.BindUIView
 
 class ViewModelBindItemStyle0 : BaseViewBindModelItem<ViewModelResponseDataBean.ItemData>() {

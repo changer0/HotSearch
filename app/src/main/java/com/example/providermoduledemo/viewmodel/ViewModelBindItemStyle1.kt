@@ -1,8 +1,8 @@
 package com.example.providermoduledemo.viewmodel
 
 import com.example.providermoduledemo.R
+import com.qq.reader.provider.viewmodel.BaseViewBindModelItem
 import com.qq.reader.provider.viewmodel.BindUIView
-import com.qq.reader.widget.recyclerview.base.BaseViewHolder
 
 class ViewModelBindItemStyle1 : BaseViewBindModelItem<ViewModelResponseDataBean.ItemData>() {
     override fun getResLayoutId(): Int {
