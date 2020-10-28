@@ -1,3 +1,6 @@
+include ':lib_provider_annotations'
+include ':lib_provider_compiler'
+include ':ProviderViewModel'
 rootProject.name='ProviderModuleDemo'
 include ':app'
 include ':ProviderModule'
