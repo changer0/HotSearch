@@ -11,19 +11,19 @@ class ViewModelBindItemStyle0 : BaseViewBindModelItem<ViewModelResponseDataBean.
     }
 
     @BindView(R.id.singleBook0)
-    private lateinit var model0: SingleBookModel
+    public lateinit var model0: SingleBookModel
 
     @BindView(R.id.singleBook1)
-    private lateinit var model1: SingleBookModel
+    public lateinit var model1: SingleBookModel
 
 
     @BindView(R.id.singleBook2)
-    private lateinit var model2: SingleBookModel
+    public lateinit var model2: SingleBookModel
 
     @BindView(R.id.title)
-    private lateinit var titleModel: ItemTitleModel
+    public lateinit var titleModel: ItemTitleModel
 
-    override fun onCreateModel(data: ViewModelResponseDataBean.ItemData?) {
+    override fun onInitModel(data: ViewModelResponseDataBean.ItemData?) {
         val bookList = data?.bookList!!
         titleModel = ItemTitleModel(data.title)
         val size = bookList.size
@@ -40,5 +40,6 @@ class ViewModelBindItemStyle0 : BaseViewBindModelItem<ViewModelResponseDataBean.
         }
         model2 = SingleBookModel(bookList[2].name, bookList[2].content)
     }
+
 
 }

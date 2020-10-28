@@ -1,8 +1,10 @@
 package com.qq.reader.provider.viewmodel;
 
 import android.app.Activity;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 
 import com.qq.reader.provider.BaseViewBindItem;
@@ -11,9 +13,13 @@ import com.qq.reader.provider.log.Logger;
 import com.qq.reader.provider.viewmodel.annotations.BindView;
 import com.qq.reader.widget.recyclerview.base.BaseViewHolder;
 
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhanglulu on 2020/10/23.
@@ -23,63 +29,64 @@ public abstract class BaseViewBindModelItem
         <Bean extends BaseDataBean>
         extends BaseViewBindItem<Bean, BaseViewHolder> {
 
-    private final List<Integer> viewIds = new ArrayList<>();
+    private static final String TAG = "BaseViewBindModelItem";
 
-    private final List<IModel> models = new ArrayList<>();
+    @Nullable
+    private IGetViewModelMapInter getViewModelMapInter;
 
     /**设置数据时触发*/
     @Override
     public void setData(Bean bean) {
         super.setData(bean);
         try {
-            onCreateModel(bean);
-            parseViewModel();
+            onInitModel(bean);
+            findBindClass();
         } catch (Exception e) {
             Logger.e("BaseViewBindModelItem", "setData 失败：" + e);
         }
 
     }
 
-    /**解析 ViewModel*/
-    private void parseViewModel() {
-        if (viewIds.size() > 0) {
-            viewIds.clear();
+    private void findBindClass() {
+        Class<? extends BaseViewBindModelItem> clazz = getClass();
+        String clazzName = clazz.getName();
+        try {
+            //参考 butterknife
+            Class<?> bindingClass = clazz.getClassLoader().loadClass(clazzName + "_ProviderViewBindModel");
+            Constructor<?> constructor = bindingClass.getConstructor(getClass());
+            getViewModelMapInter = (IGetViewModelMapInter) constructor.newInstance(this);
+        } catch (Exception e) {
+            Logger.e("BaseViewBindModelItem", "查找创建 " + clazzName + " 对应的映射类出错！！！");
+            e.printStackTrace();
         }
-        if (models.size() > 0) {
-            models.clear();
-        }
-        Field[] fields = this.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            if (!field.isAnnotationPresent(BindView.class)) {
-                continue;
-            }
-            field.setAccessible(true);
-            IModel model = null;
-            try {
-                model = (IModel) field.get(this);
-            } catch (IllegalAccessException e) {
-                continue;
-            }
-            if (model == null) {
-                continue;
-            }
-            BindView fieldAnnotation = field.getAnnotation(BindView.class);
-            viewIds.add(fieldAnnotation.value());
-            models.add(model);
-        }
+
     }
 
     @Override
     public boolean bindView(@NonNull BaseViewHolder holder, @NonNull Activity activity) throws Exception {
-        if (viewIds.size() != models.size()) {
+        if (getViewModelMapInter == null) {
             return false;
         }
-        for (int i = 0; i < viewIds.size(); i++) {
-            ((IView) holder.getView(viewIds.get(i))).setModel(models.get(i));
+        Map<Integer, IModel> viewModelMap = getViewModelMapInter.getViewModelMap();
+        if (viewModelMap == null) {
+            return false;
+        }
+        for (Map.Entry<Integer, IModel> viewModelEntry : viewModelMap.entrySet()) {
+            View view = holder.getView(viewModelEntry.getKey());
+            if (!(view instanceof IView)) {
+                Logger.e(TAG, "资源文件中的 View，必须实现 IView 接口！！！");
+                continue;
+            }
+            IModel value = viewModelEntry.getValue();
+            if (value == null) {
+                Logger.w(TAG, "当前 Model 为空：" + value);
+                continue;
+            }
+            ((IView) view).setModel(viewModelEntry.getValue());
         }
         return true;
     }
 
     /**初始化 Model*/
-    public abstract void onCreateModel(Bean data);
+    public abstract void onInitModel(Bean data);
 }

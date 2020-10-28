@@ -21,8 +21,8 @@ import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
-import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 
@@ -32,8 +32,10 @@ import javax.tools.Diagnostic;
  */
 public class ProviderProcessor extends AbstractProcessor {
     private static final String TAG = "ProviderProcessor";
-    private Filer filer;//用于生成新的java文件的对象
-    private Map<String, String> mapper = new HashMap<>();
+    //用于生成新的java文件的对象
+    private Filer filer;
+    //类名作为 Key，保存当前类中所有的被注解标识过的 field
+    private Map<String, ClazzBuilderInfo> builderMap = new HashMap<>();
     private long time;
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
@@ -43,11 +45,14 @@ public class ProviderProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
-        System.out.println("ProviderProcessor 调用");
         handleBindView(roundEnvironment);
         return true;
     }
 
+    /**
+     * 处理 BindView 注解
+     * @param roundEnvironment
+     */
     private void handleBindView(RoundEnvironment roundEnvironment) {
         //获取该注解的元素
         Set<? extends Element> sets = roundEnvironment.getElementsAnnotatedWith(BindView.class);
@@ -57,31 +62,85 @@ public class ProviderProcessor extends AbstractProcessor {
         for (Element element : sets) {
             //这是类
             TypeElement enclosingElement = (TypeElement) element.getEnclosingElement();
-            println("正在 handleBindView enclosingElement 注解：" + enclosingElement + "\n"
-                    + "enclosingElement.getSimpleName() : " + enclosingElement.getSimpleName() + "\n"
-                    + "enclosingElement.getQualifiedName() : " + enclosingElement.getQualifiedName() + "\n"
-                    + "enclosingElement.getNestingKind() : " + enclosingElement.getNestingKind() + "\n"
-
-            );
-
-            //这是字段
-            println("正在 handleBindView element 注解：" + element + "\n"
-                    + "element.getSimpleName() : " + element.getSimpleName() + "\n"
-                    + "element.getKind() : " + element.getKind() + "\n"
-                    + "element.getAnnotationMirrors() : " + element.getAnnotationMirrors() + "\n"
-            );
-            for (AnnotationMirror annotationMirror : element.getAnnotationMirrors()) {
-                println("annotationMirror : " + annotationMirror);
-            }
-            int value = element.getAnnotation(BindView.class).value();
+            int resId = element.getAnnotation(BindView.class).value();
             String packageName = enclosingElement.getEnclosingElement().toString();
-            String className = enclosingElement.getSimpleName().toString();
+            String className = enclosingElement.getQualifiedName().toString();
+            String simpleClassName = enclosingElement.getSimpleName().toString();
             String filedName = element.toString();
             println("packageName：" + packageName);
             println("className：" + className);
+            println("simpleClassName：" + filedName);
             println("fieldName：" + filedName);
-            println("注解值：" + value);
+            println("注解值：" + resId);
+
+            ClazzBuilderInfo clazzBuilderInfo = builderMap.get(className);
+            if (clazzBuilderInfo == null) {
+                clazzBuilderInfo = new ClazzBuilderInfo(packageName, simpleClassName);
+                builderMap.put(className, clazzBuilderInfo);
+            }
+            clazzBuilderInfo.filedMap.put(resId, filedName);
         }
+        generate();
+    }
+
+    /**
+     * 根据 builderMap 构建类
+     */
+    private void generate() {
+
+        for (Map.Entry<String, ClazzBuilderInfo> clazzEntry : builderMap.entrySet()) {
+            String className = clazzEntry.getKey();
+            ClazzBuilderInfo clazzInfo = clazzEntry.getValue();
+            ClassName consParamType = ClassName.get(clazzInfo.packageName, clazzInfo.simpleClassName);
+            //构造方法
+            MethodSpec.Builder constructorBuilder = MethodSpec.constructorBuilder();
+            constructorBuilder
+                    .addModifiers(Modifier.PUBLIC)
+                    .addParameter(consParamType, "viewBindItem");
+
+            Map<Integer, String> filedMap = clazzInfo.filedMap;
+            for (Map.Entry<Integer, String> infoEntry : filedMap.entrySet()) {
+                fillViewModelMap(constructorBuilder, infoEntry.getKey(), infoEntry.getValue());
+            }
+            MethodSpec cons = constructorBuilder.build();
+            //viewModelMap
+            ParameterizedTypeName mapType = ParameterizedTypeName.get(ClassName.get(Map.class),
+                    ClassName.get(Integer.class), ClassName.get("com.qq.reader.provider.viewmodel","IModel"));
+            FieldSpec map = FieldSpec.builder(mapType, "viewModelMap", Modifier.PRIVATE, Modifier.FINAL).initializer("new java.util.HashMap<>()").build();
+
+            //ClassName baseViewBindItemClassName = ClassName.get("com.qq.reader.provider.viewmodel", "BaseViewBindModelItem");
+            // viewBindItem
+            //FieldSpec viewBindItem = FieldSpec.builder(baseViewBindItemClassName, "viewBindItem", Modifier.PRIVATE).build();
+            // getViewModelMap
+            MethodSpec.Builder getViewModelMapBuilder = MethodSpec.methodBuilder("getViewModelMap").addModifiers(Modifier.PUBLIC);
+            TypeName returnType = TypeVariableName.get(Map.class);
+            getViewModelMapBuilder.returns(returnType);
+            getViewModelMapBuilder.addStatement("return viewModelMap");
+
+            //class 让其实现接口
+            ClassName iGetViewModelMapInter = ClassName.get("com.qq.reader.provider.viewmodel", "IGetViewModelMapInter");
+            //class
+            TypeSpec typeSpec = TypeSpec.classBuilder(clazzInfo.simpleClassName + "_ProviderViewBindModel")
+                    .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+                    .addField(map)
+                    //.addField(viewBindItem)
+                    .addMethod(cons)
+                    .addMethod(getViewModelMapBuilder.build())
+                    .addSuperinterface(iGetViewModelMapInter)
+                    .build();
+            //file
+            JavaFile javaFile = JavaFile.builder(clazzInfo.packageName, typeSpec).build();
+            try {
+                javaFile.writeTo(filer);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private void fillViewModelMap(MethodSpec.Builder constructorBuilder, int resId, String filedName) {
+        constructorBuilder.addStatement("viewModelMap.put(" + resId + ", " + "viewBindItem." + filedName + ")");
     }
 
 
