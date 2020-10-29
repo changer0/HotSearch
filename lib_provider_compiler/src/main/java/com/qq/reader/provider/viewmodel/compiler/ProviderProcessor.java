@@ -140,7 +140,10 @@ public class ProviderProcessor extends AbstractProcessor {
     }
 
     private void fillViewModelMap(MethodSpec.Builder constructorBuilder, int resId, String filedName) {
-        constructorBuilder.addStatement("viewModelMap.put(" + resId + ", " + "viewBindItem." + filedName + ")");
+        String fieldStr = "viewBindItem." + filedName;
+        constructorBuilder.addCode("if(" + fieldStr + " != null){");
+        constructorBuilder.addStatement("\r viewModelMap.put(" + resId + ", " + fieldStr + ")");
+        constructorBuilder.addCode("}\n");
     }
 
 

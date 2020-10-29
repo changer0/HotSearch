@@ -79,7 +79,7 @@ public abstract class BaseViewBindModelItem
             }
             IModel value = viewModelEntry.getValue();
             if (value == null) {
-                Logger.w(TAG, "当前 Model 为空：" + value);
+                Logger.e(TAG, "当前 Model 为空：" + value + " 对应的生成类中已经做了非空判断，理论上不应该出现为空的情况！！！");
                 continue;
             }
             ((IView) view).setModel(viewModelEntry.getValue());
