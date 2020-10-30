@@ -51,8 +51,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
 
     implementation project(':provider_viewmodel')
-    //需要注意需要添加注解处理器！！
-    kapt project(':lib_provider_compiler')
     //OkHttp 库
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     //api(name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')

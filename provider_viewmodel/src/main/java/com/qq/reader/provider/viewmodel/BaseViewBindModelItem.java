@@ -4,15 +4,14 @@ import android.app.Activity;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.bean.BaseDataBean;
 import com.qq.reader.provider.log.Logger;
-import java.lang.reflect.Constructor;
+
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author zhanglulu on 2020/10/23.
@@ -25,46 +24,23 @@ public abstract class BaseViewBindModelItem
 
     private static final String TAG = "BaseViewBindModelItem";
 
-    @Nullable
-    private IGetViewModelMapInter getViewModelMapInter;
+    @NonNull
+    private final Map<Integer, IViewModel> viewModelMap = new ConcurrentHashMap<>();
 
     /**设置数据时触发*/
     @Override
-    public void setData(Bean bean) {
-        super.setData(bean);
+    public void setData(Bean dataBean) {
+        super.setData(dataBean);
         try {
-            onInitModel(bean);
-            findBindClass();
+            onBindViewModel(dataBean, viewModelMap);
         } catch (Exception e) {
-            Logger.e("BaseViewBindModelItem", "setData 失败：" + e);
+            Logger.e("BaseViewBindModelItem", "onBindViewModel 失败：" + e);
         }
-
-    }
-
-    private void findBindClass() {
-        Class<? extends BaseViewBindModelItem> clazz = getClass();
-        String clazzName = clazz.getName();
-        try {
-            //参考 butterknife
-            Class<?> bindingClass = clazz.getClassLoader().loadClass(clazzName + "_ProviderViewBindModel");
-            Constructor<?> constructor = bindingClass.getConstructor(getClass());
-            getViewModelMapInter = (IGetViewModelMapInter) constructor.newInstance(this);
-        } catch (Exception e) {
-            Logger.e("BaseViewBindModelItem", "查找创建 " + clazzName + " 对应的映射类出错！！！");
-            e.printStackTrace();
-        }
-
     }
 
     @Override
     public boolean bindView(@NonNull BaseViewHolder holder, @NonNull Activity activity) {
-        if (getViewModelMapInter == null) {
-            return false;
-        }
-        Map<Integer, IViewModel> viewModelMap = getViewModelMapInter.getViewModelMap();
-        if (viewModelMap == null) {
-            return false;
-        }
+
         for (Map.Entry<Integer, IViewModel> viewModelEntry : viewModelMap.entrySet()) {
             View view = holder.getView(viewModelEntry.getKey());
             if (!(view instanceof IView)) {
@@ -82,5 +58,5 @@ public abstract class BaseViewBindModelItem
     }
 
     /**初始化 Model*/
-    public abstract void onInitModel(Bean data);
+    public abstract void onBindViewModel(Bean data, @NonNull Map<Integer, IViewModel> viewModelMap);
 }
