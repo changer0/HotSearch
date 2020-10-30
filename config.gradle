@@ -9,8 +9,7 @@ ext {
             compileOptionsEncoding: "UTF-8",
             // 编译SDK的版本
             compileSdkVersion     : 28,
-            //这里oppo、vivo是14，华为是19
-            minSdkVersion         : 21,
+            minSdkVersion         : 19,
             targetSdkVersion      : 28,
     ]
 }

@@ -5,11 +5,12 @@ apply plugin: 'kotlin-android-extensions'
 def config = rootProject.ext.android
 
 android {
-    compileSdkVersion config.compileSdkVersion
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
-        minSdkVersion config.minSdkVersion
-        targetSdkVersion config.targetSdkVersion
+        minSdkVersion 19
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
