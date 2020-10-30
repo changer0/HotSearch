@@ -167,21 +167,6 @@ public abstract class BaseViewBindItem<T extends BaseDataBean, Holder extends Re
     }
 
     //----------------------------------------------------------------------------------------------
-    // 打断动画 start
-    /**
-     * 如果当前父布局有动画在展示，为了性能考虑，打断 ViewBindItem 的动画，需要 ViewBindItem 自行处理
-     */
-    private boolean isInterceptAnimation = false;
-
-    public boolean isInterceptAnimation() {
-        return isInterceptAnimation;
-    }
-
-    public void setInterceptAnimation(boolean interceptAnimation) {
-        isInterceptAnimation = interceptAnimation;
-    }
-
-    //----------------------------------------------------------------------------------------------
     //上报相关
 
     /**
