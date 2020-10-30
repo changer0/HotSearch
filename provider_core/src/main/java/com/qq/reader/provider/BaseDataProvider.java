@@ -24,20 +24,16 @@ import java.util.List;
  * 需要传入请求Bean {@link BaseDataBean} 和 响应 Bean {@link BaseDataBean}<br/>
  *  [注: ] 不要随意改变两个
  */
+@SuppressWarnings("rawtypes")
 public abstract class BaseDataProvider< Q extends BaseDataBean, P extends BaseDataBean> implements INetQuestParams {
 
     private static final String TAG = "ReaderBaseDataProvider";
 
 
     /**
-     * 协议地址
-     */
-    private String mUrl;
-
-    /**
      * 请求 Bean
      */
-    protected Q mRequestBean = null;
+    protected Q mRequestBean;
 
     /**
      * GSON 解析生成的Bean
@@ -47,7 +43,7 @@ public abstract class BaseDataProvider< Q extends BaseDataBean, P extends BaseDa
     /**
      * 响应 bean 类型
      */
-    private Class<P> mResponseClass;
+    private final Class<P> mResponseClass;
 
     /**
      * 源 JSON 字符串
@@ -108,7 +104,6 @@ public abstract class BaseDataProvider< Q extends BaseDataBean, P extends BaseDa
 
     /**
      * 为每个 DataProvider 提供一个数据加载的Task
-     * @return
      */
     public synchronized LoadDispatcherTask getDispatcherTask() {
         if (loadDispatcherTask == null) {
@@ -125,15 +120,11 @@ public abstract class BaseDataProvider< Q extends BaseDataBean, P extends BaseDa
     }
 
     public boolean isExpired() {
-        if (getExpiredTime() > System.currentTimeMillis()) {
-            return false;
-        }
-        return true;
+        return getExpiredTime() <= System.currentTimeMillis();
     }
 
     /**
      * 获取解析示例 注意判空
-     * @return
      */
     public P getData() {
         return mData;
@@ -141,7 +132,6 @@ public abstract class BaseDataProvider< Q extends BaseDataBean, P extends BaseDa
 
     /**
      *  获取JSON 字符串
-     * @return
      */
     public String getJSONStr() {
         return mJSONStr;
@@ -154,7 +144,6 @@ public abstract class BaseDataProvider< Q extends BaseDataBean, P extends BaseDa
 
     /**
      * 数据解析
-     * @param jsonStr
      */
     public void parseData(String jsonStr) {
         mJSONStr = jsonStr;
@@ -177,12 +166,11 @@ public abstract class BaseDataProvider< Q extends BaseDataBean, P extends BaseDa
     // INetQuestParams 接口
     /**
      * 获取协议地址
-     * @return
      */
     @Override
     public String getUrl() {
-        //每次获取需要重新重新赋值
-        mUrl = composeUrl(mRequestBean);
+        //协议地址 每次获取需要重新重新赋值
+        String mUrl = composeUrl(mRequestBean);
         if (mUrl == null) {
             mUrl = "";
         }
@@ -242,8 +230,6 @@ public abstract class BaseDataProvider< Q extends BaseDataBean, P extends BaseDa
 
     /**
      * 获取整个页面的url
-     *
-     * @return
      */
     public abstract String composeUrl(Q requestBean);
 
@@ -254,7 +240,6 @@ public abstract class BaseDataProvider< Q extends BaseDataBean, P extends BaseDa
 
     /**
      * 用于获取系统返回的过期时间
-     * @return
      */
     public abstract long getExpiredTime();
 }

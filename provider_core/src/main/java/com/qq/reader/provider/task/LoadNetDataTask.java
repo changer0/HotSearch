@@ -12,14 +12,16 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author zhanglulu on 2019/3/2.
  * for 网络中拉取数据
  */
+@SuppressWarnings("rawtypes")
 public class LoadNetDataTask implements Runnable {
     private static final String TAG = "LoadNetDataTask";
-    private BaseDataProvider mDataProvider;
+    private final BaseDataProvider mDataProvider;
     private LoadDataListener loadDataListener;
 
     public LoadNetDataTask(BaseDataProvider dataProvider) {
@@ -45,7 +47,7 @@ public class LoadNetDataTask implements Runnable {
             try {
                 baos = new ByteArrayOutputStream();
                 if (!TextUtils.isEmpty(str)) {
-                    baos.write(str.getBytes("UTF-8"));
+                    baos.write(str.getBytes(StandardCharsets.UTF_8));
                 }
                 bais = new ByteArrayInputStream(baos.toByteArray());
                 DataProviderLoader.getInstance().save(mDataProvider.getCacheKey(), bais);

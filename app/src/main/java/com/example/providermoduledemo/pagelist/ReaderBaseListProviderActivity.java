@@ -16,8 +16,8 @@ import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView;
 import com.example.providermoduledemo.R;
 import com.qq.reader.provider.BaseViewBindItem;
-import com.qq.reader.provider.bean.BaseDataBean;
 import com.qq.reader.provider.viewmodel.SimpleRecyclerViewAdapter;
+
 
 /**
  * @author zhanglulu on 2019/9/10.
@@ -25,11 +25,13 @@ import com.qq.reader.provider.viewmodel.SimpleRecyclerViewAdapter;
  * 不要在里面耦合任何非公共业务 <br/>
  * 具体业务需求请在子类中实现
  */
+@SuppressWarnings("rawtypes")
 @SuppressLint("Registered")
 public abstract class ReaderBaseListProviderActivity extends AppCompatActivity implements BaseQuickAdapter.RequestLoadMoreListener {
 
     private static final String TAG = "ReaderBaseListProvider";
     protected RecyclerView mRecyclerView;
+
     protected BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> mAdapter;
     protected LinearLayoutManager mLayoutManager;
 

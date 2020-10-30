@@ -1,5 +1,4 @@
 package com.qq.reader.provider.loader;
-import com.qq.reader.provider.BaseDataProvider;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.define.ProviderConstants;
 
@@ -9,6 +8,7 @@ import java.util.List;
  * @author zhanglulu on 2019/11/11.
  * for Provider 观察者实体
  */
+@SuppressWarnings("rawtypes")
 public class MergeObserverEntity {
 
     /** 数据状态*/

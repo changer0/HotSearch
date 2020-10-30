@@ -18,6 +18,7 @@ import java.util.List;
  * @author zhanglulu on 2019/2/28.
  * for RecyclerView Adapter
  */
+@SuppressWarnings("rawtypes")
 public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> {
 
     private final Context mContext;

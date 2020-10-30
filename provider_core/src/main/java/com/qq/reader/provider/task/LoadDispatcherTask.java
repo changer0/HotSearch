@@ -15,6 +15,7 @@ import io.reactivex.ObservableEmitter;
  * @author zhanglulu on 2019/3/2.
  * for 用于分发网络/缓存
  */
+@SuppressWarnings("rawtypes")
 public class LoadDispatcherTask implements Runnable, LoadDiskDataTask.LoadDataListener
         , LoadDiskDataTask.LoadExpiredDataListener, LoadNetDataTask.LoadDataListener {
     private static final String TAG = "ReaderDataTask";

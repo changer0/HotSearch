@@ -1,8 +1,6 @@
 package com.qq.reader.provider.loader;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
-
 import com.qq.reader.provider.cache.CacheController;
 import com.qq.reader.provider.cache.core.DiskLruCache;
 import com.qq.reader.provider.BaseViewBindItem;
@@ -11,7 +9,6 @@ import com.qq.reader.provider.define.ProviderConstants;
 import com.qq.reader.provider.task.LoadDispatcherTask;
 import com.qq.reader.provider.log.Logger;
 import com.qq.reader.provider.task.TaskHandler;
-
 import org.jetbrains.annotations.NotNull;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -26,6 +23,7 @@ import io.reactivex.disposables.Disposable;
  * for 数据加载器 <br/>
  * 用于加载 {@link BaseDataProvider}
  */
+@SuppressWarnings("rawtypes")
 public class DataProviderLoader {
 
     private static final String TAG = "ReaderDataLoader";

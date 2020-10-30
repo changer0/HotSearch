@@ -18,6 +18,7 @@ import java.util.Map;
  * @author zhanglulu on 2020/10/23.
  * for 支持使用 IModel IView 形式构建 ViewBindItem
  */
+@SuppressWarnings("rawtypes")
 public abstract class BaseViewBindModelItem
         <Bean extends BaseDataBean>
         extends BaseViewBindItem<Bean, BaseViewHolder> {
@@ -56,7 +57,7 @@ public abstract class BaseViewBindModelItem
     }
 
     @Override
-    public boolean bindView(@NonNull BaseViewHolder holder, @NonNull Activity activity) throws Exception {
+    public boolean bindView(@NonNull BaseViewHolder holder, @NonNull Activity activity) {
         if (getViewModelMapInter == null) {
             return false;
         }

@@ -12,6 +12,7 @@ import java.io.InputStream;
  * @author zhanglulu on 2019/3/2.
  * for 从磁盘中获取数据
  */
+@SuppressWarnings("rawtypes")
 public class LoadDiskDataTask implements Runnable {
     private static final String TAG = "LoadDiskDataTask";
 
