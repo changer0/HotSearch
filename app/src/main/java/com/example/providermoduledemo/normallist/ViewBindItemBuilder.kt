@@ -1,8 +1,8 @@
 package com.example.providermoduledemo.normallist
 
+import com.chad.library.adapter.base.BaseViewHolder
 import com.qq.reader.provider.BaseViewBindItem
 import com.qq.reader.provider.bean.BaseDataBean
-import com.qq.reader.widget.recyclerview.base.BaseViewHolder
 
 object ViewBindItemBuilder {
 

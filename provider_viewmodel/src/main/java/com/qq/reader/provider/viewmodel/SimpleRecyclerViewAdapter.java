@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.bean.BaseDataBean;
-import com.qq.reader.widget.recyclerview.base.BaseQuickAdapter;
-import com.qq.reader.widget.recyclerview.base.BaseViewHolder;
 
 import java.util.List;
 
@@ -20,8 +20,7 @@ import java.util.List;
  */
 public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> {
 
-    private static final String TAG = "NativeBookStoreAdapterF";
-    private Context mContext;
+    private final Context mContext;
 
     public SimpleRecyclerViewAdapter(Context context, @Nullable List<BaseViewBindItem> data) {
         super(data);
@@ -30,8 +29,19 @@ public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem
 
 
     @Override
-    protected void convert(BaseViewHolder holder, int position) {
-        BaseViewBindItem<? extends BaseDataBean, BaseViewHolder> item = getItem(position);
+    protected BaseViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
+        View itemView = null;
+        if (mContext != null) {
+            itemView = LayoutInflater.from(mContext).inflate(viewType, parent, false);
+        }
+        return createBaseViewHolder(itemView);
+    }
+
+    @Override
+    protected void convert(BaseViewHolder holder,
+                           BaseViewBindItem item) {
+
+        int position = holder.getLayoutPosition() - getHeaderLayoutCount();
         if (item != null) {
             item.setIndex(position);
             try {
@@ -43,16 +53,6 @@ public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem
                 e.printStackTrace();
             }
         }
-
-    }
-
-    @Override
-    protected BaseViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
-        View itemView = null;
-        if (mContext != null) {
-            itemView = LayoutInflater.from(mContext).inflate(viewType, parent, false);
-        }
-        return createBaseViewHolder(itemView);
     }
 
 
@@ -63,6 +63,6 @@ public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem
         if (item != null) {
             type = item.getResLayoutId();
         }
-        return type > 0 ? type : 0;
+        return type;
     }
 }

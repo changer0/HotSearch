@@ -10,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.loadmore.LoadMoreView;
+import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView;
 import com.example.providermoduledemo.R;
 import com.qq.reader.provider.BaseViewBindItem;
+import com.qq.reader.provider.bean.BaseDataBean;
 import com.qq.reader.provider.viewmodel.SimpleRecyclerViewAdapter;
-import com.qq.reader.widget.recyclerview.base.BaseQuickAdapter;
-import com.qq.reader.widget.recyclerview.base.BaseViewHolder;
-import com.qq.reader.widget.recyclerview.loadmore.LoadMoreView;
-import com.qq.reader.widget.recyclerview.loadmore.SimpleLoadMoreView;
 
 /**
  * @author zhanglulu on 2019/9/10.
@@ -64,7 +65,7 @@ public abstract class ReaderBaseListProviderActivity extends AppCompatActivity i
 
 
             mLoadMoreView = getLoadMoreView();
-            mAdapter.setReaderLoadMoreView(mLoadMoreView);
+            mAdapter.setLoadMoreView(mLoadMoreView);
             mAdapter.setEnableLoadMore(true);
             mAdapter.setOnLoadMoreListener(this, mRecyclerView);
             mRecyclerView.setAdapter(mAdapter);

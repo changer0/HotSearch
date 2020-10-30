@@ -7,10 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.bean.BaseDataBean;
 import com.qq.reader.provider.log.Logger;
-import com.qq.reader.widget.recyclerview.base.BaseViewHolder;
 import java.lang.reflect.Constructor;
 import java.util.Map;
 

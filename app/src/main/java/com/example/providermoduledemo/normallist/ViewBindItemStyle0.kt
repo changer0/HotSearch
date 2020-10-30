@@ -3,9 +3,9 @@ package com.example.providermoduledemo.normallist
 import android.app.Activity
 import android.widget.TextView
 import android.widget.Toast
+import com.chad.library.adapter.base.BaseViewHolder
 import com.example.providermoduledemo.R
 import com.qq.reader.provider.BaseViewBindItem
-import com.qq.reader.widget.recyclerview.base.BaseViewHolder
 
 class ViewBindItemStyle0 : BaseViewBindItem<NormalResponseDataBean.ItemData, BaseViewHolder>() {
     override fun getResLayoutId(): Int {
