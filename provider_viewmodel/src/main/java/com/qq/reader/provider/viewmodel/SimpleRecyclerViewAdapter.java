@@ -1,4 +1,4 @@
-package com.example.providermoduledemo.pagelist;
+package com.qq.reader.provider.viewmodel;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,12 +18,12 @@ import java.util.List;
  * @author zhanglulu on 2019/2/28.
  * for RecyclerView Adapter
  */
-public class NativeBookStoreAdapterForRecyclerView extends BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> {
+public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> {
 
     private static final String TAG = "NativeBookStoreAdapterF";
     private Context mContext;
 
-    public NativeBookStoreAdapterForRecyclerView(Context context, @Nullable List<BaseViewBindItem> data) {
+    public SimpleRecyclerViewAdapter(Context context, @Nullable List<BaseViewBindItem> data) {
         super(data);
         mContext = context;
     }

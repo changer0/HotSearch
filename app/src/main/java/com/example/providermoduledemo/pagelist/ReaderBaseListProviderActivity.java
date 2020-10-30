@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.providermoduledemo.R;
 import com.qq.reader.provider.BaseViewBindItem;
+import com.qq.reader.provider.viewmodel.SimpleRecyclerViewAdapter;
 import com.qq.reader.widget.recyclerview.base.BaseQuickAdapter;
 import com.qq.reader.widget.recyclerview.base.BaseViewHolder;
 import com.qq.reader.widget.recyclerview.loadmore.LoadMoreView;
@@ -80,7 +81,7 @@ public abstract class ReaderBaseListProviderActivity extends AppCompatActivity i
     }
 
     protected BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> initAdapter() {
-        return new NativeBookStoreAdapterForRecyclerView(this, null);
+        return new SimpleRecyclerViewAdapter(this, null);
     }
 
     //----------------------------------------------------------------------------------------------
