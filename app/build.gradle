@@ -58,7 +58,7 @@ dependencies {
     kapt project(':lib_provider_compiler')
     //OkHttp 库
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
-    api(name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')
+    //api(name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }
