@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.view_model_single_book.view.*
  * @author zhanglulu on 2020/10/23.
  * for
  */
-class SingleBookView : LinearLayout, IView<SingleBookModel>{
+class SingleBookView : LinearLayout, IView<SingleBookViewModel>{
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -38,7 +38,7 @@ class SingleBookView : LinearLayout, IView<SingleBookModel>{
     }
 
 
-    override fun setModel(model: SingleBookModel) {
+    override fun setModel(model: SingleBookViewModel) {
         text.text = "${model.leftText} : ${model.rightText}"
     }
 

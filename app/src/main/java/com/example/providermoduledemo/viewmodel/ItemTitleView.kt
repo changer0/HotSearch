@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.view_model_item_title.view.*
  * @author zhanglulu on 2020/10/23.
  * for
  */
-class ItemTitleView : LinearLayout, IView<ItemTitleModel>{
+class ItemTitleView : LinearLayout, IView<ItemTitleViewModel>{
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -36,7 +36,7 @@ class ItemTitleView : LinearLayout, IView<ItemTitleModel>{
     }
 
 
-    override fun setModel(model: ItemTitleModel) {
+    override fun setModel(model: ItemTitleViewModel) {
         itemTitle.text = "${model.title}"
     }
 

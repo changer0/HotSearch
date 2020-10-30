@@ -7,5 +7,5 @@ import java.util.Map;
  * for 用于获取 View-Model 对应关系的接口，有自动生成类实现
  */
 public interface IGetViewModelMapInter {
-    Map<Integer, IModel> getViewModelMap();
+    Map<Integer, IViewModel> getViewModelMap();
 }

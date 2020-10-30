@@ -61,17 +61,17 @@ public abstract class BaseViewBindModelItem
         if (getViewModelMapInter == null) {
             return false;
         }
-        Map<Integer, IModel> viewModelMap = getViewModelMapInter.getViewModelMap();
+        Map<Integer, IViewModel> viewModelMap = getViewModelMapInter.getViewModelMap();
         if (viewModelMap == null) {
             return false;
         }
-        for (Map.Entry<Integer, IModel> viewModelEntry : viewModelMap.entrySet()) {
+        for (Map.Entry<Integer, IViewModel> viewModelEntry : viewModelMap.entrySet()) {
             View view = holder.getView(viewModelEntry.getKey());
             if (!(view instanceof IView)) {
                 Logger.e(TAG, "资源文件中的 View，必须实现 IView 接口！！！");
                 continue;
             }
-            IModel value = viewModelEntry.getValue();
+            IViewModel value = viewModelEntry.getValue();
             if (value == null) {
                 Logger.e(TAG, "当前 Model 为空：" + value + " 对应的生成类中已经做了非空判断，理论上不应该出现为空的情况！！！");
                 continue;
