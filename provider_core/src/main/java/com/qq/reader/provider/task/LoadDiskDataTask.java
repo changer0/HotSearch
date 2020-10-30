@@ -7,6 +7,7 @@ import com.qq.reader.provider.log.Logger;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author zhanglulu on 2019/3/2.
@@ -38,7 +39,7 @@ public class LoadDiskDataTask implements Runnable {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             is = new BufferedInputStream(mCacheSnapshot.getInputStream(0));
             IoUtils.copyStream(is, baos, null);
-            String jsonStr = new String(baos.toByteArray(), "UTF-8");
+            String jsonStr = new String(baos.toByteArray(), StandardCharsets.UTF_8);
             mDataProvider.parseData(jsonStr);
             if (mDataProvider.isExpired() && !isLoadExpired) {
                 if (mLoadListener != null) {
