@@ -59,6 +59,7 @@ public class ProviderProcessor extends AbstractProcessor {
         if (sets == null || sets.size() <= 0) {
             return;
         }
+        time = System.currentTimeMillis();
         for (Element element : sets) {
             //这是类
             TypeElement enclosingElement = (TypeElement) element.getEnclosingElement();
@@ -81,6 +82,7 @@ public class ProviderProcessor extends AbstractProcessor {
             clazzBuilderInfo.filedMap.put(resId, filedName);
         }
         generate();
+        println("ProviderProcessor 总共耗时：" + (System.currentTimeMillis() - time)/1000 + "s");
     }
 
     /**

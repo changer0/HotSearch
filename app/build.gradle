@@ -40,7 +40,7 @@ android {
     }
     repositories {
         flatDir {
-            dirs 'libs'
+            dirs '../provider_viewmodel/libs'
         }
     }
 
