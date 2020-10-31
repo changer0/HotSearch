@@ -17,8 +17,8 @@ import java.nio.charset.StandardCharsets;
 public class SimpleLoadDiskDataTask implements Runnable {
     private static final String TAG = "LoadDiskDataTask";
 
-    private DataProvider mDataProvider;
-    private InputStream inputStream;
+    private final DataProvider mDataProvider;
+    private final InputStream inputStream;
     private LoadDataListener mLoadListener;
     private LoadExpiredDataListener mLoadExpiredListener;
     private boolean isLoadExpired = false;
