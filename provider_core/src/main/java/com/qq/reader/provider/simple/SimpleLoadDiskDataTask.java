@@ -1,6 +1,7 @@
 package com.qq.reader.provider.simple;
 
 import com.qq.reader.provider.DataProvider;
+import com.qq.reader.provider.cache.CacheController;
 import com.qq.reader.provider.cache.core.DiskLruCache;
 import com.qq.reader.provider.cache.core.IoUtils;
 import com.qq.reader.provider.log.Logger;
@@ -22,14 +23,17 @@ public class SimpleLoadDiskDataTask implements Runnable {
     private LoadDataListener mLoadListener;
     private LoadExpiredDataListener mLoadExpiredListener;
     private boolean isLoadExpired = false;
+    private OnceRequestParams onceRequestParams;
 
     /**
      * @param isLoadExpired true 为加载过期文件
+     * @param onceRequestParams
      */
-    public SimpleLoadDiskDataTask(DataProvider mDataProvider, InputStream inputStream, boolean isLoadExpired) {
+    public SimpleLoadDiskDataTask(DataProvider mDataProvider, InputStream inputStream, boolean isLoadExpired, OnceRequestParams onceRequestParams) {
         this.mDataProvider = mDataProvider;
         this.inputStream = inputStream;
         this.isLoadExpired = isLoadExpired;
+        this.onceRequestParams = onceRequestParams;
     }
 
     @Override
@@ -70,6 +74,8 @@ public class SimpleLoadDiskDataTask implements Runnable {
                     mLoadListener.onLoadDiskDataFailed(mDataProvider);
                 }
             }
+            //此时说明可能保存了错误的缓存数据及时删除
+            CacheController.getInstance().remove(onceRequestParams.getCacheKey());
             Logger.e(TAG, "LoadDiskPageDataTask");
             e.printStackTrace();
         } finally {

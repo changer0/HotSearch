@@ -88,15 +88,6 @@ public class DataProvider< Q extends BaseDataBean, P extends BaseDataBean> {
         this.responseClass = responseClass;
     }
 
-
-    /**
-     * 清除缓存
-     */
-    public void removeCache() {
-        // TODO: 2020/10/31 需要重构 存储所有缓存 key 集合
-        //getLoader().removeCache(getCacheKey());
-    }
-
     public synchronized MutableLiveData<ObserverEntity> getLiveData() {
         if (liveData == null) {
             liveData = new MutableLiveData<>();
@@ -140,12 +131,9 @@ public class DataProvider< Q extends BaseDataBean, P extends BaseDataBean> {
     public void parseData(String jsonStr) {
         mJSONStr = jsonStr;
         try {
-            //mData = GSONUtil.parseJsonWithGSON(jsonStr, mResponseClass);
             mData = getParser().parseData(jsonStr, responseClass);
         } catch (Exception e) {
             Logger.e(TAG, "parseData: 解析失败：" + e.getMessage());
-            //解析失败 删除缓存
-            removeCache();
             e.printStackTrace();
             try {
                 mData = responseClass.newInstance();

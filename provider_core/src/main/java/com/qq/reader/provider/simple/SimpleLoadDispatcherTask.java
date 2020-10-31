@@ -115,7 +115,7 @@ public class SimpleLoadDispatcherTask implements Runnable, SimpleLoadDiskDataTas
             return;
         }
         SimpleLoadDiskDataTask diskTask = new SimpleLoadDiskDataTask(provider,
-                cacheInputStream, isLoadExpired);
+                cacheInputStream, isLoadExpired, onceRequestParams);
         diskTask.setLoadDataListener(this);
         diskTask.setLoadExpiredDataListener(this);
         TaskHandler.getInstance().enqueue(diskTask);

@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.example.providermoduledemo.R
 import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
 import com.qq.reader.provider.DataProvider
+import com.qq.reader.provider.simple.OnceRequestParams
 import com.qq.reader.provider.simple.SimpleProviderLoader
 
 class NormalListActivity : ReaderBaseListProviderActivity() {
@@ -61,7 +62,7 @@ class NormalListActivity : ReaderBaseListProviderActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.clearCache -> {
-                provider.removeCache()
+                loader.removeCache(OnceRequestParams.buildParams(provider.netQuestParams).cacheKey)
             }
             R.id.reloadData -> {
                 provider.loadData()

@@ -23,7 +23,7 @@ public class SimpleLoadNetDataTask implements Runnable {
     private static final String TAG = "LoadNetDataTask";
     private final DataProvider provider;
     private LoadDataListener loadDataListener;
-    private OnceRequestParams onceRequestParams;
+    private final OnceRequestParams onceRequestParams;
 
     public SimpleLoadNetDataTask(DataProvider provider, OnceRequestParams onceRequestParams) {
         this.provider = provider;
