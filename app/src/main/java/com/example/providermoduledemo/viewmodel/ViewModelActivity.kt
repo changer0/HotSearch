@@ -7,20 +7,21 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.providermoduledemo.R
 import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
-import com.qq.reader.provider.loader.DataProviderLoader
-import com.qq.reader.provider.log.Logger
+import com.qq.reader.provider.DataProvider
+import com.qq.reader.provider.simple.SimpleProviderLoader
 
 class ViewModelActivity : ReaderBaseListProviderActivity() {
-    lateinit var provider: ViewModelDataProvider
-
+    lateinit var provider: DataProvider<ViewModelRequestDataBean, ViewModelResponseDataBean>
+    lateinit var loader: SimpleProviderLoader
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        provider = ViewModelDataProvider(ViewModelRequestDataBean())
+        val providerCreator = ViewModelProviderCreator(ViewModelRequestDataBean())
+        provider = providerCreator.provider
+        loader = providerCreator.loader
         provider.liveData.observe(this, Observer {
             if (it.isSuccess) {
-                Logger.d("ViewModelActivity isCache：", it.provider.isCache.toString())
-                val dataItems = it.provider.dataItems
+                val dataItems = it.provider.viewBindItems
                 if (mRecyclerViewState == STATE_ENTER_INIT) {
                     mAdapter.setNewData(dataItems)
                     hideLoadingView()
@@ -33,12 +34,12 @@ class ViewModelActivity : ReaderBaseListProviderActivity() {
                 Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show()
             }
         })
-        DataProviderLoader.getInstance().loadData(provider)
+        provider.loadData()
     }
 
     override fun onLoadMoreRequested() {
         super.onLoadMoreRequested()
-        DataProviderLoader.getInstance().loadData(provider)
+        provider.loadData()
     }
 
     private fun showCacheMode(cache: Boolean) {
@@ -47,14 +48,13 @@ class ViewModelActivity : ReaderBaseListProviderActivity() {
         }
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.data_control_menu, menu)
         return true
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        menu.getItem(2).title = "修改缓存模式：${provider.cacheMode}"
+        menu.getItem(2).title = "修改缓存模式：${loader.cacheMode}"
         return true
     }
 
@@ -64,18 +64,18 @@ class ViewModelActivity : ReaderBaseListProviderActivity() {
                 provider.removeCache()
             }
             R.id.reloadData -> {
-                DataProviderLoader.getInstance().loadData(provider)
+                provider.loadData()
                 mRecyclerViewState = STATE_ENTER_INIT
                 showLoadingView()
             }
             R.id.modifyCacheModel -> {
-                var cacheMode = provider.cacheMode + 1
+                var cacheMode = loader.cacheMode + 1
                 if (cacheMode > 3) {
                     cacheMode = 0;
                 }
-                provider.cacheMode = cacheMode
+                loader.cacheMode = cacheMode
                 item.title = "修改缓存模式：${cacheMode}"
-                DataProviderLoader.getInstance().loadData(provider)
+                provider.loadData()
                 mRecyclerViewState = STATE_ENTER_INIT
                 showLoadingView()
             }

@@ -1,6 +1,6 @@
-package com.qq.reader.provider.task;
+package com.qq.reader.provider.simple;
 
-import com.qq.reader.provider.BaseDataProvider;
+import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.cache.core.DiskLruCache;
 import com.qq.reader.provider.cache.core.IoUtils;
 import com.qq.reader.provider.log.Logger;
@@ -14,11 +14,11 @@ import java.nio.charset.StandardCharsets;
  * for 从磁盘中获取数据
  */
 @SuppressWarnings("rawtypes")
-public class LoadDiskDataTask implements Runnable {
+public class SimpleLoadDiskDataTask implements Runnable {
     private static final String TAG = "LoadDiskDataTask";
 
-    private BaseDataProvider mDataProvider;
-    private DiskLruCache.Snapshot mCacheSnapshot;
+    private DataProvider mDataProvider;
+    private InputStream inputStream;
     private LoadDataListener mLoadListener;
     private LoadExpiredDataListener mLoadExpiredListener;
     private boolean isLoadExpired = false;
@@ -26,9 +26,9 @@ public class LoadDiskDataTask implements Runnable {
     /**
      * @param isLoadExpired true 为加载过期文件
      */
-    public LoadDiskDataTask(BaseDataProvider mDataProvider, DiskLruCache.Snapshot snapshot, boolean isLoadExpired) {
+    public SimpleLoadDiskDataTask(DataProvider mDataProvider, InputStream inputStream, boolean isLoadExpired) {
         this.mDataProvider = mDataProvider;
-        this.mCacheSnapshot = snapshot;
+        this.inputStream = inputStream;
         this.isLoadExpired = isLoadExpired;
     }
 
@@ -37,7 +37,7 @@ public class LoadDiskDataTask implements Runnable {
         InputStream is = null;
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            is = new BufferedInputStream(mCacheSnapshot.getInputStream(0));
+            is = new BufferedInputStream(inputStream);
             IoUtils.copyStream(is, baos, null);
             String jsonStr = new String(baos.toByteArray(), StandardCharsets.UTF_8);
             mDataProvider.parseData(jsonStr);
@@ -78,7 +78,7 @@ public class LoadDiskDataTask implements Runnable {
                     is.close();
                 }
                 //不要忘记关掉快照
-                mCacheSnapshot.close();
+                inputStream.close();
             } catch (Exception e) {
                 Logger.e(TAG, "LoadDiskPageDataTask");
                 e.printStackTrace();
@@ -102,16 +102,16 @@ public class LoadDiskDataTask implements Runnable {
      * 数据加载回调
      */
     public interface LoadDataListener {
-        void onLoadDiskDataSuccess(BaseDataProvider provider);
-        void onLoadDiskDataFailed(BaseDataProvider provider);
+        void onLoadDiskDataSuccess(DataProvider provider);
+        void onLoadDiskDataFailed(DataProvider provider);
     }
 
     /**
      * 过期数据加载回调
      */
     public interface LoadExpiredDataListener {
-        void onLoadDiskExpiredDataSuccess(BaseDataProvider provider);
-        void onLoadDiskExpiredDataFailed(BaseDataProvider provider);
+        void onLoadDiskExpiredDataSuccess(DataProvider provider);
+        void onLoadDiskExpiredDataFailed(DataProvider provider);
     }
 
 

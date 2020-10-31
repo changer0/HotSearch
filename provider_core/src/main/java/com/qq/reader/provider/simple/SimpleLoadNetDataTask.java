@@ -1,11 +1,10 @@
-package com.qq.reader.provider.task;
+package com.qq.reader.provider.simple;
 
 import android.text.TextUtils;
 
-import com.qq.reader.provider.BaseDataProvider;
+import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.DataProviderConfig;
 import com.qq.reader.provider.cache.core.IoUtils;
-import com.qq.reader.provider.loader.DataProviderLoader;
 import com.qq.reader.provider.log.Logger;
 
 import java.io.ByteArrayInputStream;
@@ -19,13 +18,13 @@ import java.nio.charset.StandardCharsets;
  * for 网络中拉取数据
  */
 @SuppressWarnings("rawtypes")
-public class LoadNetDataTask implements Runnable {
+public class SimpleLoadNetDataTask implements Runnable {
     private static final String TAG = "LoadNetDataTask";
-    private final BaseDataProvider mDataProvider;
+    private final DataProvider provider;
     private LoadDataListener loadDataListener;
 
-    public LoadNetDataTask(BaseDataProvider dataProvider) {
-        mDataProvider = dataProvider;
+    public SimpleLoadNetDataTask(DataProvider provider) {
+        this.provider = provider;
     }
 
     @Override
@@ -33,13 +32,13 @@ public class LoadNetDataTask implements Runnable {
 
         InputStream resultStream = null;
         try {
-            resultStream = DataProviderConfig.getNetQuestAdapter().syncRequest(mDataProvider);
+            resultStream = DataProviderConfig.getNetQuestAdapter().syncRequest(provider.getNetQuestParams());
             String str = IoUtils.getString(resultStream);
-            mDataProvider.parseData(str);
-            mDataProvider.fillData();
+            provider.parseData(str);
+            provider.fillData();
             //数据填充结束, 通知页面刷新
             if (loadDataListener != null) {
-                loadDataListener.onLoadNetDataSuccess(mDataProvider);
+                loadDataListener.onLoadNetDataSuccess(provider);
             }
             //resultStream 已经读完了，变成 ByteArrayOutputStream 存入缓存
             ByteArrayOutputStream baos = null;
@@ -50,7 +49,8 @@ public class LoadNetDataTask implements Runnable {
                     baos.write(str.getBytes(StandardCharsets.UTF_8));
                 }
                 bais = new ByteArrayInputStream(baos.toByteArray());
-                DataProviderLoader.getInstance().save(mDataProvider.getCacheKey(), bais);
+                //保存缓存
+                provider.getLoader().saveCache(provider.getCacheKey(), bais);
             } finally {
                 if (bais != null) {
                     bais.close();
@@ -83,7 +83,7 @@ public class LoadNetDataTask implements Runnable {
      * 数据加载回调
      */
     public interface LoadDataListener {
-        void onLoadNetDataSuccess(BaseDataProvider provider);
+        void onLoadNetDataSuccess(DataProvider provider);
         void onLoadNetDataFailed(Throwable throwable);
     }
 }

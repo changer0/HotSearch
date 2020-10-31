@@ -22,7 +22,20 @@ public class CacheController {
 
     private DiskLruCache cache;
 
-    public CacheController() {
+    public static volatile CacheController instance = null;
+
+    public static CacheController getInstance() {
+        if (instance == null) {
+            synchronized (CacheController.class) {
+                if (instance == null) {
+                    instance = new CacheController();
+                }
+            }
+        }
+        return instance;
+    }
+
+    private CacheController() {
         initCache();
     }
 
@@ -68,13 +81,16 @@ public class CacheController {
     }
 
     /**获取缓存快照，需要 close 哟*/
-    public DiskLruCache.Snapshot get(String originKey) {
+    public InputStream get(String originKey) {
         try {
-            return cache.get(generateKey(originKey));
+            DiskLruCache.Snapshot snapshot = cache.get(generateKey(originKey));
+            if (snapshot != null) {
+                return snapshot.getInputStream(0);
+            }
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
     }
 
     /**移除缓存*/

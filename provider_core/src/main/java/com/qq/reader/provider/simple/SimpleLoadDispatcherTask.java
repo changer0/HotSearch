@@ -1,10 +1,9 @@
-package com.qq.reader.provider.task;
+package com.qq.reader.provider.simple;
 
-import com.qq.reader.provider.BaseDataProvider;
+import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.cache.CacheMode;
-import com.qq.reader.provider.cache.core.DiskLruCache;
-import com.qq.reader.provider.loader.DataProviderLoader;
 import com.qq.reader.provider.log.Logger;
+import com.qq.reader.provider.task.TaskHandler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,40 +15,41 @@ import io.reactivex.ObservableEmitter;
  * for 用于分发网络/缓存
  */
 @SuppressWarnings("rawtypes")
-public class LoadDispatcherTask implements Runnable, LoadDiskDataTask.LoadDataListener
-        , LoadDiskDataTask.LoadExpiredDataListener, LoadNetDataTask.LoadDataListener {
+public class SimpleLoadDispatcherTask implements Runnable, SimpleLoadDiskDataTask.LoadDataListener
+        , SimpleLoadDiskDataTask.LoadExpiredDataListener, SimpleLoadNetDataTask.LoadDataListener {
     private static final String TAG = "ReaderDataTask";
 
     /**
-     * 数据承载类
+     * 数据加载类
      */
-    private final BaseDataProvider mDataProvider;
+    private final DataProvider provider;
 
     /**
      * 结果发射器
      */
-    private ObservableEmitter<BaseDataProvider> mEmitter;
+    private ObservableEmitter<DataProvider> mEmitter;
 
     /**
-     * 缓存快照
+     * 缓存流
      */
-    private DiskLruCache.Snapshot mCacheSnapshot;
+    private InputStream cacheInputStream;
+
+    /**
+     * 缓存模式
+     */
+    private int cacheMode;
 
     /**
      * 判断当前快照是否有缓存数据
      * @return
      */
     private boolean hasCache() {
-        if (mCacheSnapshot == null) {
-            return false;
-        }
-        InputStream inputStream = mCacheSnapshot.getInputStream(0);
-        if (inputStream == null) {
+        if (cacheInputStream == null) {
             return false;
         }
 
         try {
-            if (inputStream.available() <= 0) {
+            if (cacheInputStream.available() <= 0) {
                 return false;
             }
         } catch (IOException e) {
@@ -59,21 +59,22 @@ public class LoadDispatcherTask implements Runnable, LoadDiskDataTask.LoadDataLi
         return true;
     }
 
-    public void setEmitter(ObservableEmitter<BaseDataProvider> mEmitter) {
+    public void setEmitter(ObservableEmitter<DataProvider> mEmitter) {
         this.mEmitter = mEmitter;
     }
 
     public int getCacheMode() {
-        return mDataProvider.getCacheMode();
+        return cacheMode;
     }
 
-    public LoadDispatcherTask(BaseDataProvider mDataProvider) {
-        this.mDataProvider = mDataProvider;
+    public SimpleLoadDispatcherTask(DataProvider provider, int cacheMode) {
+        this.provider = provider;
+        this.cacheMode = cacheMode;
     }
 
     @Override
     public void run() {
-        mCacheSnapshot = DataProviderLoader.getInstance().get(mDataProvider.getCacheKey());
+        cacheInputStream = provider.getLoader().getCache(provider.getCacheKey());
         if (hasCache()){
             //优先使用缓存 和 使用缓存，但不使用过期数据
             if (getCacheMode() == CacheMode.CACHE_MODE_USE_CACHE_PRIORITY || getCacheMode() == CacheMode.CACHE_MODE_USE_CACHE_NOT_EXPIRED) {
@@ -90,10 +91,10 @@ public class LoadDispatcherTask implements Runnable, LoadDiskDataTask.LoadDataLi
      * 网络中拉取
      */
     private void tryLoadNetData() {
-        if (mDataProvider == null) {
+        if (provider == null) {
             return;
         }
-        LoadNetDataTask netTask = new LoadNetDataTask(mDataProvider);
+        SimpleLoadNetDataTask netTask = new SimpleLoadNetDataTask(provider);
         netTask.setLoadDataListener(this);
         TaskHandler.getInstance().enqueue(netTask);
     }
@@ -103,11 +104,11 @@ public class LoadDispatcherTask implements Runnable, LoadDiskDataTask.LoadDataLi
      * [注] 当且仅当 网络加载失败或者网络数据解析失败时调用，否则会持续加载过期数据
      */
     private void tryLoadDiskData(boolean isLoadExpired) {
-        if (mCacheSnapshot == null || mDataProvider == null) {
+        if (cacheInputStream == null || provider == null) {
             return;
         }
-        LoadDiskDataTask diskTask = new LoadDiskDataTask(mDataProvider,
-                mCacheSnapshot, isLoadExpired);
+        SimpleLoadDiskDataTask diskTask = new SimpleLoadDiskDataTask(provider,
+                cacheInputStream, isLoadExpired);
         diskTask.setLoadDataListener(this);
         diskTask.setLoadExpiredDataListener(this);
         TaskHandler.getInstance().enqueue(diskTask);
@@ -121,8 +122,8 @@ public class LoadDispatcherTask implements Runnable, LoadDiskDataTask.LoadDataLi
     private void notifyLoadPageDataSuccess(boolean isCache) {
         if (mEmitter != null) {
             //并发请求直接发送出去
-            mDataProvider.setCache(isCache);
-            mEmitter.onNext(mDataProvider);
+            provider.setCache(isCache);
+            mEmitter.onNext(provider);
             mEmitter.onComplete();
         }
     }
@@ -147,14 +148,14 @@ public class LoadDispatcherTask implements Runnable, LoadDiskDataTask.LoadDataLi
     //----------------------------------------------------------------------------------------------
     // LoadDiskDataTask.LoadDataListener 缓存获取回调
     @Override
-    public void onLoadDiskDataSuccess(BaseDataProvider provider) {
+    public void onLoadDiskDataSuccess(DataProvider provider) {
         synchronized (this) {
             notifyLoadPageDataSuccess(true);
         }
     }
 
     @Override
-    public void onLoadDiskDataFailed(BaseDataProvider provider) {
+    public void onLoadDiskDataFailed(DataProvider provider) {
         synchronized (this) {
             tryLoadNetData();
         }
@@ -162,14 +163,14 @@ public class LoadDispatcherTask implements Runnable, LoadDiskDataTask.LoadDataLi
     //----------------------------------------------------------------------------------------------
     // LoadDiskDataTask.LoadExpiredDataListener 过期缓存获取回调
     @Override
-    public void onLoadDiskExpiredDataSuccess(BaseDataProvider provider) {
+    public void onLoadDiskExpiredDataSuccess(DataProvider provider) {
         synchronized (this) {
             notifyLoadPageDataSuccess(true);
         }
     }
 
     @Override
-    public void onLoadDiskExpiredDataFailed(BaseDataProvider provider) {
+    public void onLoadDiskExpiredDataFailed(DataProvider provider) {
         String error = "本地过期数据加载失败 !!!! ";
         synchronized (this) {
             notifyLoadPageDataFailed(new RuntimeException(error));
@@ -180,7 +181,7 @@ public class LoadDispatcherTask implements Runnable, LoadDiskDataTask.LoadDataLi
     //----------------------------------------------------------------------------------------------
     // ReaderJSONNetTaskListener 网络获取回调
     @Override
-    public void onLoadNetDataSuccess(BaseDataProvider provider) {
+    public void onLoadNetDataSuccess(DataProvider provider) {
         synchronized (this) {
             notifyLoadPageDataSuccess(false);
         }

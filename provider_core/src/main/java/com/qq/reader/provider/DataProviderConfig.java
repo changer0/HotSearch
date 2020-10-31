@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 
 import androidx.annotation.WorkerThread;
 
-import com.qq.reader.provider.task.INetQuestParams;
+import com.qq.reader.provider.inter.INetQuestParams;
 
 import java.io.InputStream;
 
