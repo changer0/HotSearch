@@ -26,8 +26,7 @@ import io.reactivex.disposables.Disposable;
 public class SimpleProviderLoader implements ILoader {
     private static final String TAG = "SimpleProviderLoader";
 
-    DataProvider provider;
-    boolean isCache;
+    private DataProvider provider;
     private int cacheMode = CacheMode.CACHE_MODE_USE_CACHE_PRIORITY;
 
     public int getCacheMode() {
@@ -53,7 +52,7 @@ public class SimpleProviderLoader implements ILoader {
      * 为 DataProvider 提供分发任务的 Runnable
      */
     private synchronized SimpleLoadDispatcherTask getDispatcherTask() {
-        return new SimpleLoadDispatcherTask(provider, cacheMode);
+        return new SimpleLoadDispatcherTask(provider, cacheMode, OnceRequestParams.buildParams(provider.getNetQuestParams()));
     }
 
     //----------------------------------------------------------------------------------------------
@@ -81,9 +80,8 @@ public class SimpleProviderLoader implements ILoader {
     }
 
     //----------------------------------------------------------------------------------------------
-    // ILoader 的接口实现
+    // 暴露缓存相关操作
 
-    @Override
     public void saveCache(String key,InputStream inputStream) {
         try {
             CacheController.getInstance().save(key, inputStream);
@@ -92,16 +90,12 @@ public class SimpleProviderLoader implements ILoader {
         }
     }
 
-    @Override
-    public InputStream getCache(String key) {
-        return CacheController.getInstance().get(key);
-    }
-
-    @Override
     public boolean removeCache(String key) {
         return CacheController.getInstance().remove(key);
     }
 
+    //----------------------------------------------------------------------------------------------
+    // ILoader 的接口实现
     @Override
     public void loadData(DataProvider provider) {
         this.provider = provider;
@@ -133,28 +127,6 @@ public class SimpleProviderLoader implements ILoader {
                         Logger.d(TAG, "onComplete: called");
                     }
                 });
-    }
-
-    @Override
-    public boolean isCache() {
-        return isCache;
-    }
-
-    /**
-     * 获取缓存 Key
-     * POST 请求使用 url+contentType+requestContent
-     * GET 请求使用 url
-     * <br/>
-     * 缓存文件,如果是post请求，则以url+contentType+requestContent生成的SHA256值作为key，取出缓存文件，因缓存未考虑区分用户，所以具体先不以uid加入其中作为区分。
-     * Key 的生成由缓存层去做！
-     */
-    @Override
-    public String getCacheKey() {
-        INetQuestParams netQuestParams = provider.getNetQuestParams();
-        if (TextUtils.equals(netQuestParams.getRequestMethod(), "POST")) {
-            return netQuestParams.getUrl() + netQuestParams.getContentType() + netQuestParams.getRequestContent();
-        }
-        return netQuestParams.getUrl();
     }
 
 }

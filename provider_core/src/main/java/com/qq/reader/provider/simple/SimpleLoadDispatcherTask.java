@@ -1,6 +1,7 @@
 package com.qq.reader.provider.simple;
 
 import com.qq.reader.provider.DataProvider;
+import com.qq.reader.provider.cache.CacheController;
 import com.qq.reader.provider.cache.CacheMode;
 import com.qq.reader.provider.log.Logger;
 import com.qq.reader.provider.task.TaskHandler;
@@ -40,6 +41,11 @@ public class SimpleLoadDispatcherTask implements Runnable, SimpleLoadDiskDataTas
     private int cacheMode;
 
     /**
+     * 一次请求参数
+     */
+    private OnceRequestParams onceRequestParams;
+
+    /**
      * 判断当前快照是否有缓存数据
      * @return
      */
@@ -67,14 +73,15 @@ public class SimpleLoadDispatcherTask implements Runnable, SimpleLoadDiskDataTas
         return cacheMode;
     }
 
-    public SimpleLoadDispatcherTask(DataProvider provider, int cacheMode) {
+    public SimpleLoadDispatcherTask(DataProvider provider, int cacheMode, OnceRequestParams onceRequestParams) {
         this.provider = provider;
         this.cacheMode = cacheMode;
+        this.onceRequestParams = onceRequestParams;
     }
 
     @Override
     public void run() {
-        cacheInputStream = provider.getLoader().getCache(provider.getCacheKey());
+        cacheInputStream = CacheController.getInstance().get(onceRequestParams.getCacheKey());
         if (hasCache()){
             //优先使用缓存 和 使用缓存，但不使用过期数据
             if (getCacheMode() == CacheMode.CACHE_MODE_USE_CACHE_PRIORITY || getCacheMode() == CacheMode.CACHE_MODE_USE_CACHE_NOT_EXPIRED) {
@@ -94,7 +101,7 @@ public class SimpleLoadDispatcherTask implements Runnable, SimpleLoadDiskDataTas
         if (provider == null) {
             return;
         }
-        SimpleLoadNetDataTask netTask = new SimpleLoadNetDataTask(provider);
+        SimpleLoadNetDataTask netTask = new SimpleLoadNetDataTask(provider, onceRequestParams);
         netTask.setLoadDataListener(this);
         TaskHandler.getInstance().enqueue(netTask);
     }

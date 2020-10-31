@@ -94,7 +94,7 @@ public class DataProvider< Q extends BaseDataBean, P extends BaseDataBean> {
      */
     public void removeCache() {
         // TODO: 2020/10/31 需要重构 存储所有缓存 key 集合
-        getLoader().removeCache(getCacheKey());
+        //getLoader().removeCache(getCacheKey());
     }
 
     public synchronized MutableLiveData<ObserverEntity> getLiveData() {
@@ -175,10 +175,6 @@ public class DataProvider< Q extends BaseDataBean, P extends BaseDataBean> {
 
     public void setCache(boolean cache) {
         isCache = cache;
-    }
-
-    public String getCacheKey() {
-        return getLoader().getCacheKey();
     }
 
     //----------------------------------------------------------------------------------------------

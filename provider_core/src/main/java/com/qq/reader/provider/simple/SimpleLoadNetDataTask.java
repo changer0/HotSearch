@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.DataProviderConfig;
+import com.qq.reader.provider.cache.CacheController;
 import com.qq.reader.provider.cache.core.IoUtils;
 import com.qq.reader.provider.log.Logger;
 
@@ -22,9 +23,11 @@ public class SimpleLoadNetDataTask implements Runnable {
     private static final String TAG = "LoadNetDataTask";
     private final DataProvider provider;
     private LoadDataListener loadDataListener;
+    private OnceRequestParams onceRequestParams;
 
-    public SimpleLoadNetDataTask(DataProvider provider) {
+    public SimpleLoadNetDataTask(DataProvider provider, OnceRequestParams onceRequestParams) {
         this.provider = provider;
+        this.onceRequestParams = onceRequestParams;
     }
 
     @Override
@@ -32,7 +35,7 @@ public class SimpleLoadNetDataTask implements Runnable {
 
         InputStream resultStream = null;
         try {
-            resultStream = DataProviderConfig.getNetQuestAdapter().syncRequest(provider.getNetQuestParams());
+            resultStream = DataProviderConfig.getNetQuestAdapter().syncRequest(onceRequestParams);
             String str = IoUtils.getString(resultStream);
             provider.parseData(str);
             provider.fillData();
@@ -50,7 +53,7 @@ public class SimpleLoadNetDataTask implements Runnable {
                 }
                 bais = new ByteArrayInputStream(baos.toByteArray());
                 //保存缓存
-                provider.getLoader().saveCache(provider.getCacheKey(), bais);
+                CacheController.getInstance().save(onceRequestParams.getCacheKey(), bais);
             } finally {
                 if (bais != null) {
                     bais.close();
