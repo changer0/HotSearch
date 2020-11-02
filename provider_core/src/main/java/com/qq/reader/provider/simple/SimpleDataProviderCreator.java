@@ -4,7 +4,8 @@ import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.bean.BaseDataBean;
 import com.qq.reader.provider.inter.IFiller;
 import com.qq.reader.provider.inter.INetQuestParams;
-import com.qq.reader.provider.inter.IParser;
+import com.qq.reader.provider.loader.SimpleProviderLoader;
+import com.qq.reader.provider.parser.SimpleGSONParser;
 
 /**
  * 对 DataProvider 的

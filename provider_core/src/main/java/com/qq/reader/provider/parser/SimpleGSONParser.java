@@ -1,7 +1,7 @@
-package com.qq.reader.provider.simple;
+package com.qq.reader.provider.parser;
 
 import com.qq.reader.provider.bean.BaseDataBean;
-import com.qq.reader.provider.inter.IParser;
+import com.qq.reader.provider.parser.IParser;
 import com.qq.reader.provider.utils.GSONUtil;
 
 /**

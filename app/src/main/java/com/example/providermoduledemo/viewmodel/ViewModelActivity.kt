@@ -9,8 +9,8 @@ import com.example.providermoduledemo.R
 import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
 import com.qq.reader.provider.DataProvider
 import com.qq.reader.provider.cache.CacheMode
-import com.qq.reader.provider.simple.OnceRequestParams
-import com.qq.reader.provider.simple.SimpleProviderLoader
+import com.qq.reader.provider.loader.OnceRequestParams
+import com.qq.reader.provider.loader.SimpleProviderLoader
 
 class ViewModelActivity : ReaderBaseListProviderActivity() {
     lateinit var provider: DataProvider<ViewModelRequestDataBean, ViewModelResponseDataBean>

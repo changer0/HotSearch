@@ -1,13 +1,9 @@
-package com.qq.reader.provider.simple;
-
-import android.text.TextUtils;
+package com.qq.reader.provider.loader;
 
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.cache.CacheController;
 import com.qq.reader.provider.cache.CacheMode;
 import com.qq.reader.provider.define.ProviderConstants;
-import com.qq.reader.provider.inter.ILoader;
-import com.qq.reader.provider.inter.INetQuestParams;
 import com.qq.reader.provider.log.Logger;
 import com.qq.reader.provider.task.TaskHandler;
 

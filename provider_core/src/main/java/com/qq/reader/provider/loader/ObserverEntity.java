@@ -1,4 +1,4 @@
-package com.qq.reader.provider.simple;
+package com.qq.reader.provider.loader;
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.define.ProviderConstants;
 

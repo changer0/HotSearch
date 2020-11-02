@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.qq.reader.provider.bean.BaseDataBean;
 import com.qq.reader.provider.inter.IFiller;
-import com.qq.reader.provider.inter.ILoader;
-import com.qq.reader.provider.inter.IParser;
+import com.qq.reader.provider.loader.ILoader;
+import com.qq.reader.provider.parser.IParser;
 import com.qq.reader.provider.log.Logger;
 import com.qq.reader.provider.inter.INetQuestParams;
-import com.qq.reader.provider.simple.ObserverEntity;
+import com.qq.reader.provider.loader.ObserverEntity;
 
 import java.util.List;
 /**

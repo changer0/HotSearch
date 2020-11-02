@@ -1,8 +1,7 @@
-package com.qq.reader.provider.simple;
+package com.qq.reader.provider.loader;
 
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.cache.CacheController;
-import com.qq.reader.provider.cache.core.DiskLruCache;
 import com.qq.reader.provider.cache.core.IoUtils;
 import com.qq.reader.provider.log.Logger;
 import java.io.BufferedInputStream;

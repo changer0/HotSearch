@@ -1,4 +1,4 @@
-package com.qq.reader.provider.simple;
+package com.qq.reader.provider.loader;
 
 import android.text.TextUtils;
 
