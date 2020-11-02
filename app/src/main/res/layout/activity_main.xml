@@ -29,6 +29,11 @@
                 android:text="ViewModel 页面"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/preLoadActivity"
+                android:text="预加载测试"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 

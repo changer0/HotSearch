@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.example.providermoduledemo.R
 import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
 import com.qq.reader.provider.DataProvider
+import com.qq.reader.provider.cache.CacheMode
 import com.qq.reader.provider.simple.OnceRequestParams
 import com.qq.reader.provider.simple.SimpleProviderLoader
 
@@ -20,6 +21,7 @@ class ViewModelActivity : ReaderBaseListProviderActivity() {
         val providerCreator = ViewModelProviderCreator(ViewModelRequestDataBean())
         provider = providerCreator.provider
         loader = providerCreator.loader
+        loader.cacheMode = CacheMode.CACHE_MODE_NOT_USE_CACHE
         provider.liveData.observe(this, Observer {
             if (it.isSuccess) {
                 val dataItems = it.provider.viewBindItems
