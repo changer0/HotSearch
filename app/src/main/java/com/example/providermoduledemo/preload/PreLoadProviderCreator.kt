@@ -6,6 +6,7 @@ import com.example.providermoduledemo.viewmodel.ViewModelRequestDataBean
 import com.example.providermoduledemo.viewmodel.ViewModelResponseDataBean
 import com.qq.reader.provider.BaseViewBindItem
 import com.qq.reader.provider.bean.BaseDataBean
+import com.qq.reader.provider.cache.CacheMode
 import com.qq.reader.provider.simple.SimpleDataProviderCreator
 
 /**
@@ -23,10 +24,8 @@ class PreLoadProviderCreator private constructor(requestBean: ViewModelRequestDa
             if (instance == null) {
                 synchronized(PreLoadProviderCreator::class.java) {
                     if (instance == null) {
-                        instance =
-                            PreLoadProviderCreator(
-                                ViewModelRequestDataBean()
-                            )
+                        instance = PreLoadProviderCreator(ViewModelRequestDataBean())
+                        instance!!.loader.cacheMode = CacheMode.CACHE_MODE_NOT_USE_CACHE
                     }
                 }
             }

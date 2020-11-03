@@ -23,10 +23,8 @@ class MainActivity : AppCompatActivity() {
         }
         preLoadActivity.setOnClickListener {
             PreLoadProviderCreator.get().provider.loadData()
-            PreLoadProviderCreator.get().loader.cacheMode = CacheMode.CACHE_MODE_NOT_USE_CACHE
             startActivity(Intent(this, PreLoadActivity::class.java))
         }
     }
-
 }
 
