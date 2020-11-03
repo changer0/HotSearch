@@ -8,12 +8,12 @@ import com.qq.reader.provider.loader.SimpleProviderLoader;
 import com.qq.reader.provider.parser.SimpleGSONParser;
 
 /**
- * 对 DataProvider 的
+ * DataProvider 构造器
  */
 public abstract class SimpleDataProviderCreator<Q extends BaseDataBean, P extends BaseDataBean> implements INetQuestParams, IFiller<P> {
 
 
-    private final DataProvider provider;
+    private final DataProvider<Q, P> provider;
     private final SimpleProviderLoader loader;
 
     public SimpleDataProviderCreator(Q requestBean, Class<P> responseClass) {
