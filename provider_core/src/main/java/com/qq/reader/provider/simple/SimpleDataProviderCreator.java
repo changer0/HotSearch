@@ -10,6 +10,7 @@ import com.qq.reader.provider.parser.SimpleGSONParser;
 /**
  * DataProvider 构造器
  */
+@SuppressWarnings("all")
 public abstract class SimpleDataProviderCreator<Q extends BaseBean, P extends BaseBean> implements INetQuestParams, IFiller<P> {
 
 
