@@ -3,7 +3,7 @@ package com.qq.reader.provider;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
-import com.qq.reader.provider.bean.BaseDataBean;
+import com.qq.reader.provider.bean.BaseBean;
 import com.qq.reader.provider.inter.IFiller;
 import com.qq.reader.provider.loader.ILoader;
 import com.qq.reader.provider.parser.IParser;
@@ -18,11 +18,11 @@ import java.util.List;
  * 能力:
  * 1. 拼接协议url <br/>
  * 2. 解析数据 <br/>
- * 需要传入请求Bean {@link BaseDataBean} 和 响应 Bean {@link BaseDataBean}<br/>
+ * 需要传入请求Bean {@link BaseBean} 和 响应 Bean {@link BaseBean}<br/>
  *  [注: ] 不要随意改变两个
  */
 @SuppressWarnings("rawtypes")
-public class DataProvider< Q extends BaseDataBean, P extends BaseDataBean> {
+public class DataProvider< Q extends BaseBean, P extends BaseBean> {
 
     private static final String TAG = "ReaderBaseDataProvider";
 
@@ -231,7 +231,7 @@ public class DataProvider< Q extends BaseDataBean, P extends BaseDataBean> {
      * @param <Q>
      * @param <P>
      */
-    public static class Builder< Q extends BaseDataBean, P extends BaseDataBean> {
+    public static class Builder< Q extends BaseBean, P extends BaseBean> {
 
         private IParser<P> parser;
         private ILoader loader;

@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
-import com.example.providermoduledemo.viewmodel.ViewModelRequestDataBean
-import com.example.providermoduledemo.viewmodel.ViewModelResponseDataBean
+import com.example.providermoduledemo.viewmodel.ViewModelRequestBean
+import com.example.providermoduledemo.viewmodel.ViewModelResponseBean
 import com.qq.reader.provider.DataProvider
-import com.qq.reader.provider.cache.CacheMode
 
 class PreLoadActivity : ReaderBaseListProviderActivity() {
-    lateinit var provider: DataProvider<ViewModelRequestDataBean, ViewModelResponseDataBean>
+    lateinit var provider: DataProvider<ViewModelRequestBean, ViewModelResponseBean>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

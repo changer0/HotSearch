@@ -12,12 +12,12 @@ import com.qq.reader.provider.loader.OnceRequestParams
 import com.qq.reader.provider.loader.SimpleProviderLoader
 
 class NormalListActivity : ReaderBaseListProviderActivity() {
-    lateinit var provider: DataProvider<NormalRequestDataBean, NormalResponseDataBean>
+    lateinit var provider: DataProvider<NormalRequestBean, NormalResponseBean>
     lateinit var loader: SimpleProviderLoader
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val providerCreator = NormalProviderCreator(NormalRequestDataBean())
+        val providerCreator = NormalProviderCreator(NormalRequestBean())
         provider = providerCreator.provider
         loader = providerCreator.loader
         provider.liveData.observe(this, Observer {

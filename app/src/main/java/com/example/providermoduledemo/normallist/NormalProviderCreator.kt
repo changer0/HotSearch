@@ -2,8 +2,7 @@ package com.example.providermoduledemo.normallist
 
 import com.chad.library.adapter.base.BaseViewHolder
 import com.qq.reader.provider.BaseViewBindItem
-import com.qq.reader.provider.DataProvider
-import com.qq.reader.provider.bean.BaseDataBean
+import com.qq.reader.provider.bean.BaseBean
 import com.qq.reader.provider.simple.SimpleDataProviderCreator
 
 /**
@@ -11,15 +10,15 @@ import com.qq.reader.provider.simple.SimpleDataProviderCreator
  * for DataProvider 实现类
  */
 
-class NormalProviderCreator(requestBean: NormalRequestDataBean)
-    : SimpleDataProviderCreator<NormalRequestDataBean, NormalResponseDataBean>(requestBean, NormalResponseDataBean::class.java) {
+class NormalProviderCreator(requestBean: NormalRequestBean)
+    : SimpleDataProviderCreator<NormalRequestBean, NormalResponseBean>(requestBean, NormalResponseBean::class.java) {
 
 
-    override fun fillData(data: NormalResponseDataBean): List<BaseViewBindItem<out BaseDataBean, BaseViewHolder>> {
+    override fun fillData(data: NormalResponseBean): List<BaseViewBindItem<out BaseBean, BaseViewHolder>> {
         return ViewBindItemBuilder.buildViewBindItem(data);
     }
 
-    override fun getExpiredTime(mData: NormalResponseDataBean?): Long {
+    override fun getExpiredTime(mData: NormalResponseBean?): Long {
         if (mData == null) {
             return 0
         }

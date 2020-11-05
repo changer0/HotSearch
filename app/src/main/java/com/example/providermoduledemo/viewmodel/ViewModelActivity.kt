@@ -13,12 +13,12 @@ import com.qq.reader.provider.loader.OnceRequestParams
 import com.qq.reader.provider.loader.SimpleProviderLoader
 
 class ViewModelActivity : ReaderBaseListProviderActivity() {
-    lateinit var provider: DataProvider<ViewModelRequestDataBean, ViewModelResponseDataBean>
+    lateinit var provider: DataProvider<ViewModelRequestBean, ViewModelResponseBean>
     lateinit var loader: SimpleProviderLoader
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val providerCreator = ViewModelProviderCreator(ViewModelRequestDataBean())
+        val providerCreator = ViewModelProviderCreator(ViewModelRequestBean())
         provider = providerCreator.provider
         loader = providerCreator.loader
         loader.cacheMode = CacheMode.CACHE_MODE_NOT_USE_CACHE

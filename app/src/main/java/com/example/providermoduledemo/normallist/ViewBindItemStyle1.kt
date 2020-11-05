@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.example.providermoduledemo.R
 import com.qq.reader.provider.BaseViewBindItem
 
-class ViewBindItemStyle1 : BaseViewBindItem<NormalResponseDataBean.ItemData, BaseViewHolder>() {
+class ViewBindItemStyle1 : BaseViewBindItem<NormalResponseBean.Item, BaseViewHolder>() {
     override fun getResLayoutId(): Int {
         return R.layout.view_data_item_style1
     }

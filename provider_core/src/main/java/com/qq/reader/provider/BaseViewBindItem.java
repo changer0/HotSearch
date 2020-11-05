@@ -11,7 +11,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.Toast;
 
-import com.qq.reader.provider.bean.BaseDataBean;
+import com.qq.reader.provider.bean.BaseBean;
 import com.qq.reader.provider.log.Logger;
 import com.qq.reader.provider.utils.ProviderUtility;
 
@@ -21,7 +21,7 @@ import java.lang.ref.WeakReference;
  * Created by zhanglulu on 2019/3/3.
  * for View 绑定 Item
  */
-public abstract class BaseViewBindItem<T extends BaseDataBean, Holder extends RecyclerView.ViewHolder> {
+public abstract class BaseViewBindItem<T extends BaseBean, Holder extends RecyclerView.ViewHolder> {
 
     private static final String TAG = "BaseDataItem";
 

@@ -214,7 +214,7 @@ CacheMode 共分为四种类型：
 ## 混淆配置
 
 ``` java
--keep class * extends com.qq.reader.provider.bean.BaseDataBean {*;}
+-keep class * extends com.qq.reader.provider.bean.BaseBean {*;}
 ```
 
 

@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
-import com.qq.reader.provider.bean.BaseDataBean;
+import com.qq.reader.provider.bean.BaseBean;
 
 import java.util.List;
 
@@ -60,7 +60,7 @@ public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem
     @Override
     protected int getDefItemViewType(int position) {
         int type = 0;
-        BaseViewBindItem<? extends BaseDataBean, BaseViewHolder> item = getItem(position);
+        BaseViewBindItem<? extends BaseBean, BaseViewHolder> item = getItem(position);
         if (item != null) {
             type = item.getResLayoutId();
         }

@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
-import com.qq.reader.provider.bean.BaseDataBean;
+import com.qq.reader.provider.bean.BaseBean;
 import com.qq.reader.provider.log.Logger;
 
 import java.util.Map;
@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @SuppressWarnings("rawtypes")
 public abstract class BaseViewBindModelItem
-        <Bean extends BaseDataBean>
+        <Bean extends BaseBean>
         extends BaseViewBindItem<Bean, BaseViewHolder> {
 
     private static final String TAG = "BaseViewBindModelItem";

@@ -1,7 +1,7 @@
 package com.qq.reader.provider.simple;
 
 import com.qq.reader.provider.DataProvider;
-import com.qq.reader.provider.bean.BaseDataBean;
+import com.qq.reader.provider.bean.BaseBean;
 import com.qq.reader.provider.inter.IFiller;
 import com.qq.reader.provider.inter.INetQuestParams;
 import com.qq.reader.provider.loader.SimpleProviderLoader;
@@ -10,7 +10,7 @@ import com.qq.reader.provider.parser.SimpleGSONParser;
 /**
  * DataProvider 构造器
  */
-public abstract class SimpleDataProviderCreator<Q extends BaseDataBean, P extends BaseDataBean> implements INetQuestParams, IFiller<P> {
+public abstract class SimpleDataProviderCreator<Q extends BaseBean, P extends BaseBean> implements INetQuestParams, IFiller<P> {
 
 
     private final DataProvider<Q, P> provider;

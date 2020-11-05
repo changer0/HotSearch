@@ -2,10 +2,10 @@ package com.example.providermoduledemo.preload
 
 import com.chad.library.adapter.base.BaseViewHolder
 import com.example.providermoduledemo.viewmodel.ViewBindItemBuilder
-import com.example.providermoduledemo.viewmodel.ViewModelRequestDataBean
-import com.example.providermoduledemo.viewmodel.ViewModelResponseDataBean
+import com.example.providermoduledemo.viewmodel.ViewModelRequestBean
+import com.example.providermoduledemo.viewmodel.ViewModelResponseBean
 import com.qq.reader.provider.BaseViewBindItem
-import com.qq.reader.provider.bean.BaseDataBean
+import com.qq.reader.provider.bean.BaseBean
 import com.qq.reader.provider.cache.CacheMode
 import com.qq.reader.provider.simple.SimpleDataProviderCreator
 
@@ -14,8 +14,8 @@ import com.qq.reader.provider.simple.SimpleDataProviderCreator
  * for DataProvider 实现类
  */
 
-class PreLoadProviderCreator private constructor(requestBean: ViewModelRequestDataBean)
-    : SimpleDataProviderCreator<ViewModelRequestDataBean, ViewModelResponseDataBean>(requestBean, ViewModelResponseDataBean::class.java) {
+class PreLoadProviderCreator private constructor(requestBean: ViewModelRequestBean)
+    : SimpleDataProviderCreator<ViewModelRequestBean, ViewModelResponseBean>(requestBean, ViewModelResponseBean::class.java) {
 
     companion object {
         private var instance: PreLoadProviderCreator? = null
@@ -24,7 +24,7 @@ class PreLoadProviderCreator private constructor(requestBean: ViewModelRequestDa
             if (instance == null) {
                 synchronized(PreLoadProviderCreator::class.java) {
                     if (instance == null) {
-                        instance = PreLoadProviderCreator(ViewModelRequestDataBean())
+                        instance = PreLoadProviderCreator(ViewModelRequestBean())
                         instance!!.loader.cacheMode = CacheMode.CACHE_MODE_NOT_USE_CACHE
                     }
                 }
@@ -42,12 +42,12 @@ class PreLoadProviderCreator private constructor(requestBean: ViewModelRequestDa
         return "https://gitee.com/luluzhang/publish-json/raw/master/view_model.json"
     }
 
-    override fun fillData(data: ViewModelResponseDataBean): List<BaseViewBindItem<out BaseDataBean, BaseViewHolder>> {
+    override fun fillData(data: ViewModelResponseBean): List<BaseViewBindItem<out BaseBean, BaseViewHolder>> {
         //填充数据
         return ViewBindItemBuilder.buildViewBindItem(data)
     }
 
-    override fun getExpiredTime(mData: ViewModelResponseDataBean?): Long {
+    override fun getExpiredTime(mData: ViewModelResponseBean?): Long {
         if (mData == null) {
             return 0
         }
