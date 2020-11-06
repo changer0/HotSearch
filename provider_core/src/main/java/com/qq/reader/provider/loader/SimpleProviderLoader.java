@@ -38,7 +38,7 @@ public class SimpleProviderLoader<Q, P> implements ILoader<Q, P> {
      */
     private Observable<DataProvider<Q, P>> getObservable() {
         return Observable.create(emitter -> {
-            SimpleLoadDispatcherTask<Q, P> dispatcher = getDispatcherTask();
+            LoadDispatcherTask<Q, P> dispatcher = getDispatcherTask();
             dispatcher.setEmitter(emitter);
             TaskHandler.getInstance().enqueue(dispatcher);
         });
@@ -47,8 +47,8 @@ public class SimpleProviderLoader<Q, P> implements ILoader<Q, P> {
     /**
      * 为 DataProvider<Q, P> 提供分发任务的 Runnable
      */
-    private synchronized SimpleLoadDispatcherTask<Q, P> getDispatcherTask() {
-        return new SimpleLoadDispatcherTask<Q, P>(provider, cacheMode, OnceRequestParams.buildParams(provider.getNetQuestParams()));
+    private synchronized LoadDispatcherTask<Q, P> getDispatcherTask() {
+        return new LoadDispatcherTask<Q, P>(provider, cacheMode, OnceRequestParams.buildParams(provider.getNetQuestParams()));
     }
 
     //----------------------------------------------------------------------------------------------

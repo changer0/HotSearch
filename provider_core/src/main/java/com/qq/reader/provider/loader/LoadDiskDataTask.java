@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
  * for 从磁盘中获取数据
  */
 @SuppressWarnings("rawtypes")
-public class SimpleLoadDiskDataTask implements Runnable {
+public class LoadDiskDataTask implements Runnable {
     private static final String TAG = "LoadDiskDataTask";
 
     private final DataProvider mDataProvider;
@@ -28,7 +28,7 @@ public class SimpleLoadDiskDataTask implements Runnable {
      * @param isLoadExpired true 为加载过期文件
      * @param onceRequestParams
      */
-    public SimpleLoadDiskDataTask(DataProvider mDataProvider, InputStream inputStream, boolean isLoadExpired, OnceRequestParams onceRequestParams) {
+    public LoadDiskDataTask(DataProvider mDataProvider, InputStream inputStream, boolean isLoadExpired, OnceRequestParams onceRequestParams) {
         this.mDataProvider = mDataProvider;
         this.inputStream = inputStream;
         this.isLoadExpired = isLoadExpired;

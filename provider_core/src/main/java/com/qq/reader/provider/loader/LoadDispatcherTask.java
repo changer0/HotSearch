@@ -16,8 +16,8 @@ import io.reactivex.ObservableEmitter;
  * for 用于分发网络/缓存
  */
 @SuppressWarnings("rawtypes")
-public class SimpleLoadDispatcherTask<Q, P> implements Runnable, SimpleLoadDiskDataTask.LoadDataListener
-        , SimpleLoadDiskDataTask.LoadExpiredDataListener, SimpleLoadNetDataTask.LoadDataListener {
+public class LoadDispatcherTask<Q, P> implements Runnable, LoadDiskDataTask.LoadDataListener
+        , LoadDiskDataTask.LoadExpiredDataListener, LoadNetDataTask.LoadDataListener {
     private static final String TAG = "ReaderDataTask";
 
     /**
@@ -73,7 +73,7 @@ public class SimpleLoadDispatcherTask<Q, P> implements Runnable, SimpleLoadDiskD
         return cacheMode;
     }
 
-    public SimpleLoadDispatcherTask(DataProvider<Q, P> provider, int cacheMode, OnceRequestParams onceRequestParams) {
+    public LoadDispatcherTask(DataProvider<Q, P> provider, int cacheMode, OnceRequestParams onceRequestParams) {
         this.provider = provider;
         this.cacheMode = cacheMode;
         this.onceRequestParams = onceRequestParams;
@@ -101,7 +101,7 @@ public class SimpleLoadDispatcherTask<Q, P> implements Runnable, SimpleLoadDiskD
         if (provider == null) {
             return;
         }
-        SimpleLoadNetDataTask netTask = new SimpleLoadNetDataTask(provider, onceRequestParams);
+        LoadNetDataTask netTask = new LoadNetDataTask(provider, onceRequestParams);
         netTask.setLoadDataListener(this);
         TaskHandler.getInstance().enqueue(netTask);
     }
@@ -114,7 +114,7 @@ public class SimpleLoadDispatcherTask<Q, P> implements Runnable, SimpleLoadDiskD
         if (cacheInputStream == null || provider == null) {
             return;
         }
-        SimpleLoadDiskDataTask diskTask = new SimpleLoadDiskDataTask(provider,
+        LoadDiskDataTask diskTask = new LoadDiskDataTask(provider,
                 cacheInputStream, isLoadExpired, onceRequestParams);
         diskTask.setLoadDataListener(this);
         diskTask.setLoadExpiredDataListener(this);

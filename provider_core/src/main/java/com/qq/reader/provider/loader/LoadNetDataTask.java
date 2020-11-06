@@ -19,13 +19,13 @@ import java.nio.charset.StandardCharsets;
  * for 网络中拉取数据
  */
 @SuppressWarnings("rawtypes")
-public class SimpleLoadNetDataTask implements Runnable {
+public class LoadNetDataTask implements Runnable {
     private static final String TAG = "LoadNetDataTask";
     private final DataProvider provider;
     private LoadDataListener loadDataListener;
     private final OnceRequestParams onceRequestParams;
 
-    public SimpleLoadNetDataTask(DataProvider provider, OnceRequestParams onceRequestParams) {
+    public LoadNetDataTask(DataProvider provider, OnceRequestParams onceRequestParams) {
         this.provider = provider;
         this.onceRequestParams = onceRequestParams;
     }
