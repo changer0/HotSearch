@@ -15,7 +15,7 @@
 
 ## 时序图
 
-![](![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201106171753.png))
+![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201106171753.png)
 
 ## 核心类
 
