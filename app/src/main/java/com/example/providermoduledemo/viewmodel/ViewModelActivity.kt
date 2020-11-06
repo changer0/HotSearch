@@ -16,7 +16,7 @@ import com.qq.reader.provider.loader.SimpleProviderLoader
 
 class ViewModelActivity : ReaderBaseListProviderActivity() {
     lateinit var provider: DataProvider<SampleRequestBean, SampleReponseBean>
-    lateinit var loader: SimpleProviderLoader
+    lateinit var loader: SimpleProviderLoader<SampleRequestBean, SampleReponseBean>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

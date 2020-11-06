@@ -18,11 +18,11 @@ import java.io.OutputStream;
 public class CacheController {
     private static final String DISK_CACHE_DIR = DataProviderConfig.getApplication().getExternalCacheDir() + "/" + "data_provider";
     private static final int MAX_CACHE_SIZE = 10 * 1024 * 1024;//10M
-    public static final int DEFAULT_BUFFER_SIZE = 32 * 1024; // 32 Kb
+    private static final int DEFAULT_BUFFER_SIZE = 32 * 1024; // 32 Kb
 
     private DiskLruCache cache;
 
-    public static volatile CacheController instance = null;
+    private static volatile CacheController instance = null;
 
     public static CacheController getInstance() {
         if (instance == null) {

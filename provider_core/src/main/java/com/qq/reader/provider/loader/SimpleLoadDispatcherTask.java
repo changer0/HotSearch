@@ -16,19 +16,19 @@ import io.reactivex.ObservableEmitter;
  * for 用于分发网络/缓存
  */
 @SuppressWarnings("rawtypes")
-public class SimpleLoadDispatcherTask implements Runnable, SimpleLoadDiskDataTask.LoadDataListener
+public class SimpleLoadDispatcherTask<Q, P> implements Runnable, SimpleLoadDiskDataTask.LoadDataListener
         , SimpleLoadDiskDataTask.LoadExpiredDataListener, SimpleLoadNetDataTask.LoadDataListener {
     private static final String TAG = "ReaderDataTask";
 
     /**
      * 数据加载类
      */
-    private final DataProvider provider;
+    private final DataProvider<Q, P> provider;
 
     /**
      * 结果发射器
      */
-    private ObservableEmitter<DataProvider> mEmitter;
+    private ObservableEmitter<DataProvider<Q, P>> mEmitter;
 
     /**
      * 缓存流
@@ -65,7 +65,7 @@ public class SimpleLoadDispatcherTask implements Runnable, SimpleLoadDiskDataTas
         return true;
     }
 
-    public void setEmitter(ObservableEmitter<DataProvider> mEmitter) {
+    public void setEmitter(ObservableEmitter<DataProvider<Q, P>> mEmitter) {
         this.mEmitter = mEmitter;
     }
 
@@ -73,7 +73,7 @@ public class SimpleLoadDispatcherTask implements Runnable, SimpleLoadDiskDataTas
         return cacheMode;
     }
 
-    public SimpleLoadDispatcherTask(DataProvider provider, int cacheMode, OnceRequestParams onceRequestParams) {
+    public SimpleLoadDispatcherTask(DataProvider<Q, P> provider, int cacheMode, OnceRequestParams onceRequestParams) {
         this.provider = provider;
         this.cacheMode = cacheMode;
         this.onceRequestParams = onceRequestParams;

@@ -3,7 +3,6 @@ package com.qq.reader.provider;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
-import com.qq.reader.provider.bean.BaseBean;
 import com.qq.reader.provider.inter.IFiller;
 import com.qq.reader.provider.loader.ILoader;
 import com.qq.reader.provider.parser.IParser;
@@ -18,24 +17,23 @@ import java.util.List;
  * 能力:
  * 1. 拼接协议url <br/>
  * 2. 解析数据 <br/>
- * 需要传入请求Bean {@link BaseBean} 和 响应 Bean {@link BaseBean}<br/>
- *  [注: ] 不要随意改变两个
+ * 3. 填充 ViewBindItem
+ * 需要传入请求Bean 和 响应 Bean <br/>
  */
 @SuppressWarnings("rawtypes")
-public class DataProvider< Q extends BaseBean, P extends BaseBean> {
+public class DataProvider<Q, P> {
 
     private static final String TAG = "ReaderBaseDataProvider";
-
 
     /**
      * 请求 Bean
      */
-    protected Q requestBean;
+    private Q requestBean;
 
     /**
      * GSON 解析生成的Bean
      */
-    protected P mData;
+    private P mData;
 
     /**
      * 响应 bean 类型
@@ -45,13 +43,13 @@ public class DataProvider< Q extends BaseBean, P extends BaseBean> {
     /**
      * 源 JSON 字符串
      */
-    protected String mJSONStr;
+    private String mJSONStr;
 
     /**
      *  ViewBindItems 列表
      */
     @Nullable
-    protected List<BaseViewBindItem> mViewBindItems;
+    private List<BaseViewBindItem> mViewBindItems;
 
     /**
      * 是否为缓存数据
@@ -71,7 +69,7 @@ public class DataProvider< Q extends BaseBean, P extends BaseBean> {
     /**
      * 加载器
      */
-    private ILoader loader;
+    private ILoader<Q, P> loader;
 
     /**
      * 填充器
@@ -205,7 +203,7 @@ public class DataProvider< Q extends BaseBean, P extends BaseBean> {
         this.loader = loader;
     }
 
-    public ILoader getLoader() {
+    public ILoader<Q, P> getLoader() {
         if (loader == null) {
             throw new RuntimeException("Provider 组件需要提供 ILoader 加载器，请参考文档使用！");
         }
@@ -231,7 +229,7 @@ public class DataProvider< Q extends BaseBean, P extends BaseBean> {
      * @param <Q>
      * @param <P>
      */
-    public static class Builder< Q extends BaseBean, P extends BaseBean> {
+    public static class Builder< Q, P> {
 
         private IParser<P> parser;
         private ILoader loader;

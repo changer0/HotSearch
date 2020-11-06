@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
-import com.qq.reader.provider.bean.BaseBean;
 
 import java.util.List;
 
@@ -18,7 +17,6 @@ import java.util.List;
  * @author zhanglulu on 2019/2/28.
  * for RecyclerView Adapter
  */
-@SuppressWarnings("rawtypes")
 public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> {
 
     private final Context mContext;
@@ -38,6 +36,7 @@ public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem
         return createBaseViewHolder(itemView);
     }
 
+    @SuppressWarnings("all")
     @Override
     protected void convert(BaseViewHolder holder,
                            BaseViewBindItem item) {
@@ -60,7 +59,7 @@ public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem
     @Override
     protected int getDefItemViewType(int position) {
         int type = 0;
-        BaseViewBindItem<? extends BaseBean, BaseViewHolder> item = getItem(position);
+        BaseViewBindItem item = getItem(position);
         if (item != null) {
             type = item.getResLayoutId();
         }

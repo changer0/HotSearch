@@ -19,10 +19,10 @@ import io.reactivex.disposables.Disposable;
 /**
  * 对 Loader 的简单实现，支持本地缓存 使用方可根据自己的需求进行定制
  */
-public class SimpleProviderLoader implements ILoader {
+public class SimpleProviderLoader<Q, P> implements ILoader<Q, P> {
     private static final String TAG = "SimpleProviderLoader";
 
-    private DataProvider provider;
+    private DataProvider<Q, P> provider;
     private int cacheMode = CacheMode.CACHE_MODE_USE_CACHE_PRIORITY;
 
     public int getCacheMode() {
@@ -36,19 +36,19 @@ public class SimpleProviderLoader implements ILoader {
     /**
      * 获取 RxJava 请求
      */
-    private Observable<DataProvider> getObservable() {
+    private Observable<DataProvider<Q, P>> getObservable() {
         return Observable.create(emitter -> {
-            SimpleLoadDispatcherTask dispatcher = getDispatcherTask();
+            SimpleLoadDispatcherTask<Q, P> dispatcher = getDispatcherTask();
             dispatcher.setEmitter(emitter);
             TaskHandler.getInstance().enqueue(dispatcher);
         });
     }
 
     /**
-     * 为 DataProvider 提供分发任务的 Runnable
+     * 为 DataProvider<Q, P> 提供分发任务的 Runnable
      */
-    private synchronized SimpleLoadDispatcherTask getDispatcherTask() {
-        return new SimpleLoadDispatcherTask(provider, cacheMode, OnceRequestParams.buildParams(provider.getNetQuestParams()));
+    private synchronized SimpleLoadDispatcherTask<Q, P> getDispatcherTask() {
+        return new SimpleLoadDispatcherTask<Q, P>(provider, cacheMode, OnceRequestParams.buildParams(provider.getNetQuestParams()));
     }
 
     //----------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ public class SimpleProviderLoader implements ILoader {
     /**
      * 通知失败回调
      */
-    public void notifyLoadPageDataFailed(DataProvider p, Throwable e) {
+    public void notifyLoadPageDataFailed(DataProvider<Q, P> p, Throwable e) {
         ObserverEntity observerEntity = new ObserverEntity();
         observerEntity.provider = p;
         observerEntity.throwable = e;
@@ -68,7 +68,7 @@ public class SimpleProviderLoader implements ILoader {
     /**
      * 通知成功回调
      */
-    public void notifyLoadPageDataSuccess(DataProvider p) {
+    public void notifyLoadPageDataSuccess(DataProvider<Q, P> p) {
         ObserverEntity observerEntity = new ObserverEntity();
         observerEntity.provider = p;
         observerEntity.state = ProviderConstants.PROVIDER_DATA_SUCCESS;
@@ -93,20 +93,20 @@ public class SimpleProviderLoader implements ILoader {
     //----------------------------------------------------------------------------------------------
     // ILoader 的接口实现
     @Override
-    public void loadData(DataProvider provider) {
+    public void loadData(DataProvider<Q, P> provider) {
         this.provider = provider;
         if (provider == null) {
             throw new NullPointerException("provider 不可为空");
         }
-        Observable<DataProvider> observable = getObservable();
-        observable.subscribe(new Observer<DataProvider>() {
+        Observable<DataProvider<Q, P>> observable = getObservable();
+        observable.subscribe(new Observer<DataProvider<Q, P>>() {
                     @Override
                     public void onSubscribe(@NotNull Disposable d) {
                         Logger.d(TAG, "onSubscribe: called: " + Thread.currentThread());
                     }
 
                     @Override
-                    public void onNext(@NotNull DataProvider dataProvider) {
+                    public void onNext(@NotNull DataProvider<Q, P> dataProvider) {
                         Logger.d(TAG, "onNext: called: " + Thread.currentThread());
                         notifyLoadPageDataSuccess(dataProvider);
                     }

@@ -2,14 +2,10 @@ package com.qq.reader.provider.viewmodel;
 
 import android.app.Activity;
 import android.view.View;
-
 import androidx.annotation.NonNull;
-
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
-import com.qq.reader.provider.bean.BaseBean;
 import com.qq.reader.provider.log.Logger;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @SuppressWarnings("rawtypes")
 public abstract class BaseViewBindModelItem
-        <Bean extends BaseBean>
+        <Bean>
         extends BaseViewBindItem<Bean, BaseViewHolder> {
 
     private static final String TAG = "BaseViewBindModelItem";
