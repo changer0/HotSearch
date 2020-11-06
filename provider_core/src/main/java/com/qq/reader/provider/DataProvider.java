@@ -258,8 +258,8 @@ public class DataProvider< Q extends BaseBean, P extends BaseBean> {
             return this;
         }
 
-        public DataProvider build(Q requestBean, Class<P> responseClazz) {
-            DataProvider dataProvider = new DataProvider(requestBean, responseClazz);
+        public DataProvider<Q, P> build(Q requestBean, Class<P> responseClazz) {
+            DataProvider<Q, P> dataProvider = new DataProvider<>(requestBean, responseClazz);
             dataProvider.setLoader(loader);
             dataProvider.setParser(parser);
             dataProvider.setFiller(filler);
