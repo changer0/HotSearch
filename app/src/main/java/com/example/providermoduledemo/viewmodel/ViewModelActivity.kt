@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.providermoduledemo.R
+import com.example.providermoduledemo.SampleReponseBean
 import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
 import com.qq.reader.provider.DataProvider
 import com.qq.reader.provider.cache.CacheMode
@@ -13,7 +14,7 @@ import com.qq.reader.provider.loader.OnceRequestParams
 import com.qq.reader.provider.loader.SimpleProviderLoader
 
 class ViewModelActivity : ReaderBaseListProviderActivity() {
-    lateinit var provider: DataProvider<ViewModelRequestBean, ViewModelResponseBean>
+    lateinit var provider: DataProvider<ViewModelRequestBean, SampleReponseBean>
     lateinit var loader: SimpleProviderLoader
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

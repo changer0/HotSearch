@@ -1,8 +1,8 @@
-package com.example.providermoduledemo.viewmodel
+package com.example.providermoduledemo
 
 import com.qq.reader.provider.bean.BaseBean
 
-class ViewModelResponseBean : BaseBean() {
+class SampleReponseBean : BaseBean() {
     var time: Long = 0
     var list: List<Item>? = null
     class Item : BaseBean(){
