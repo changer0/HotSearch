@@ -1,5 +1,7 @@
 package com.qq.reader.provider.loader;
 
+import android.os.Looper;
+
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.cache.CacheController;
 import com.qq.reader.provider.cache.CacheMode;
@@ -103,7 +105,11 @@ public class LoadDispatcherTask<Q, P> implements Runnable, LoadDiskDataTask.Load
         }
         LoadNetDataTask netTask = new LoadNetDataTask(provider, onceRequestParams);
         netTask.setLoadDataListener(this);
-        TaskHandler.getInstance().enqueue(netTask);
+        if (isUIThread()) {
+            TaskHandler.getInstance().enqueue(netTask);
+        } else {
+            netTask.run();
+        }
     }
 
     /**
@@ -118,9 +124,20 @@ public class LoadDispatcherTask<Q, P> implements Runnable, LoadDiskDataTask.Load
                 cacheInputStream, isLoadExpired, onceRequestParams);
         diskTask.setLoadDataListener(this);
         diskTask.setLoadExpiredDataListener(this);
-        TaskHandler.getInstance().enqueue(diskTask);
+        if (isUIThread()) {
+            TaskHandler.getInstance().enqueue(diskTask);
+        } else {
+            diskTask.run();
+        }
     }
 
+    /**
+     * 是否 UI 线程
+     * @return
+     */
+    private boolean isUIThread() {
+        return Thread.currentThread() == Looper.getMainLooper().getThread();
+    }
 
     /**
      * 成功通知
