@@ -29,9 +29,9 @@ LoadDispatcherTask -> LoadNetDataTask: tryLoadNetData()
 
 LoadNetDataTask -> LoadNetDataTask: DataProviderConfig.getNetQuestAdapter().syncRequest()\n请求网络数据
 
-LoadNetDataTask -> DataProvider:  mDataProvider.fillData()
+LoadNetDataTask -> DataProvider:  mDataProvider.parseData()
 
-LoadNetDataTask -> DataProvider:  mDataProvider.parseData(str)
+LoadNetDataTask -> DataProvider:  mDataProvider.fillData(str)
 
 LoadNetDataTask -> LoadDispatcherTask: onLoadNetDataSuccess()
 
@@ -43,9 +43,9 @@ LoadNetDataTask -> LoadNetDataTask: DataProviderLoader.getInstance().save()\n存
 LoadDispatcherTask -> LoadDiskDataTask: tryLoadDiskData()
 
 
-LoadDiskDataTask -> DataProvider:  mDataProvider.fillData()
+LoadDiskDataTask -> DataProvider:  mDataProvider.parseData()
 
-LoadDiskDataTask -> DataProvider:  mDataProvider.parseData(str)
+LoadDiskDataTask -> DataProvider:  mDataProvider.fillData(str)
 
 LoadDiskDataTask -> LoadDispatcherTask: onLoadDiskExpiredDataSuccess()
 
