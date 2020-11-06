@@ -5,7 +5,7 @@ package com.qq.reader.provider.inter;
  */
 public interface INetQuestParams {
 
-    /*** 获取请求request的方式，get or post*/
+    /*** 获取请求协议地址*/
     String getUrl();
 
     /*** 获取请求request的方式，get or post*/

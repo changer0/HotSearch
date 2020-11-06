@@ -7,20 +7,31 @@
 
 'SampleActivity -> DataProviderLoader: load(BaseDataProvider)
 
+SampleActivity -> SimpleDataProviderCreator: 创建
 
-SampleActivity -> SampleDataProvider: DataProviderLoader.getInstance().loadData()
+SimpleDataProviderCreator -> DataProvider: 构建 DataProvider
 
-SampleDataProvider -> LoadDispatcherTask: getDispatcherTask()
+DataProvider -> SimpleDataProviderCreator: 构建 DataProvider
 
-LoadDispatcherTask -> LoadDispatcherTask: DataProviderLoader.getInstance().get(mDataProvider.getCacheKey())\n获取缓存，根据缓存模式决定使用 网络/缓存 数据
+SimpleDataProviderCreator -> SampleActivity: provider
+
+SampleActivity -> DataProvider:provider.loadData()
+
+DataProvider -> SimpleProviderLoader : loadData()
+
+
+
+SimpleProviderLoader -> LoadDispatcherTask: getDispatcherTask()
+
+LoadDispatcherTask -> LoadDispatcherTask: 获取缓存，根据缓存模式决定\n 使用 网络/缓存 数据
 
 LoadDispatcherTask -> LoadNetDataTask: tryLoadNetData()
 
 LoadNetDataTask -> LoadNetDataTask: DataProviderConfig.getNetQuestAdapter().syncRequest()\n请求网络数据
 
-LoadNetDataTask -> SampleDataProvider:  mDataProvider.fillData()
+LoadNetDataTask -> DataProvider:  mDataProvider.fillData()
 
-LoadNetDataTask -> SampleDataProvider:  mDataProvider.parseData(str)
+LoadNetDataTask -> DataProvider:  mDataProvider.parseData(str)
 
 LoadNetDataTask -> LoadDispatcherTask: onLoadNetDataSuccess()
 
@@ -32,17 +43,21 @@ LoadNetDataTask -> LoadNetDataTask: DataProviderLoader.getInstance().save()\n存
 LoadDispatcherTask -> LoadDiskDataTask: tryLoadDiskData()
 
 
-LoadDiskDataTask -> SampleDataProvider:  mDataProvider.fillData()
+LoadDiskDataTask -> DataProvider:  mDataProvider.fillData()
 
-LoadDiskDataTask -> SampleDataProvider:  mDataProvider.parseData(str)
+LoadDiskDataTask -> DataProvider:  mDataProvider.parseData(str)
 
 LoadDiskDataTask -> LoadDispatcherTask: onLoadDiskExpiredDataSuccess()
 
 LoadDiskDataTask -> LoadDispatcherTask: onLoadDiskExpiredDataFailed()
 
-LoadDispatcherTask -> SampleActivity: notifyLoadPageDataSuccess()
+LoadDispatcherTask -> SimpleProviderLoader: onLoadDiskExpiredDataSuccess()
 
-LoadDispatcherTask -> SampleActivity: notifyLoadPageDataFailed()
+LoadDispatcherTask -> SimpleProviderLoader: onLoadDiskExpiredDataFailed()
+
+SimpleProviderLoader -> SampleActivity: notifyLoadPageDataSuccess()
+
+SimpleProviderLoader -> SampleActivity: notifyLoadPageDataFailed()
 
 SampleActivity -> SampleActivity: 通知 Adapter 刷新
 

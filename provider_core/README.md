@@ -11,31 +11,31 @@
 
 ## 类图
 
-![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201021092504.png)
+![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201106161018.png)
 
 ## 时序图
 
-![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201021100524.png)
+![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201106161056.png)
 
-## 核心类介绍
+## 核心类
 
 **DataProviderConfig**
 
 > DataProvider 配置类，需要在 Application 中进行配置！
 
 - 配置 Provider 所需的 Application
-- 配置 Provider 所需的网络请求接口（Provider 本身并不支持网络请求，需要使用方自行提供接口）
+- 配置 Provider 所需的网络请求接口（Provider 本身并不支持网络请求，需要用户自行提供接口）
 
-**BaseDataProvider**
+**DataProvider**
 
 > 数据加载中间层
 
 能力:
 
-- 构建请求 URL、请求体以及请求类型等基本信息
-- 通过 GSON 进行数据解析
-- 填充列表数据
-- 返回协议中的时间戳，用于检查数据的有效性（即缓存的实现）
+- 通过 netQuestParams 构建请求 URL、请求体以及请求类型等基本信息
+- 通过 loader 加载数据
+- 通过 parser 解析数据
+- 通过 filler 构建 ViewBindItem
 
  **BaseViewBindItem**
 
@@ -46,18 +46,33 @@
 - View 和 Data 绑定
 - UI 相关逻辑处理，点击事件等
 
-**DataProviderLoader**
+**SimpleDataProviderCreator**
 
-> 数据加载类
+框架提供的 DatProvider 构建器，全部使用默认构建参数，例如：SimpleProviderLoader 和 SimpleGSONParser
 
-- 加载 DataProvider
-- 支持多 DataProvider 并发请求
+## 开放接口说明
+
+**INetQuestParams**
+
+网络请求请求参数接口，用于获取 URL、请求体以及请求类型等基本信息
+
+**ILoader**
+
+用于加载 Provider 的开放接口，用户可通过实现该接口自由实现请求逻辑。目前框架内提供一个支持缓存的 SimpleProviderLoader
+
+**IParser**
+
+数据解析器，用于将 json 数据转为 bean 的工具。目前框架内提供一个 Gson 解析器
+
+**IFiller**
+
+填充器，用于填充 ViewBindItem，需要用户在业务层自行实现
+
 
 ## 使用方式
 
-### 初始化配置
-
-进行初始化配置，DataProvider 本身并不提供网络请求能力，需要使用方自行提供
+### 1. 初始化配置
+进行初始化配置，DataProvider 本身并不提供网络请求能力，需要用户自行提供
 
 ``` kotlin
 class MyApp: Application() {
@@ -75,32 +90,33 @@ class MyApp: Application() {
     }
 }
 ```
-### 实现 BaseDataProvider
+### 2. 实现 SimpleDataProviderCreator
 
-- 添加一个继承自 BaseDataProvider 的类，指定请求 Bean 和响应 Bean 泛型
-- 重写 composeUrl() 用于拼接协议地址
-- 重写 fillData() 用于构建 ViewBindItem，添加到 mViewBindItems 中
+- 添加一个继承自 SimpleDataProviderCreator 的类，指定请求 Bean 和响应 Bean 泛型
+- 重写 getUrl() 用于拼接协议地址（或者其他请求体）
+- 重写 fillData() 用于构建 ViewBindItem，返回构建集合
 
-NormalListDataProvider.kt
+NormalProviderCreator.kt
 
 ``` kotlin
-class NormalListDataProvider(requestBean: NormalRequestDataBean)
-    : BaseDataProvider<NormalRequestDataBean, NormalResponseDataBean>(requestBean, NormalResponseDataBean::class.java) {
-    override fun fillData() {
-        //填充数据
-        mViewBindItems = ViewBindItemBuilder.buildViewBindItem(mData)
+class NormalProviderCreator(requestBean: NormalRequestBean)
+    : SimpleDataProviderCreator<NormalRequestBean, NormalResponseBean>(requestBean, NormalResponseBean::class.java) {
+
+    override fun fillData(data: NormalResponseBean): List<BaseViewBindItem<out BaseBean, BaseViewHolder>> {
+        //给 ViewBindItem 填充数据
+        return ViewBindItemBuilder.buildViewBindItem(data);
     }
 
-    override fun composeUrl(p0: NormalRequestDataBean?): String {
-        //拼接 URL
-        return "https://gitee.com/luluzhang/publish-json/raw/master/list_json.json"
-    }
-
-    override fun getExpiredTime(): Long {
+    override fun getExpiredTime(mData: NormalResponseBean?): Long {
         if (mData == null) {
             return 0
         }
         return mData.time
+    }
+
+    override fun getUrl(): String {
+        //可以根据 provider.requestBean 获取请求参数，拼接到 url
+        return "https://gitee.com/luluzhang/publish-json/raw/master/list_json.json"
     }
 }
 ```
@@ -163,10 +179,11 @@ class ViewBindItemStyle0 : BaseViewBindItem<ListResponseDataBean.ListData, BaseV
 
 ### 加载 DataProvider
 
-- 使用 DataProviderLoader 加载 Provider
+- 通过 Provider 加载数据
 - 实现自己想要的 RecyclerView.Adapter，并调用 ViewBindItem.attachView 方法进行 View 绑定
+- 
 
-ListActivity.kt
+NormalListActivity.kt
 
 ``` kotlin
 class NormalListActivity : ReaderBaseListProviderActivity() {
@@ -175,10 +192,12 @@ class NormalListActivity : ReaderBaseListProviderActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        provider = NormalListDataProvider(NormalRequestDataBean())
+        val providerCreator = NormalProviderCreator(NormalRequestBean())
+        provider = providerCreator.provider
+        loader = providerCreator.loader
         provider.liveData.observe(this, Observer {
             if (it.isSuccess) {
-                val dataItems = it.provider.dataItems
+                val dataItems = it.provider.viewBindItems
                 if (mRecyclerViewState == STATE_ENTER_INIT) {
                     mAdapter.setNewData(dataItems)
                     hideLoadingView()
@@ -186,23 +205,25 @@ class NormalListActivity : ReaderBaseListProviderActivity() {
                     mAdapter.addData(dataItems)
                 }
                 mAdapter.loadMoreComplete()
+                showCacheMode(provider.isCache)
             } else {
                 Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show()
             }
         })
+        provider.loadData()
         DataProviderLoader.getInstance().loadData(provider)
     }
 
     override fun onLoadMoreRequested() {
         super.onLoadMoreRequested()
-        DataProviderLoader.getInstance().loadData(provider)
+       provider.loadData()
     }
 }
 ```
 
 ## 缓存模式说明
 
-CacheMode 共分为四种类型：
+框架提供的 loader 提供四种缓存类型：
 
 |缓存类型|说明|
 |--|--|
@@ -211,13 +232,6 @@ CacheMode 共分为四种类型：
 |CACHE_MODE_USE_CACHE_PRIORITY|优先使用缓存: 本地有缓存且未过期则用缓存 -> 过期则使用网络数据 -> 网络失败使用过期数据|
 |CACHE_MODE_USE_CACHE_NOT_EXPIRED|使用缓存，但不使用过期数据|
 
-## 混淆配置
-
-``` java
--keep class * extends com.qq.reader.provider.bean.BaseBean {*;}
-```
-
-
 ## 其他注意事项
 
-- 编写数据 Bean 类的内部类务必也要继承 BaseDataBean
+- 编写数据 Bean 时需要将其避免混淆！
