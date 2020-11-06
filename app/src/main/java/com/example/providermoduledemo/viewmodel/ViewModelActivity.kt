@@ -44,7 +44,7 @@ class ViewModelActivity : ReaderBaseListProviderActivity() {
 
     override fun onLoadMoreRequested() {
         super.onLoadMoreRequested()
-        provider.loadData()
+        loadNextData()
     }
 
     private fun showCacheMode(cache: Boolean) {
@@ -87,4 +87,15 @@ class ViewModelActivity : ReaderBaseListProviderActivity() {
         }
         return true
     }
+
+    public fun loadNextData() {
+        var index = provider.requestBean.index
+        index++
+        if (index > 5) {
+            index = 1
+        }
+        provider.requestBean.index = index
+        provider.loadData()
+    }
+
 }
