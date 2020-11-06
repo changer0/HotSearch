@@ -2,6 +2,7 @@ package com.example.providermoduledemo.viewmodel
 
 import com.chad.library.adapter.base.BaseViewHolder
 import com.example.providermoduledemo.SampleReponseBean
+import com.example.providermoduledemo.SampleRequestBean
 import com.qq.reader.provider.BaseViewBindItem
 import com.qq.reader.provider.bean.BaseBean
 import com.qq.reader.provider.simple.SimpleDataProviderCreator
@@ -11,8 +12,8 @@ import com.qq.reader.provider.simple.SimpleDataProviderCreator
  * for DataProvider 实现类
  */
 
-class ViewModelProviderCreator(requestBean: ViewModelRequestBean)
-    : SimpleDataProviderCreator<ViewModelRequestBean, SampleReponseBean>(requestBean, SampleReponseBean::class.java) {
+class ViewModelProviderCreator(requestBean: SampleRequestBean)
+    : SimpleDataProviderCreator<SampleRequestBean, SampleReponseBean>(requestBean, SampleReponseBean::class.java) {
     override fun getUrl(): String {
         //拼接 URL
         return "https://gitee.com/luluzhang/publish-json/raw/master/view_model.json"
