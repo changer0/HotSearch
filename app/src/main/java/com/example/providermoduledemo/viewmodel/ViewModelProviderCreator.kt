@@ -13,9 +13,9 @@ import com.qq.reader.provider.simple.SimpleDataProviderCreator
  */
 
 class ViewModelProviderCreator(requestBean: SampleRequestBean)
-    : SimpleDataProviderCreator<SampleRequestBean, SampleReponseBean>(requestBean, SampleReponseBean::class.java) {
+    : SimpleDataProviderCreator<SampleReponseBean>(SampleReponseBean::class.java) {
     override fun getUrl(): String {
-        return "https://gitee.com/luluzhang/publish-json/raw/master/bookdetail-bid- (${provider.requestBean.index}).json"
+        return "https://gitee.com/luluzhang/publish-json/raw/master/bookdetail-bid- (0).json"
     }
 
     override fun fillData(data: SampleReponseBean): List<BaseViewBindItem<out BaseBean, BaseViewHolder>> {

@@ -15,8 +15,8 @@ import com.qq.reader.provider.loader.OnceRequestParams
 import com.qq.reader.provider.loader.SimpleProviderLoader
 
 class ViewModelActivity : ReaderBaseListProviderActivity() {
-    lateinit var provider: DataProvider<SampleRequestBean, SampleReponseBean>
-    lateinit var loader: SimpleProviderLoader<SampleRequestBean, SampleReponseBean>
+    lateinit var provider: DataProvider<SampleReponseBean>
+    lateinit var loader: SimpleProviderLoader<SampleReponseBean>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -89,13 +89,13 @@ class ViewModelActivity : ReaderBaseListProviderActivity() {
     }
 
     public fun loadNextData() {
-        var index = provider.requestBean.index
-        index++
-        if (index > 5) {
-            index = 1
-        }
-        provider.requestBean.index = index
-        provider.loadData()
+//        var index = provider.requestBean.index
+//        index++
+//        if (index > 5) {
+//            index = 1
+//        }
+//        provider.requestBean.index = index
+//        provider.loadData()
     }
 
 }

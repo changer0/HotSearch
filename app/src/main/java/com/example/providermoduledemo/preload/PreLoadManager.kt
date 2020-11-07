@@ -11,19 +11,19 @@ object PreLoadManager {
     /**
      * 存储用于预加载的 Provider
      */
-    private val map = ConcurrentHashMap<String, DataProvider<out BaseBean, out BaseBean>>()
+    private val map = ConcurrentHashMap<String, DataProvider<out BaseBean>>()
 
     /**
      * 获取预加载 Provider
      */
-    public fun getProvider(key: String): DataProvider<out BaseBean, out BaseBean>? {
+    public fun getProvider(key: String): DataProvider<out BaseBean>? {
         return map[key]
     }
 
     /**
      * 执行预加载 Provider
      */
-    public fun preLoadProvider(key: String, provider: DataProvider<out BaseBean, out BaseBean>) {
+    public fun preLoadProvider(key: String, provider: DataProvider<out BaseBean>) {
         var resultProvider = map[key]
         if (resultProvider == null) {
             resultProvider = provider

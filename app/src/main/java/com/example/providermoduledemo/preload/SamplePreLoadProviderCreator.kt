@@ -15,7 +15,7 @@ import com.qq.reader.provider.simple.SimpleDataProviderCreator
  * for 预加载 ProviderCreator 示例
  */
 public class SamplePreLoadProviderCreator constructor(requestBean: SampleRequestBean)
-    : SimpleDataProviderCreator<SampleRequestBean, SampleReponseBean>(requestBean, SampleReponseBean::class.java) {
+    : SimpleDataProviderCreator<SampleReponseBean>(SampleReponseBean::class.java) {
 
 
     init {
@@ -24,7 +24,7 @@ public class SamplePreLoadProviderCreator constructor(requestBean: SampleRequest
 
     override fun getUrl(): String {
         val url =
-            "https://gitee.com/luluzhang/publish-json/raw/master/bookdetail-${provider.requestBean.bid}- (${provider.requestBean.index}).json"
+            "https://gitee.com/luluzhang/publish-json/raw/master/bookdetail-bid- (1).json"
         Log.d("SamplePreLoad", "url: $url")
         return url
     }

@@ -12,8 +12,8 @@ import com.qq.reader.provider.loader.OnceRequestParams
 import com.qq.reader.provider.loader.SimpleProviderLoader
 
 class NormalListActivity : ReaderBaseListProviderActivity() {
-    lateinit var provider: DataProvider<NormalRequestBean, NormalResponseBean>
-    lateinit var loader: SimpleProviderLoader<NormalRequestBean, NormalResponseBean>
+    lateinit var provider: DataProvider<NormalResponseBean>
+    lateinit var loader: SimpleProviderLoader<NormalResponseBean>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

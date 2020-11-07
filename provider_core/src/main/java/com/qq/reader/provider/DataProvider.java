@@ -21,14 +21,9 @@ import java.util.List;
  * 需要传入请求Bean 和 响应 Bean <br/>
  */
 @SuppressWarnings("rawtypes")
-public class DataProvider<Q, P> {
+public class DataProvider<P> {
 
     private static final String TAG = "ReaderBaseDataProvider";
-
-    /**
-     * 请求 Bean
-     */
-    private Q requestBean;
 
     /**
      * GSON 解析生成的Bean
@@ -69,7 +64,7 @@ public class DataProvider<Q, P> {
     /**
      * 加载器
      */
-    private ILoader<Q, P> loader;
+    private ILoader<P> loader;
 
     /**
      * 填充器
@@ -81,8 +76,7 @@ public class DataProvider<Q, P> {
      */
     private INetQuestParams netQuestParams;
 
-    private DataProvider(Q requestBean, Class<P> responseClass) {
-        this.requestBean = requestBean;
+    private DataProvider(Class<P> responseClass) {
         this.responseClass = responseClass;
     }
 
@@ -95,10 +89,6 @@ public class DataProvider<Q, P> {
 
     public boolean isExpired() {
         return filler.getExpiredTime(mData) <= System.currentTimeMillis();
-    }
-
-    public Q getRequestBean() {
-        return requestBean;
     }
 
     /**
@@ -203,7 +193,7 @@ public class DataProvider<Q, P> {
         this.loader = loader;
     }
 
-    public ILoader<Q, P> getLoader() {
+    public ILoader<P> getLoader() {
         if (loader == null) {
             throw new RuntimeException("Provider 组件需要提供 ILoader 加载器，请参考文档使用！");
         }
@@ -229,35 +219,35 @@ public class DataProvider<Q, P> {
      * @param <Q>
      * @param <P>
      */
-    public static class Builder< Q, P> {
+    public static class Builder<P> {
 
         private IParser<P> parser;
         private ILoader loader;
         private IFiller<P> filler;
         private INetQuestParams netQuestParams;
 
-        public Builder<Q ,P> setParser(IParser<P> parser) {
+        public  Builder<P> setParser(IParser<P> parser) {
             this.parser = parser;
             return this;
         }
 
-        public Builder<Q ,P> setLoader(ILoader loader) {
+        public  Builder<P> setLoader(ILoader loader) {
             this.loader = loader;
             return this;
         }
 
-        public Builder<Q ,P> setFiller(IFiller<P> filler) {
+        public  Builder<P> setFiller(IFiller<P> filler) {
             this.filler = filler;
             return this;
         }
 
-        public Builder<Q ,P> setNetQuestParams(INetQuestParams netQuestParams) {
+        public  Builder<P> setNetQuestParams(INetQuestParams netQuestParams) {
             this.netQuestParams = netQuestParams;
             return this;
         }
 
-        public DataProvider<Q, P> build(Q requestBean, Class<P> responseClazz) {
-            DataProvider<Q, P> dataProvider = new DataProvider<>(requestBean, responseClazz);
+        public DataProvider<P> build(Class<P> responseClazz) {
+            DataProvider<P> dataProvider = new DataProvider<>(responseClazz);
             dataProvider.setLoader(loader);
             dataProvider.setParser(parser);
             dataProvider.setFiller(filler);

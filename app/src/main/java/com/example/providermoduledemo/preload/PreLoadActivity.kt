@@ -14,7 +14,7 @@ class PreLoadActivity : ReaderBaseListProviderActivity() {
         public const val TEST_BID = "bid"
     }
 
-    private lateinit var provider: DataProvider<SampleRequestBean, SampleReponseBean>
+    private lateinit var provider: DataProvider<SampleReponseBean>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -24,7 +24,7 @@ class PreLoadActivity : ReaderBaseListProviderActivity() {
             p.loadData()
         }
 
-        provider = p as DataProvider<SampleRequestBean, SampleReponseBean>
+        provider = p as DataProvider<SampleReponseBean>
         provider.liveData.observe(this, Observer {
             if (it.isSuccess) {
                 val dataItems = it.provider.viewBindItems
@@ -53,13 +53,13 @@ class PreLoadActivity : ReaderBaseListProviderActivity() {
 
 
     public fun loadNextData() {
-        var index = provider.requestBean.index
-        index++
-        if (index > 5) {
-            index = 1
-        }
-        provider.requestBean.index = index
-        provider.loadData()
+//        var index = provider.requestBean.index
+//        index++
+//        if (index > 5) {
+//            index = 1
+//        }
+//        provider.requestBean.index = index
+//        provider.loadData()
     }
 
 

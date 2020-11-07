@@ -10,7 +10,7 @@ import com.qq.reader.provider.simple.SimpleDataProviderCreator
  * for DataProvider 构建类
  */
 class NormalProviderCreator(requestBean: NormalRequestBean)
-    : SimpleDataProviderCreator<NormalRequestBean, NormalResponseBean>(requestBean, NormalResponseBean::class.java) {
+    : SimpleDataProviderCreator<NormalResponseBean>(NormalResponseBean::class.java) {
 
     override fun fillData(data: NormalResponseBean): List<BaseViewBindItem<out BaseBean, BaseViewHolder>> {
         //给 ViewBindItem 填充数据

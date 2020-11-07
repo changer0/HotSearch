@@ -9,26 +9,26 @@ import com.qq.reader.provider.parser.SimpleGSONParser;
 /**
  * DataProvider 构造器
  */
-public abstract class SimpleDataProviderCreator<Q , P> implements INetQuestParams, IFiller<P> {
-    private final DataProvider<Q, P> provider;
-    private final SimpleProviderLoader<Q , P> loader;
+public abstract class SimpleDataProviderCreator<P> implements INetQuestParams, IFiller<P> {
+    private final DataProvider<P> provider;
+    private final SimpleProviderLoader<P> loader;
 
-    public SimpleDataProviderCreator(Q requestBean, Class<P> responseClass) {
+    public SimpleDataProviderCreator(Class<P> responseClass) {
 
-        loader = new SimpleProviderLoader<Q , P>();
-        provider = new DataProvider.Builder<Q, P>()
+        loader = new SimpleProviderLoader();
+        provider = new DataProvider.Builder<P>()
                 .setNetQuestParams(this)
                 .setFiller(this)
                 .setParser(new SimpleGSONParser<P>())
                 .setLoader(loader)
-                .build(requestBean, responseClass);
+                .build(responseClass);
     }
 
-    public DataProvider<Q, P> getProvider() {
+    public DataProvider<P> getProvider() {
         return provider;
     }
 
-    public SimpleProviderLoader<Q , P> getLoader() {
+    public SimpleProviderLoader<P> getLoader() {
         return loader;
     }
 }
