@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.cache.CacheController;
-import com.qq.reader.provider.cache.CacheMode;
 import com.qq.reader.provider.define.ProviderConstants;
 import com.qq.reader.provider.log.Logger;
 import com.qq.reader.provider.task.TaskHandler;
