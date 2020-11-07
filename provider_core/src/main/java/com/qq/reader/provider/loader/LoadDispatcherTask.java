@@ -38,11 +38,6 @@ public class LoadDispatcherTask<P> implements Runnable, LoadDiskDataTask.LoadDat
     private InputStream cacheInputStream;
 
     /**
-     * 缓存模式
-     */
-    private int cacheMode;
-
-    /**
      * 判断当前快照是否有缓存数据
      * @return
      */
@@ -67,12 +62,11 @@ public class LoadDispatcherTask<P> implements Runnable, LoadDiskDataTask.LoadDat
     }
 
     public int getCacheMode() {
-        return cacheMode;
+        return provider.getCacheMode();
     }
 
-    public LoadDispatcherTask(DataProvider<P> provider, int cacheMode) {
+    public LoadDispatcherTask(DataProvider<P> provider) {
         this.provider = provider;
-        this.cacheMode = cacheMode;
     }
 
     @Override

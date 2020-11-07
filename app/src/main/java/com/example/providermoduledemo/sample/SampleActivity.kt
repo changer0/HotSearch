@@ -11,8 +11,6 @@ import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
 import com.qq.reader.provider.DataProvider
 import com.qq.reader.provider.cache.CacheMode
 import com.qq.reader.provider.loader.ObserverEntity
-import com.qq.reader.provider.loader.SimpleProviderLoader
-
 /**
  * 示例 Activity
  */
@@ -30,7 +28,7 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loadNewData()
+        loadInitData()
     }
 
     override fun onLoadMoreRequested() {
@@ -50,17 +48,14 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        menu.getItem(2).title = "修改缓存模式：${cacheMode}"
+        menu.getItem(1).title = "修改缓存模式：${cacheMode}"
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.clearCache -> {
-                //loader.removeCache()
-            }
             R.id.reloadData -> {
-                loadNewData()
+                loadInitData()
                 mRecyclerViewState = STATE_ENTER_INIT
                 showLoadingView()
             }
@@ -71,7 +66,7 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
                 }
                 this.cacheMode = cacheMode
                 item.title = "修改缓存模式：${cacheMode}"
-                loadNewData()
+                loadInitData()
                 mRecyclerViewState = STATE_ENTER_INIT
                 showLoadingView()
             }
@@ -90,14 +85,12 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
     }
 
 
-    private fun loadNewData() {
+    private fun loadInitData() {
         loadData(1)
     }
 
     private fun loadData(index: Int) {
         curIndex = index
-        val loader = SimpleProviderLoader<SampleReponseBean>()
-        loader.cacheMode = this.cacheMode
 
         val url = String.format(SERVER_URL, index)
         Log.d(TAG, "loadData: url: $url")
@@ -105,12 +98,14 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
         DataProvider.with(SampleReponseBean::class.java)
             .url(url)
             .viewBindItemBuilder(SampleViewBindItemBuilder())
-            .loader(loader)
-            .expiredTime(SampleGetExpiredTime())
+            .cacheConfig(cacheMode, SampleGetExpiredTime())
             .load()
             .observe(this, this)
 
     }
+
+    //----------------------------------------------------------------------------------------------
+    // 回调数据
 
     override fun onChanged(entity: ObserverEntity) {
         if (entity.isSuccess) {

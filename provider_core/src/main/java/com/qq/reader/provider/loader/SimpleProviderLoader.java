@@ -25,16 +25,8 @@ public class SimpleProviderLoader<P> implements ILoader<P> {
     private static final String TAG = "SimpleProviderLoader";
 
     private DataProvider<P> provider;
-    private int cacheMode = CacheMode.CACHE_MODE_USE_CACHE_PRIORITY;
     private MutableLiveData<ObserverEntity> liveData = new MutableLiveData<>();
 
-    public int getCacheMode() {
-        return cacheMode;
-    }
-
-    public void setCacheMode(int cacheMode) {
-        this.cacheMode = cacheMode;
-    }
 
     /**
      * 获取 RxJava 请求
@@ -51,7 +43,7 @@ public class SimpleProviderLoader<P> implements ILoader<P> {
      * 为 DataProvider<P> 提供分发任务的 Runnable
      */
     private synchronized LoadDispatcherTask<P> getDispatcherTask() {
-        return new LoadDispatcherTask<P>(provider, cacheMode);
+        return new LoadDispatcherTask<P>(provider);
     }
 
     //----------------------------------------------------------------------------------------------

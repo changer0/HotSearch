@@ -76,6 +76,11 @@ public class DataProvider<P> {
      */
     private IGetExpiredTime<P> expiredTime;
 
+    /**
+     * 缓存模式
+     */
+    private int cacheMode;
+
     private DataProvider(Class<P> responseClass) {
         this.responseClass = responseClass;
     }
@@ -156,6 +161,10 @@ public class DataProvider<P> {
             return p.getUrl() + p.getRequestMethod() + p.getRequestContent() + p.getContentType();
         }
         return p.getUrl();
+    }
+
+    public int getCacheMode() {
+        return cacheMode;
     }
 
     //----------------------------------------------------------------------------------------------
@@ -275,9 +284,21 @@ public class DataProvider<P> {
             return this;
         }
 
+        /**
+         * 需要使用方提供过期时间
+         */
         private IGetExpiredTime<P> expiredTime;
 
-        public RequestBuilder<P> expiredTime(IGetExpiredTime<P> expiredTime) {
+        /**
+         * 缓存模式
+         */
+        private int cacheMode;
+
+        /**
+         * 缓存配置
+         */
+        public RequestBuilder<P> cacheConfig(int cacheMode, IGetExpiredTime<P> expiredTime) {
+            this.cacheMode = cacheMode;
             this.expiredTime = expiredTime;
             return this;
         }
@@ -290,6 +311,8 @@ public class DataProvider<P> {
             DataProvider<P> provider = new DataProvider<>(responseClazz);
             provider.parser = parser;
             provider.builder = builder;
+            provider.expiredTime = expiredTime;
+            provider.cacheMode = cacheMode;
             provider.netQuestParams = new INetQuestParams() {
                 @Override
                 public String getUrl() {
@@ -312,7 +335,6 @@ public class DataProvider<P> {
                     return needGzip;
                 }
             };
-            provider.expiredTime = expiredTime;
             return loader.loadData(provider);
         }
     }
