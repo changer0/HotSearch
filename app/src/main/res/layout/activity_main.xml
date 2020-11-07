@@ -18,12 +18,6 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/listActivity"
-                android:text="普通列表页面"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/viewModelActivity"
                 android:text="ViewModel 页面"
@@ -42,6 +36,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:padding="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

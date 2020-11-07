@@ -1,14 +1,18 @@
-package com.example.providermoduledemo.viewmodel
+package com.example.providermoduledemo.sample
 
+import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseViewHolder
-import com.example.providermoduledemo.SampleReponseBean
+import com.example.providermoduledemo.viewmodel.ViewModelBindItemStyle0
+import com.example.providermoduledemo.viewmodel.ViewModelBindItemStyle1
 import com.qq.reader.provider.BaseViewBindItem
-import com.qq.reader.provider.bean.BaseBean
+import com.qq.reader.provider.inter.IViewBindItemBuilder
 
-object ViewBindItemBuilder {
 
-    @JvmStatic
-    fun buildViewBindItem(data: SampleReponseBean): List<BaseViewBindItem<out BaseBean, BaseViewHolder>> {
+/**
+ * ViewBindItemBuilder 构建示例
+ */
+class SampleViewBindItemBuilder : IViewBindItemBuilder<SampleReponseBean> {
+    override fun buildViewBindItem(data: SampleReponseBean): List<BaseViewBindItem<*, out RecyclerView.ViewHolder>> {
         val viewBindItemList = mutableListOf<BaseViewBindItem<SampleReponseBean.Item, BaseViewHolder>>()
         if (data.list == null) {
             return viewBindItemList

@@ -24,7 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".viewmodel.ViewModelActivity"></activity>
+        <activity android:name=".sample.SampleActivity"></activity>
         <activity android:name=".preload.PreLoadActivity"></activity>
         <activity android:name=".normallist.NormalListActivity" />
         <activity android:name=".MainActivity">

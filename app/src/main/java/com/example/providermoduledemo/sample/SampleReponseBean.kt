@@ -1,4 +1,4 @@
-package com.example.providermoduledemo
+package com.example.providermoduledemo.sample
 
 import com.qq.reader.provider.bean.BaseBean
 

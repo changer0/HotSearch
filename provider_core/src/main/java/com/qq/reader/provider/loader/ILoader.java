@@ -1,5 +1,7 @@
 package com.qq.reader.provider.loader;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.qq.reader.provider.DataProvider;
 
 /**
@@ -7,5 +9,5 @@ import com.qq.reader.provider.DataProvider;
  */
 public interface ILoader<P> {
     /**加载数据*/
-    void loadData(DataProvider<P> provider);
+    MutableLiveData<ObserverEntity> loadData(DataProvider<P> provider);
 }

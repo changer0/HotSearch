@@ -1,14 +1,20 @@
 package com.qq.reader.provider;
 
+import android.text.TextUtils;
+
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.qq.reader.provider.inter.IFiller;
+import com.qq.reader.provider.inter.IGetExpiredTime;
+import com.qq.reader.provider.inter.IViewBindItemBuilder;
 import com.qq.reader.provider.loader.ILoader;
+import com.qq.reader.provider.loader.SimpleProviderLoader;
 import com.qq.reader.provider.parser.IParser;
 import com.qq.reader.provider.log.Logger;
 import com.qq.reader.provider.inter.INetQuestParams;
 import com.qq.reader.provider.loader.ObserverEntity;
+import com.qq.reader.provider.parser.SimpleGSONParser;
 
 import java.util.List;
 /**
@@ -20,10 +26,9 @@ import java.util.List;
  * 3. 填充 ViewBindItem
  * 需要传入请求Bean 和 响应 Bean <br/>
  */
-@SuppressWarnings("rawtypes")
 public class DataProvider<P> {
 
-    private static final String TAG = "ReaderBaseDataProvider";
+    private static final String TAG = "DataProvider";
 
     /**
      * GSON 解析生成的Bean
@@ -44,7 +49,7 @@ public class DataProvider<P> {
      *  ViewBindItems 列表
      */
     @Nullable
-    private List<BaseViewBindItem> mViewBindItems;
+    private List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> mViewBindItems;
 
     /**
      * 是否为缓存数据
@@ -52,43 +57,35 @@ public class DataProvider<P> {
     private boolean isCache;
 
     /**
-     * 数据回调
-     */
-    private volatile MutableLiveData<ObserverEntity> liveData;
-
-    /**
      * 解析器
      */
     private IParser<P> parser;
 
     /**
-     * 加载器
-     */
-    private ILoader<P> loader;
-
-    /**
      * 填充器
      */
-    private IFiller<P> filler;
+    private IViewBindItemBuilder<P> builder;
 
     /**
      * 网络参数接口
      */
     private INetQuestParams netQuestParams;
 
+    /**
+     * 过期时间
+     */
+    private IGetExpiredTime<P> expiredTime;
+
     private DataProvider(Class<P> responseClass) {
         this.responseClass = responseClass;
     }
 
-    public synchronized MutableLiveData<ObserverEntity> getLiveData() {
-        if (liveData == null) {
-            liveData = new MutableLiveData<>();
-        }
-        return liveData;
-    }
-
     public boolean isExpired() {
-        return filler.getExpiredTime(mData) <= System.currentTimeMillis();
+        if (expiredTime == null) {
+            Logger.w(TAG, "未配置过期时间，数据将不会缓存！");
+            return true;
+        }
+        return expiredTime.getExpiredTime(mData) <= System.currentTimeMillis();
     }
 
     /**
@@ -109,7 +106,7 @@ public class DataProvider<P> {
     /**
      * 获取 mViewBindItems
      */
-    public List<BaseViewBindItem> getViewBindItems() {
+    public List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> getViewBindItems() {
         return mViewBindItems;
     }
 
@@ -132,13 +129,13 @@ public class DataProvider<P> {
     }
 
     /**
-     * 数据填充
+     * 构建 ViewBindItem
      */
-    public void fillData() {
+    public void buildViewBindItem() {
         if (mData == null) {
             throw new RuntimeException("fillData 失败，mData == null !!!");
         }
-        mViewBindItems = getFiller().fillData(mData);
+        mViewBindItems = getBuilder().buildViewBindItem(mData);
     }
 
 
@@ -153,12 +150,16 @@ public class DataProvider<P> {
         isCache = cache;
     }
 
+    public String getRequestKey() {
+        INetQuestParams p = getNetQuestParams();
+        if (TextUtils.equals(p.getRequestMethod(), "POST")) {
+            return p.getUrl() + p.getRequestMethod() + p.getRequestContent() + p.getContentType();
+        }
+        return p.getUrl();
+    }
+
     //----------------------------------------------------------------------------------------------
     // parser
-
-    public void setParser(IParser<P> parser) {
-        this.parser = parser;
-    }
 
     private IParser<P> getParser() {
         if (parser == null) {
@@ -168,43 +169,17 @@ public class DataProvider<P> {
     }
 
     //----------------------------------------------------------------------------------------------
-    // filler
+    // builder
 
-    public IFiller<P> getFiller() {
-        return filler;
-    }
-
-    public void setFiller(IFiller<P> filler) {
-        this.filler = filler;
-    }
-
-    //----------------------------------------------------------------------------------------------
-    // loader
-
-
-    /**
-     * 加载数据
-     */
-    public void loadData() {
-        getLoader().loadData(this);
-    }
-
-    public void setLoader(ILoader loader) {
-        this.loader = loader;
-    }
-
-    public ILoader<P> getLoader() {
-        if (loader == null) {
-            throw new RuntimeException("Provider 组件需要提供 ILoader 加载器，请参考文档使用！");
+    private IViewBindItemBuilder<P> getBuilder() {
+        if (builder == null) {
+            throw new RuntimeException("Provider 组件需要提供 IViewBindItemBuilder 构建接口，请参考文档使用！");
         }
-        return loader;
+        return builder;
     }
 
     //----------------------------------------------------------------------------------------------
     // INetQuestParams 接口
-    public void setNetQuestParams(INetQuestParams netQuestParams) {
-        this.netQuestParams = netQuestParams;
-    }
 
     public INetQuestParams getNetQuestParams() {
         if (netQuestParams == null) {
@@ -213,46 +188,132 @@ public class DataProvider<P> {
         return netQuestParams;
     }
 
+    //----------------------------------------------------------------------------------------------
+    // IGetExpiredTime
+
+    private void setExpiredTime(IGetExpiredTime<P> expiredTime) {
+        this.expiredTime = expiredTime;
+    }
+
+    //----------------------------------------------------------------------------------------------
+    // 构造
+
+    public static <T> RequestBuilder with(Class<T> responseClazz) {
+        return new RequestBuilder(responseClazz);
+    }
 
     /**
-     * DataProvider 构建类
-     * @param <Q>
+     * 请求构造类
      * @param <P>
      */
-    public static class Builder<P> {
+    public static class RequestBuilder<P> {
 
-        private IParser<P> parser;
-        private ILoader loader;
-        private IFiller<P> filler;
-        private INetQuestParams netQuestParams;
+        private Class<P> responseClazz;
 
-        public  Builder<P> setParser(IParser<P> parser) {
-            this.parser = parser;
+        public RequestBuilder(Class<P> responseClazz) {
+            this.responseClazz = responseClazz;
+        }
+
+        /**
+         * 请求参数
+         */
+        private String url;
+        private String requestMethod;
+        private String requestContent;
+        private String requestContentType;
+        private boolean needGzip;
+
+        public RequestBuilder<P> url(String url) {
+            this.url = url;
             return this;
         }
 
-        public  Builder<P> setLoader(ILoader loader) {
+        public RequestBuilder<P> requestMethod(String requestMethod) {
+            this.requestMethod = requestMethod;
+            return this;
+        }
+        public RequestBuilder<P> requestContent(String requestContent) {
+            this.requestContent = requestContent;
+            return this;
+        }
+        public RequestBuilder<P> requestContentType(String requestContentType) {
+            this.requestContentType = requestContentType;
+            return this;
+        }
+        public RequestBuilder<P> needGzip(boolean needGzip) {
+            this.needGzip = needGzip;
+            return this;
+        }
+
+        /**
+         * 加载器，提供默认的加载器 SimpleProviderLoader
+         */
+        private ILoader<P> loader = new SimpleProviderLoader();
+
+        public RequestBuilder<P> loader(ILoader<P> loader) {
             this.loader = loader;
             return this;
         }
 
-        public  Builder<P> setFiller(IFiller<P> filler) {
-            this.filler = filler;
+        /**
+         * 解析器，提供默认解析器 SimpleGSONParser
+         */
+        private IParser<P> parser = new SimpleGSONParser<>();
+
+        public RequestBuilder<P> parser(IParser<P> parser) {
+            this.parser = parser;
             return this;
         }
 
-        public  Builder<P> setNetQuestParams(INetQuestParams netQuestParams) {
-            this.netQuestParams = netQuestParams;
+        /**
+         * ViewBindItem 构建器
+         */
+        private IViewBindItemBuilder<P> builder;
+
+        public RequestBuilder<P> viewBindItemBuilder (IViewBindItemBuilder<P> builder) {
+            this.builder = builder;
             return this;
         }
 
-        public DataProvider<P> build(Class<P> responseClazz) {
-            DataProvider<P> dataProvider = new DataProvider<>(responseClazz);
-            dataProvider.setLoader(loader);
-            dataProvider.setParser(parser);
-            dataProvider.setFiller(filler);
-            dataProvider.setNetQuestParams(netQuestParams);
-            return dataProvider;
+        private IGetExpiredTime<P> expiredTime;
+
+        public RequestBuilder<P> expiredTime(IGetExpiredTime<P> expiredTime) {
+            this.expiredTime = expiredTime;
+            return this;
+        }
+
+        /**
+         * 数据加载
+         * @return
+         */
+        public MutableLiveData<ObserverEntity> load() {
+            DataProvider<P> provider = new DataProvider<>(responseClazz);
+            provider.parser = parser;
+            provider.builder = builder;
+            provider.netQuestParams = new INetQuestParams() {
+                @Override
+                public String getUrl() {
+                    return url;
+                }
+                @Override
+                public String getRequestMethod() {
+                    return requestMethod;
+                }
+                @Override
+                public String getContentType() {
+                    return requestContentType;
+                }
+                @Override
+                public String getRequestContent() {
+                    return requestContent;
+                }
+                @Override
+                public boolean needGzip() {
+                    return needGzip;
+                }
+            };
+            provider.expiredTime = expiredTime;
+            return loader.loadData(provider);
         }
     }
 }

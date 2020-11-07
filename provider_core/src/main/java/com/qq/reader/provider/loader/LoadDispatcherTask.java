@@ -43,11 +43,6 @@ public class LoadDispatcherTask<P> implements Runnable, LoadDiskDataTask.LoadDat
     private int cacheMode;
 
     /**
-     * 一次请求参数
-     */
-    private OnceRequestParams onceRequestParams;
-
-    /**
      * 判断当前快照是否有缓存数据
      * @return
      */
@@ -75,15 +70,14 @@ public class LoadDispatcherTask<P> implements Runnable, LoadDiskDataTask.LoadDat
         return cacheMode;
     }
 
-    public LoadDispatcherTask(DataProvider<P> provider, int cacheMode, OnceRequestParams onceRequestParams) {
+    public LoadDispatcherTask(DataProvider<P> provider, int cacheMode) {
         this.provider = provider;
         this.cacheMode = cacheMode;
-        this.onceRequestParams = onceRequestParams;
     }
 
     @Override
     public void run() {
-        cacheInputStream = CacheController.getInstance().get(onceRequestParams.getCacheKey());
+        cacheInputStream = CacheController.getInstance().get(provider.getRequestKey());
         if (hasCache()){
             //优先使用缓存 和 使用缓存，但不使用过期数据
             if (getCacheMode() == CacheMode.CACHE_MODE_USE_CACHE_PRIORITY || getCacheMode() == CacheMode.CACHE_MODE_USE_CACHE_NOT_EXPIRED) {
@@ -103,7 +97,7 @@ public class LoadDispatcherTask<P> implements Runnable, LoadDiskDataTask.LoadDat
         if (provider == null) {
             return;
         }
-        LoadNetDataTask netTask = new LoadNetDataTask(provider, onceRequestParams);
+        LoadNetDataTask netTask = new LoadNetDataTask(provider);
         netTask.setLoadDataListener(this);
         if (isUIThread()) {
             TaskHandler.getInstance().enqueue(netTask);
@@ -121,7 +115,7 @@ public class LoadDispatcherTask<P> implements Runnable, LoadDiskDataTask.LoadDat
             return;
         }
         LoadDiskDataTask diskTask = new LoadDiskDataTask(provider,
-                cacheInputStream, isLoadExpired, onceRequestParams);
+                cacheInputStream, isLoadExpired);
         diskTask.setLoadDataListener(this);
         diskTask.setLoadExpiredDataListener(this);
         if (isUIThread()) {

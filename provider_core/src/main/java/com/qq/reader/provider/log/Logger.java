@@ -22,7 +22,7 @@ public class Logger {
     }
 
     public static void w(String tag, String info) {
-        android.util.Log.e(TAG, tag + ": " + info);
+        android.util.Log.w(TAG, tag + ": " + info);
     }
 
 }

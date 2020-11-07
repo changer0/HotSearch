@@ -23,11 +23,9 @@ public class LoadNetDataTask implements Runnable {
     private static final String TAG = "LoadNetDataTask";
     private final DataProvider provider;
     private LoadDataListener loadDataListener;
-    private final OnceRequestParams onceRequestParams;
 
-    public LoadNetDataTask(DataProvider provider, OnceRequestParams onceRequestParams) {
+    public LoadNetDataTask(DataProvider provider) {
         this.provider = provider;
-        this.onceRequestParams = onceRequestParams;
     }
 
     @Override
@@ -35,10 +33,10 @@ public class LoadNetDataTask implements Runnable {
 
         InputStream resultStream = null;
         try {
-            resultStream = DataProviderConfig.getNetQuestAdapter().syncRequest(onceRequestParams);
+            resultStream = DataProviderConfig.getNetQuestAdapter().syncRequest(provider.getNetQuestParams());
             String str = IoUtils.getString(resultStream);
             provider.parseData(str);
-            provider.fillData();
+            provider.buildViewBindItem();
             //数据填充结束, 通知页面刷新
             if (loadDataListener != null) {
                 loadDataListener.onLoadNetDataSuccess(provider);
@@ -53,7 +51,7 @@ public class LoadNetDataTask implements Runnable {
                 }
                 bais = new ByteArrayInputStream(baos.toByteArray());
                 //保存缓存
-                CacheController.getInstance().save(onceRequestParams.getCacheKey(), bais);
+                CacheController.getInstance().save(provider.getRequestKey(), bais);
             } finally {
                 if (bais != null) {
                     bais.close();

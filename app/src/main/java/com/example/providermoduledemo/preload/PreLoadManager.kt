@@ -29,7 +29,7 @@ object PreLoadManager {
             resultProvider = provider
             map[key] = resultProvider
         }
-        resultProvider.loadData()
+        //resultProvider.loadData()
     }
 
     /**

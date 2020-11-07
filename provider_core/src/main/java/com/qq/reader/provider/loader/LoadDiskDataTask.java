@@ -22,17 +22,14 @@ public class LoadDiskDataTask implements Runnable {
     private LoadDataListener mLoadListener;
     private LoadExpiredDataListener mLoadExpiredListener;
     private boolean isLoadExpired = false;
-    private OnceRequestParams onceRequestParams;
 
     /**
      * @param isLoadExpired true 为加载过期文件
-     * @param onceRequestParams
      */
-    public LoadDiskDataTask(DataProvider mDataProvider, InputStream inputStream, boolean isLoadExpired, OnceRequestParams onceRequestParams) {
+    public LoadDiskDataTask(DataProvider mDataProvider, InputStream inputStream, boolean isLoadExpired) {
         this.mDataProvider = mDataProvider;
         this.inputStream = inputStream;
         this.isLoadExpired = isLoadExpired;
-        this.onceRequestParams = onceRequestParams;
     }
 
     @Override
@@ -50,7 +47,7 @@ public class LoadDiskDataTask implements Runnable {
                 }
             } else {
                 //只有加载成功后才会填充数据
-                mDataProvider.fillData();
+                mDataProvider.buildViewBindItem();
                 if (isLoadExpired) {
                     //回调过期数据
                     if (mLoadExpiredListener != null) {
@@ -74,7 +71,7 @@ public class LoadDiskDataTask implements Runnable {
                 }
             }
             //此时说明可能保存了错误的缓存数据及时删除
-            CacheController.getInstance().remove(onceRequestParams.getCacheKey());
+            CacheController.getInstance().remove(mDataProvider.getRequestKey());
             Logger.e(TAG, "LoadDiskPageDataTask");
             e.printStackTrace();
         } finally {

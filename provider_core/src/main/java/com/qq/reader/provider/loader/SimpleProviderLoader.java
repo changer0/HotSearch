@@ -1,5 +1,7 @@
 package com.qq.reader.provider.loader;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.cache.CacheController;
 import com.qq.reader.provider.cache.CacheMode;
@@ -24,6 +26,7 @@ public class SimpleProviderLoader<P> implements ILoader<P> {
 
     private DataProvider<P> provider;
     private int cacheMode = CacheMode.CACHE_MODE_USE_CACHE_PRIORITY;
+    private MutableLiveData<ObserverEntity> liveData = new MutableLiveData<>();
 
     public int getCacheMode() {
         return cacheMode;
@@ -48,7 +51,7 @@ public class SimpleProviderLoader<P> implements ILoader<P> {
      * 为 DataProvider<P> 提供分发任务的 Runnable
      */
     private synchronized LoadDispatcherTask<P> getDispatcherTask() {
-        return new LoadDispatcherTask<P>(provider, cacheMode, OnceRequestParams.buildParams(provider.getNetQuestParams()));
+        return new LoadDispatcherTask<P>(provider, cacheMode);
     }
 
     //----------------------------------------------------------------------------------------------
@@ -62,7 +65,7 @@ public class SimpleProviderLoader<P> implements ILoader<P> {
         observerEntity.provider = p;
         observerEntity.throwable = e;
         observerEntity.state = ProviderConstants.PROVIDER_DATA_ERROR;
-        p.getLiveData().postValue(observerEntity);
+        liveData.postValue(observerEntity);
     }
 
     /**
@@ -72,7 +75,7 @@ public class SimpleProviderLoader<P> implements ILoader<P> {
         ObserverEntity observerEntity = new ObserverEntity();
         observerEntity.provider = p;
         observerEntity.state = ProviderConstants.PROVIDER_DATA_SUCCESS;
-        p.getLiveData().postValue(observerEntity);
+        liveData.postValue(observerEntity);
     }
 
     //----------------------------------------------------------------------------------------------
@@ -86,14 +89,14 @@ public class SimpleProviderLoader<P> implements ILoader<P> {
         }
     }
 
-    public boolean removeCache(String key) {
-        return CacheController.getInstance().remove(key);
+    public boolean removeCache() {
+        return CacheController.getInstance().remove(provider.getRequestKey());
     }
 
     //----------------------------------------------------------------------------------------------
     // ILoader 的接口实现
     @Override
-    public void loadData(DataProvider<P> provider) {
+    public MutableLiveData<ObserverEntity> loadData(DataProvider<P> provider) {
         this.provider = provider;
         if (provider == null) {
             throw new NullPointerException("provider 不可为空");
@@ -123,6 +126,7 @@ public class SimpleProviderLoader<P> implements ILoader<P> {
                         Logger.d(TAG, "onComplete: called");
                     }
                 });
+        return liveData;
     }
 
 }
