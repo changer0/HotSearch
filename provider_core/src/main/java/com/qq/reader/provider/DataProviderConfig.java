@@ -21,6 +21,9 @@ public class DataProviderConfig {
 
     public static boolean isDebug = false;
 
+    /**缓存目录*/
+    public static String cacheDir;
+
     public static Application getApplication() {
         if (application == null) {
             throw new RuntimeException("使用前 请在 Application 中执行 DataProviderConfig.init");
@@ -36,10 +39,11 @@ public class DataProviderConfig {
     }
 
     /**初始化*/
-    public static void init(Application application, boolean isDebug, NetQuestAdapter netQuestAdapter) {
-        DataProviderConfig.application = application;
-        DataProviderConfig.netQuestAdapter = netQuestAdapter;
-        DataProviderConfig.isDebug = isDebug;
+    public static void init(Builder builder) {
+        DataProviderConfig.application = builder.application;
+        DataProviderConfig.netQuestAdapter = builder.netQuestAdapter;
+        DataProviderConfig.isDebug = builder.isDebug;
+        DataProviderConfig.cacheDir = builder.cacheDir;
     }
 
     /**获取获取版本号*/
@@ -60,5 +64,28 @@ public class DataProviderConfig {
         InputStream syncRequest(INetQuestParams params);
     }
 
+    /**
+     * 构建类
+     */
+    public static class Builder {
+        private Application application;
+        private NetQuestAdapter netQuestAdapter;
+        private boolean isDebug = false;
+        private String cacheDir;
+
+        public Builder(Application application, NetQuestAdapter netQuestAdapter) {
+            this.application = application;
+            this.netQuestAdapter = netQuestAdapter;
+            this.cacheDir = application.getExternalCacheDir() + "/" + "data_provider";
+        }
+
+        public void setDebug(boolean debug) {
+            isDebug = debug;
+        }
+
+        public void setCacheDir(String cacheDir) {
+            this.cacheDir = cacheDir;
+        }
+    }
 
 }

@@ -16,7 +16,6 @@ import java.io.OutputStream;
  * 缓存控制器 对 DiskLruCache 的一层封装
  */
 public class CacheController {
-    private static final String DISK_CACHE_DIR = DataProviderConfig.getApplication().getExternalCacheDir() + "/" + "data_provider";
     private static final int MAX_CACHE_SIZE = 10 * 1024 * 1024;//10M
     private static final int DEFAULT_BUFFER_SIZE = 32 * 1024; // 32 Kb
 
@@ -40,7 +39,7 @@ public class CacheController {
     }
 
     private void initCache() {
-        File cacheFile = new File(DISK_CACHE_DIR);
+        File cacheFile = new File(DataProviderConfig.cacheDir);
         try {
             //1. 缓存地址 2. 版本号  3. 指定同一个key可以对应多少个缓存文件 4. 指定最多可以缓存多少字节的数据
             cache = DiskLruCache.open(cacheFile, DataProviderConfig.getAppVersion(), 1, MAX_CACHE_SIZE);
