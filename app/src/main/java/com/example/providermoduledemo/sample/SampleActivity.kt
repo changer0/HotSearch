@@ -101,7 +101,6 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
             .cacheConfig(cacheMode, SampleGetExpiredTime())
             .load()
             .observe(this, this)
-
     }
 
     //----------------------------------------------------------------------------------------------
