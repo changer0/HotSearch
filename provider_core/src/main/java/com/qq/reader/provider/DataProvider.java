@@ -172,7 +172,7 @@ public class DataProvider<P> {
 
     private IParser<P> getParser() {
         if (parser == null) {
-            throw new RuntimeException("Provider 组件需要提供 IParser 解析器，请参考文档使用！");
+            return new SimpleGSONParser<P>();
         }
         return parser;
     }
@@ -216,11 +216,10 @@ public class DataProvider<P> {
      * @param <P>
      */
     public static class RequestBuilder<P> {
-
-        private Class<P> responseClazz;
+        private DataProvider<P> provider;
 
         public RequestBuilder(Class<P> responseClazz) {
-            this.responseClazz = responseClazz;
+            this.provider = new DataProvider<>(responseClazz);
         }
 
         /**
@@ -267,39 +266,25 @@ public class DataProvider<P> {
         /**
          * 解析器，提供默认解析器 SimpleGSONParser
          */
-        private IParser<P> parser = new SimpleGSONParser<>();
-
         public RequestBuilder<P> parser(IParser<P> parser) {
-            this.parser = parser;
+            provider.parser = parser;
             return this;
         }
 
         /**
          * ViewBindItem 构建器
          */
-        private IViewBindItemBuilder<P> builder;
-
         public RequestBuilder<P> viewBindItemBuilder (IViewBindItemBuilder<P> builder) {
-            this.builder = builder;
+            provider.builder = builder;
             return this;
         }
-
-        /**
-         * 需要使用方提供过期时间
-         */
-        private IGetExpiredTime<P> expiredTime;
-
-        /**
-         * 缓存模式
-         */
-        private int cacheMode;
 
         /**
          * 缓存配置
          */
         public RequestBuilder<P> cacheConfig(int cacheMode, IGetExpiredTime<P> expiredTime) {
-            this.cacheMode = cacheMode;
-            this.expiredTime = expiredTime;
+            provider.cacheMode = cacheMode;
+            provider.expiredTime = expiredTime;
             return this;
         }
 
@@ -308,11 +293,6 @@ public class DataProvider<P> {
          * @return
          */
         public MutableLiveData<ObserverEntity> load() {
-            DataProvider<P> provider = new DataProvider<>(responseClazz);
-            provider.parser = parser;
-            provider.builder = builder;
-            provider.expiredTime = expiredTime;
-            provider.cacheMode = cacheMode;
             provider.netQuestParams = new INetQuestParams() {
                 @Override
                 public String getUrl() {
