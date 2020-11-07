@@ -56,4 +56,6 @@ dependencies {
     //api(name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
 }

@@ -290,7 +290,6 @@ public class DataProvider<P> {
 
         /**
          * 数据加载
-         * @return
          */
         public MutableLiveData<ObserverEntity> load() {
             provider.netQuestParams = new INetQuestParams() {
