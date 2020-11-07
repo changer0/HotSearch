@@ -7,19 +7,9 @@
 
 'SampleActivity -> DataProviderLoader: load(BaseDataProvider)
 
-SampleActivity -> SimpleDataProviderCreator: 创建
+SampleActivity -> DataProvider: DataProvider.with(SampleResponseBean.class)\n    .url(url)\n    .viewBindItemBuilder(new SampleViewBindItemBuilder())\n    .cacheConfig(cacheMode, new SampleGetExpiredTime())\n    .load()\n    .observe(this, this);
 
-SimpleDataProviderCreator -> DataProvider: 构建 DataProvider
-
-DataProvider -> SimpleDataProviderCreator: 构建 DataProvider
-
-SimpleDataProviderCreator -> SampleActivity: provider
-
-SampleActivity -> DataProvider:provider.loadData()
-
-DataProvider -> SimpleProviderLoader : loadData()
-
-
+SampleActivity -> SimpleProviderLoader : load()
 
 SimpleProviderLoader -> LoadDispatcherTask: getDispatcherTask()
 
@@ -31,7 +21,7 @@ LoadNetDataTask -> LoadNetDataTask: DataProviderConfig.getNetQuestAdapter().sync
 
 LoadNetDataTask -> DataProvider:  mDataProvider.parseData()
 
-LoadNetDataTask -> DataProvider:  mDataProvider.fillData(str)
+LoadNetDataTask -> DataProvider:  mDataProvider.buildViewBindItem()
 
 LoadNetDataTask -> LoadDispatcherTask: onLoadNetDataSuccess()
 
@@ -45,7 +35,7 @@ LoadDispatcherTask -> LoadDiskDataTask: tryLoadDiskData()
 
 LoadDiskDataTask -> DataProvider:  mDataProvider.parseData()
 
-LoadDiskDataTask -> DataProvider:  mDataProvider.fillData(str)
+LoadDiskDataTask -> DataProvider:  mDataProvider.buildViewBindItem()
 
 LoadDiskDataTask -> LoadDispatcherTask: onLoadDiskExpiredDataSuccess()
 

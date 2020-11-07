@@ -20,12 +20,8 @@ class SampleViewBindItemBuilder : IViewBindItemBuilder<SampleResponseBean> {
         for (item in data.list!!) {
             var bindViewItem : BaseViewBindItem<SampleResponseBean.Item, BaseViewHolder>? = null
             when (item.style) {
-                0 -> {
-                    bindViewItem = ViewModelBindItemStyle0()
-                }
-                1 -> {
-                    bindViewItem = ViewModelBindItemStyle1()
-                }
+                0 -> bindViewItem = ViewModelBindItemStyle0()
+                1 -> bindViewItem = ViewModelBindItemStyle1()
             }
             bindViewItem?.let {
                 it.data = item
