@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.providermoduledemo.R
+import com.example.providermoduledemo.Utils
 import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
 import com.qq.reader.provider.DataProvider
 import com.qq.reader.provider.cache.CacheMode
@@ -18,8 +19,6 @@ private const val TAG = "SampleActivity"
 class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity> {
 
     private var cacheMode = CacheMode.CACHE_MODE_NOT_USE_CACHE
-
-    private lateinit var menu: Menu
 
     companion object {
         public const val SERVER_URL =
@@ -48,7 +47,7 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        menu.getItem(1).title = "修改缓存模式：${cacheMode}"
+        menu.getItem(1).title = "缓存模式：${Utils.getCacheStr(cacheMode)}"
         return true
     }
 
@@ -62,10 +61,10 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
             R.id.modifyCacheModel -> {
                 var cacheMode = this.cacheMode + 1
                 if (cacheMode > 3) {
-                    cacheMode = 0;
+                    cacheMode = 0
                 }
                 this.cacheMode = cacheMode
-                item.title = "修改缓存模式：${cacheMode}"
+                item.title = "缓存模式：${Utils.getCacheStr(cacheMode)}"
                 loadInitData()
                 mRecyclerViewState = STATE_ENTER_INIT
                 showLoadingView()
