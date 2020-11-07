@@ -11,14 +11,14 @@ import com.qq.reader.provider.inter.IViewBindItemBuilder
 /**
  * ViewBindItemBuilder 构建示例
  */
-class SampleViewBindItemBuilder : IViewBindItemBuilder<SampleReponseBean> {
-    override fun buildViewBindItem(data: SampleReponseBean): List<BaseViewBindItem<*, out RecyclerView.ViewHolder>> {
-        val viewBindItemList = mutableListOf<BaseViewBindItem<SampleReponseBean.Item, BaseViewHolder>>()
+class SampleViewBindItemBuilder : IViewBindItemBuilder<SampleResponseBean> {
+    override fun buildViewBindItem(data: SampleResponseBean): List<BaseViewBindItem<*, out RecyclerView.ViewHolder>> {
+        val viewBindItemList = mutableListOf<BaseViewBindItem<SampleResponseBean.Item, BaseViewHolder>>()
         if (data.list == null) {
             return viewBindItemList
         }
         for (item in data.list!!) {
-            var bindViewItem : BaseViewBindItem<SampleReponseBean.Item, BaseViewHolder>? = null
+            var bindViewItem : BaseViewBindItem<SampleResponseBean.Item, BaseViewHolder>? = null
             when (item.style) {
                 0 -> {
                     bindViewItem = ViewModelBindItemStyle0()

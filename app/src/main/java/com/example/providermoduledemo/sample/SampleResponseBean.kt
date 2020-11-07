@@ -2,7 +2,7 @@ package com.example.providermoduledemo.sample
 
 import com.qq.reader.provider.bean.BaseBean
 
-class SampleReponseBean : BaseBean() {
+class SampleResponseBean : BaseBean() {
     var time: Long = 0
     var list: List<Item>? = null
     class Item : BaseBean(){
