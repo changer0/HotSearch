@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import com.example.providermoduledemo.R
 import com.example.providermoduledemo.Utils
 import com.example.providermoduledemo.pagelist.ReaderBaseListProviderActivity
-import com.example.providermoduledemo.preload.PreLoadManager
+import com.example.providermoduledemo.preload.PreLoadLiveDataManager
 import com.qq.reader.provider.DataProvider
 import com.qq.reader.provider.cache.CacheMode
 import com.qq.reader.provider.loader.ObserverEntity
@@ -86,10 +86,10 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
 
 
     private fun loadInitData() {
-        val liveData = PreLoadManager.getLiveData("bid")
+        val liveData = PreLoadLiveDataManager.getLiveData("bid")
         liveData?.let {
             it.observe(this, this)
-            PreLoadManager.release("bid")
+            PreLoadLiveDataManager.release("bid")
             Log.d(TAG, "loadInitData: 预加载数据！")
         }?:loadData(1)
 

@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
-import com.example.providermoduledemo.preload.PreLoadManager
+import com.example.providermoduledemo.preload.PreLoadLiveDataManager
 import com.example.providermoduledemo.sample.SampleActivity
 import com.example.providermoduledemo.sample.SampleResponseBean
 import com.example.providermoduledemo.sample.SampleViewBindItemBuilder
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 .url(String.format(SampleActivity.SERVER_URL, 1))
                 .viewBindItemBuilder(SampleViewBindItemBuilder())
                 .load()
-            PreLoadManager.savePreLoadLiveData("bid", liveData as MutableLiveData<ObserverEntity>)
+            PreLoadLiveDataManager.savePreLoadLiveData("bid", liveData as MutableLiveData<ObserverEntity>)
             startActivity(Intent(this, SampleActivity::class.java))
         }
     }
