@@ -138,7 +138,7 @@ public class DataProvider<P> {
      */
     public void buildViewBindItem() {
         if (mData == null) {
-            throw new RuntimeException("fillData 失败，mData == null !!!");
+            throw new RuntimeException("buildViewBindItem 失败，mData == null !!!");
         }
         mViewBindItems = getBuilder().buildViewBindItem(mData);
     }
