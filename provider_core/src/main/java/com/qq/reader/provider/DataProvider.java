@@ -226,7 +226,7 @@ public class DataProvider<P> {
          * 请求参数
          */
         private String url;
-        private String requestMethod;
+        private String requestMethod = "GET";
         private String requestContent;
         private String requestContentType;
         private boolean needGzip;
@@ -236,18 +236,25 @@ public class DataProvider<P> {
             return this;
         }
 
-        public RequestBuilder<P> requestMethod(String requestMethod) {
-            this.requestMethod = requestMethod;
+        public RequestBuilder<P> get() {
+            this.requestMethod = "GET";
             return this;
         }
-        public RequestBuilder<P> requestContent(String requestContent) {
+
+        public RequestBuilder<P> post(String contentType, String requestContent) {
+            this.requestMethod = "POST";
+            this.requestContentType = contentType;
             this.requestContent = requestContent;
             return this;
         }
-        public RequestBuilder<P> requestContentType(String requestContentType) {
-            this.requestContentType = requestContentType;
+
+        public RequestBuilder<P> post(String requestContent) {
+            this.requestMethod = "POST";
+            this.requestContent = requestContent;
+            this.requestContentType = "application/json";
             return this;
         }
+
         public RequestBuilder<P> needGzip(boolean needGzip) {
             this.needGzip = needGzip;
             return this;
@@ -274,7 +281,7 @@ public class DataProvider<P> {
         /**
          * ViewBindItem 构建器
          */
-        public RequestBuilder<P> viewBindItemBuilder (IViewBindItemBuilder<P> builder) {
+        public RequestBuilder<P> viewBindItemBuilder(IViewBindItemBuilder<P> builder) {
             provider.builder = builder;
             return this;
         }

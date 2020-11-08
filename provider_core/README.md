@@ -9,6 +9,17 @@
 - 支持使用 LiveData 实现数据回调
 - 采用链式调用方式方便使用
 
+请求示例：
+
+``` kotlin
+DataProvider.with(SampleResponseBean::class.java)
+    .url(url).get()
+    .viewBindItemBuilder(SampleViewBindItemBuilder())
+    .cacheConfig(cacheMode, SampleGetExpiredTime())
+    .load()
+    .observe(this, this)
+```
+
 ## 类图
 
 ![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201107212401.png)
@@ -33,8 +44,8 @@
 
 能力:
 
-- 构建请求 URL、请求体以及请求类型等基本信息
-- 数据加载
+- 构建请求信息
+- 数据加载（网络请求、数据缓存等）
 - 响应解析
 - 构建 ViewBindItem
 
@@ -65,7 +76,8 @@ ViewBindItem 构建器，用于业务层构建 ViewBindItem，需要用户自行
 ## 使用方式
 
 ### 1. 初始化配置
-进行初始化配置，DataProvider 本身并不提供网络请求能力，需要用户自行提供
+
+进行初始化配置，DataProvider 本身并不提供网络请求能力，需要用户自行提供，需在 Application 中进行初始化：
 
 ``` kotlin
 class MyApp: Application() {
@@ -195,18 +207,17 @@ class SampleViewBindItemBuilder : IViewBindItemBuilder<SampleResponseBean> {
 
 |方法|说明|是否必须|
 |--|--|--|
-|with|指定响应类型（第一步调用）|是|
+|with|指定响应类型（首先调用）|是|
 |url|协议地址|是|
-|requestMethod|请求方法|否|
-|requestContent|请求内容|否|
-|requestContentType|请求类型|否|
-|needGzip|是否 gzip 压缩|否|
+|get|使用 GET 请求（默认请求方式）|否|
+|post|使用 POST 请求，需传入请求类型、请求内容|否|
+|needGzip|是否 gzip 压缩（默认 false）|否|
 |loader|指定数据加载器|否|
 |parser|指定数据解析器|否|
 |viewBindItemBuilder|指定 ViewBindItem 构建器|是|
 |cacheConfig|缓存配置，包括缓存类型、数据过期时间|否|
 |load|加载数据|是|
-|observe|数据监听|是|
+|observe|数据监听，需传入 LifecycleOwner 与 Observer|是|
 
 ## 缓存模式说明
 
