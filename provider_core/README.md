@@ -33,10 +33,10 @@
 
 能力:
 
-- 通过 netQuestParams 构建请求 URL、请求体以及请求类型等基本信息
-- 通过 loader 加载数据
-- 通过 parser 解析数据
-- 通过 viewBindItemBuilder 构建 ViewBindItem
+- 构建请求 URL、请求体以及请求类型等基本信息
+- 数据加载
+- 响应解析
+- 构建 ViewBindItem
 
  **BaseViewBindItem**
 
@@ -195,7 +195,7 @@ class SampleViewBindItemBuilder : IViewBindItemBuilder<SampleResponseBean> {
 
 |方法|说明|是否必须|
 |--|--|--|
-|with|指定相应类型|是|
+|with|指定响应类型（第一步调用）|是|
 |url|协议地址|是|
 |requestMethod|请求方法|否|
 |requestContent|请求内容|否|
