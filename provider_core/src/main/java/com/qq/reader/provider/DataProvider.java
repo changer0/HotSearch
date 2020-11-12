@@ -208,7 +208,7 @@ public class DataProvider<P> {
     // 构造
 
     public static <T> RequestBuilder with(Class<T> responseClazz) {
-        return new RequestBuilder(responseClazz);
+        return new RequestBuilder<T>(responseClazz);
     }
 
     /**
@@ -218,7 +218,7 @@ public class DataProvider<P> {
     public static class RequestBuilder<P> {
         private DataProvider<P> provider;
 
-        public RequestBuilder(Class<P> responseClazz) {
+        private RequestBuilder(Class<P> responseClazz) {
             this.provider = new DataProvider<>(responseClazz);
         }
 
