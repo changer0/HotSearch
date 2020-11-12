@@ -1,6 +1,4 @@
 package com.example.providermoduledemo.viewmodel
-
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -16,7 +14,6 @@ import kotlinx.android.synthetic.main.view_model_single_book.view.*
  * for 左图右文 View
  */
 class LIRTView : ConstraintLayout, IView<LIRTViewModel>{
-
     constructor(context: Context) : super(context) {init(context)}
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {init(context) }
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
@@ -35,5 +32,4 @@ class LIRTView : ConstraintLayout, IView<LIRTViewModel>{
         Glide.with(context).load(model.leftImgUrl).into(leftImg)
         leftImg.setOnClickListener {Toast.makeText(context, model.leftImgUrl, Toast.LENGTH_SHORT).show()}
     }
-
 }

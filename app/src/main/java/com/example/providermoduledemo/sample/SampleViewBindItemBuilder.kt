@@ -17,14 +17,14 @@ class SampleViewBindItemBuilder : IViewBindItemBuilder<SampleResponseBean> {
         if (data.list == null) {
             return viewBindItemList
         }
-        for (item in data.list!!) {
+        for (dataItem in data.list!!) {
             var bindViewItem : BaseViewBindItem<SampleResponseBean.Item, BaseViewHolder>? = null
-            when (item.style) {
+            when (dataItem.style) {
                 0 -> bindViewItem = ViewBindItemLIRTGroupStyle0()
                 1 -> bindViewItem = ViewBindItemLIRTGroupStyle1()
             }
             bindViewItem?.let {
-                it.data = item
+                it.data = dataItem
                 viewBindItemList.add(it)
             }
         }

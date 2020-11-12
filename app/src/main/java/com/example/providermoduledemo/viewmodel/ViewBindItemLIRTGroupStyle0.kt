@@ -34,6 +34,4 @@ class ViewBindItemLIRTGroupStyle0 : BaseViewBindModelItem<SampleResponseBean.Ite
         }
         viewModelMap[R.id.singleBook2] = LIRTViewModel(bookList[2].leftImgUrl, bookList[2].rightText)
     }
-
-
 }
