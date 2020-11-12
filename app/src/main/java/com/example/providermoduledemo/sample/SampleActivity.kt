@@ -19,11 +19,11 @@ import com.qq.reader.provider.loader.ObserverEntity
 private const val TAG = "SampleActivity"
 class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity> {
 
-    private var cacheMode = CacheMode.CACHE_MODE_NOT_USE_CACHE
+    private var cacheMode = CacheMode.CACHE_MODE_USE_CACHE_PRIORITY
 
     companion object {
         public const val SERVER_URL =
-            "https://gitee.com/luluzhang/publish-json/raw/master/bookdetail-bid- (%s).json"
+            "https://gitee.com/luluzhang/publish-json/raw/master/leftImgRightText (%s).json"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

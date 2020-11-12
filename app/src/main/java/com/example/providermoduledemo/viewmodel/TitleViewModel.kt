@@ -4,6 +4,6 @@ import com.qq.reader.provider.viewmodel.IViewModel
 
 /**
  * @author zhanglulu on 2020/10/23.
- * for
+ * for 标题 ViewModel
  */
-class ItemTitleViewModel(public var title: String? = null) :IViewModel
+class TitleViewModel(public var title: String? = null) :IViewModel

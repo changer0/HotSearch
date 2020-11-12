@@ -8,25 +8,25 @@
     android:padding="10dp">
 
 
-    <com.example.providermoduledemo.viewmodel.ItemTitleView
+    <com.example.providermoduledemo.viewmodel.TitleView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="#FF0"
+        android:background="#5200FFA6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.example.providermoduledemo.viewmodel.SingleBookView
+        <com.example.providermoduledemo.viewmodel.LIRTView
             android:id="@+id/singleBook0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <com.example.providermoduledemo.viewmodel.SingleBookView
+        <com.example.providermoduledemo.viewmodel.LIRTView
             android:id="@+id/singleBook1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <com.example.providermoduledemo.viewmodel.SingleBookView
+        <com.example.providermoduledemo.viewmodel.LIRTView
             android:id="@+id/singleBook2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

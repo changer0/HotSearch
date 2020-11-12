@@ -8,10 +8,10 @@ class SampleResponseBean : BaseBean() {
     class Item : BaseBean(){
         var style: Int = -1
         var title: String? = null
-        var bookList: List<Book>? = null
-        class Book: BaseBean() {
-            var name: String? = null
-            var content: String? = null
+        var bookList: List<Element>? = null
+        class Element: BaseBean() {
+            var leftImgUrl: String? = null
+            var rightText: String? = null
         }
     }
 }

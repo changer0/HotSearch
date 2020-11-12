@@ -5,10 +5,12 @@ import com.example.providermoduledemo.sample.SampleResponseBean
 import com.qq.reader.provider.viewmodel.BaseViewBindModelItem
 import com.qq.reader.provider.viewmodel.IViewModel
 
-class ViewModelBindItemStyle0 : BaseViewBindModelItem<SampleResponseBean.Item>() {
-
+/**
+ * 左图右文 组合样式 1
+ */
+class ViewBindItemLIRTGroupStyle1 : BaseViewBindModelItem<SampleResponseBean.Item>() {
     override fun getResLayoutId(): Int {
-        return R.layout.view_model_data_item_style0
+        return R.layout.view_model_data_item_style1
     }
 
     override fun onBindViewModel(
@@ -16,21 +18,19 @@ class ViewModelBindItemStyle0 : BaseViewBindModelItem<SampleResponseBean.Item>()
         viewModelMap: MutableMap<Int, IViewModel>
     ) {
         val bookList = data?.bookList!!
-        viewModelMap[R.id.title] = ItemTitleViewModel(data.title)
+        viewModelMap[R.id.title] = TitleViewModel(data.title)
         val size = bookList.size
         if (size < 1) {
             return
         }
-        viewModelMap[R.id.singleBook0] = SingleBookViewModel(bookList[0].name, bookList[0].content)
+        viewModelMap[R.id.singleBook0] = LIRTViewModel(bookList[0].leftImgUrl, bookList[0].rightText)
         if (size < 2) {
             return
         }
-        viewModelMap[R.id.singleBook1] = SingleBookViewModel(bookList[1].name, bookList[1].content)
+        viewModelMap[R.id.singleBook1] = LIRTViewModel(bookList[1].leftImgUrl, bookList[1].rightText)
         if (size < 3) {
             return
         }
-        viewModelMap[R.id.singleBook2] = SingleBookViewModel(bookList[2].name, bookList[2].content)
+        viewModelMap[R.id.singleBook2] = LIRTViewModel(bookList[2].leftImgUrl, bookList[2].rightText)
     }
-
-
 }

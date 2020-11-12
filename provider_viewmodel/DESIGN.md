@@ -32,7 +32,7 @@ class SampleViewBindItem : BaseViewBindModelItem<SampleResponseBean.Item>() {
 
 主要添加了 BaseViewBindModelItem，通过 viewModelMap 建立 View 和 ViewModel 的关系。
 
-``` kotlin
+``` java
 public abstract class BaseViewBindModelItem
         <Bean>
         extends BaseViewBindItem<Bean, BaseViewHolder> {

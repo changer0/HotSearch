@@ -2,8 +2,8 @@ package com.example.providermoduledemo.sample
 
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseViewHolder
-import com.example.providermoduledemo.viewmodel.ViewModelBindItemStyle0
-import com.example.providermoduledemo.viewmodel.ViewModelBindItemStyle1
+import com.example.providermoduledemo.viewmodel.ViewBindItemLIRTGroupStyle0
+import com.example.providermoduledemo.viewmodel.ViewBindItemLIRTGroupStyle1
 import com.qq.reader.provider.BaseViewBindItem
 import com.qq.reader.provider.inter.IViewBindItemBuilder
 
@@ -20,8 +20,8 @@ class SampleViewBindItemBuilder : IViewBindItemBuilder<SampleResponseBean> {
         for (item in data.list!!) {
             var bindViewItem : BaseViewBindItem<SampleResponseBean.Item, BaseViewHolder>? = null
             when (item.style) {
-                0 -> bindViewItem = ViewModelBindItemStyle0()
-                1 -> bindViewItem = ViewModelBindItemStyle1()
+                0 -> bindViewItem = ViewBindItemLIRTGroupStyle0()
+                1 -> bindViewItem = ViewBindItemLIRTGroupStyle1()
             }
             bindViewItem?.let {
                 it.data = item
