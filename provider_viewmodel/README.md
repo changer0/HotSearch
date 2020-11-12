@@ -15,7 +15,7 @@ class LIRTViewModel(public var leftImgUrl: String? = null, public var rightText:
 
 ### 2. 编写 View
 
-添加一个继承自 View（或其子类）的 LIRTView 类，实现 IView 接口，并制定 LIRTViewModel 泛型，实现 setModel 方法：
+添加一个继承自 View（或其子类）的 LIRTView 类，实现 IView 接口，并指定 LIRTViewModel 泛型，实现 setModel 方法：
 
 ```kotlin
 /** 左图右文 View*/
@@ -79,7 +79,7 @@ class ViewBindItemLIRTGroupStyle0 : BaseViewBindModelItem<SampleResponseBean.Ite
 
 ### 4. 编写 ViewBindItemBuilder
 
-添加一个 SampleViewBindItemBuilder 实现 IViewBindItemBuilder 接口，并制定数据类型泛型，实现 buildViewBindItem 方法，组装 ViewBindItem 集合：
+添加一个 SampleViewBindItemBuilder 实现 IViewBindItemBuilder 接口，并指定数据类型泛型，实现 buildViewBindItem 方法，组装 ViewBindItem 集合：
 
 ```kotlin
 /*** ViewBindItemBuilder 构建示例*/
@@ -117,8 +117,6 @@ DataProvider.with(SampleResponseBean::class.java)
 ```
 DataProvider 使用细节请参考：[provider_core 使用文档](../provider_core/README.md)
 
-### 效果图
+## 效果图
 
 ![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201112211149.png)
-
-待补充
