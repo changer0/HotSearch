@@ -66,7 +66,7 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loadInitData()
+        loadData(1)
     }
 
     private fun loadData(index: Int) {
