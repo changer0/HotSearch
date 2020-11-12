@@ -198,13 +198,6 @@ public class DataProvider<P> {
     }
 
     //----------------------------------------------------------------------------------------------
-    // IGetExpiredTime
-
-    private void setExpiredTime(IGetExpiredTime<P> expiredTime) {
-        this.expiredTime = expiredTime;
-    }
-
-    //----------------------------------------------------------------------------------------------
     // 构造
 
     public static <T> RequestBuilder with(Class<T> responseClazz) {
