@@ -256,7 +256,7 @@ public class DataProvider<P> {
         /**
          * 加载器，提供默认的加载器 SimpleProviderLoader
          */
-        private ILoader<P> loader = new SimpleProviderLoader();
+        private ILoader<P> loader = new SimpleProviderLoader<P>();
 
         public RequestBuilder<P> loader(ILoader<P> loader) {
             this.loader = loader;
