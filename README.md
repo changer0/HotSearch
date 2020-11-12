@@ -8,7 +8,7 @@
 
 [provider_viewmodel 设计文档](provider_viewmodel/DESIGN.md)
 
-[provider_viewmodel 设计文档](provider_viewmodel/README.md)
+[provider_viewmodel 使用文档](provider_viewmodel/README.md)
 
 ## 示例图
 
