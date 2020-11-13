@@ -43,7 +43,7 @@ class LIRTView : ConstraintLayout, IView<LIRTViewModel>{
 
 ### 3. 编写 ViewBindItem
 
-添加一个 ViewBindItemLIRTGroupStyle0 类，继承自 BaseViewBindModelItem，并制定数据类型泛型，重写 onBindViewModel 方法，绑定 ViewModel：
+添加一个 ViewBindItemLIRTGroupStyle0 类，继承自 BaseViewBindModelItem，并指定数据类型泛型，重写 onBindViewModel 方法，绑定 ViewModel：
 
 ```kotlin
 
