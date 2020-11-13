@@ -14,4 +14,4 @@
 
 ![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201108224245.png)
 
-![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201108224306.png)
+![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201112211149.png)
