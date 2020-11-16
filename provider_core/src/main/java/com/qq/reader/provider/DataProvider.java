@@ -266,7 +266,7 @@ public class DataProvider<RESULT> {
         /**
          * 解析器，提供默认解析器 SimpleGSONParser
          */
-        public RequestBuilder parser(IParser parser) {
+        public RequestBuilder<R> parser(IParser<R> parser) {
             provider.parser = parser;
             return this;
         }
