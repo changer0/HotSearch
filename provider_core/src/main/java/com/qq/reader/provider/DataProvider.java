@@ -26,19 +26,19 @@ import java.util.List;
  * 3. 填充 ViewBindItem
  * 需要传入请求Bean 和 响应 Bean <br/>
  */
-public class DataProvider<P> {
+public class DataProvider<RESULT> {
 
     private static final String TAG = "DataProvider";
 
     /**
      * GSON 解析生成的Bean
      */
-    private P mData;
+    private RESULT mData;
 
     /**
      * 响应 bean 类型
      */
-    private final Class<P> responseClass;
+    private final Class<RESULT> responseClass;
 
     /**
      * 源 JSON 字符串
@@ -59,12 +59,12 @@ public class DataProvider<P> {
     /**
      * 解析器
      */
-    private IParser<P> parser;
+    private IParser<RESULT> parser;
 
     /**
      * 填充器
      */
-    private IViewBindItemBuilder<P> builder;
+    private IViewBindItemBuilder<RESULT> builder;
 
     /**
      * 网络参数接口
@@ -74,14 +74,14 @@ public class DataProvider<P> {
     /**
      * 过期时间
      */
-    private IGetExpiredTime<P> expiredTime;
+    private IGetExpiredTime<RESULT> expiredTime;
 
     /**
      * 缓存模式
      */
     private int cacheMode;
 
-    private DataProvider(Class<P> responseClass) {
+    private DataProvider(Class<RESULT> responseClass) {
         this.responseClass = responseClass;
     }
 
@@ -97,7 +97,7 @@ public class DataProvider<P> {
      * 获取解析示例 注意判空
      */
     @Nullable
-    public P getData() {
+    public RESULT getData() {
         return mData;
     }
 
@@ -170,9 +170,9 @@ public class DataProvider<P> {
     //----------------------------------------------------------------------------------------------
     // parser
 
-    private IParser<P> getParser() {
+    private IParser<RESULT> getParser() {
         if (parser == null) {
-            return new SimpleGSONParser<P>();
+            return new SimpleGSONParser<RESULT>();
         }
         return parser;
     }
@@ -180,7 +180,7 @@ public class DataProvider<P> {
     //----------------------------------------------------------------------------------------------
     // builder
 
-    private IViewBindItemBuilder<P> getBuilder() {
+    private IViewBindItemBuilder<RESULT> getBuilder() {
         if (builder == null) {
             throw new RuntimeException("Provider 组件需要提供 IViewBindItemBuilder 构建接口，请参考文档使用！");
         }
@@ -200,18 +200,18 @@ public class DataProvider<P> {
     //----------------------------------------------------------------------------------------------
     // 构造
 
-    public static <T> RequestBuilder with(Class<T> responseClazz) {
-        return new RequestBuilder<T>(responseClazz);
+    public static <R> RequestBuilder with(Class<R> responseClazz) {
+        return new RequestBuilder<R>(responseClazz);
     }
 
     /**
      * 请求构造类
-     * @param <P>
+     * @param <R>
      */
-    public static class RequestBuilder<P> {
-        private DataProvider<P> provider;
+    public static class RequestBuilder<R> {
+        private DataProvider<R> provider;
 
-        private RequestBuilder(Class<P> responseClazz) {
+        private RequestBuilder(Class<R> responseClazz) {
             this.provider = new DataProvider<>(responseClazz);
         }
 
@@ -224,31 +224,31 @@ public class DataProvider<P> {
         private String requestContentType;
         private boolean needGzip;
 
-        public RequestBuilder<P> url(String url) {
+        public RequestBuilder<R> url(String url) {
             this.url = url;
             return this;
         }
 
-        public RequestBuilder<P> get() {
+        public RequestBuilder<R> get() {
             this.requestMethod = "GET";
             return this;
         }
 
-        public RequestBuilder<P> post(String contentType, String requestContent) {
+        public RequestBuilder<R> post(String contentType, String requestContent) {
             this.requestMethod = "POST";
             this.requestContentType = contentType;
             this.requestContent = requestContent;
             return this;
         }
 
-        public RequestBuilder<P> post(String requestContent) {
+        public RequestBuilder<R> post(String requestContent) {
             this.requestMethod = "POST";
             this.requestContent = requestContent;
             this.requestContentType = "application/json";
             return this;
         }
 
-        public RequestBuilder<P> needGzip(boolean needGzip) {
+        public RequestBuilder<R> needGzip(boolean needGzip) {
             this.needGzip = needGzip;
             return this;
         }
@@ -256,9 +256,9 @@ public class DataProvider<P> {
         /**
          * 加载器，提供默认的加载器 SimpleProviderLoader
          */
-        private ILoader<P> loader = new SimpleProviderLoader<P>();
+        private ILoader<R> loader = new SimpleProviderLoader<R>();
 
-        public RequestBuilder<P> loader(ILoader<P> loader) {
+        public RequestBuilder<R> loader(ILoader<R> loader) {
             this.loader = loader;
             return this;
         }
@@ -266,7 +266,7 @@ public class DataProvider<P> {
         /**
          * 解析器，提供默认解析器 SimpleGSONParser
          */
-        public RequestBuilder<P> parser(IParser<P> parser) {
+        public RequestBuilder parser(IParser parser) {
             provider.parser = parser;
             return this;
         }
@@ -274,7 +274,7 @@ public class DataProvider<P> {
         /**
          * ViewBindItem 构建器
          */
-        public RequestBuilder<P> viewBindItemBuilder(IViewBindItemBuilder<P> builder) {
+        public RequestBuilder<R> viewBindItemBuilder(IViewBindItemBuilder<R> builder) {
             provider.builder = builder;
             return this;
         }
@@ -282,7 +282,7 @@ public class DataProvider<P> {
         /**
          * 缓存配置
          */
-        public RequestBuilder<P> cacheConfig(int cacheMode, IGetExpiredTime<P> expiredTime) {
+        public RequestBuilder<R> cacheConfig(int cacheMode, IGetExpiredTime<R> expiredTime) {
             provider.cacheMode = cacheMode;
             provider.expiredTime = expiredTime;
             return this;
