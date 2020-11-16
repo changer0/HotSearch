@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import com.example.providermoduledemo.preload.PreLoadLiveDataManager
 import com.example.providermoduledemo.sample.SampleActivity
+import com.example.providermoduledemo.sample.SampleListPageActivity
 import com.example.providermoduledemo.sample.SampleResponseBean
 import com.example.providermoduledemo.sample.SampleViewBindItemBuilder
 import com.qq.reader.provider.DataProvider
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity() {
                 .load()
             PreLoadLiveDataManager.savePreLoadLiveData("bid", liveData as MutableLiveData<ObserverEntity>)
             startActivity(Intent(this, SampleActivity::class.java))
+        }
+        sampleListPageActivity.setOnClickListener {
+            startActivity(Intent(this, SampleListPageActivity::class.java))
         }
     }
 }
