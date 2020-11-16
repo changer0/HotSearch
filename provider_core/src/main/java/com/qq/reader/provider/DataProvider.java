@@ -6,6 +6,9 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
+import converter.IConverter;
+import converter.NoConverter;
+
 import com.qq.reader.provider.inter.IGetExpiredTime;
 import com.qq.reader.provider.inter.IViewBindItemBuilder;
 import com.qq.reader.provider.loader.ILoader;
@@ -25,7 +28,7 @@ import java.util.List;
  * 2. 解析数据 <br/>
  * 3. 填充 ViewBindItem
  */
-public class DataProvider<R> {
+public class DataProvider<R, P> {
 
     private static final String TAG = "DataProvider";
 
@@ -38,6 +41,11 @@ public class DataProvider<R> {
      * 结果 bean 类型
      */
     private final Class<R> resultClass;
+
+    /**
+     * 响应 bean 类型
+     */
+    private Class<P> responseClass;
 
     /**
      * 源 JSON 字符串
@@ -58,12 +66,17 @@ public class DataProvider<R> {
     /**
      * 解析器
      */
-    private IParser<R> parser;
+    private IParser<P> parser;
 
     /**
      * 填充器
      */
     private IViewBindItemBuilder<R> builder;
+
+    /**
+     * 转换器
+     */
+    private IConverter<R, P> converter;
 
     /**
      * 网络参数接口
@@ -80,8 +93,9 @@ public class DataProvider<R> {
      */
     private int cacheMode;
 
-    private DataProvider(Class<R> resultClass) {
+    private DataProvider(Class<R> resultClass, Class<P> responseClass) {
         this.resultClass = resultClass;
+        this.responseClass = responseClass;
     }
 
     public boolean isExpired() {
@@ -120,7 +134,8 @@ public class DataProvider<R> {
     public void parseData(String jsonStr) {
         mJSONStr = jsonStr;
         try {
-            mData = getParser().parseData(jsonStr, resultClass);
+            P responseData = getParser().parseData(jsonStr, responseClass);
+            mData = getConverter().convert(responseData);
         } catch (Exception e) {
             Logger.e(TAG, "parseData: 解析失败：" + e.getMessage());
             e.printStackTrace();
@@ -169,12 +184,27 @@ public class DataProvider<R> {
     //----------------------------------------------------------------------------------------------
     // parser
 
-    private IParser<R> getParser() {
+    private IParser<P> getParser() {
         if (parser == null) {
-            return new SimpleGSONParser<R>();
+            return new SimpleGSONParser<P>();
         }
         return parser;
     }
+
+    //----------------------------------------------------------------------------------------------
+    // converter
+
+    private IConverter<R, P> getConverter() {
+        if (converter == null) {
+            //此时无需转换器，直接强转成 R 类型
+            return new NoConverter<>();
+        }
+        if (responseClass == resultClass) {
+            throw new RuntimeException("需要在 with 中传入响应 bean 类型！");
+        }
+        return converter;
+    }
+
 
     //----------------------------------------------------------------------------------------------
     // builder
@@ -199,19 +229,23 @@ public class DataProvider<R> {
     //----------------------------------------------------------------------------------------------
     // 构造
 
-    public static <R> RequestBuilder with(Class<R> responseClazz) {
-        return new RequestBuilder<R>(responseClazz);
+    public static <R, P> RequestBuilder with(Class<R> resultClass, Class<P> responseClass) {
+        return new RequestBuilder<R, P>(resultClass, responseClass);
+    }
+
+    public static <R> RequestBuilder with(Class<R> resultClass) {
+        return new RequestBuilder<R, R>(resultClass, resultClass);
     }
 
     /**
      * 请求构造类
      * @param <R>
      */
-    public static class RequestBuilder<R> {
-        private DataProvider<R> provider;
+    public static class RequestBuilder<R, P> {
+        private DataProvider<R, P> provider;
 
-        private RequestBuilder(Class<R> responseClazz) {
-            this.provider = new DataProvider<>(responseClazz);
+        private RequestBuilder(Class<R> resultClass, Class<P> responseClass) {
+            this.provider = new DataProvider<>(resultClass, responseClass);
         }
 
         /**
@@ -223,41 +257,46 @@ public class DataProvider<R> {
         private String requestContentType;
         private boolean needGzip;
 
-        public RequestBuilder<R> url(String url) {
+        public RequestBuilder<R, P> url(String url) {
             this.url = url;
             return this;
         }
 
-        public RequestBuilder<R> get() {
+        public RequestBuilder<R, P> get() {
             this.requestMethod = "GET";
             return this;
         }
 
-        public RequestBuilder<R> post(String contentType, String requestContent) {
+        public RequestBuilder<R, P> post(String contentType, String requestContent) {
             this.requestMethod = "POST";
             this.requestContentType = contentType;
             this.requestContent = requestContent;
             return this;
         }
 
-        public RequestBuilder<R> post(String requestContent) {
+        public RequestBuilder<R, P> post(String requestContent) {
             this.requestMethod = "POST";
             this.requestContent = requestContent;
             this.requestContentType = "application/json";
             return this;
         }
 
-        public RequestBuilder<R> needGzip(boolean needGzip) {
+        public RequestBuilder<R, P> needGzip(boolean needGzip) {
             this.needGzip = needGzip;
+            return this;
+        }
+
+        public RequestBuilder<R, P> converter(IConverter<R, P> converter) {
+            provider.converter = converter;
             return this;
         }
 
         /**
          * 加载器，提供默认的加载器 SimpleProviderLoader
          */
-        private ILoader<R> loader = new SimpleProviderLoader<R>();
+        private ILoader<R, P> loader = new SimpleProviderLoader<R, P>();
 
-        public RequestBuilder<R> loader(ILoader<R> loader) {
+        public RequestBuilder<R, P> loader(ILoader<R, P> loader) {
             this.loader = loader;
             return this;
         }
@@ -265,7 +304,7 @@ public class DataProvider<R> {
         /**
          * 解析器，提供默认解析器 SimpleGSONParser
          */
-        public RequestBuilder<R> parser(IParser<R> parser) {
+        public RequestBuilder<R, P> parser(IParser<P> parser) {
             provider.parser = parser;
             return this;
         }
@@ -273,7 +312,7 @@ public class DataProvider<R> {
         /**
          * ViewBindItem 构建器
          */
-        public RequestBuilder<R> viewBindItemBuilder(IViewBindItemBuilder<R> builder) {
+        public RequestBuilder<R, P> viewBindItemBuilder(IViewBindItemBuilder<R> builder) {
             provider.builder = builder;
             return this;
         }
@@ -281,7 +320,7 @@ public class DataProvider<R> {
         /**
          * 缓存配置
          */
-        public RequestBuilder<R> cacheConfig(int cacheMode, IGetExpiredTime<R> expiredTime) {
+        public RequestBuilder<R, P> cacheConfig(int cacheMode, IGetExpiredTime<R> expiredTime) {
             provider.cacheMode = cacheMode;
             provider.expiredTime = expiredTime;
             return this;
