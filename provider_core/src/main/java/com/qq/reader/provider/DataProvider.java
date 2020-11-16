@@ -24,7 +24,6 @@ import java.util.List;
  * 1. 拼接协议url <br/>
  * 2. 解析数据 <br/>
  * 3. 填充 ViewBindItem
- * 需要传入请求Bean 和 响应 Bean <br/>
  */
 public class DataProvider<R> {
 
@@ -94,7 +93,7 @@ public class DataProvider<R> {
     }
 
     /**
-     * 获取解析示例 注意判空
+     * 获取解析实例 注意判空
      */
     @Nullable
     public R getData() {

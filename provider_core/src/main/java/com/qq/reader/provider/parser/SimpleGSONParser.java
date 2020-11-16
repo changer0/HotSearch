@@ -3,11 +3,11 @@ import com.qq.reader.provider.utils.GSONUtil;
 
 /**
  * 简易 GSON 解析器
- * @param <P>
+ * @param <T>
  */
-public class SimpleGSONParser<P> implements IParser<P> {
+public class SimpleGSONParser<T> implements IParser<T> {
     @Override
-    public P parseData(String jsonStr, Class<P> clazz) {
+    public T parseData(String jsonStr, Class<T> clazz) {
         return GSONUtil.parseJsonWithGSON(jsonStr, clazz);
     }
 }

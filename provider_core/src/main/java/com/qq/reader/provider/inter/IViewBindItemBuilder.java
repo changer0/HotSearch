@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * ViewBindItem 构建器
  */
-public interface IViewBindItemBuilder<P> {
+public interface IViewBindItemBuilder<T> {
     /**构建ViewBindItem*/
-    List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> buildViewBindItem(@NonNull P data);
+    List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> buildViewBindItem(@NonNull T data);
 
 }
