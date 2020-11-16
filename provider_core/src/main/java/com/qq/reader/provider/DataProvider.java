@@ -26,19 +26,19 @@ import java.util.List;
  * 3. 填充 ViewBindItem
  * 需要传入请求Bean 和 响应 Bean <br/>
  */
-public class DataProvider<RESULT> {
+public class DataProvider<R> {
 
     private static final String TAG = "DataProvider";
 
     /**
      * GSON 解析生成的Bean
      */
-    private RESULT mData;
+    private R mData;
 
     /**
-     * 响应 bean 类型
+     * 结果 bean 类型
      */
-    private final Class<RESULT> responseClass;
+    private final Class<R> resultClass;
 
     /**
      * 源 JSON 字符串
@@ -59,12 +59,12 @@ public class DataProvider<RESULT> {
     /**
      * 解析器
      */
-    private IParser<RESULT> parser;
+    private IParser<R> parser;
 
     /**
      * 填充器
      */
-    private IViewBindItemBuilder<RESULT> builder;
+    private IViewBindItemBuilder<R> builder;
 
     /**
      * 网络参数接口
@@ -74,15 +74,15 @@ public class DataProvider<RESULT> {
     /**
      * 过期时间
      */
-    private IGetExpiredTime<RESULT> expiredTime;
+    private IGetExpiredTime<R> expiredTime;
 
     /**
      * 缓存模式
      */
     private int cacheMode;
 
-    private DataProvider(Class<RESULT> responseClass) {
-        this.responseClass = responseClass;
+    private DataProvider(Class<R> resultClass) {
+        this.resultClass = resultClass;
     }
 
     public boolean isExpired() {
@@ -97,7 +97,7 @@ public class DataProvider<RESULT> {
      * 获取解析示例 注意判空
      */
     @Nullable
-    public RESULT getData() {
+    public R getData() {
         return mData;
     }
 
@@ -121,12 +121,12 @@ public class DataProvider<RESULT> {
     public void parseData(String jsonStr) {
         mJSONStr = jsonStr;
         try {
-            mData = getParser().parseData(jsonStr, responseClass);
+            mData = getParser().parseData(jsonStr, resultClass);
         } catch (Exception e) {
             Logger.e(TAG, "parseData: 解析失败：" + e.getMessage());
             e.printStackTrace();
             try {
-                mData = responseClass.newInstance();
+                mData = resultClass.newInstance();
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -170,9 +170,9 @@ public class DataProvider<RESULT> {
     //----------------------------------------------------------------------------------------------
     // parser
 
-    private IParser<RESULT> getParser() {
+    private IParser<R> getParser() {
         if (parser == null) {
-            return new SimpleGSONParser<RESULT>();
+            return new SimpleGSONParser<R>();
         }
         return parser;
     }
@@ -180,7 +180,7 @@ public class DataProvider<RESULT> {
     //----------------------------------------------------------------------------------------------
     // builder
 
-    private IViewBindItemBuilder<RESULT> getBuilder() {
+    private IViewBindItemBuilder<R> getBuilder() {
         if (builder == null) {
             throw new RuntimeException("Provider 组件需要提供 IViewBindItemBuilder 构建接口，请参考文档使用！");
         }
