@@ -16,9 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * for 支持使用 IModel IView 形式构建 ViewBindItem
  */
 @SuppressWarnings("rawtypes")
-public abstract class BaseViewBindModelItem
-        <Bean>
-        extends BaseViewBindItem<Bean, BaseViewHolder> {
+public abstract class BaseViewBindModelItem <Bean> extends BaseViewBindItem<Bean, BaseViewHolder> {
 
     private static final String TAG = "BaseViewBindModelItem";
 
