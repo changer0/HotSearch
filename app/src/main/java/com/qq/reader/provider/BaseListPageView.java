@@ -69,14 +69,13 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
         mAdapter = initAdapter();
         mLoadMoreView = getLoadMoreView();
         mAdapter.setLoadMoreView(mLoadMoreView);
-        mAdapter.setOnLoadMoreListener(this, mRecyclerView);
-        mAdapter.setEnableLoadMore(false);
         mRecyclerView.setAdapter(mAdapter);
 
         mLoadingView = contentView.findViewById(getLoadingViewIdRes());
         mDataErrorView = contentView.findViewById(getDataErrorViewIdRes());
         mPullDownView = (SwipeRefreshLayout) contentView.findViewById(getPullDownViewIdRes());
         mPullDownView.setOnRefreshListener(this);
+        mPullDownView.setEnabled(false);
         showLoadingView();
         hideDataErrorView();
     }
@@ -136,7 +135,9 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
     public void onLoadMoreRequested() {
         Log.d(TAG, "onLoadMoreRequested: 调用");
         mRecyclerViewState = STATE_UP_LOAD_MORE;
-        requestLoadMoreListener.onLoadMoreRequested();
+        if (requestLoadMoreListener != null) {
+            requestLoadMoreListener.onLoadMoreRequested();
+        }
     }
 
     public LoadMoreView getLoadMoreView() {
@@ -144,7 +145,7 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
     }
 
     public void setOnLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener requestLoadMoreListener) {
-        setEnableLoadMore(true);
+        mAdapter.setOnLoadMoreListener(this, mRecyclerView);
         this.requestLoadMoreListener = requestLoadMoreListener;
     }
 
@@ -187,6 +188,7 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
         if (entity.isSuccess()) {
             List<BaseViewBindItem> viewBindItems = entity.provider.getViewBindItems();
             if (viewBindItems == null) {
+                Log.e(TAG, "onChanged: viewBindItems == null");
                 showDataErrorView();
                 return;
             }
@@ -197,7 +199,9 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
                 mAdapter.addData(viewBindItems);
             }
             mAdapter.loadMoreComplete();
+            hideDataErrorView();
         } else {
+            Log.e(TAG, "onChanged: entity.isSuccess() false ");
             showDataErrorView();
         }
         mPullDownView.setRefreshing(false);

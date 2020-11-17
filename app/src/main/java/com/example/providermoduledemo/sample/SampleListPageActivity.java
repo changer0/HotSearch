@@ -38,7 +38,7 @@ public class SampleListPageActivity extends AppCompatActivity {
 
     private void loadData(int index) {
         String url = String.format(SERVER_URL, index);
-        Log.d(TAG, "loadData: url: $url");
+        Log.d(TAG, "loadData: url:" + url);
 
         DataProvider.with(SampleResponseBean.class)
                 .url(url)

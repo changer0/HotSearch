@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -26,6 +27,7 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
 
     private DataProvider<R, P> provider;
     private ProviderLiveData liveData = new ProviderLiveData();
+    private long lastTime = 0L;
 
 
     /**
@@ -93,6 +95,7 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
         if (provider == null) {
             throw new NullPointerException("provider 不可为空");
         }
+        lastTime = System.currentTimeMillis();
         Observable<DataProvider<R, P>> observable = getObservable();
         observable.subscribe(new Observer<DataProvider<R, P>>() {
                     @Override
@@ -102,13 +105,13 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
 
                     @Override
                     public void onNext(@NotNull DataProvider<R, P> dataProvider) {
-                        Logger.d(TAG, "onNext: called: " + Thread.currentThread());
+                        Logger.d(TAG, "onNext: called: 耗时：" + getFormatTimeConsuming());
                         notifyLoadPageDataSuccess(dataProvider);
                     }
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                        Logger.e(TAG, "loadData onError: ");
+                        Logger.e(TAG, "loadData onError: 耗时：" + getFormatTimeConsuming());
                         notifyLoadPageDataFailed(provider, e);
                         e.printStackTrace();
                     }
@@ -119,6 +122,11 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
                     }
                 });
         return liveData;
+    }
+
+    private String getFormatTimeConsuming() {
+        long time = System.currentTimeMillis() - lastTime;
+        return String.format(Locale.CHINA, "%fs", time/1000f);
     }
 
 }
