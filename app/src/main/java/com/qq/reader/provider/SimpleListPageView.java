@@ -20,6 +20,11 @@ public class SimpleListPageView extends BaseListPageView {
     }
 
     @Override
+    public int getPullDownViewIdRes() {
+        return R.id.pull_down_list;
+    }
+
+    @Override
     public int getContentViewLayoutRes() {
         return R.layout.common_recycle_layout;
     }

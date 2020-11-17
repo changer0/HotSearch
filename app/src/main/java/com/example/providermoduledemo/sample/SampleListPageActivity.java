@@ -26,10 +26,13 @@ public class SampleListPageActivity extends AppCompatActivity {
         simpleListPageView = new SimpleListPageView(this);
         setContentView(simpleListPageView.getContentView());
         loadData(curIndex);
-        simpleListPageView.setRequestLoadMoreListener(() -> {
+        simpleListPageView.setOnLoadMoreListener(() -> {
             curIndex++;
             curIndex = curIndex > 5 ? 1 : curIndex;
             loadData(curIndex);
+        });
+        simpleListPageView.setOnRefreshListener(() -> {
+            loadData(1);
         });
     }
 
@@ -41,6 +44,7 @@ public class SampleListPageActivity extends AppCompatActivity {
                 .url(url)
                 .viewBindItemBuilder(new SampleViewBindItemBuilder())
                 .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
-                .load().observe(this, simpleListPageView);
+                .load()
+                .observe(this, simpleListPageView);
     }
 }

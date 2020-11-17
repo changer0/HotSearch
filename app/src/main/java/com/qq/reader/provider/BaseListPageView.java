@@ -11,6 +11,7 @@ import androidx.annotation.LayoutRes;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -25,7 +26,7 @@ import java.util.List;
  * 页面列表加载辅助类
  * 针对 DataProvider 框架上层的封装 View 层
  */
-abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMoreListener, Observer<ObserverEntity> {
+abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMoreListener, Observer<ObserverEntity>, SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "PageListLoadHelper";
 
     protected Context context;
@@ -45,9 +46,11 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
     protected View mLoadingView;
     protected View mDataErrorView;
 
+    //下拉刷新
+    protected SwipeRefreshLayout mPullDownView;
+    private SwipeRefreshLayout.OnRefreshListener refreshListener;
     //Load More
     private BaseQuickAdapter.RequestLoadMoreListener requestLoadMoreListener;
-    private boolean enableLoadMore = true;
 
     public BaseListPageView(Context context) {
         this.context = context;
@@ -66,13 +69,14 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
         mAdapter = initAdapter();
         mLoadMoreView = getLoadMoreView();
         mAdapter.setLoadMoreView(mLoadMoreView);
-        mAdapter.setEnableLoadMore(enableLoadMore);
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
+        mAdapter.setEnableLoadMore(false);
         mRecyclerView.setAdapter(mAdapter);
 
         mLoadingView = contentView.findViewById(getLoadingViewIdRes());
         mDataErrorView = contentView.findViewById(getDataErrorViewIdRes());
-
+        mPullDownView = (SwipeRefreshLayout) contentView.findViewById(getPullDownViewIdRes());
+        mPullDownView.setOnRefreshListener(this);
         showLoadingView();
         hideDataErrorView();
     }
@@ -83,21 +87,6 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
 
     public View getContentView() {
         return contentView;
-    }
-
-    //----------------------------------------------------------------------------------------------
-    // Loading More View 控制
-    public LoadMoreView getLoadMoreView() {
-        return new SimpleLoadMoreView();
-    }
-
-    public void setRequestLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener requestLoadMoreListener) {
-        this.requestLoadMoreListener = requestLoadMoreListener;
-    }
-
-    public void setEnableLoadMore(boolean enableLoadMore) {
-        this.enableLoadMore = enableLoadMore;
-        mAdapter.setEnableLoadMore(enableLoadMore);
     }
 
     //----------------------------------------------------------------------------------------------
@@ -150,13 +139,42 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
         requestLoadMoreListener.onLoadMoreRequested();
     }
 
+    public LoadMoreView getLoadMoreView() {
+        return new SimpleLoadMoreView();
+    }
+
+    public void setOnLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener requestLoadMoreListener) {
+        setEnableLoadMore(true);
+        this.requestLoadMoreListener = requestLoadMoreListener;
+    }
+
+    public void setEnableLoadMore(boolean enableLoadMore) {
+        mAdapter.setEnableLoadMore(enableLoadMore);
+    }
+
     //----------------------------------------------------------------------------------------------
     // OnRefreshListener 下拉刷新
+    @Override
     public void onRefresh() {
         Log.d(TAG, "onRefresh: 调用");
         mRecyclerViewState = STATE_DOWN_REFRESH;
+        if (refreshListener != null) {
+            refreshListener.onRefresh();
+        }
     }
 
+    public void setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener refreshListener) {
+        setEnablePullDownRefresh(true);
+        this.refreshListener = refreshListener;
+    }
+
+    public void setEnablePullDownRefresh(boolean enablePullDownRefresh) {
+        mPullDownView.setEnabled(enablePullDownRefresh);
+    }
+
+    public boolean isRefreshing() {
+        return mPullDownView.isRefreshing();
+    }
 
     //----------------------------------------------------------------------------------------------
     // 数据回调处理
@@ -182,10 +200,12 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
         } else {
             showDataErrorView();
         }
+        mPullDownView.setRefreshing(false);
     }
 
     //----------------------------------------------------------------------------------------------
     // 抽象方法
+    abstract public @IdRes int getPullDownViewIdRes();
     abstract public @IdRes int getRecyclerViewIdRes();
     abstract public @IdRes int getLoadingViewIdRes();
     abstract public @IdRes int getDataErrorViewIdRes();
