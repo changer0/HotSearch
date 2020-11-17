@@ -3,7 +3,6 @@ package com.qq.reader.provider;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import converter.IConverter;
 import converter.NoConverter;
@@ -55,7 +54,7 @@ public class DataProvider<R, P> {
      *  ViewBindItems 列表
      */
     @Nullable
-    private List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> mViewBindItems;
+    private List<BaseViewBindItem> mViewBindItems;
 
     /**
      * 是否为缓存数据
@@ -123,7 +122,7 @@ public class DataProvider<R, P> {
     /**
      * 获取 mViewBindItems
      */
-    public List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> getViewBindItems() {
+    public List<BaseViewBindItem> getViewBindItems() {
         return mViewBindItems;
     }
 

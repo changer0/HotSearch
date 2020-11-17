@@ -180,7 +180,6 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
     //----------------------------------------------------------------------------------------------
     // 数据回调处理
     @Override
-    @SuppressWarnings("unchecked")
     public void onChanged(ObserverEntity entity) {
         if (context == null) {
             return;

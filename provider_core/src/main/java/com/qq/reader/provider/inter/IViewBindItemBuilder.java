@@ -11,6 +11,5 @@ import java.util.List;
  */
 public interface IViewBindItemBuilder<T> {
     /**构建ViewBindItem*/
-    List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> buildViewBindItem(@NonNull T data);
-
+    List<BaseViewBindItem> buildViewBindItem(@NonNull T data);
 }
