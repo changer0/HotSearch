@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.log.Logger;
+import com.qq.reader.provider.utils.CastUtils;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -43,12 +45,12 @@ public abstract class BaseViewBindModelItem
                 Logger.e(TAG, "资源文件中的 View，必须实现 IView 接口！！！");
                 continue;
             }
-            IViewModel value = viewModelEntry.getValue();
-            if (value == null) {
-                Logger.e(TAG, "当前 ViewModel 为空：" + value);
+            IViewModel viewModel = viewModelEntry.getValue();
+            if (viewModel == null) {
+                Logger.e(TAG, "当前 ViewModel 为空");
                 continue;
             }
-            ((IView) view).setModel(viewModelEntry.getValue());
+            ((IView<? extends IViewModel>) view).setModel(CastUtils.cast(viewModel));
         }
         return true;
     }
