@@ -191,7 +191,7 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
                 showDataErrorView();
                 return;
             }
-            if (mRecyclerViewState == STATE_ENTER_INIT) {
+            if (mRecyclerViewState == STATE_ENTER_INIT || mRecyclerViewState == STATE_DOWN_REFRESH) {
                 mAdapter.setNewData(viewBindItems);
                 hideLoadingView();
             } else if (mRecyclerViewState == STATE_UP_LOAD_MORE) {
