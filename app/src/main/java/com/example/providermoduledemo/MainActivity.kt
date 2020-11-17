@@ -14,7 +14,6 @@ import com.qq.reader.provider.loader.ObserverEntity
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val TAG = "MainActivity"
-@Suppress("UNCHECKED_CAST")
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 .url(String.format(SampleActivity.SERVER_URL, 1))
                 .viewBindItemBuilder(SampleViewBindItemBuilder())
                 .load()
-            PreLoadLiveDataManager.savePreLoadLiveData("bid", liveData as MutableLiveData<ObserverEntity>)
+            PreLoadLiveDataManager.savePreLoadLiveData("bid", liveData)
             startActivity(Intent(this, SampleActivity::class.java))
         }
         sampleListPageActivity.setOnClickListener {

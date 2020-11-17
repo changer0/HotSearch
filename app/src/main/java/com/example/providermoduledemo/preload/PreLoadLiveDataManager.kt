@@ -1,7 +1,6 @@
 package com.example.providermoduledemo.preload
 
-import androidx.lifecycle.MutableLiveData
-import com.qq.reader.provider.loader.ObserverEntity
+import com.qq.reader.provider.ProviderLiveData
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -11,19 +10,19 @@ object PreLoadLiveDataManager {
     /**
      * 存储用于预加载的 LiveData
      */
-    private val map = ConcurrentHashMap<String, MutableLiveData<ObserverEntity>>()
+    private val map = ConcurrentHashMap<String, ProviderLiveData>()
 
     /**
      * 获取预加载 LiveData
      */
-    public fun getLiveData(key: String): MutableLiveData<ObserverEntity>? {
+    public fun getLiveData(key: String): ProviderLiveData? {
         return map[key]
     }
 
     /**
      * 保存 LiveData
      */
-    public fun savePreLoadLiveData(key: String, liveData: MutableLiveData<ObserverEntity>) {
+    public fun savePreLoadLiveData(key: String, liveData: ProviderLiveData) {
         map[key] = liveData
     }
 
