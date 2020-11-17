@@ -14,14 +14,14 @@ import java.util.List;
 /**
  * ViewBindItemBuilder 示例
  */
-public class SampleViewBindItemBuilder implements IViewBindItemBuilder<SampleResponseBean> {
+public class SampleViewBindItemBuilder implements IViewBindItemBuilder<SampleResultBean> {
     @Override
-    public List<BaseViewBindItem> buildViewBindItem(@NonNull SampleResponseBean data) {
+    public List<BaseViewBindItem> buildViewBindItem(@NonNull SampleResultBean data) {
         List<BaseViewBindItem> viewBindItemList = new ArrayList<>();
-        List<SampleResponseBean.Item> dataList = data.getList();
+        List<SampleResultBean.Item> dataList = data.getList();
         if (dataList == null) return viewBindItemList;
-        for (SampleResponseBean.Item item : dataList) {
-            BaseViewBindItem<SampleResponseBean.Item, BaseViewHolder> bindViewItem = null;
+        for (SampleResultBean.Item item : dataList) {
+            BaseViewBindItem<SampleResultBean.Item, BaseViewHolder> bindViewItem = null;
             switch (item.getStyle()) {
                 case 0:
                     bindViewItem = new ViewBindItemLIRTGroupStyle0();

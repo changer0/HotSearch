@@ -2,8 +2,8 @@ package com.example.providermoduledemo.sample
 
 import com.qq.reader.provider.inter.IGetExpiredTime
 
-class SampleGetExpiredTime : IGetExpiredTime<SampleResponseBean>{
-    override fun getExpiredTime(mData: SampleResponseBean?): Long {
+class SampleGetExpiredTime : IGetExpiredTime<SampleResultBean>{
+    override fun getExpiredTime(mData: SampleResultBean?): Long {
         if (mData == null) {
             return 0
         }

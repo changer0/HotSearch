@@ -101,7 +101,7 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
         val url = String.format(SERVER_URL, index)
         Log.d(TAG, "loadData: url: $url")
 
-        DataProvider.with(SampleResponseBean::class.java)
+        DataProvider.with(SampleResultBean::class.java)
             .url(url)
             .viewBindItemBuilder(SampleViewBindItemBuilder())
             .cacheConfig(cacheMode, SampleGetExpiredTime())

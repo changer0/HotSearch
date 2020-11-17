@@ -1,21 +1,21 @@
 package com.example.providermoduledemo.viewmodel
 
 import com.example.providermoduledemo.R
-import com.example.providermoduledemo.sample.SampleResponseBean
+import com.example.providermoduledemo.sample.SampleResultBean
 import com.qq.reader.provider.viewmodel.BaseViewBindModelItem
 import com.qq.reader.provider.viewmodel.IViewModel
 
 /**
  * 左图右文 组合样式 0
  */
-class ViewBindItemLIRTGroupStyle0 : BaseViewBindModelItem<SampleResponseBean.Item>() {
+class ViewBindItemLIRTGroupStyle0 : BaseViewBindModelItem<SampleResultBean.Item>() {
 
     override fun getResLayoutId(): Int {
         return R.layout.view_model_data_item_style0
     }
 
     override fun onBindViewModel(
-        data: SampleResponseBean.Item?,
+        data: SampleResultBean.Item?,
         viewModelMap: MutableMap<Int, IViewModel>
     ) {
         val bookList = data?.bookList!!
