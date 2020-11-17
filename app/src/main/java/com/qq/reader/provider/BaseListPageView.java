@@ -30,10 +30,8 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
 
     protected Context context;
     protected RecyclerView mRecyclerView;
-
     protected BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> mAdapter;
     protected LinearLayoutManager mLayoutManager;
-
     //进入时调用
     protected static final int STATE_ENTER_INIT = 0;
     //下拉刷新
@@ -42,31 +40,35 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
     protected static final int STATE_UP_LOAD_MORE = 2;
     protected int mRecyclerViewState = STATE_ENTER_INIT;
 
+    private View contentView;
     protected LoadMoreView mLoadMoreView;
-
     protected View mLoadingView;
     protected View mDataErrorView;
 
-    private View contentView;
+    //Load More
+    private BaseQuickAdapter.RequestLoadMoreListener requestLoadMoreListener;
+    private boolean enableLoadMore = true;
 
     public BaseListPageView(Context context) {
         this.context = context;
         this.contentView = LayoutInflater.from(context).inflate(getContentViewLayoutRes(), null);
-        onCreateView();
+        onCreateView(contentView);
     }
 
-    protected void onCreateView() {
+
+    protected void onCreateView(View contentView) {
         mRecyclerView = (RecyclerView) contentView.findViewById(getRecyclerViewIdRes());
-        if (mRecyclerView != null) {
-            mLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-            mRecyclerView.setLayoutManager(mLayoutManager);
-            mAdapter = initAdapter();
-            mLoadMoreView = getLoadMoreView();
-            mAdapter.setLoadMoreView(mLoadMoreView);
-            mAdapter.setEnableLoadMore(true);
-            mAdapter.setOnLoadMoreListener(this, mRecyclerView);
-            mRecyclerView.setAdapter(mAdapter);
+        if (mRecyclerView == null) {
+            throw new RuntimeException("mRecyclerView 为空，请指定正确的 getRecyclerViewIdRes()");
         }
+        mLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = initAdapter();
+        mLoadMoreView = getLoadMoreView();
+        mAdapter.setLoadMoreView(mLoadMoreView);
+        mAdapter.setEnableLoadMore(enableLoadMore);
+        mAdapter.setOnLoadMoreListener(this, mRecyclerView);
+        mRecyclerView.setAdapter(mAdapter);
 
         mLoadingView = contentView.findViewById(getLoadingViewIdRes());
         mDataErrorView = contentView.findViewById(getDataErrorViewIdRes());
@@ -79,11 +81,23 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
         return new SimpleRecyclerViewAdapter(context, null);
     }
 
+    public View getContentView() {
+        return contentView;
+    }
 
     //----------------------------------------------------------------------------------------------
     // Loading More View 控制
     public LoadMoreView getLoadMoreView() {
         return new SimpleLoadMoreView();
+    }
+
+    public void setRequestLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener requestLoadMoreListener) {
+        this.requestLoadMoreListener = requestLoadMoreListener;
+    }
+
+    public void setEnableLoadMore(boolean enableLoadMore) {
+        this.enableLoadMore = enableLoadMore;
+        mAdapter.setEnableLoadMore(enableLoadMore);
     }
 
     //----------------------------------------------------------------------------------------------
@@ -133,6 +147,7 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
     public void onLoadMoreRequested() {
         Log.d(TAG, "onLoadMoreRequested: 调用");
         mRecyclerViewState = STATE_UP_LOAD_MORE;
+        requestLoadMoreListener.onLoadMoreRequested();
     }
 
     //----------------------------------------------------------------------------------------------
@@ -145,7 +160,6 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
 
     //----------------------------------------------------------------------------------------------
     // 数据回调处理
-
     @Override
     @SuppressWarnings("unchecked")
     public void onChanged(ObserverEntity entity) {
@@ -176,12 +190,4 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
     abstract public @IdRes int getLoadingViewIdRes();
     abstract public @IdRes int getDataErrorViewIdRes();
     abstract public @LayoutRes int getContentViewLayoutRes();
-
-    //----------------------------------------------------------------------------------------------
-    //
-
-
-    public View getContentView() {
-        return contentView;
-    }
 }

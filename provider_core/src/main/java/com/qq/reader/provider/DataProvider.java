@@ -3,7 +3,6 @@ package com.qq.reader.provider;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import converter.IConverter;
@@ -16,8 +15,8 @@ import com.qq.reader.provider.loader.SimpleProviderLoader;
 import com.qq.reader.provider.parser.IParser;
 import com.qq.reader.provider.log.Logger;
 import com.qq.reader.provider.inter.INetQuestParams;
-import com.qq.reader.provider.loader.ObserverEntity;
 import com.qq.reader.provider.parser.SimpleGSONParser;
+import com.qq.reader.provider.utils.CastUtils;
 
 import java.util.List;
 /**
@@ -186,7 +185,7 @@ public class DataProvider<R, P> {
 
     private IParser<P> getParser() {
         if (parser == null) {
-            return new SimpleGSONParser<P>();
+            return new SimpleGSONParser<>();
         }
         return parser;
     }
@@ -296,40 +295,40 @@ public class DataProvider<R, P> {
          */
         private ILoader<R, P> loader = new SimpleProviderLoader<R, P>();
 
-        public RequestBuilder<R, P> loader(ILoader<R, P> loader) {
-            this.loader = loader;
+        public RequestBuilder<R, P> loader(ILoader loader) {
+            this.loader = CastUtils.cast(loader);
             return this;
         }
 
         /**
          * 解析器，提供默认解析器 SimpleGSONParser
          */
-        public RequestBuilder<R, P> parser(IParser<P> parser) {
-            provider.parser = parser;
+        public RequestBuilder<R, P> parser(IParser parser) {
+            provider.parser = CastUtils.cast(parser);
             return this;
         }
 
         /**
          * ViewBindItem 构建器
          */
-        public RequestBuilder<R, P> viewBindItemBuilder(IViewBindItemBuilder<R> builder) {
-            provider.builder = builder;
+        public RequestBuilder<R, P> viewBindItemBuilder(IViewBindItemBuilder builder) {
+            provider.builder = CastUtils.cast(builder);
             return this;
         }
 
         /**
          * 缓存配置
          */
-        public RequestBuilder<R, P> cacheConfig(int cacheMode, IGetExpiredTime<R> expiredTime) {
+        public RequestBuilder<R, P> cacheConfig(int cacheMode, IGetExpiredTime expiredTime) {
             provider.cacheMode = cacheMode;
-            provider.expiredTime = expiredTime;
+            provider.expiredTime = CastUtils.cast(expiredTime);
             return this;
         }
 
         /**
          * 数据加载
          */
-        public MutableLiveData<ObserverEntity> load() {
+        public ProviderLiveData load() {
             provider.netQuestParams = new INetQuestParams() {
                 @Override
                 public String getUrl() {

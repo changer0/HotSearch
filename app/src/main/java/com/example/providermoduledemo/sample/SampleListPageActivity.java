@@ -1,9 +1,8 @@
 package com.example.providermoduledemo.sample;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
-
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.qq.reader.provider.DataProvider;
@@ -19,12 +18,19 @@ public class SampleListPageActivity extends AppCompatActivity {
 
     private SimpleListPageView simpleListPageView;
 
+    private int curIndex = 1;
+
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         simpleListPageView = new SimpleListPageView(this);
         setContentView(simpleListPageView.getContentView());
-        loadData(1);
+        loadData(curIndex);
+        simpleListPageView.setRequestLoadMoreListener(() -> {
+            curIndex++;
+            curIndex = curIndex > 5 ? 1 : curIndex;
+            loadData(curIndex);
+        });
     }
 
     private void loadData(int index) {
@@ -34,8 +40,7 @@ public class SampleListPageActivity extends AppCompatActivity {
         DataProvider.with(SampleResponseBean.class)
                 .url(url)
                 .viewBindItemBuilder(new SampleViewBindItemBuilder())
-                .cacheConfig(CacheMode.CACHE_MODE_USE_CACHE_PRIORITY, new SampleGetExpiredTime())
-                .load()
-                .observe(this, simpleListPageView);
+                .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
+                .load().observe(this, simpleListPageView);
     }
 }

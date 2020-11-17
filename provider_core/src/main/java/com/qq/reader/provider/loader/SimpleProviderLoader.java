@@ -3,6 +3,7 @@ package com.qq.reader.provider.loader;
 import androidx.lifecycle.MutableLiveData;
 
 import com.qq.reader.provider.DataProvider;
+import com.qq.reader.provider.ProviderLiveData;
 import com.qq.reader.provider.cache.CacheController;
 import com.qq.reader.provider.define.ProviderConstants;
 import com.qq.reader.provider.log.Logger;
@@ -24,7 +25,7 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
     private static final String TAG = "SimpleProviderLoader";
 
     private DataProvider<R, P> provider;
-    private MutableLiveData<ObserverEntity> liveData = new MutableLiveData<>();
+    private ProviderLiveData liveData = new ProviderLiveData();
 
 
     /**
@@ -87,7 +88,7 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
     //----------------------------------------------------------------------------------------------
     // ILoader 的接口实现
     @Override
-    public MutableLiveData<ObserverEntity> loadData(DataProvider<R, P> provider) {
+    public ProviderLiveData loadData(DataProvider<R, P> provider) {
         this.provider = provider;
         if (provider == null) {
             throw new NullPointerException("provider 不可为空");

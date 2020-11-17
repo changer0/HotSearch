@@ -1,6 +1,7 @@
 package com.qq.reader.provider;
 
 import android.content.Context;
+import android.view.View;
 
 import com.example.providermoduledemo.R;
 
@@ -10,6 +11,12 @@ import com.example.providermoduledemo.R;
 public class SimpleListPageView extends BaseListPageView {
     public SimpleListPageView(Context context) {
         super(context);
+    }
+
+    @Override
+    protected void onCreateView(View contentView) {
+        super.onCreateView(contentView);
+        // TODO: Perform findViewById and other initialization operations
     }
 
     @Override
