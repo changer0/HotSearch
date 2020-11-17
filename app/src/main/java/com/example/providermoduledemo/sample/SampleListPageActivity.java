@@ -14,7 +14,7 @@ public class SampleListPageActivity extends AppCompatActivity {
 
     private static final String TAG = "SampleListPageActivity";
 
-    private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/leftImgRightText (%s).json";
+    private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/convertTest (%s).json";
 
     private SimpleListPageView simpleListPageView;
 
@@ -40,8 +40,9 @@ public class SampleListPageActivity extends AppCompatActivity {
         String url = String.format(SERVER_URL, index);
         Log.d(TAG, "loadData: url:" + url);
 
-        DataProvider.with(SampleResultBean.class)
+        DataProvider.with(SampleResultBean.class, SampleConvertResponseBean.class)
                 .url(url)
+                .converter(new SampleConverter())
                 .viewBindItemBuilder(new SampleViewBindItemBuilder())
                 .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
                 .load()

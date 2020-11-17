@@ -6,5 +6,5 @@ package converter;
  * @param <P>
  */
 public interface IConverter<R, P> {
-    R convert(P bean);
+    R convert(P responseBean);
 }

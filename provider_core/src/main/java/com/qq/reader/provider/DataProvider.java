@@ -284,8 +284,8 @@ public class DataProvider<R, P> {
             return this;
         }
 
-        public RequestBuilder<R, P> converter(IConverter<R, P> converter) {
-            provider.converter = converter;
+        public RequestBuilder<R, P> converter(IConverter converter) {
+            provider.converter = CastUtils.cast(converter);
             return this;
         }
 
