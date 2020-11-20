@@ -3,6 +3,7 @@ package com.qq.reader.provider.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.os.Looper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,5 +34,13 @@ public class ProviderUtility {
 
     public static ThreadFactory threadFactory(final String name) {
         return runnable -> new Thread(runnable, name);
+    }
+
+    /**
+     * 是否 UI 线程
+     * @return
+     */
+    public static boolean isUIThread() {
+        return Thread.currentThread() == Looper.getMainLooper().getThread();
     }
 }

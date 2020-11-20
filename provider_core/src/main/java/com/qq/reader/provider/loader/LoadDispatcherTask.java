@@ -1,17 +1,13 @@
 package com.qq.reader.provider.loader;
 
-import android.os.Looper;
-
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.cache.CacheController;
 import com.qq.reader.provider.cache.CacheMode;
 import com.qq.reader.provider.log.Logger;
 import com.qq.reader.provider.task.TaskHandler;
-
+import com.qq.reader.provider.utils.ProviderUtility;
 import java.io.IOException;
 import java.io.InputStream;
-
-import io.reactivex.ObservableEmitter;
 
 /**
  * @author zhanglulu on 2019/3/2.
@@ -27,10 +23,11 @@ public class LoadDispatcherTask<R, P> implements Runnable, LoadDiskDataTask.Load
      */
     private final DataProvider<R, P> provider;
 
+
     /**
-     * 结果发射器
+     * Task 完成监听
      */
-    private ObservableEmitter<DataProvider<R, P>> mEmitter;
+    private ITaskFinishListener mTaskFinishListener;
 
     /**
      * 缓存流
@@ -57,8 +54,8 @@ public class LoadDispatcherTask<R, P> implements Runnable, LoadDiskDataTask.Load
         return true;
     }
 
-    public void setEmitter(ObservableEmitter<DataProvider<R, P>> mEmitter) {
-        this.mEmitter = mEmitter;
+    public void setTaskFinishListener(ITaskFinishListener mTaskFinishListener) {
+        this.mTaskFinishListener = mTaskFinishListener;
     }
 
     public int getCacheMode() {
@@ -93,7 +90,7 @@ public class LoadDispatcherTask<R, P> implements Runnable, LoadDiskDataTask.Load
         }
         LoadNetDataTask netTask = new LoadNetDataTask(provider);
         netTask.setLoadDataListener(this);
-        if (isUIThread()) {
+        if (ProviderUtility.isUIThread()) {
             TaskHandler.getInstance().enqueue(netTask);
         } else {
             netTask.run();
@@ -112,7 +109,7 @@ public class LoadDispatcherTask<R, P> implements Runnable, LoadDiskDataTask.Load
                 cacheInputStream, isLoadExpired);
         diskTask.setLoadDataListener(this);
         diskTask.setLoadExpiredDataListener(this);
-        if (isUIThread()) {
+        if (ProviderUtility.isUIThread()) {
             TaskHandler.getInstance().enqueue(diskTask);
         } else {
             diskTask.run();
@@ -120,23 +117,13 @@ public class LoadDispatcherTask<R, P> implements Runnable, LoadDiskDataTask.Load
     }
 
     /**
-     * 是否 UI 线程
-     * @return
-     */
-    private boolean isUIThread() {
-        return Thread.currentThread() == Looper.getMainLooper().getThread();
-    }
-
-    /**
      * 成功通知
      * @param isCache
      */
     private void notifyLoadPageDataSuccess(boolean isCache) {
-        if (mEmitter != null) {
-            //并发请求直接发送出去
+        if (mTaskFinishListener != null) {
             provider.setCache(isCache);
-            mEmitter.onNext(provider);
-            mEmitter.onComplete();
+            mTaskFinishListener.onSuccess(provider);
         }
     }
 
@@ -147,9 +134,8 @@ public class LoadDispatcherTask<R, P> implements Runnable, LoadDiskDataTask.Load
      */
     private void notifyLoadPageDataFailed(Throwable e) {
         try {
-            if (mEmitter != null) {
-                mEmitter.onError(e);
-                mEmitter.onComplete();
+            if (mTaskFinishListener != null) {
+                mTaskFinishListener.onFailure(e);
             }
             e.printStackTrace();
         } catch (Exception ex) {

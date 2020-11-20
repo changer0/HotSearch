@@ -1,23 +1,16 @@
 package com.qq.reader.provider.loader;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
 import com.qq.reader.provider.cache.CacheController;
 import com.qq.reader.provider.define.ProviderConstants;
 import com.qq.reader.provider.log.Logger;
 import com.qq.reader.provider.task.TaskHandler;
-
-import org.jetbrains.annotations.NotNull;
+import com.qq.reader.provider.utils.ProviderUtility;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
-
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 /**
  * 对 Loader 的简单实现，支持本地缓存 使用方可根据自己的需求进行定制
@@ -28,23 +21,31 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
     private DataProvider<R, P> provider;
     private ProviderLiveData liveData = new ProviderLiveData();
     private long lastTime = 0L;
+    private ObserverEntity syncObserverEntity;
 
+    private final ITaskFinishListener<R, P> mTaskFinishListener = new ITaskFinishListener<R, P>() {
+        @Override
+        public void onSuccess(DataProvider<R, P> provider) {
+            notifyLoadPageDataSuccess(provider);
+        }
 
-    /**
-     * 获取 RxJava 请求
-     */
-    private Observable<DataProvider<R, P>> getObservable() {
-        return Observable.create(emitter -> {
-            LoadDispatcherTask<R, P> dispatcher = getDispatcherTask();
-            dispatcher.setEmitter(emitter);
-            TaskHandler.getInstance().enqueue(dispatcher);
-        });
+        @Override
+        public void onFailure(Throwable throwable) {
+            notifyLoadPageDataFailed(provider, throwable);
+        }
+    };
+
+    private void sendASyncDispatcherTask() {
+        LoadDispatcherTask<R, P> dispatcher = getDispatcherTask();
+        dispatcher.setTaskFinishListener(mTaskFinishListener);
+        TaskHandler.getInstance().enqueue(dispatcher);
     }
 
     /**
      * 为 DataProvider<R, P> 提供分发任务的 Runnable
      */
     private synchronized LoadDispatcherTask<R, P> getDispatcherTask() {
+        lastTime = System.currentTimeMillis();
         return new LoadDispatcherTask<R, P>(provider);
     }
 
@@ -60,6 +61,8 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
         observerEntity.throwable = e;
         observerEntity.state = ProviderConstants.PROVIDER_DATA_ERROR;
         liveData.postValue(observerEntity);
+        syncObserverEntity = observerEntity;
+        Logger.e(TAG, "notifyLoadPageDataFailed: 耗时：" + getFormatTimeConsuming());
     }
 
     /**
@@ -70,6 +73,8 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
         observerEntity.provider = p;
         observerEntity.state = ProviderConstants.PROVIDER_DATA_SUCCESS;
         liveData.postValue(observerEntity);
+        syncObserverEntity = observerEntity;
+        Logger.e(TAG, "notifyLoadPageDataSuccess: 耗时：" + getFormatTimeConsuming());
     }
 
     //----------------------------------------------------------------------------------------------
@@ -95,32 +100,7 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
         if (provider == null) {
             throw new NullPointerException("provider 不可为空");
         }
-        lastTime = System.currentTimeMillis();
-        Observable<DataProvider<R, P>> observable = getObservable();
-        observable.subscribe(new Observer<DataProvider<R, P>>() {
-                    @Override
-                    public void onSubscribe(@NotNull Disposable d) {
-                        Logger.d(TAG, "onSubscribe: called: " + Thread.currentThread());
-                    }
-
-                    @Override
-                    public void onNext(@NotNull DataProvider<R, P> dataProvider) {
-                        Logger.d(TAG, "onNext: called: 耗时：" + getFormatTimeConsuming());
-                        notifyLoadPageDataSuccess(dataProvider);
-                    }
-
-                    @Override
-                    public void onError(@NotNull Throwable e) {
-                        Logger.e(TAG, "loadData onError: 耗时：" + getFormatTimeConsuming());
-                        notifyLoadPageDataFailed(provider, e);
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Logger.d(TAG, "onComplete: called");
-                    }
-                });
+        sendASyncDispatcherTask();
         return liveData;
     }
 
