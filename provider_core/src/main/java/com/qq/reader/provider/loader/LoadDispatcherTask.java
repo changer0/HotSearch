@@ -27,7 +27,7 @@ public class LoadDispatcherTask<R, P> implements Runnable, LoadDiskDataTask.Load
     /**
      * Task 完成监听
      */
-    private ITaskFinishListener mTaskFinishListener;
+    private ITaskFinishListener<R, P> mTaskFinishListener;
 
     /**
      * 缓存流
