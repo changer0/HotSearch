@@ -1,7 +1,7 @@
 package com.qq.reader.provider.generator.compiler;
 
 import com.qq.reader.provider.generator.annotations.ProviderGeneratorType;
-import com.qq.reader.provider.generator.ILoadProviderGenerator;
+import com.qq.reader.provider.generator.IProviderGeneratorManager;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;
@@ -113,7 +113,7 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
 
 
         // getLoadProvider 方法
-        MethodSpec.Builder getLoadProvider = MethodSpec.methodBuilder("getLoadProvider").addModifiers(Modifier.PUBLIC);
+        MethodSpec.Builder getLoadProvider = MethodSpec.methodBuilder("getProviderGenerator").addModifiers(Modifier.PUBLIC);
         ClassName param = ClassName.get(String.class);
         getLoadProvider.addParameter(param, "type");
         TypeName returnType = TypeVariableName.get(String.class);//返回值
@@ -121,7 +121,7 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
         getLoadProvider.addStatement("return providerGeneratorMap.get(type)");
 
         //class 让其实现接口
-        ClassName iGetViewModelMapInter = ClassName.get(ILoadProviderGenerator.class);
+        ClassName iGetViewModelMapInter = ClassName.get(IProviderGeneratorManager.class);
         //class
         TypeSpec typeSpec = TypeSpec.classBuilder(Constants.GENERATOR_CLASS_NAME)
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
