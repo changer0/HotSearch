@@ -16,7 +16,7 @@ import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView;
 import com.example.providermoduledemo.R;
 import com.qq.reader.provider.BaseViewBindItem;
-import com.qq.reader.provider.viewmodel.SimpleRecyclerViewAdapter;
+import com.example.providermoduledemo.QuickRecyclerViewAdapter;
 
 
 /**
@@ -84,7 +84,7 @@ public abstract class ReaderBaseListProviderActivity extends AppCompatActivity i
     }
 
     protected BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> initAdapter() {
-        return new SimpleRecyclerViewAdapter(this, null);
+        return new QuickRecyclerViewAdapter(this, null);
     }
 
     //----------------------------------------------------------------------------------------------

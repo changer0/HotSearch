@@ -1,4 +1,4 @@
-package com.qq.reader.provider.viewmodel;
+package com.example.providermoduledemo;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
+import com.qq.reader.provider.simple.SimpleViewHolder;
 
 import java.util.List;
 
@@ -17,11 +18,11 @@ import java.util.List;
  * @author zhanglulu on 2019/2/28.
  * for RecyclerView Adapter
  */
-public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> {
+public class QuickRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> {
 
     private final Context mContext;
 
-    public SimpleRecyclerViewAdapter(Context context, @Nullable List<BaseViewBindItem> data) {
+    public QuickRecyclerViewAdapter(Context context, @Nullable List<BaseViewBindItem> data) {
         super(data);
         mContext = context;
     }
@@ -45,7 +46,8 @@ public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem
         if (item != null) {
             item.setIndex(position);
             try {
-                item.attachView(holder);
+                //此处需要格外注意，由于 ViewModel 模块本身采用了 SimpleViewHolder，过此处需要做转换！！
+                item.attachView(new SimpleViewHolder(holder.itemView));
             } catch (Exception e) {
                 //如果发生异常, 该item不显示
                 holder.itemView.setVisibility(View.GONE);

@@ -3,9 +3,9 @@ package com.qq.reader.provider.viewmodel;
 import android.app.Activity;
 import android.view.View;
 import androidx.annotation.NonNull;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.log.Logger;
+import com.qq.reader.provider.simple.SimpleViewHolder;
 import com.qq.reader.provider.utils.CastUtils;
 
 import java.util.Map;
@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * for 支持使用 IModel IView 形式构建 ViewBindItem
  */
 @SuppressWarnings("rawtypes")
-public abstract class BaseViewBindModelItem <Bean> extends BaseViewBindItem<Bean, BaseViewHolder> {
+public abstract class BaseViewBindModelItem <Bean> extends BaseViewBindItem<Bean, SimpleViewHolder> {
 
     private static final String TAG = "BaseViewBindModelItem";
 
@@ -35,7 +35,7 @@ public abstract class BaseViewBindModelItem <Bean> extends BaseViewBindItem<Bean
     }
 
     @Override
-    public boolean bindView(@NonNull BaseViewHolder holder, @NonNull Activity activity) {
+    public boolean bindView(@NonNull SimpleViewHolder holder, @NonNull Activity activity) {
 
         for (Map.Entry<Integer, IViewModel> viewModelEntry : viewModelMap.entrySet()) {
             View view = holder.getView(viewModelEntry.getKey());

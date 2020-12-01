@@ -48,5 +48,5 @@ dependencies {
     api project(":provider_core")
 
     //api (name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    //api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 }

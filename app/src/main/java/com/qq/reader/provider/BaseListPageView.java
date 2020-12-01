@@ -18,7 +18,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView;
 import com.qq.reader.provider.loader.ObserverEntity;
-import com.qq.reader.provider.viewmodel.SimpleRecyclerViewAdapter;
+import com.example.providermoduledemo.QuickRecyclerViewAdapter;
 
 import java.util.List;
 
@@ -81,7 +81,7 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
     }
 
     protected BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> initAdapter() {
-        return new SimpleRecyclerViewAdapter(context, null);
+        return new QuickRecyclerViewAdapter(context, null);
     }
 
     public View getContentView() {

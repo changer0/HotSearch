@@ -2,11 +2,11 @@ package com.example.providermoduledemo.sample;
 
 import androidx.annotation.NonNull;
 
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.providermoduledemo.viewmodel.ViewBindItemLIRTGroupStyle0;
 import com.example.providermoduledemo.viewmodel.ViewBindItemLIRTGroupStyle1;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.inter.IViewBindItemBuilder;
+import com.qq.reader.provider.simple.SimpleViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class SampleViewBindItemBuilder implements IViewBindItemBuilder<SampleRes
         List<SampleResultBean.Item> dataList = data.getList();
         if (dataList == null) return viewBindItemList;
         for (SampleResultBean.Item item : dataList) {
-            BaseViewBindItem<SampleResultBean.Item, BaseViewHolder> bindViewItem = null;
+            BaseViewBindItem<SampleResultBean.Item, SimpleViewHolder> bindViewItem = null;
             switch (item.getStyle()) {
                 case 0:
                     bindViewItem = new ViewBindItemLIRTGroupStyle0();
