@@ -61,4 +61,10 @@ dependencies {
     //下拉刷新库，后续会更换成 QQ Reader 的刷新库
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
+    implementation project(':provider_core')
+    implementation project(':provider_generator')
+    //Provider Generator 注解
+    implementation project(':lib_provider_gen_annotations')
+    //需要注意需要添加注解处理器！！
+    kapt project(':lib_provider_gen_compiler')
 }
