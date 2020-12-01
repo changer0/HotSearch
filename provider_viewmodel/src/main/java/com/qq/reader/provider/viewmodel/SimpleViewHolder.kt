@@ -1,4 +1,4 @@
-package com.qq.reader.provider.simple
+package com.qq.reader.provider.viewmodel
 
 import android.util.SparseArray
 import android.view.View

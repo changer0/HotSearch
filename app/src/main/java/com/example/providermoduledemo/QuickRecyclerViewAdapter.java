@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
-import com.qq.reader.provider.simple.SimpleViewHolder;
+import com.qq.reader.provider.viewmodel.SimpleViewHolder;
 
 import java.util.List;
 

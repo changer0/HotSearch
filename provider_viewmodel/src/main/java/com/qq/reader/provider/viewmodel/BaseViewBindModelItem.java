@@ -5,7 +5,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.log.Logger;
-import com.qq.reader.provider.simple.SimpleViewHolder;
 import com.qq.reader.provider.utils.CastUtils;
 
 import java.util.Map;

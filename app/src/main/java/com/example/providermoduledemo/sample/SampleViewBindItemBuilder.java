@@ -6,7 +6,7 @@ import com.example.providermoduledemo.viewmodel.ViewBindItemLIRTGroupStyle0;
 import com.example.providermoduledemo.viewmodel.ViewBindItemLIRTGroupStyle1;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.inter.IViewBindItemBuilder;
-import com.qq.reader.provider.simple.SimpleViewHolder;
+import com.qq.reader.provider.viewmodel.SimpleViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
