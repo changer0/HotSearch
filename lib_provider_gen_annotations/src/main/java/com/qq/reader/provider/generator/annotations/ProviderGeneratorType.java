@@ -1,4 +1,4 @@
-package com.qq.reader.provider.gen.annotations;
+package com.qq.reader.provider.generator.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

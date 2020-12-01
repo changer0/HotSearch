@@ -1,13 +1,18 @@
-package com.qq.reader.provider.gen.compiler;
+package com.qq.reader.provider.generator.compiler;
 
-import com.qq.reader.provider.gen.annotations.ProviderGeneratorType;
+import com.qq.reader.provider.generator.annotations.ProviderGeneratorType;
+import com.qq.reader.provider.generator.ILoadProviderGenerator;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;
+import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
+import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
+import com.squareup.javapoet.TypeVariableName;
 
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -60,6 +65,7 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
     }
 
 
+
     private void handleProviderGeneratorType(RoundEnvironment roundEnvironment) {
         //获取该注解的元素
         Set<? extends Element> sets = roundEnvironment.getElementsAnnotatedWith(ProviderGeneratorType.class);
@@ -72,11 +78,14 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
         constructorBuilder
                 .addModifiers(Modifier.PRIVATE);
 
+        //providerGeneratorMap 字段
         ParameterizedTypeName mapType = ParameterizedTypeName.get(ClassName.get(Map.class),
                 ClassName.get(String.class), ClassName.get(String.class));
         FieldSpec providerGeneratorMap = FieldSpec.builder(mapType, "providerGeneratorMap",
                 Modifier.PRIVATE, Modifier.FINAL, Modifier.STATIC).initializer("new java.util.HashMap<>()").build();
 
+        //静态代码块
+        CodeBlock.Builder staticBlockBuilder = CodeBlock.builder();
 
         print("handleProviderGeneratorType 注解集合：" + sets.size());
         for (Element element : sets) {
@@ -84,25 +93,51 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
             print("注解值 providerGeneratorType：" + providerGeneratorType);
             String packageName = element.getEnclosingElement().toString();
             String simpleClazzName = element.getSimpleName().toString();
-            String value = packageName + simpleClazzName;
+            String value = packageName + "." + simpleClazzName;
 
 
             print("value" + value);
 
-
+            StringBuilder codeBuilder = new StringBuilder("providerGeneratorMap.put(");
+            codeBuilder.append("\"");
+            codeBuilder.append(providerGeneratorType);
+            codeBuilder.append("\"");
+            codeBuilder.append(", ");
+            codeBuilder.append("\"");
+            codeBuilder.append(value);
+            codeBuilder.append("\"");
+            codeBuilder.append(");");
+            codeBuilder.append("\n");
+            staticBlockBuilder.add(codeBuilder.toString());
         }
 
+
+        // getLoadProvider 方法
+        MethodSpec.Builder getLoadProvider = MethodSpec.methodBuilder("getLoadProvider").addModifiers(Modifier.PUBLIC);
+        ClassName param = ClassName.get(String.class);
+        getLoadProvider.addParameter(param, "type");
+        TypeName returnType = TypeVariableName.get(String.class);//返回值
+        getLoadProvider.returns(returnType);
+        getLoadProvider.addStatement("return providerGeneratorMap.get(type)");
+
         //class 让其实现接口
-        ClassName iGetViewModelMapInter = ClassName.get("com.qq.reader.provider.generator", "IProviderGenerator");
+        ClassName iGetViewModelMapInter = ClassName.get(ILoadProviderGenerator.class);
         //class
-//        TypeSpec typeSpec = TypeSpec.classBuilder("ProviderGenerator")
-//                .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
-//                .addField(providerGeneratorMap)
-//                //.addField(viewBindItem)
-//                .addMethod(cons)
-//                .addMethod(getViewModelMapBuilder.build())
-//                .addSuperinterface(iGetViewModelMapInter)
-//                .build();
+        TypeSpec typeSpec = TypeSpec.classBuilder(Constants.GENERATOR_CLASS_NAME)
+                .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+                .addField(providerGeneratorMap)
+                .addMethod(getLoadProvider.build())
+                .addStaticBlock(staticBlockBuilder.build())
+                .addSuperinterface(iGetViewModelMapInter)
+                .build();
+        //file
+        JavaFile javaFile = JavaFile.builder(Constants.GENERATOR_PACKAGE_NAME, typeSpec).build();
+        try {
+            javaFile.writeTo(filer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void print(String message) {
