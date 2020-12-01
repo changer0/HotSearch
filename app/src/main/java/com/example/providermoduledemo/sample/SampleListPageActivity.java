@@ -5,9 +5,16 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.providermoduledemo.generator.ProviderGeneratorTypes;
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.SimpleListPageView;
 import com.qq.reader.provider.cache.CacheMode;
+import com.qq.reader.provider.generator.IProviderGenerator;
+import com.qq.reader.provider.generator.IProviderGeneratorManager;
+import com.qq.reader.provider.generator.ProviderGeneratorConstants;
+import com.qq.reader.provider.utils.CastUtils;
+
+import java.lang.reflect.Proxy;
 
 
 public class SampleListPageActivity extends AppCompatActivity {
@@ -20,11 +27,14 @@ public class SampleListPageActivity extends AppCompatActivity {
 
     private int curIndex = 1;
 
+    private IProviderGenerator iProviderGenerator;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         simpleListPageView = new SimpleListPageView(this);
         setContentView(simpleListPageView.getContentView());
+        initProviderGenerator();
         loadData(curIndex);
         simpleListPageView.setOnLoadMoreListener(() -> {
             curIndex++;
@@ -40,12 +50,35 @@ public class SampleListPageActivity extends AppCompatActivity {
         String url = String.format(SERVER_URL, index);
         Log.d(TAG, "loadData: url:" + url);
 
-        DataProvider.with(SampleResultBean.class, SampleConvertResponseBean.class)
-                .url(url)
-                .converter(new SampleConverter())
-                .viewBindItemBuilder(new SampleViewBindItemBuilder())
-                .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
-                .load()
-                .observe(this, simpleListPageView);
+//        DataProvider.with(SampleResultBean.class, SampleConvertResponseBean.class)
+//                .url(url)
+//                .converter(new SampleConverter())
+//                .viewBindItemBuilder(new SampleViewBindItemBuilder())
+//                .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
+//                .load()
+//                .observe(this, simpleListPageView);
+        iProviderGenerator.loadData(index);
+
+
+    }
+
+    private void initProviderGenerator() {
+        IProviderGeneratorManager iProviderGeneratorManager =
+                newInstance(getClassLoader(), ProviderGeneratorConstants.GENERATOR_CLASS_NAME, IProviderGeneratorManager.class);
+        String providerGenerator = iProviderGeneratorManager.getProviderGenerator(ProviderGeneratorTypes.TEST_PAGE);
+        iProviderGenerator = newInstance(getClassLoader(), providerGenerator, IProviderGenerator.class);
+        if (iProviderGenerator == null) {
+            throw new NullPointerException("iProviderGenerator 为空！！！！");
+        }
+    }
+
+    private static <T> T newInstance(ClassLoader loader, String className, Class<T> tClass) {
+        try {
+            Class<?> aClass = loader.loadClass(className);
+            return CastUtils.cast(aClass.newInstance());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

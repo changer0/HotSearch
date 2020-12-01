@@ -1,5 +1,6 @@
 package com.qq.reader.provider.generator.compiler;
 
+import com.qq.reader.provider.generator.ProviderGeneratorConstants;
 import com.qq.reader.provider.generator.annotations.ProviderGeneratorType;
 import com.qq.reader.provider.generator.IProviderGeneratorManager;
 import com.squareup.javapoet.ClassName;
@@ -123,7 +124,7 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
         //class 让其实现接口
         ClassName iGetViewModelMapInter = ClassName.get(IProviderGeneratorManager.class);
         //class
-        TypeSpec typeSpec = TypeSpec.classBuilder(Constants.GENERATOR_CLASS_NAME)
+        TypeSpec typeSpec = TypeSpec.classBuilder(ProviderGeneratorConstants.GENERATOR_SIMPLE_CLASS_NAME)
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addField(providerGeneratorMap)
                 .addMethod(getLoadProvider.build())
@@ -131,7 +132,7 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
                 .addSuperinterface(iGetViewModelMapInter)
                 .build();
         //file
-        JavaFile javaFile = JavaFile.builder(Constants.GENERATOR_PACKAGE_NAME, typeSpec).build();
+        JavaFile javaFile = JavaFile.builder(ProviderGeneratorConstants.GENERATOR_PACKAGE_NAME, typeSpec).build();
         try {
             javaFile.writeTo(filer);
         } catch (IOException e) {
