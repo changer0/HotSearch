@@ -56,7 +56,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
 
     private void initProviderBuilder() {
         IProviderBuilderFactory iProviderBuilderFactory =
-                ClassLoaderUtils.newInstance(getClassLoader(), ProviderBuilderConstants.GENERATOR_CLASS_NAME, IProviderBuilderFactory.class);
+                ClassLoaderUtils.newInstance(getClassLoader(), ProviderBuilderConstants.BUILDER_CLASS_NAME, IProviderBuilderFactory.class);
         String providerGenerator = iProviderBuilderFactory.getProviderBuilder(ProviderGeneratorTypes.TEST_PAGE);
         providerBuilder = ClassLoaderUtils.newInstance(getClassLoader(), providerGenerator, IProviderBuilder.class);
         if (providerBuilder == null) {
