@@ -31,7 +31,7 @@ import javax.lang.model.element.Element;
 /**
  * by zhanglulu
  */
-public class ProviderGeneratorProcessor extends AbstractProcessor {
+public class ProviderBuilderProcessor extends AbstractProcessor {
 
     private static final String TAG = "ProviderProcessor";
     //用于生成新的java文件的对象
