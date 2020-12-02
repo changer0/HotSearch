@@ -1,8 +1,8 @@
-package com.qq.reader.provider.builder.compiler;
+package com.qq.reader.provider.build.compiler;
 
-import com.qq.reader.provider.builder.ProviderGeneratorConstants;
-import com.qq.reader.provider.builder.annotations.ProviderGeneratorType;
-import com.qq.reader.provider.builder.IProviderGeneratorManager;
+import com.qq.reader.provider.build.ProviderGeneratorConstants;
+import com.qq.reader.provider.build.annotations.ProviderGeneratorType;
+import com.qq.reader.provider.build.IProviderGeneratorManager;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;

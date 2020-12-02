@@ -1,4 +1,4 @@
-package com.qq.reader.provider.builder;
+package com.qq.reader.provider.build;
 
 public class ProviderGeneratorConstants {
     public static final String GENERATOR_PACKAGE_NAME = "com.qq.reader.provider.generator";

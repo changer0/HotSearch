@@ -1,4 +1,4 @@
-package com.qq.reader.provider.builder;
+package com.qq.reader.provider.build;
 
 import com.qq.reader.provider.ProviderLiveData;
 

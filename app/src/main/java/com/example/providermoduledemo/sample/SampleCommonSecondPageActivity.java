@@ -8,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.providermoduledemo.generator.ProviderGeneratorTypes;
 import com.qq.reader.provider.SimpleListPageView;
-import com.qq.reader.provider.builder.ClassLoaderUtils;
-import com.qq.reader.provider.builder.IProviderBuilder;
-import com.qq.reader.provider.builder.IProviderGeneratorManager;
-import com.qq.reader.provider.builder.ProviderGeneratorConstants;
+import com.qq.reader.provider.build.ClassLoaderUtils;
+import com.qq.reader.provider.build.IProviderBuilder;
+import com.qq.reader.provider.build.IProviderGeneratorManager;
+import com.qq.reader.provider.build.ProviderGeneratorConstants;
 
 /**
  * 通用二级页 示例页面
