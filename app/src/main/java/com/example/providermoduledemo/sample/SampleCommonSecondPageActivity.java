@@ -1,22 +1,26 @@
 package com.example.providermoduledemo.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.providermoduledemo.generator.ProviderGeneratorTypes;
 import com.qq.reader.provider.SimpleListPageView;
 import com.qq.reader.provider.build.ClassLoaderUtils;
 import com.qq.reader.provider.build.IProviderBuilder;
 import com.qq.reader.provider.build.IProviderBuilderFactory;
 import com.qq.reader.provider.build.ProviderBuilderConstants;
+import com.qq.reader.provider.build.ProviderBuilderManger;
 
 /**
  * 通用二级页 示例页面
  */
 public class SampleCommonSecondPageActivity extends AppCompatActivity {
+
+    public static String PROVIDER_BUILDER_TYPE = "PROVIDER_BUILDER_TYPE";
 
     private static final String TAG = "SampleListPageActivity";
 
@@ -43,24 +47,24 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         simpleListPageView.setOnRefreshListener(() -> {
             loadData(1);
         });
+
     }
 
     private void loadData(int index) {
         String url = String.format(SERVER_URL, index);
         Log.d(TAG, "loadData: url:" + url);
-
         providerBuilder.buildProvider(index).observe(this, simpleListPageView);
-
-
     }
 
     private void initProviderBuilder() {
-        IProviderBuilderFactory iProviderBuilderFactory =
-                ClassLoaderUtils.newInstance(getClassLoader(), ProviderBuilderConstants.BUILDER_CLASS_NAME, IProviderBuilderFactory.class);
-        String providerGenerator = iProviderBuilderFactory.getProviderBuilder(ProviderGeneratorTypes.TEST_PAGE);
-        providerBuilder = ClassLoaderUtils.newInstance(getClassLoader(), providerGenerator, IProviderBuilder.class);
+        Intent intent = getIntent();
+        String providerType = intent.getStringExtra(PROVIDER_BUILDER_TYPE);
+        if (TextUtils.isEmpty(providerType)) {
+            throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + " 必须接受一个 PROVIDER_BUILDER_TYPE");
+        }
+        providerBuilder = ProviderBuilderManger.getInstance(getClassLoader()).getProviderBuilder(providerType);
         if (providerBuilder == null) {
-            throw new NullPointerException("iProviderGenerator 为空！！！！");
+            throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + "Provider Builder 类型：" + providerType + "获取为空，请检查注解配置！");
         }
     }
 

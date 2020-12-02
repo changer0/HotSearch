@@ -45,5 +45,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
     implementation project(":provider_core")
+    implementation project(":lib_provider_build_base")
 
 }

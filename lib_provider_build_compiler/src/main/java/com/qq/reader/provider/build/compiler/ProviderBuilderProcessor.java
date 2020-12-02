@@ -78,56 +78,36 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
         constructorBuilder
                 .addModifiers(Modifier.PRIVATE);
 
-        //providerGeneratorMap 字段
-        ParameterizedTypeName mapType = ParameterizedTypeName.get(ClassName.get(Map.class),
-                ClassName.get(String.class), ClassName.get(String.class));
-        FieldSpec providerGeneratorMap = FieldSpec.builder(mapType, "providerGeneratorMap",
-                Modifier.PRIVATE, Modifier.FINAL, Modifier.STATIC).initializer("new java.util.HashMap<>()").build();
+        // getProviderBuilder 方法
+        MethodSpec.Builder getProviderBuilder = MethodSpec.methodBuilder(ProviderBuilderConstants.BUILDER_GET_METHOD_NAME).addModifiers(Modifier.PUBLIC);
+        ClassName param = ClassName.get(String.class);
+        getProviderBuilder.addParameter(param, "type");
+        ClassName returnType = ClassName.get(ProviderBuilderConstants.BUILDER_PACKAGE_NAME, ProviderBuilderConstants.BUILDER_SIMPLE_CLASS);
+        getProviderBuilder.returns(returnType);
+        getProviderBuilder.addStatement("IProviderBuilder builder = null");
+        getProviderBuilder.addCode("switch (type) {\n");
 
-        //静态代码块
-        CodeBlock.Builder staticBlockBuilder = CodeBlock.builder();
-
-        print("handleProviderGeneratorType 注解集合：" + sets.size());
         for (Element element : sets) {
-            String providerGeneratorType = element.getAnnotation(ProviderBuilderType.class).value();
-            print("注解值 providerGeneratorType：" + providerGeneratorType);
+            String type = element.getAnnotation(ProviderBuilderType.class).value();
+            print("注解值 providerGeneratorType：" + type);
             String packageName = element.getEnclosingElement().toString();
             String simpleClazzName = element.getSimpleName().toString();
-            String value = packageName + "." + simpleClazzName;
 
-
-            print("value" + value);
-
-            StringBuilder codeBuilder = new StringBuilder("providerGeneratorMap.put(");
-            codeBuilder.append("\"");
-            codeBuilder.append(providerGeneratorType);
-            codeBuilder.append("\"");
-            codeBuilder.append(", ");
-            codeBuilder.append("\"");
-            codeBuilder.append(value);
-            codeBuilder.append("\"");
-            codeBuilder.append(");");
-            codeBuilder.append("\n");
-            staticBlockBuilder.add(codeBuilder.toString());
+            getProviderBuilder.addCode("case");
+            getProviderBuilder.addCode("\"" + type);
+            getProviderBuilder.addCode("\":");
+            getProviderBuilder.addStatement("\rbuilder = new " + packageName + "." + simpleClazzName + "()");
+            getProviderBuilder.addStatement("break");
         }
-
-
-        // getLoadProvider 方法
-        MethodSpec.Builder getLoadProvider = MethodSpec.methodBuilder("getProviderBuilder").addModifiers(Modifier.PUBLIC);
-        ClassName param = ClassName.get(String.class);
-        getLoadProvider.addParameter(param, "type");
-        TypeName returnType = TypeVariableName.get(String.class);//返回值
-        getLoadProvider.returns(returnType);
-        getLoadProvider.addStatement("return providerGeneratorMap.get(type)");
+        getProviderBuilder.addCode("}\n");
+        getProviderBuilder.addStatement("return builder");
 
         //class 让其实现接口
         ClassName iGetViewModelMapInter = ClassName.get(ProviderBuilderConstants.BUILDER_PACKAGE_NAME, ProviderBuilderConstants.BUILDER_FACTORY_SIMPLE_CLASS_NAME);
         //class
-        TypeSpec typeSpec = TypeSpec.classBuilder(ProviderBuilderConstants.BUILDER_SIMPLE_CLASS_NAME)
+        TypeSpec typeSpec = TypeSpec.classBuilder(ProviderBuilderConstants.BUILDER_FACTORY_IMPL_SIMPLE_CLASS_NAME)
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
-                .addField(providerGeneratorMap)
-                .addMethod(getLoadProvider.build())
-                .addStaticBlock(staticBlockBuilder.build())
+                .addMethod(getProviderBuilder.build())
                 .addSuperinterface(iGetViewModelMapInter)
                 .build();
         //file

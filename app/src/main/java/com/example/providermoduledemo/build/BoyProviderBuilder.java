@@ -1,4 +1,4 @@
-package com.example.providermoduledemo.generator;
+package com.example.providermoduledemo.build;
 
 import com.example.providermoduledemo.sample.SampleConvertResponseBean;
 import com.example.providermoduledemo.sample.SampleConverter;
@@ -14,7 +14,7 @@ import com.qq.reader.provider.build.IProviderBuilder;
 /**
  * 男生 Provider 构建类 （举例说明）
  */
-@ProviderBuilderType(ProviderGeneratorTypes.TEST_PAGE)
+@ProviderBuilderType(ProviderBuilderTypes.BOY_PROVIDER_BUILDER)
 public class BoyProviderBuilder implements IProviderBuilder {
     private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/convertTest (%s).json";
     @Override
