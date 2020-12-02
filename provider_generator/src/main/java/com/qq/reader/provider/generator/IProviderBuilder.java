@@ -3,8 +3,9 @@ package com.qq.reader.provider.generator;
 import com.qq.reader.provider.ProviderLiveData;
 
 /**
- * Provider 生成器接口
+ * Provider 构建器
  */
-public interface IProviderGenerator {
+public interface IProviderBuilder {
+
     public ProviderLiveData loadData(int index);
 }

@@ -9,10 +9,13 @@ import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
 import com.qq.reader.provider.cache.CacheMode;
 import com.qq.reader.provider.generator.annotations.ProviderGeneratorType;
-import com.qq.reader.provider.generator.IProviderGenerator;
+import com.qq.reader.provider.generator.IProviderBuilder;
 
+/**
+ * 男生 Provider 构建类 （举例说明）
+ */
 @ProviderGeneratorType(ProviderGeneratorTypes.TEST_PAGE)
-public class ProviderGeneratorImpl implements IProviderGenerator {
+public class BoyProviderBuilder implements IProviderBuilder {
     private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/convertTest (%s).json";
     @Override
     public ProviderLiveData loadData(int index) {

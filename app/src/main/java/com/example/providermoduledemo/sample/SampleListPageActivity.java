@@ -6,15 +6,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.providermoduledemo.generator.ProviderGeneratorTypes;
-import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.SimpleListPageView;
-import com.qq.reader.provider.cache.CacheMode;
-import com.qq.reader.provider.generator.IProviderGenerator;
+import com.qq.reader.provider.generator.IProviderBuilder;
 import com.qq.reader.provider.generator.IProviderGeneratorManager;
 import com.qq.reader.provider.generator.ProviderGeneratorConstants;
 import com.qq.reader.provider.utils.CastUtils;
-
-import java.lang.reflect.Proxy;
 
 
 public class SampleListPageActivity extends AppCompatActivity {
@@ -27,7 +23,7 @@ public class SampleListPageActivity extends AppCompatActivity {
 
     private int curIndex = 1;
 
-    private IProviderGenerator iProviderGenerator;
+    private IProviderBuilder iProviderGenerator;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +53,7 @@ public class SampleListPageActivity extends AppCompatActivity {
 //                .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
 //                .load()
 //                .observe(this, simpleListPageView);
-        iProviderGenerator.loadData(index);
+        iProviderGenerator.loadData(index).observe(this, simpleListPageView);
 
 
     }
@@ -66,7 +62,7 @@ public class SampleListPageActivity extends AppCompatActivity {
         IProviderGeneratorManager iProviderGeneratorManager =
                 newInstance(getClassLoader(), ProviderGeneratorConstants.GENERATOR_CLASS_NAME, IProviderGeneratorManager.class);
         String providerGenerator = iProviderGeneratorManager.getProviderGenerator(ProviderGeneratorTypes.TEST_PAGE);
-        iProviderGenerator = newInstance(getClassLoader(), providerGenerator, IProviderGenerator.class);
+        iProviderGenerator = newInstance(getClassLoader(), providerGenerator, IProviderBuilder.class);
         if (iProviderGenerator == null) {
             throw new NullPointerException("iProviderGenerator 为空！！！！");
         }
