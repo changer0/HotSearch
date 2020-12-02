@@ -18,7 +18,7 @@ import com.qq.reader.provider.build.IProviderBuilder;
 public class BoyProviderBuilder implements IProviderBuilder {
     private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/convertTest (%s).json";
     @Override
-    public ProviderLiveData loadData(int index) {
+    public ProviderLiveData buildProvider(int index) {
         String url = String.format(SERVER_URL, index);
         return DataProvider.with(SampleResultBean.class, SampleConvertResponseBean.class)
                 .url(url)

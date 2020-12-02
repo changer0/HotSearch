@@ -49,7 +49,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         String url = String.format(SERVER_URL, index);
         Log.d(TAG, "loadData: url:" + url);
 
-        iProviderGenerator.loadData(index).observe(this, simpleListPageView);
+        iProviderGenerator.buildProvider(index).observe(this, simpleListPageView);
 
 
     }

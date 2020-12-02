@@ -7,5 +7,5 @@ import com.qq.reader.provider.ProviderLiveData;
  */
 public interface IProviderBuilder {
 
-    public ProviderLiveData loadData(int index);
+    public ProviderLiveData buildProvider(int index);
 }
