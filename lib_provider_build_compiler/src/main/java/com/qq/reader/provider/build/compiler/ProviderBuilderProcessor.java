@@ -1,6 +1,6 @@
 package com.qq.reader.provider.build.compiler;
 
-import com.qq.reader.provider.build.IProviderBuilderManager;
+import com.qq.reader.provider.build.IProviderBuilderFactory;
 import com.qq.reader.provider.build.ProviderBuilderConstants;
 import com.qq.reader.provider.build.annotations.ProviderBuilderType;
 import com.squareup.javapoet.ClassName;
@@ -122,7 +122,7 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
         getLoadProvider.addStatement("return providerGeneratorMap.get(type)");
 
         //class 让其实现接口
-        ClassName iGetViewModelMapInter = ClassName.get(IProviderBuilderManager.class);
+        ClassName iGetViewModelMapInter = ClassName.get(IProviderBuilderFactory.class);
         //class
         TypeSpec typeSpec = TypeSpec.classBuilder(ProviderBuilderConstants.GENERATOR_SIMPLE_CLASS_NAME)
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)

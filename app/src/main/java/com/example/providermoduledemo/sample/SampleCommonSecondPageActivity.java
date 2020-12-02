@@ -10,7 +10,7 @@ import com.example.providermoduledemo.generator.ProviderGeneratorTypes;
 import com.qq.reader.provider.SimpleListPageView;
 import com.qq.reader.provider.build.ClassLoaderUtils;
 import com.qq.reader.provider.build.IProviderBuilder;
-import com.qq.reader.provider.build.IProviderBuilderManager;
+import com.qq.reader.provider.build.IProviderBuilderFactory;
 import com.qq.reader.provider.build.ProviderBuilderConstants;
 
 /**
@@ -55,9 +55,9 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
     }
 
     private void initProviderBuilder() {
-        IProviderBuilderManager iProviderBuilderManager =
-                ClassLoaderUtils.newInstance(getClassLoader(), ProviderBuilderConstants.GENERATOR_CLASS_NAME, IProviderBuilderManager.class);
-        String providerGenerator = iProviderBuilderManager.getProviderBuilder(ProviderGeneratorTypes.TEST_PAGE);
+        IProviderBuilderFactory iProviderBuilderFactory =
+                ClassLoaderUtils.newInstance(getClassLoader(), ProviderBuilderConstants.GENERATOR_CLASS_NAME, IProviderBuilderFactory.class);
+        String providerGenerator = iProviderBuilderFactory.getProviderBuilder(ProviderGeneratorTypes.TEST_PAGE);
         providerBuilder = ClassLoaderUtils.newInstance(getClassLoader(), providerGenerator, IProviderBuilder.class);
         if (providerBuilder == null) {
             throw new NullPointerException("iProviderGenerator 为空！！！！");
