@@ -4,10 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.providermoduledemo.preload.PreLoadLiveDataManager
-import com.example.providermoduledemo.sample.SampleActivity
-import com.example.providermoduledemo.sample.SampleListPageActivity
-import com.example.providermoduledemo.sample.SampleResultBean
-import com.example.providermoduledemo.sample.SampleViewBindItemBuilder
+import com.example.providermoduledemo.sample.*
 import com.qq.reader.provider.DataProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -29,6 +26,10 @@ class MainActivity : AppCompatActivity() {
         }
         sampleListPageActivity.setOnClickListener {
             startActivity(Intent(this, SampleListPageActivity::class.java))
+        }
+
+        sampleCommonSecondPageActivity.setOnClickListener {
+            startActivity(Intent(this, SampleCommonSecondPageActivity::class.java))
         }
     }
 }

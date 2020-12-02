@@ -8,8 +8,8 @@ import com.example.providermoduledemo.sample.SampleViewBindItemBuilder;
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
 import com.qq.reader.provider.cache.CacheMode;
-import com.qq.reader.provider.generator.annotations.ProviderGeneratorType;
-import com.qq.reader.provider.generator.IProviderBuilder;
+import com.qq.reader.provider.builder.annotations.ProviderGeneratorType;
+import com.qq.reader.provider.builder.IProviderBuilder;
 
 /**
  * 男生 Provider 构建类 （举例说明）
