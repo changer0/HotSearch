@@ -1,8 +1,8 @@
 package com.qq.reader.provider.build.compiler;
 
-import com.qq.reader.provider.build.ProviderGeneratorConstants;
-import com.qq.reader.provider.build.annotations.ProviderGeneratorType;
-import com.qq.reader.provider.build.IProviderGeneratorManager;
+import com.qq.reader.provider.build.IProviderBuilderManager;
+import com.qq.reader.provider.build.ProviderBuilderConstants;
+import com.qq.reader.provider.build.annotations.ProviderBuilderType;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;
@@ -50,7 +50,7 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> res = new HashSet<>();
-        res.add(ProviderGeneratorType.class.getCanonicalName());
+        res.add(ProviderBuilderType.class.getCanonicalName());
         return res;
     }
 
@@ -69,7 +69,7 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
 
     private void handleProviderGeneratorType(RoundEnvironment roundEnvironment) {
         //获取该注解的元素
-        Set<? extends Element> sets = roundEnvironment.getElementsAnnotatedWith(ProviderGeneratorType.class);
+        Set<? extends Element> sets = roundEnvironment.getElementsAnnotatedWith(ProviderBuilderType.class);
         if (sets == null || sets.size() <= 0) {
             return;
         }
@@ -90,7 +90,7 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
 
         print("handleProviderGeneratorType 注解集合：" + sets.size());
         for (Element element : sets) {
-            String providerGeneratorType = element.getAnnotation(ProviderGeneratorType.class).value();
+            String providerGeneratorType = element.getAnnotation(ProviderBuilderType.class).value();
             print("注解值 providerGeneratorType：" + providerGeneratorType);
             String packageName = element.getEnclosingElement().toString();
             String simpleClazzName = element.getSimpleName().toString();
@@ -114,7 +114,7 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
 
 
         // getLoadProvider 方法
-        MethodSpec.Builder getLoadProvider = MethodSpec.methodBuilder("getProviderGenerator").addModifiers(Modifier.PUBLIC);
+        MethodSpec.Builder getLoadProvider = MethodSpec.methodBuilder("getProviderBuilder").addModifiers(Modifier.PUBLIC);
         ClassName param = ClassName.get(String.class);
         getLoadProvider.addParameter(param, "type");
         TypeName returnType = TypeVariableName.get(String.class);//返回值
@@ -122,9 +122,9 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
         getLoadProvider.addStatement("return providerGeneratorMap.get(type)");
 
         //class 让其实现接口
-        ClassName iGetViewModelMapInter = ClassName.get(IProviderGeneratorManager.class);
+        ClassName iGetViewModelMapInter = ClassName.get(IProviderBuilderManager.class);
         //class
-        TypeSpec typeSpec = TypeSpec.classBuilder(ProviderGeneratorConstants.GENERATOR_SIMPLE_CLASS_NAME)
+        TypeSpec typeSpec = TypeSpec.classBuilder(ProviderBuilderConstants.GENERATOR_SIMPLE_CLASS_NAME)
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addField(providerGeneratorMap)
                 .addMethod(getLoadProvider.build())
@@ -132,7 +132,7 @@ public class ProviderGeneratorProcessor extends AbstractProcessor {
                 .addSuperinterface(iGetViewModelMapInter)
                 .build();
         //file
-        JavaFile javaFile = JavaFile.builder(ProviderGeneratorConstants.GENERATOR_PACKAGE_NAME, typeSpec).build();
+        JavaFile javaFile = JavaFile.builder(ProviderBuilderConstants.GENERATOR_PACKAGE_NAME, typeSpec).build();
         try {
             javaFile.writeTo(filer);
         } catch (IOException e) {
