@@ -26,7 +26,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
 
     private int curIndex = 1;
 
-    private IProviderBuilder iProviderGenerator;
+    private IProviderBuilder providerBuilder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         String url = String.format(SERVER_URL, index);
         Log.d(TAG, "loadData: url:" + url);
 
-        iProviderGenerator.buildProvider(index).observe(this, simpleListPageView);
+        providerBuilder.buildProvider(index).observe(this, simpleListPageView);
 
 
     }
@@ -58,8 +58,8 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         IProviderBuilderManager iProviderBuilderManager =
                 ClassLoaderUtils.newInstance(getClassLoader(), ProviderBuilderConstants.GENERATOR_CLASS_NAME, IProviderBuilderManager.class);
         String providerGenerator = iProviderBuilderManager.getProviderBuilder(ProviderGeneratorTypes.TEST_PAGE);
-        iProviderGenerator = ClassLoaderUtils.newInstance(getClassLoader(), providerGenerator, IProviderBuilder.class);
-        if (iProviderGenerator == null) {
+        providerBuilder = ClassLoaderUtils.newInstance(getClassLoader(), providerGenerator, IProviderBuilder.class);
+        if (providerBuilder == null) {
             throw new NullPointerException("iProviderGenerator 为空！！！！");
         }
     }
