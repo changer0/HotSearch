@@ -33,7 +33,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         simpleListPageView = new SimpleListPageView(this);
         setContentView(simpleListPageView.getContentView());
-        initProviderGenerator();
+        initProviderBuilder();
         loadData(curIndex);
         simpleListPageView.setOnLoadMoreListener(() -> {
             curIndex++;
@@ -54,7 +54,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
 
     }
 
-    private void initProviderGenerator() {
+    private void initProviderBuilder() {
         IProviderBuilderManager iProviderBuilderManager =
                 ClassLoaderUtils.newInstance(getClassLoader(), ProviderBuilderConstants.GENERATOR_CLASS_NAME, IProviderBuilderManager.class);
         String providerGenerator = iProviderBuilderManager.getProviderBuilder(ProviderGeneratorTypes.TEST_PAGE);
