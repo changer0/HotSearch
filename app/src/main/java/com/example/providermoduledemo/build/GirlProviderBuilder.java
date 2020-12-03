@@ -16,13 +16,13 @@ import com.qq.reader.provider.cache.CacheMode;
  */
 @ProviderBuilderType(ProviderBuilderTypes.GIRL_PROVIDER_BUILDER)
 public class GirlProviderBuilder implements IProviderBuilder {
-    private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/convertTest (%s).json";
+    private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/leftImgRightText (%s).json";
+
     @Override
     public ProviderLiveData buildProvider(int index) {
         String url = String.format(SERVER_URL, index);
-        return DataProvider.with(SampleResultBean.class, SampleConvertResponseBean.class)
+        return DataProvider.with(SampleResultBean.class)
                 .url(url)
-                .converter(new SampleConverter())
                 .viewBindItemBuilder(new SampleViewBindItemBuilder())
                 .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
                 .load();

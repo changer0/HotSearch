@@ -30,9 +30,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SampleListPageActivity::class.java))
         }
 
-        sampleCommonSecondPageActivity.setOnClickListener {
+        boyCommonSecondPage.setOnClickListener {
             val intent = Intent(this, SampleCommonSecondPageActivity::class.java)
             intent.putExtra(SampleCommonSecondPageActivity.PROVIDER_BUILDER_TYPE, ProviderBuilderTypes.BOY_PROVIDER_BUILDER)
+            startActivity(intent)
+        }
+
+        girlCommonSecondPage.setOnClickListener {
+            val intent = Intent(this, SampleCommonSecondPageActivity::class.java)
+            intent.putExtra(SampleCommonSecondPageActivity.PROVIDER_BUILDER_TYPE, ProviderBuilderTypes.GIRL_PROVIDER_BUILDER)
             startActivity(intent)
         }
     }

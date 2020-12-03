@@ -35,8 +35,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
-                android:id="@+id/sampleCommonSecondPageActivity"
-                android:text="通用二级页"
+                android:id="@+id/boyCommonSecondPage"
+                android:text="男生二级页"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/girlCommonSecondPage"
+                android:text="女生二级页"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
