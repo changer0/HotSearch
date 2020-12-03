@@ -1,4 +1,4 @@
-package com.qq.reader.provider;
+package com.qq.reader.provider.listpage;
 
 
 import android.content.Context;
@@ -17,6 +17,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView;
+import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.loader.ObserverEntity;
 import com.example.providermoduledemo.QuickRecyclerViewAdapter;
 

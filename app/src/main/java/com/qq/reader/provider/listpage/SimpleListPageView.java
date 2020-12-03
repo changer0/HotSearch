@@ -1,4 +1,4 @@
-package com.qq.reader.provider;
+package com.qq.reader.provider.listpage;
 
 import android.content.Context;
 import android.view.View;
