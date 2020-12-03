@@ -45,6 +45,10 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
             loadData(1);
         });
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(providerBuilder.getTitleName());
+        }
+
     }
 
     private void loadData(int index) {

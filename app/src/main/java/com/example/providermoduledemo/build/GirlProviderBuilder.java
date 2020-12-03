@@ -27,4 +27,9 @@ public class GirlProviderBuilder implements IProviderBuilder {
                 .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
                 .load();
     }
+
+    @Override
+    public String getTitleName() {
+        return "女生页面";
+    }
 }

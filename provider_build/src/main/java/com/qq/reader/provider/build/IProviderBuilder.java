@@ -21,4 +21,12 @@ public interface IProviderBuilder {
     default int getStartIndex() {
         return 0;
     }
+
+    /**
+     * 标题名
+     * @return
+     */
+    String getTitleName();
+
+    // TODO: 2020/12/3 后续对应需求可以继续添加，但是一定要保持克制！
 }
