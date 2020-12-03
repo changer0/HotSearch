@@ -57,7 +57,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String providerType = intent.getStringExtra(PROVIDER_BUILDER_TYPE);
         if (TextUtils.isEmpty(providerType)) {
-            throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + " 必须接受一个 PROVIDER_BUILDER_TYPE");
+            throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + " 启动该 Activity 前需要传入 PROVIDER_BUILDER_TYPE");
         }
         providerBuilder = ProviderBuilderManger.getInstance(getClassLoader()).getProviderBuilder(providerType);
         if (providerBuilder == null) {

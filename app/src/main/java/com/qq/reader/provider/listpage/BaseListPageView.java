@@ -213,5 +213,9 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
     //----------------------------------------------------------------------------------------------
     // 抽象方法
 
+    /**
+     * 提供资源参数 {@link ListPageResParams.Builder}
+     * @return
+     */
     abstract public ListPageResParams getListPageResParams();
 }
