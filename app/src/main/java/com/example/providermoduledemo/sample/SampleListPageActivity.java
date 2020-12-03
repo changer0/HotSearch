@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.qq.reader.provider.DataProvider;
-import com.qq.reader.provider.SimpleListPageView;
+import com.qq.reader.provider.listpage.SimpleListPageView;
 import com.qq.reader.provider.cache.CacheMode;
 
 

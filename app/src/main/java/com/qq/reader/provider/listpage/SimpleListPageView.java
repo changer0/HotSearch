@@ -20,28 +20,12 @@ public class SimpleListPageView extends BaseListPageView {
     }
 
     @Override
-    public int getPullDownViewIdRes() {
-        return R.id.pull_down_list;
-    }
-
-    @Override
-    public int getContentViewLayoutRes() {
-        return R.layout.common_recycle_layout;
-    }
-
-    @Override
-    public int getRecyclerViewIdRes() {
-        return R.id.refresh_target_view;
-    }
-
-    @Override
-    public int getLoadingViewIdRes() {
-        return R.id.loading_view;
-    }
-
-    @Override
-    public int getDataErrorViewIdRes() {
-        return R.id.data_error_view;
+    public ListPageResParams getListPageResParams() {
+        return new ListPageResParams.Builder(R.layout.common_recycle_layout, R.id.refresh_target_view)
+                .setLoadingViewIdRes(R.id.loading_view)
+                .setPullDownViewIdRes(R.id.pull_down_list)
+                .setDataErrorViewIdRes(R.id.data_error_view)
+                .build();
     }
 
 }

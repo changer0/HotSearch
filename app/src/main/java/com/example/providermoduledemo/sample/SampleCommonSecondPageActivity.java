@@ -8,11 +8,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.qq.reader.provider.SimpleListPageView;
-import com.qq.reader.provider.build.ClassLoaderUtils;
+import com.qq.reader.provider.listpage.SimpleListPageView;
 import com.qq.reader.provider.build.IProviderBuilder;
-import com.qq.reader.provider.build.IProviderBuilderFactory;
-import com.qq.reader.provider.build.ProviderBuilderConstants;
 import com.qq.reader.provider.build.ProviderBuilderManger;
 
 /**

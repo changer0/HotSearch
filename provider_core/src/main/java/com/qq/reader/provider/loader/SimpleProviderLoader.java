@@ -74,7 +74,7 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
         observerEntity.state = ProviderConstants.PROVIDER_DATA_SUCCESS;
         liveData.postValue(observerEntity);
         syncObserverEntity = observerEntity;
-        Logger.e(TAG, "notifyLoadPageDataSuccess: 耗时：" + getFormatTimeConsuming());
+        Logger.i(TAG, "notifyLoadPageDataSuccess: 耗时：" + getFormatTimeConsuming());
     }
 
     //----------------------------------------------------------------------------------------------

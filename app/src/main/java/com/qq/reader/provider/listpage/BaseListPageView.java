@@ -53,15 +53,18 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
     //Load More
     private BaseQuickAdapter.RequestLoadMoreListener requestLoadMoreListener;
 
+    private ListPageResParams listPageResParams;
+
     public BaseListPageView(Context context) {
+        listPageResParams = getListPageResParams();
         this.context = context;
-        this.contentView = LayoutInflater.from(context).inflate(getContentViewLayoutRes(), null);
+        this.contentView = LayoutInflater.from(context).inflate(listPageResParams.getContentViewLayoutRes(), null);
         onCreateView(contentView);
     }
 
 
     protected void onCreateView(View contentView) {
-        mRecyclerView = (RecyclerView) contentView.findViewById(getRecyclerViewIdRes());
+        mRecyclerView = (RecyclerView) contentView.findViewById(listPageResParams.getRecyclerViewIdRes());
         if (mRecyclerView == null) {
             throw new RuntimeException("mRecyclerView 为空，请指定正确的 getRecyclerViewIdRes()");
         }
@@ -72,9 +75,9 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
         mAdapter.setLoadMoreView(mLoadMoreView);
         mRecyclerView.setAdapter(mAdapter);
 
-        mLoadingView = contentView.findViewById(getLoadingViewIdRes());
-        mDataErrorView = contentView.findViewById(getDataErrorViewIdRes());
-        mPullDownView = (SwipeRefreshLayout) contentView.findViewById(getPullDownViewIdRes());
+        mLoadingView = contentView.findViewById(listPageResParams.getLoadingViewIdRes());
+        mDataErrorView = contentView.findViewById(listPageResParams.getDataErrorViewIdRes());
+        mPullDownView = (SwipeRefreshLayout) contentView.findViewById(listPageResParams.getPullDownViewIdRes());
         mPullDownView.setOnRefreshListener(this);
         mPullDownView.setEnabled(false);
         showLoadingView();
@@ -209,9 +212,6 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
 
     //----------------------------------------------------------------------------------------------
     // 抽象方法
-    abstract public @IdRes int getPullDownViewIdRes();
-    abstract public @IdRes int getRecyclerViewIdRes();
-    abstract public @IdRes int getLoadingViewIdRes();
-    abstract public @IdRes int getDataErrorViewIdRes();
-    abstract public @LayoutRes int getContentViewLayoutRes();
+
+    abstract public ListPageResParams getListPageResParams();
 }
