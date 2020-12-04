@@ -32,4 +32,14 @@ public class GirlProviderBuilder implements IProviderBuilder {
     public String getTitleName() {
         return "女生页面";
     }
+
+    @Override
+    public boolean isEnableLoadMore() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnablePullDownRefresh() {
+        return false;
+    }
 }

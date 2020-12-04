@@ -155,6 +155,9 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
 
     public void setEnableLoadMore(boolean enableLoadMore) {
         mAdapter.setEnableLoadMore(enableLoadMore);
+        if (!enableLoadMore) {
+            mAdapter.setOnLoadMoreListener(null, mRecyclerView);
+        }
     }
 
     //----------------------------------------------------------------------------------------------
@@ -197,7 +200,6 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
             }
             if (mRecyclerViewState == STATE_ENTER_INIT || mRecyclerViewState == STATE_DOWN_REFRESH) {
                 mAdapter.setNewData(viewBindItems);
-                hideLoadingView();
             } else if (mRecyclerViewState == STATE_UP_LOAD_MORE) {
                 mAdapter.addData(viewBindItems);
             }
@@ -207,6 +209,7 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
             Log.e(TAG, "onChanged: entity.isSuccess() false ");
             showDataErrorView();
         }
+        hideLoadingView();
         mPullDownView.setRefreshing(false);
     }
 

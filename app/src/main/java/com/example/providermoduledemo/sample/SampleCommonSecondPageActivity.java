@@ -3,7 +3,6 @@ package com.example.providermoduledemo.sample;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,8 +20,6 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
 
     private static final String TAG = "SampleListPageActivity";
 
-    private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/convertTest (%s).json";
-
     private SimpleListPageView simpleListPageView;
 
     private int curIndex = 1;
@@ -35,25 +32,35 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         simpleListPageView = new SimpleListPageView(this);
         setContentView(simpleListPageView.getContentView());
         initProviderBuilder();
-        loadData(curIndex);
-        simpleListPageView.setOnLoadMoreListener(() -> {
-            curIndex++;
-            curIndex = curIndex > 5 ? 1 : curIndex;
-            loadData(curIndex);
-        });
-        simpleListPageView.setOnRefreshListener(() -> {
-            loadData(1);
-        });
-
+        initLoadData();
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(providerBuilder.getTitleName());
         }
+    }
 
+    /**
+     * 初始化加载数据
+     */
+    private void initLoadData() {
+        curIndex = providerBuilder.getStartIndex();
+        loadData(curIndex);
+        simpleListPageView.setEnableLoadMore(providerBuilder.isEnableLoadMore());
+        simpleListPageView.setEnablePullDownRefresh(providerBuilder.isEnablePullDownRefresh());
+        if (providerBuilder.isEnableLoadMore()) {
+            simpleListPageView.setOnLoadMoreListener(() -> {
+                curIndex++;
+                curIndex = curIndex > 5 ? 1 : curIndex;
+                loadData(curIndex);
+            });
+        }
+        if (providerBuilder.isEnablePullDownRefresh()) {
+            simpleListPageView.setOnRefreshListener(() -> {
+                loadData(providerBuilder.getStartIndex());
+            });
+        }
     }
 
     private void loadData(int index) {
-        String url = String.format(SERVER_URL, index);
-        Log.d(TAG, "loadData: url:" + url);
         providerBuilder.buildProvider(index).observe(this, simpleListPageView);
     }
 

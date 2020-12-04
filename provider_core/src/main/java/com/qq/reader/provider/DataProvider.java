@@ -129,19 +129,16 @@ public class DataProvider<R, P> {
     /**
      * 数据解析
      */
-    public void parseData(String jsonStr) {
+    public void parseData(String jsonStr) throws Exception {
         mJSONStr = jsonStr;
         try {
             P responseData = getParser().parseData(jsonStr, responseClass);
             mData = getConverter().convert(responseData);
         } catch (Exception e) {
             Logger.e(TAG, "parseData: 解析失败：" + e.getMessage());
-            e.printStackTrace();
-            try {
-                mData = resultClass.newInstance();
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
+            mData = resultClass.newInstance();
+            //抛出异常交给
+            throw new RuntimeException(e);
         }
     }
 
