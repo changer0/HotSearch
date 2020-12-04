@@ -15,7 +15,6 @@ public class SimpleListPageView extends BaseListPageView {
 
     @Override
     protected void onCreateView(View contentView) {
-        super.onCreateView(contentView);
         // TODO: Perform findViewById and other initialization operations
     }
 

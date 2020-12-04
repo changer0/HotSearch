@@ -59,11 +59,16 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
         listPageResParams = getListPageResParams();
         this.context = context;
         this.contentView = LayoutInflater.from(context).inflate(listPageResParams.getContentViewLayoutRes(), null);
+        createView(contentView);
         onCreateView(contentView);
     }
 
-
     protected void onCreateView(View contentView) {
+
+    }
+
+
+    protected void createView(View contentView) {
         mRecyclerView = (RecyclerView) contentView.findViewById(listPageResParams.getRecyclerViewIdRes());
         if (mRecyclerView == null) {
             throw new RuntimeException("mRecyclerView 为空，请指定正确的 getRecyclerViewIdRes()");
