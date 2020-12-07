@@ -204,15 +204,27 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
                 return;
             }
             if (mRecyclerViewState == STATE_ENTER_INIT || mRecyclerViewState == STATE_DOWN_REFRESH) {
-                mAdapter.setNewData(viewBindItems);
+                if (viewBindItems.isEmpty()) {
+                    showDataErrorView();
+                } else {
+                    mAdapter.setNewData(viewBindItems);
+                    mAdapter.loadMoreComplete();
+                }
             } else if (mRecyclerViewState == STATE_UP_LOAD_MORE) {
-                mAdapter.addData(viewBindItems);
+                if (viewBindItems.isEmpty()) {
+                    mAdapter.loadMoreEnd();
+                } else {
+                    mAdapter.addData(viewBindItems);
+                }
             }
-            mAdapter.loadMoreComplete();
             hideDataErrorView();
         } else {
+            if (mRecyclerViewState == STATE_ENTER_INIT || mRecyclerViewState == STATE_DOWN_REFRESH) {
+                showDataErrorView();
+            } else {
+                mAdapter.loadMoreFail();
+            }
             Log.e(TAG, "onChanged: entity.isSuccess() false ");
-            showDataErrorView();
         }
         hideLoadingView();
         mPullDownView.setRefreshing(false);
