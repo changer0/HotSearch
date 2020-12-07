@@ -215,6 +215,7 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
                     mAdapter.loadMoreEnd();
                 } else {
                     mAdapter.addData(viewBindItems);
+                    mAdapter.loadMoreComplete();
                 }
             }
             hideDataErrorView();

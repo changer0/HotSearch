@@ -49,13 +49,13 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         if (providerBuilder.isEnableLoadMore()) {
             simpleListPageView.setOnLoadMoreListener(() -> {
                 curIndex++;
-                curIndex = curIndex > 5 ? 1 : curIndex;
                 loadData(curIndex);
             });
         }
         if (providerBuilder.isEnablePullDownRefresh()) {
             simpleListPageView.setOnRefreshListener(() -> {
-                loadData(providerBuilder.getStartIndex());
+                curIndex = providerBuilder.getStartIndex();
+                loadData(curIndex);
             });
         }
     }
