@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 /**
  * @author zhanglulu on 2020/11/20.
- * for
+ * for 通用的 ViewHolder
  */
-open class SimpleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+open class CommonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     /**
      * Views indexed with their IDs
      */

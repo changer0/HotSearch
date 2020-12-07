@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * for 支持使用 IModel IView 形式构建 ViewBindItem
  */
 @SuppressWarnings("rawtypes")
-public abstract class BaseViewBindModelItem <Bean> extends BaseViewBindItem<Bean, SimpleViewHolder> {
+public abstract class BaseViewBindModelItem <Bean> extends BaseViewBindItem<Bean, CommonViewHolder> {
 
     private static final String TAG = "BaseViewBindModelItem";
 
@@ -34,7 +34,7 @@ public abstract class BaseViewBindModelItem <Bean> extends BaseViewBindItem<Bean
     }
 
     @Override
-    public boolean bindView(@NonNull SimpleViewHolder holder, @NonNull Activity activity) {
+    public boolean bindView(@NonNull CommonViewHolder holder, @NonNull Activity activity) {
 
         for (Map.Entry<Integer, IViewModel> viewModelEntry : viewModelMap.entrySet()) {
             View view = holder.getView(viewModelEntry.getKey());

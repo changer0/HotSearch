@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qq.reader.provider.BaseViewBindItem;
-import com.qq.reader.provider.viewmodel.SimpleViewHolder;
+import com.qq.reader.provider.viewmodel.CommonViewHolder;
 
 import java.util.List;
 
@@ -46,8 +46,8 @@ public class QuickRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem,
         if (item != null) {
             item.setIndex(position);
             try {
-                //此处需要格外注意，由于 ViewModel 模块本身采用了 SimpleViewHolder，过此处需要做转换！！
-                item.attachView(new SimpleViewHolder(holder.itemView));
+                //此处需要格外注意，由于 ViewModel 模块本身采用了 CommonViewHolder，过此处需要做转换！！
+                item.attachView(new CommonViewHolder(holder.itemView));
             } catch (Exception e) {
                 //如果发生异常, 该item不显示
                 holder.itemView.setVisibility(View.GONE);
