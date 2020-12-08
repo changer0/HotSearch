@@ -19,7 +19,7 @@ import com.qq.reader.provider.build.PageBuilderManger;
  */
 public class SampleCommonSecondPageActivity extends AppCompatActivity {
 
-    public static String PROVIDER_BUILDER_TYPE = "PROVIDER_BUILDER_TYPE";
+    public static String PAGE_BUILDER_TYPE = "PAGE_BUILDER_TYPE";
 
     private static final String TAG = "SampleListPageActivity";
 
@@ -72,7 +72,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
 
     private void initPageBuilder() {
         Intent intent = getIntent();
-        String providerType = intent.getStringExtra(PROVIDER_BUILDER_TYPE);
+        String providerType = intent.getStringExtra(PAGE_BUILDER_TYPE);
         if (TextUtils.isEmpty(providerType)) {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + " 启动该 Activity 前需要传入 PROVIDER_BUILDER_TYPE");
         }
