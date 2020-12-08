@@ -11,13 +11,13 @@ import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
 import com.qq.reader.provider.build.PageConfigInfo;
 import com.qq.reader.provider.cache.CacheMode;
-import com.qq.reader.provider.build.annotations.ProviderBuilderType;
+import com.qq.reader.provider.build.annotations.PageBuilderType;
 import com.qq.reader.provider.build.IPageBuilder;
 
 /**
  * 男生 Provider 构建类 （举例说明）
  */
-@ProviderBuilderType(ProviderBuilderTypes.BOY_PROVIDER_BUILDER)
+@PageBuilderType(PageBuilderTypes.BOY_PAGE)
 public class BoyPageBuilder implements IPageBuilder {
     private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/convertTest (%s).json";
     @Override

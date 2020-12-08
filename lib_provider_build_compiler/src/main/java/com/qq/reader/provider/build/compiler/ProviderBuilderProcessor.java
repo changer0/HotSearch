@@ -1,20 +1,14 @@
 package com.qq.reader.provider.build.compiler;
 
 import com.qq.reader.provider.build.ProviderBuilderConstants;
-import com.qq.reader.provider.build.annotations.ProviderBuilderType;
+import com.qq.reader.provider.build.annotations.PageBuilderType;
 import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.CodeBlock;
-import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
-import com.squareup.javapoet.ParameterizedTypeName;
-import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
-import com.squareup.javapoet.TypeVariableName;
 
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -49,7 +43,7 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> res = new HashSet<>();
-        res.add(ProviderBuilderType.class.getCanonicalName());
+        res.add(PageBuilderType.class.getCanonicalName());
         return res;
     }
 
@@ -68,7 +62,7 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
 
     private void handleProviderGeneratorType(RoundEnvironment roundEnvironment) {
         //获取该注解的元素
-        Set<? extends Element> sets = roundEnvironment.getElementsAnnotatedWith(ProviderBuilderType.class);
+        Set<? extends Element> sets = roundEnvironment.getElementsAnnotatedWith(PageBuilderType.class);
         if (sets == null || sets.size() <= 0) {
             return;
         }
@@ -88,7 +82,7 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
         getProviderBuilder.addCode("switch (type) {\n");
 
         for (Element element : sets) {
-            String type = element.getAnnotation(ProviderBuilderType.class).value();
+            String type = element.getAnnotation(PageBuilderType.class).value();
             print("注解值 providerGeneratorType：" + type);
             String packageName = element.getEnclosingElement().toString();
             String simpleClazzName = element.getSimpleName().toString();

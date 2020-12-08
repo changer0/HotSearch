@@ -16,6 +16,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 //定该注解只能使用在类上：因为我们的功能是注册接口和实现类的关系。
 @Target(value = ElementType.TYPE)
-public @interface ProviderBuilderType {
+public @interface PageBuilderType {
     String value() default "";
 }

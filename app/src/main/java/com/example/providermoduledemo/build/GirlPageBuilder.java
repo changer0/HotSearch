@@ -9,13 +9,13 @@ import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
 import com.qq.reader.provider.build.IPageBuilder;
 import com.qq.reader.provider.build.PageConfigInfo;
-import com.qq.reader.provider.build.annotations.ProviderBuilderType;
+import com.qq.reader.provider.build.annotations.PageBuilderType;
 import com.qq.reader.provider.cache.CacheMode;
 
 /**
  * 女生 Provider 构建类 （举例说明）
  */
-@ProviderBuilderType(ProviderBuilderTypes.GIRL_PROVIDER_BUILDER)
+@PageBuilderType(PageBuilderTypes.GIRL_PAGE)
 public class GirlPageBuilder implements IPageBuilder {
     private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/leftImgRightText (%s).json";
 
