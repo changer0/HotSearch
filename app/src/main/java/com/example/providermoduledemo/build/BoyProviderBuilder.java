@@ -1,5 +1,7 @@
 package com.example.providermoduledemo.build;
 
+import android.os.Bundle;
+
 import com.example.providermoduledemo.sample.SampleConvertResponseBean;
 import com.example.providermoduledemo.sample.SampleConverter;
 import com.example.providermoduledemo.sample.SampleGetExpiredTime;
@@ -19,7 +21,8 @@ import com.qq.reader.provider.build.IProviderBuilder;
 public class BoyProviderBuilder implements IProviderBuilder {
     private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/convertTest (%s).json";
     @Override
-    public ProviderLiveData buildProvider(int index) {
+    public ProviderLiveData buildProvider(Bundle params) {
+        int index = params.getInt(PageBuilderParams.PAGE_INDEX);
         String url = String.format(SERVER_URL, index);
         return DataProvider.with(SampleResultBean.class, SampleConvertResponseBean.class)
                 .url(url)
@@ -33,6 +36,8 @@ public class BoyProviderBuilder implements IProviderBuilder {
     public PageConfigInfo buildPageConfigInfo() {
         return new PageConfigInfo.Builder()
                 .setTitleName("男生页面")
+                .setEnableLoadMore(true)
+                .setEnablePullDownRefresh(true)
                 .setStartIndex(1)
                 .build();
     }

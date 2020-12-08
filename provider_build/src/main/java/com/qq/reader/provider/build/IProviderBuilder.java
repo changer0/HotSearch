@@ -1,5 +1,7 @@
 package com.qq.reader.provider.build;
 
+import android.os.Bundle;
+
 import com.qq.reader.provider.ProviderLiveData;
 
 /**
@@ -9,10 +11,10 @@ public interface IProviderBuilder {
 
     /**
      * 构建 Provider
-     * @param index
+     * @param params
      * @return
      */
-    public ProviderLiveData buildProvider(int index);
+    public ProviderLiveData buildProvider(Bundle params);
 
     public PageConfigInfo buildPageConfigInfo();
 }

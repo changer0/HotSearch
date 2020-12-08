@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.providermoduledemo.build.PageBuilderParams;
 import com.qq.reader.provider.build.PageConfigInfo;
 import com.qq.reader.provider.listpage.SimpleListPageView;
 import com.qq.reader.provider.build.IProviderBuilder;
@@ -63,7 +64,9 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
     }
 
     private void loadData(int index) {
-        providerBuilder.buildProvider(index).observe(this, simpleListPageView);
+        Bundle bundle = new Bundle();
+        bundle.putInt(PageBuilderParams.PAGE_INDEX, index);
+        providerBuilder.buildProvider(bundle).observe(this, simpleListPageView);
     }
 
     private void initProviderBuilder() {

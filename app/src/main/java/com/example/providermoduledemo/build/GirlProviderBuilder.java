@@ -1,5 +1,7 @@
 package com.example.providermoduledemo.build;
 
+import android.os.Bundle;
+
 import com.example.providermoduledemo.sample.SampleConvertResponseBean;
 import com.example.providermoduledemo.sample.SampleConverter;
 import com.example.providermoduledemo.sample.SampleGetExpiredTime;
@@ -20,7 +22,8 @@ public class GirlProviderBuilder implements IProviderBuilder {
     private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/leftImgRightText (%s).json";
 
     @Override
-    public ProviderLiveData buildProvider(int index) {
+    public ProviderLiveData buildProvider(Bundle params) {
+        int index = params.getInt(PageBuilderParams.PAGE_INDEX);
         String url = String.format(SERVER_URL, index);
         return DataProvider.with(SampleResultBean.class)
                 .url(url)
