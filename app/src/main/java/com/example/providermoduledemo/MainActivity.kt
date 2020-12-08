@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(SampleCommonSecondPageActivity.PROVIDER_BUILDER_TYPE, PageBuilderTypes.GIRL_PAGE)
             startActivity(intent)
         }
+
+        fragmentCommonSecondPageFragment.setOnClickListener {
+            startActivity(Intent(this, SampleFragmentActivity::class.java))
+        }
     }
 }
 

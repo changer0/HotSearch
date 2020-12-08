@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.providermoduledemo.build.PageBuilderParams;
+import com.example.providermoduledemo.build.PageBuilderTypes;
 import com.qq.reader.provider.build.IPageBuilder;
 import com.qq.reader.provider.build.PageBuilderManger;
 import com.qq.reader.provider.build.PageConfigInfo;
@@ -33,6 +34,23 @@ public class SampleCommonSecondPageFragment extends Fragment {
 
     private IPageBuilder pageBuilder;
     private PageConfigInfo pageConfigInfo;
+
+    private SampleCommonSecondPageFragment() {
+    }
+
+    public static SampleCommonSecondPageFragment newInstance(String pageBuilderType) {
+        SampleCommonSecondPageFragment fragment = new SampleCommonSecondPageFragment();
+        Bundle args = new Bundle();
+        args.putString(PAGE_BUILDER_TYPE, pageBuilderType);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static SampleCommonSecondPageFragment newInstance(Bundle bundle) {
+        SampleCommonSecondPageFragment fragment = new SampleCommonSecondPageFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Nullable
     @Override
