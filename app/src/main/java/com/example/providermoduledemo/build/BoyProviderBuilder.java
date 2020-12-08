@@ -7,6 +7,7 @@ import com.example.providermoduledemo.sample.SampleResultBean;
 import com.example.providermoduledemo.sample.SampleViewBindItemBuilder;
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
+import com.qq.reader.provider.build.PageConfigInfo;
 import com.qq.reader.provider.cache.CacheMode;
 import com.qq.reader.provider.build.annotations.ProviderBuilderType;
 import com.qq.reader.provider.build.IProviderBuilder;
@@ -29,7 +30,11 @@ public class BoyProviderBuilder implements IProviderBuilder {
     }
 
     @Override
-    public String getTitleName() {
-        return "男生页面";
+    public PageConfigInfo buildPageConfigInfo() {
+        return new PageConfigInfo.Builder()
+                .setTitleName("男生页面")
+                .setStartIndex(1)
+                .build();
     }
+
 }

@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.qq.reader.provider.build.PageConfigInfo;
 import com.qq.reader.provider.listpage.SimpleListPageView;
 import com.qq.reader.provider.build.IProviderBuilder;
 import com.qq.reader.provider.build.ProviderBuilderManger;
@@ -25,6 +26,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
     private int curIndex = 1;
 
     private IProviderBuilder providerBuilder;
+    private PageConfigInfo pageConfigInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         initProviderBuilder();
         initLoadData();
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(providerBuilder.getTitleName());
+            getSupportActionBar().setTitle(pageConfigInfo.getTitleName());
         }
     }
 
@@ -42,19 +44,19 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
      * 初始化加载数据
      */
     private void initLoadData() {
-        curIndex = providerBuilder.getStartIndex();
+        curIndex = pageConfigInfo.getStartIndex();
         loadData(curIndex);
-        simpleListPageView.setEnableLoadMore(providerBuilder.isEnableLoadMore());
-        simpleListPageView.setEnablePullDownRefresh(providerBuilder.isEnablePullDownRefresh());
-        if (providerBuilder.isEnableLoadMore()) {
+        simpleListPageView.setEnableLoadMore(pageConfigInfo.isEnableLoadMore());
+        simpleListPageView.setEnablePullDownRefresh(pageConfigInfo.isEnablePullDownRefresh());
+        if (pageConfigInfo.isEnableLoadMore()) {
             simpleListPageView.setOnLoadMoreListener(() -> {
                 curIndex++;
                 loadData(curIndex);
             });
         }
-        if (providerBuilder.isEnablePullDownRefresh()) {
+        if (pageConfigInfo.isEnablePullDownRefresh()) {
             simpleListPageView.setOnRefreshListener(() -> {
-                curIndex = providerBuilder.getStartIndex();
+                curIndex = pageConfigInfo.getStartIndex();
                 loadData(curIndex);
             });
         }
@@ -74,6 +76,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         if (providerBuilder == null) {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + "Provider Builder 类型：" + providerType + "获取为空，请检查注解配置！");
         }
+        pageConfigInfo = providerBuilder.buildPageConfigInfo();
     }
 
 }

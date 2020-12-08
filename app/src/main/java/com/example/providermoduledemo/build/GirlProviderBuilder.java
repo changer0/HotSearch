@@ -8,6 +8,7 @@ import com.example.providermoduledemo.sample.SampleViewBindItemBuilder;
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
 import com.qq.reader.provider.build.IProviderBuilder;
+import com.qq.reader.provider.build.PageConfigInfo;
 import com.qq.reader.provider.build.annotations.ProviderBuilderType;
 import com.qq.reader.provider.cache.CacheMode;
 
@@ -29,17 +30,12 @@ public class GirlProviderBuilder implements IProviderBuilder {
     }
 
     @Override
-    public String getTitleName() {
-        return "女生页面";
-    }
-
-    @Override
-    public boolean isEnableLoadMore() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnablePullDownRefresh() {
-        return false;
+    public PageConfigInfo buildPageConfigInfo() {
+        return new PageConfigInfo.Builder()
+                .setEnableLoadMore(false)
+                .setEnablePullDownRefresh(false)
+                .setTitleName("女生页面")
+                .setStartIndex(1)
+                .build();
     }
 }
