@@ -26,7 +26,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
 
     private int curIndex = 1;
 
-    private IPageBuilder providerBuilder;
+    private IPageBuilder pageBuilder;
     private PageConfigInfo pageConfigInfo;
 
     @Override
@@ -34,7 +34,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         simpleListPageView = new SimpleListPageView(this);
         setContentView(simpleListPageView.getContentView());
-        initProviderBuilder();
+        initPageBuilder();
         initLoadData();
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(pageConfigInfo.getTitleName());
@@ -66,20 +66,20 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
     private void loadData(int index) {
         Bundle bundle = new Bundle();
         bundle.putInt(PageBuilderParams.PAGE_INDEX, index);
-        providerBuilder.buildProvider(bundle).observe(this, simpleListPageView);
+        pageBuilder.buildProvider(bundle).observe(this, simpleListPageView);
     }
 
-    private void initProviderBuilder() {
+    private void initPageBuilder() {
         Intent intent = getIntent();
         String providerType = intent.getStringExtra(PROVIDER_BUILDER_TYPE);
         if (TextUtils.isEmpty(providerType)) {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + " 启动该 Activity 前需要传入 PROVIDER_BUILDER_TYPE");
         }
-        providerBuilder = PageBuilderManger.getInstance(getClassLoader()).getPageBuilder(providerType);
-        if (providerBuilder == null) {
+        pageBuilder = PageBuilderManger.getInstance(getClassLoader()).getPageBuilder(providerType);
+        if (pageBuilder == null) {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + "Provider Builder 类型：" + providerType + "获取为空，请检查注解配置！");
         }
-        pageConfigInfo = providerBuilder.buildPageConfigInfo();
+        pageConfigInfo = pageBuilder.buildPageConfigInfo();
     }
 
 }
