@@ -28,7 +28,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".sample.SampleListPageActivity"/>
         <activity android:name=".sample.SampleCommonSecondPageActivity"/>
-        <activity android:name=".sample.SampleActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

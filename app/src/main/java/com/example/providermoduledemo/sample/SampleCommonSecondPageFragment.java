@@ -15,6 +15,7 @@ import com.example.providermoduledemo.build.PageBuilderParams;
 import com.qq.reader.provider.build.IPageBuilder;
 import com.qq.reader.provider.build.PageBuilderManger;
 import com.qq.reader.provider.build.PageConfigInfo;
+import com.qq.reader.provider.listpage.BaseListPageView;
 import com.qq.reader.provider.listpage.SimpleListPageView;
 
 /**
@@ -26,7 +27,7 @@ public class SampleCommonSecondPageFragment extends Fragment {
 
     private static final String TAG = "SampleListPageActivity";
 
-    private SimpleListPageView simpleListPageView;
+    private BaseListPageView simpleListPageView;
 
     private int curIndex = 1;
 
@@ -36,7 +37,7 @@ public class SampleCommonSecondPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        simpleListPageView = new SimpleListPageView(getContext());
+        simpleListPageView = getListPageView();
         return simpleListPageView.getContentView();
     }
 
@@ -94,5 +95,12 @@ public class SampleCommonSecondPageFragment extends Fragment {
         }
         pageConfigInfo = pageBuilder.buildPageConfigInfo();
     }
+    protected BaseListPageView getListPageView() {
+        if (simpleListPageView != null) {
+            return simpleListPageView;
+        }
+        return new SimpleListPageView(getContext());
+    }
+
 
 }

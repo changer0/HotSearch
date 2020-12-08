@@ -14,17 +14,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModelActivity.setOnClickListener {
-            startActivity(Intent(this, SampleActivity::class.java))
-        }
-        preLoadActivity.setOnClickListener {
-            val liveData = DataProvider.with(SampleResultBean::class.java)
-                .url(String.format(SampleActivity.SERVER_URL, 1))
-                .viewBindItemBuilder(SampleViewBindItemBuilder())
-                .load()
-            PreLoadLiveDataManager.savePreLoadLiveData("bid", liveData)
-            startActivity(Intent(this, SampleActivity::class.java))
-        }
+
         sampleListPageActivity.setOnClickListener {
             startActivity(Intent(this, SampleListPageActivity::class.java))
         }

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.providermoduledemo.build.PageBuilderParams;
 import com.qq.reader.provider.build.PageConfigInfo;
+import com.qq.reader.provider.listpage.BaseListPageView;
 import com.qq.reader.provider.listpage.SimpleListPageView;
 import com.qq.reader.provider.build.IPageBuilder;
 import com.qq.reader.provider.build.PageBuilderManger;
@@ -22,7 +23,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
 
     private static final String TAG = "SampleListPageActivity";
 
-    private SimpleListPageView simpleListPageView;
+    private BaseListPageView simpleListPageView;
 
     private int curIndex = 1;
 
@@ -32,7 +33,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        simpleListPageView = new SimpleListPageView(this);
+        simpleListPageView = getListPageView();
         setContentView(simpleListPageView.getContentView());
         initPageBuilder();
         initLoadData();
@@ -80,6 +81,13 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + "Provider Builder 类型：" + providerType + "获取为空，请检查注解配置！");
         }
         pageConfigInfo = pageBuilder.buildPageConfigInfo();
+    }
+
+    protected BaseListPageView getListPageView() {
+        if (simpleListPageView != null) {
+            return simpleListPageView;
+        }
+        return new SimpleListPageView(this);
     }
 
 }
