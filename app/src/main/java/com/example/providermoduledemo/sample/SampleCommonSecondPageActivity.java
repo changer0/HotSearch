@@ -8,11 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.providermoduledemo.build.PageBuilderParams;
-import com.qq.reader.provider.build.PageConfigInfo;
+import com.qq.reader.provider.build.IPage;
+import com.qq.reader.provider.build.PageInfo;
 import com.qq.reader.provider.listpage.BaseListPageView;
 import com.qq.reader.provider.listpage.SimpleListPageView;
-import com.qq.reader.provider.build.IPageBuilder;
-import com.qq.reader.provider.build.PageBuilderManger;
+import com.qq.reader.provider.build.PageManger;
 
 /**
  * 通用二级页 示例页面
@@ -27,8 +27,8 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
 
     private int curIndex = 1;
 
-    private IPageBuilder pageBuilder;
-    private PageConfigInfo pageConfigInfo;
+    private IPage pageBuilder;
+    private PageInfo pageInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         initPageBuilder();
         initLoadData();
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(pageConfigInfo.getTitleName());
+            getSupportActionBar().setTitle(pageInfo.getTitleName());
         }
     }
 
@@ -46,19 +46,19 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
      * 初始化加载数据
      */
     private void initLoadData() {
-        curIndex = pageConfigInfo.getStartIndex();
+        curIndex = pageInfo.getStartIndex();
         loadData(curIndex);
-        simpleListPageView.setEnableLoadMore(pageConfigInfo.isEnableLoadMore());
-        simpleListPageView.setEnablePullDownRefresh(pageConfigInfo.isEnablePullDownRefresh());
-        if (pageConfigInfo.isEnableLoadMore()) {
+        simpleListPageView.setEnableLoadMore(pageInfo.isEnableLoadMore());
+        simpleListPageView.setEnablePullDownRefresh(pageInfo.isEnablePullDownRefresh());
+        if (pageInfo.isEnableLoadMore()) {
             simpleListPageView.setOnLoadMoreListener(() -> {
                 curIndex++;
                 loadData(curIndex);
             });
         }
-        if (pageConfigInfo.isEnablePullDownRefresh()) {
+        if (pageInfo.isEnablePullDownRefresh()) {
             simpleListPageView.setOnRefreshListener(() -> {
-                curIndex = pageConfigInfo.getStartIndex();
+                curIndex = pageInfo.getStartIndex();
                 loadData(curIndex);
             });
         }
@@ -67,7 +67,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
     private void loadData(int index) {
         Bundle bundle = new Bundle();
         bundle.putInt(PageBuilderParams.PAGE_INDEX, index);
-        pageBuilder.buildProvider(bundle).observe(this, simpleListPageView);
+        pageBuilder.loadPageData(bundle).observe(this, simpleListPageView);
     }
 
     private void initPageBuilder() {
@@ -76,11 +76,11 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(providerType)) {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + " 启动该 Activity 前需要传入 PROVIDER_BUILDER_TYPE");
         }
-        pageBuilder = PageBuilderManger.getInstance(getClassLoader()).getPageBuilder(providerType);
+        pageBuilder = PageManger.getInstance(getClassLoader()).getPageBuilder(providerType);
         if (pageBuilder == null) {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + "Provider Builder 类型：" + providerType + "获取为空，请检查注解配置！");
         }
-        pageConfigInfo = pageBuilder.buildPageConfigInfo();
+        pageInfo = pageBuilder.buildPageInfo();
     }
 
     protected BaseListPageView getListPageView() {

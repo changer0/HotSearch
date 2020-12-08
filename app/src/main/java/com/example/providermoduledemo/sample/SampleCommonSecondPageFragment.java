@@ -12,10 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.providermoduledemo.build.PageBuilderParams;
-import com.example.providermoduledemo.build.PageBuilderTypes;
-import com.qq.reader.provider.build.IPageBuilder;
-import com.qq.reader.provider.build.PageBuilderManger;
-import com.qq.reader.provider.build.PageConfigInfo;
+import com.qq.reader.provider.build.IPage;
+import com.qq.reader.provider.build.PageManger;
+import com.qq.reader.provider.build.PageInfo;
 import com.qq.reader.provider.listpage.BaseListPageView;
 import com.qq.reader.provider.listpage.SimpleListPageView;
 
@@ -32,8 +31,8 @@ public class SampleCommonSecondPageFragment extends Fragment {
 
     private int curIndex = 1;
 
-    private IPageBuilder pageBuilder;
-    private PageConfigInfo pageConfigInfo;
+    private IPage pageBuilder;
+    private PageInfo pageInfo;
 
     private SampleCommonSecondPageFragment() {
     }
@@ -70,19 +69,19 @@ public class SampleCommonSecondPageFragment extends Fragment {
      * 初始化加载数据
      */
     private void initLoadData() {
-        curIndex = pageConfigInfo.getStartIndex();
+        curIndex = pageInfo.getStartIndex();
         loadData(curIndex);
-        simpleListPageView.setEnableLoadMore(pageConfigInfo.isEnableLoadMore());
-        simpleListPageView.setEnablePullDownRefresh(pageConfigInfo.isEnablePullDownRefresh());
-        if (pageConfigInfo.isEnableLoadMore()) {
+        simpleListPageView.setEnableLoadMore(pageInfo.isEnableLoadMore());
+        simpleListPageView.setEnablePullDownRefresh(pageInfo.isEnablePullDownRefresh());
+        if (pageInfo.isEnableLoadMore()) {
             simpleListPageView.setOnLoadMoreListener(() -> {
                 curIndex++;
                 loadData(curIndex);
             });
         }
-        if (pageConfigInfo.isEnablePullDownRefresh()) {
+        if (pageInfo.isEnablePullDownRefresh()) {
             simpleListPageView.setOnRefreshListener(() -> {
-                curIndex = pageConfigInfo.getStartIndex();
+                curIndex = pageInfo.getStartIndex();
                 loadData(curIndex);
             });
         }
@@ -91,7 +90,7 @@ public class SampleCommonSecondPageFragment extends Fragment {
     private void loadData(int index) {
         Bundle bundle = new Bundle();
         bundle.putInt(PageBuilderParams.PAGE_INDEX, index);
-        pageBuilder.buildProvider(bundle).observe(this, simpleListPageView);
+        pageBuilder.loadPageData(bundle).observe(this, simpleListPageView);
     }
 
     private void initPageBuilder() {
@@ -107,11 +106,11 @@ public class SampleCommonSecondPageFragment extends Fragment {
         if (TextUtils.isEmpty(pageType)) {
             throw new NullPointerException(SampleCommonSecondPageFragment.class.getSimpleName() + " 启动该 Fragment 前需要传入 PROVIDER_BUILDER_TYPE");
         }
-        pageBuilder = PageBuilderManger.getInstance(context.getClassLoader()).getPageBuilder(pageType);
+        pageBuilder = PageManger.getInstance(context.getClassLoader()).getPageBuilder(pageType);
         if (pageBuilder == null) {
             throw new NullPointerException(SampleCommonSecondPageFragment.class.getSimpleName() + "Page 类型：" + pageType + "获取为空，请检查注解配置！");
         }
-        pageConfigInfo = pageBuilder.buildPageConfigInfo();
+        pageInfo = pageBuilder.buildPageInfo();
     }
     protected BaseListPageView getListPageView() {
         if (simpleListPageView != null) {

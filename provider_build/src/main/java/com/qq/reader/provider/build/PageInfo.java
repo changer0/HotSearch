@@ -3,13 +3,13 @@ package com.qq.reader.provider.build;
 /**
  * 页面信息
  */
-public class PageConfigInfo {
+public class PageInfo {
     private String titleName;
     private int startIndex;
     private boolean isEnablePullDownRefresh;
     private boolean isEnableLoadMore;
 
-    private PageConfigInfo() {
+    private PageInfo() {
     }
 
     public String getTitleName() {
@@ -33,7 +33,7 @@ public class PageConfigInfo {
      * 构建类
      */
     public static class Builder {
-        private PageConfigInfo P = new PageConfigInfo();
+        private PageInfo P = new PageInfo();
 
         public Builder setTitleName(String titleName) {
             P.titleName = titleName;
@@ -52,7 +52,7 @@ public class PageConfigInfo {
             return this;
         }
 
-        public PageConfigInfo build() {
+        public PageInfo build() {
             return P;
         }
     }

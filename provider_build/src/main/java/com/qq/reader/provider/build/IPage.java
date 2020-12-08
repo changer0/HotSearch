@@ -7,14 +7,14 @@ import com.qq.reader.provider.ProviderLiveData;
 /**
  * 页面构建器
  */
-public interface IPageBuilder {
+public interface IPage {
 
     /**
      * 构建 Provider
      * @param params
      * @return
      */
-    public ProviderLiveData buildProvider(Bundle params);
+    public ProviderLiveData loadPageData(Bundle params);
 
-    public PageConfigInfo buildPageConfigInfo();
+    public PageInfo buildPageInfo();
 }
