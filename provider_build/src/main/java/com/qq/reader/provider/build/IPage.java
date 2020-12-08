@@ -10,11 +10,15 @@ import com.qq.reader.provider.ProviderLiveData;
 public interface IPage {
 
     /**
-     * 构建 Provider
+     * 加载 Page 数据
      * @param params
      * @return
      */
     public ProviderLiveData loadPageData(Bundle params);
 
+    /**
+     * 构建 Page 信息
+     * @return
+     */
     public PageInfo buildPageInfo();
 }
