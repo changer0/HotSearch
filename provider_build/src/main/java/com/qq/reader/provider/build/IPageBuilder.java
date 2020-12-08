@@ -5,9 +5,9 @@ import android.os.Bundle;
 import com.qq.reader.provider.ProviderLiveData;
 
 /**
- * Provider 构建器
+ * 页面构建器
  */
-public interface IProviderBuilder {
+public interface IPageBuilder {
 
     /**
      * 构建 Provider

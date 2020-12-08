@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.providermoduledemo.build.PageBuilderParams;
 import com.qq.reader.provider.build.PageConfigInfo;
 import com.qq.reader.provider.listpage.SimpleListPageView;
-import com.qq.reader.provider.build.IProviderBuilder;
-import com.qq.reader.provider.build.ProviderBuilderManger;
+import com.qq.reader.provider.build.IPageBuilder;
+import com.qq.reader.provider.build.PageBuilderManger;
 
 /**
  * 通用二级页 示例页面
@@ -26,7 +26,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
 
     private int curIndex = 1;
 
-    private IProviderBuilder providerBuilder;
+    private IPageBuilder providerBuilder;
     private PageConfigInfo pageConfigInfo;
 
     @Override
@@ -75,7 +75,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(providerType)) {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + " 启动该 Activity 前需要传入 PROVIDER_BUILDER_TYPE");
         }
-        providerBuilder = ProviderBuilderManger.getInstance(getClassLoader()).getProviderBuilder(providerType);
+        providerBuilder = PageBuilderManger.getInstance(getClassLoader()).getPageBuilder(providerType);
         if (providerBuilder == null) {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + "Provider Builder 类型：" + providerType + "获取为空，请检查注解配置！");
         }
