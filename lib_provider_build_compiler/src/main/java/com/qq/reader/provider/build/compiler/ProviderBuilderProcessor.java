@@ -84,7 +84,7 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
         getProviderBuilder.addParameter(param, "type");
         ClassName returnType = ClassName.get(ProviderBuilderConstants.BUILDER_PACKAGE_NAME, ProviderBuilderConstants.BUILDER_SIMPLE_CLASS);
         getProviderBuilder.returns(returnType);
-        getProviderBuilder.addStatement("IProviderBuilder builder = null");
+        getProviderBuilder.addStatement(ProviderBuilderConstants.BUILDER_SIMPLE_CLASS + " builder = null");
         getProviderBuilder.addCode("switch (type) {\n");
 
         for (Element element : sets) {
