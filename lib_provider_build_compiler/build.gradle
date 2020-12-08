@@ -10,6 +10,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     dependencies {
         implementation 'com.squareup:javapoet:1.12.1'
-        implementation project(':lib_provider_build_base')
+        if (!isSourceBuildDataProviderComponent.toBoolean()) {
+            implementation project(':lib_provider_build_base')
+        }
     }
 }

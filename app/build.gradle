@@ -3,15 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-def config = rootProject.ext.android
 android {
-    compileSdkVersion config.compileSdkVersion
-    //buildToolsVersion config.buildToolsVersion
+    compileSdkVersion gradle_build_versions.compileSdkVersion
 
     defaultConfig {
         applicationId "com.example.providermoduledemo"
-        minSdkVersion config.minSdkVersion
-        targetSdkVersion config.targetSdkVersion
+        minSdkVersion gradle_build_versions.minSdkVersion
+        targetSdkVersion gradle_build_versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -50,7 +48,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
 
-    implementation project(':provider_viewmodel')
     //OkHttp 库
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     api(name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')
@@ -61,10 +58,14 @@ dependencies {
     //下拉刷新库，后续会更换成 QQ Reader 的刷新库
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-    implementation project(':provider_core')
-    implementation project(':provider_build')
-    //Provider Generator 注解
-    implementation project(':lib_provider_build_base')
-    //需要注意需要添加注解处理器！！
-    kapt project(':lib_provider_build_compiler')
+
+    if (!isSourceBuildDataProviderComponent.toBoolean()) {
+        implementation project(':provider_viewmodel')
+        implementation project(':provider_core')
+        implementation project(':provider_build')
+        //Provider Generator 注解
+        implementation project(':lib_provider_build_base')
+        //需要注意需要添加注解处理器！！
+        kapt project(':lib_provider_build_compiler')
+    }
 }
