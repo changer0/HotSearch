@@ -23,10 +23,10 @@ public class PageManger {
     }
 
     public IPage getPage(String type) {
-        IPage providerBuilder = providerBuilderFactory.getPage(type);
-        if (providerBuilder == null) {
-            throw new NullPointerException("请检查该类型： " + type + " 是否标注到 IPageBuilder 实现类中");
+        IPage page = providerBuilderFactory.getPage(type);
+        if (page == null) {
+            throw new NullPointerException("请检查该类型： " + type + " 是否标注到 IPage 的实现类中");
         }
-        return providerBuilder;
+        return page;
     }
 }
