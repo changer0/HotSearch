@@ -76,7 +76,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(providerType)) {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + " 启动该 Activity 前需要传入 PROVIDER_BUILDER_TYPE");
         }
-        pageBuilder = PageManger.getInstance(getClassLoader()).getPageBuilder(providerType);
+        pageBuilder = PageManger.getInstance(getClassLoader()).getPage(providerType);
         if (pageBuilder == null) {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + "Provider Builder 类型：" + providerType + "获取为空，请检查注解配置！");
         }
