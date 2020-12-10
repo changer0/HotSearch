@@ -69,3 +69,26 @@ dependencies {
         kapt project(':lib_provider_build_compiler')
     }
 }
+
+task uniteTask {
+    doFirst {
+        println "uniteTask 执行"
+    }
+
+}
+
+
+
+task uploadTestTask1 {
+    doLast {
+        println "uploadTestTask1"
+    }
+}
+task uploadTestTask2 {
+    doLast {
+        println "uploadTestTask2"
+    }
+}
+
+uniteTask.dependsOn app:uploadTestTask1
+uniteTask.dependsOn app:uploadTestTask2

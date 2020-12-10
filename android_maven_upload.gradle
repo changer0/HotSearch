@@ -1,0 +1,58 @@
+apply plugin: 'maven'
+//apply plugin: 'com.android.library'
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives androidSourcesJar
+}
+
+uploadArchives {
+    def MAVEN_REPO_RELEASE_URL = 'http://qdnexus.inner.yuewen.local/nexus/content/repositories/releases/'
+    def LOCAL_MAVEN_REPO_SNAPSHOT_URL = 'http://qdnexus.inner.yuewen.local/nexus/content/repositories/snapshots/'
+
+    println "UPLOAD_LOCAL=${UPLOAD_LOCAL}|UPLOAD_SNAPSHOT=${UPLOAD_SNAPSHOT}"
+
+    def uploadLocal = UPLOAD_LOCAL == "true"
+    def uploadSanpshot = UPLOAD_SNAPSHOT == "true"
+
+    println "uploadLocal=${uploadLocal}|uploadRelease=${uploadSanpshot}"
+
+    def NEXUS_USERNAME = 'deployment'
+    def NEXUS_PASSWORD = 'deployment123'
+    def uploadVersion = VERSION
+    if (uploadSanpshot) {
+        uploadVersion = "${VERSION}-SNAPSHOT"
+    }
+    println uploadVersion + " ============ ${uploadSanpshot}"
+    configuration = configurations.archives
+    repositories {
+        mavenDeployer {
+            pom.project {
+                artifactId ARTIFACTID
+                groupId GROUPID
+                packaging PACKAGING
+                version uploadVersion
+                description DESCRIPTION
+            }
+            if (uploadLocal) {
+                repository(url: uri("${project.rootDir}/LocalRepository"))
+            } else {
+                // 私有仓库的地址，以及账户
+                if (!uploadSanpshot) {
+                    repository(url: MAVEN_REPO_RELEASE_URL) {
+                        authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+                    }
+                } else {
+                    repository(url: LOCAL_MAVEN_REPO_SNAPSHOT_URL) {
+                        authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+                    }
+                }
+            }
+
+        }
+    }
+}
