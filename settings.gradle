@@ -1,8 +1,8 @@
 
-rootProject.name='ProviderModuleDemo'
+rootProject.name='DataProviderComponent'
 include ':app'
 include ':provider_core'
 include ':provider_viewmodel'
-include ':provider_build'
+include ':provider_page'
 include ':lib_provider_build_base'
 include ':lib_provider_build_compiler'

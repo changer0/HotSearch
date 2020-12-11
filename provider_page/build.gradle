@@ -53,3 +53,15 @@ dependencies {
     }
 
 }
+
+ext {
+    ARTIFACTID = "provider_page"
+    GROUPID = "com.yuewen.component"
+    PACKAGING = "aar"
+    VERSION = "1.0.0"
+    DESCRIPTION = "DataProvider 组件 Page 构建模块"
+    UPLOAD_LOCAL = "true"
+    UPLOAD_SNAPSHOT = "true"
+}
+
+apply from : "${project.rootDir}/android_maven_upload.gradle"

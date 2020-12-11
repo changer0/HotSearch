@@ -11,3 +11,15 @@ java {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+ext {
+    ARTIFACTID = "lib_provider_build_base"
+    GROUPID = "com.yuewen.component"
+    PACKAGING = "jar"
+    VERSION = "1.0.0"
+    DESCRIPTION = "DataProvider 组件注解编译基础库"
+    UPLOAD_LOCAL = "true"
+    UPLOAD_SNAPSHOT = "true"
+}
+
+apply from : "${project.rootDir}/android_maven_upload.gradle"
