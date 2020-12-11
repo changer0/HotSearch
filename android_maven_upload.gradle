@@ -1,13 +1,15 @@
 apply plugin: 'maven'
-//apply plugin: 'com.android.library'
 
-task androidSourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.java.srcDirs
-}
+// 只有 aar 需要编译源码，jar 会报错
+if (PACKAGING=="aar") {
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
 
-artifacts {
-    archives androidSourcesJar
+    artifacts {
+        archives androidSourcesJar
+    }
 }
 
 uploadArchives {
