@@ -5,12 +5,11 @@ apply plugin: 'kotlin-android-extensions'
 //def config = rootProject.ext.android
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion gradle_build_versions.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
+        minSdkVersion gradle_build_versions.minSdkVersion
+        targetSdkVersion gradle_build_versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -54,7 +53,7 @@ dependencies {
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation "androidx.lifecycle:lifecycle-livedata:2.0.0"
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.4'
 }
 
 ext {
