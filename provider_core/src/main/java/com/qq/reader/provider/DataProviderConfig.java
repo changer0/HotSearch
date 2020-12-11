@@ -61,7 +61,7 @@ public class DataProviderConfig {
     /**网络请求适配器*/
     public interface NetQuestAdapter {
         @WorkerThread
-        InputStream syncRequest(INetQuestParams params);
+        InputStream syncRequest(INetQuestParams params) throws Exception;
     }
 
     /**
