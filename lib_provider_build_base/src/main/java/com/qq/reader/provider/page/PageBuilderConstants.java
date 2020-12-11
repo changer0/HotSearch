@@ -1,7 +1,7 @@
-package com.qq.reader.provider.build;
+package com.qq.reader.provider.page;
 
-public class ProviderBuilderConstants {
-    public static final String BUILDER_PACKAGE_NAME = "com.qq.reader.provider.build";
+public class PageBuilderConstants {
+    public static final String BUILDER_PACKAGE_NAME = "com.qq.reader.provider.page";
 
     public static final String BUILDER_FACTORY_SIMPLE_CLASS_NAME = "IPageFactory";
     public static final String BUILDER_FACTORY_IMPL_SIMPLE_CLASS_NAME = "PageFactoryImpl";

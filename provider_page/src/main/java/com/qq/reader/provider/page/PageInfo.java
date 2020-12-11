@@ -1,4 +1,4 @@
-package com.qq.reader.provider.build;
+package com.qq.reader.provider.page;
 
 /**
  * 页面信息

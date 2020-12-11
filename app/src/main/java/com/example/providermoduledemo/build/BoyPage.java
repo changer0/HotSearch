@@ -9,10 +9,10 @@ import com.example.providermoduledemo.sample.SampleResultBean;
 import com.example.providermoduledemo.sample.SampleViewBindItemBuilder;
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
-import com.qq.reader.provider.build.IPage;
-import com.qq.reader.provider.build.PageInfo;
+import com.qq.reader.provider.page.IPage;
+import com.qq.reader.provider.page.PageInfo;
 import com.qq.reader.provider.cache.CacheMode;
-import com.qq.reader.provider.build.annotations.PageBuilderType;
+import com.qq.reader.provider.page.annotations.PageBuilderType;
 
 /**
  * 男生 Provider 构建类 （举例说明）

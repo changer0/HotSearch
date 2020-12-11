@@ -1,4 +1,4 @@
-package com.qq.reader.provider.build;
+package com.qq.reader.provider.page;
 
 import com.qq.reader.provider.utils.CastUtils;
 

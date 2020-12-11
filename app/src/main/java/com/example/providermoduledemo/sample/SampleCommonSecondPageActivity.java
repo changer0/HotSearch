@@ -8,11 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.providermoduledemo.build.PageBuilderParams;
-import com.qq.reader.provider.build.IPage;
-import com.qq.reader.provider.build.PageInfo;
+import com.qq.reader.provider.page.IPage;
+import com.qq.reader.provider.page.PageInfo;
 import com.qq.reader.provider.listpage.BaseListPageView;
 import com.qq.reader.provider.listpage.SimpleListPageView;
-import com.qq.reader.provider.build.PageManger;
+import com.qq.reader.provider.page.PageManger;
 
 /**
  * 通用二级页 示例页面

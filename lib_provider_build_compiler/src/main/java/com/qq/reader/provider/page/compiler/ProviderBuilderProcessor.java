@@ -1,7 +1,7 @@
-package com.qq.reader.provider.build.compiler;
+package com.qq.reader.provider.page.compiler;
 
-import com.qq.reader.provider.build.ProviderBuilderConstants;
-import com.qq.reader.provider.build.annotations.PageBuilderType;
+import com.qq.reader.provider.page.PageBuilderConstants;
+import com.qq.reader.provider.page.annotations.PageBuilderType;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
@@ -73,12 +73,12 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
                 .addModifiers(Modifier.PRIVATE);
 
         // getProviderBuilder 方法
-        MethodSpec.Builder getProviderBuilder = MethodSpec.methodBuilder(ProviderBuilderConstants.BUILDER_GET_METHOD_NAME).addModifiers(Modifier.PUBLIC);
+        MethodSpec.Builder getProviderBuilder = MethodSpec.methodBuilder(PageBuilderConstants.BUILDER_GET_METHOD_NAME).addModifiers(Modifier.PUBLIC);
         ClassName param = ClassName.get(String.class);
         getProviderBuilder.addParameter(param, "type");
-        ClassName returnType = ClassName.get(ProviderBuilderConstants.BUILDER_PACKAGE_NAME, ProviderBuilderConstants.BUILDER_SIMPLE_CLASS);
+        ClassName returnType = ClassName.get(PageBuilderConstants.BUILDER_PACKAGE_NAME, PageBuilderConstants.BUILDER_SIMPLE_CLASS);
         getProviderBuilder.returns(returnType);
-        getProviderBuilder.addStatement(ProviderBuilderConstants.BUILDER_SIMPLE_CLASS + " builder = null");
+        getProviderBuilder.addStatement(PageBuilderConstants.BUILDER_SIMPLE_CLASS + " builder = null");
         getProviderBuilder.addCode("switch (type) {\n");
 
         for (Element element : sets) {
@@ -97,15 +97,15 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
         getProviderBuilder.addStatement("return builder");
 
         //class 让其实现接口
-        ClassName iGetViewModelMapInter = ClassName.get(ProviderBuilderConstants.BUILDER_PACKAGE_NAME, ProviderBuilderConstants.BUILDER_FACTORY_SIMPLE_CLASS_NAME);
+        ClassName iGetViewModelMapInter = ClassName.get(PageBuilderConstants.BUILDER_PACKAGE_NAME, PageBuilderConstants.BUILDER_FACTORY_SIMPLE_CLASS_NAME);
         //class
-        TypeSpec typeSpec = TypeSpec.classBuilder(ProviderBuilderConstants.BUILDER_FACTORY_IMPL_SIMPLE_CLASS_NAME)
+        TypeSpec typeSpec = TypeSpec.classBuilder(PageBuilderConstants.BUILDER_FACTORY_IMPL_SIMPLE_CLASS_NAME)
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addMethod(getProviderBuilder.build())
                 .addSuperinterface(iGetViewModelMapInter)
                 .build();
         //file
-        JavaFile javaFile = JavaFile.builder(ProviderBuilderConstants.BUILDER_PACKAGE_NAME, typeSpec).build();
+        JavaFile javaFile = JavaFile.builder(PageBuilderConstants.BUILDER_PACKAGE_NAME, typeSpec).build();
         try {
             javaFile.writeTo(filer);
         } catch (IOException e) {

@@ -1,4 +1,4 @@
-package com.qq.reader.provider.build;
+package com.qq.reader.provider.page;
 
 public class PageManger {
 
@@ -6,7 +6,7 @@ public class PageManger {
 
     private PageManger(ClassLoader classLoader) {
         providerBuilderFactory = ClassLoaderUtils.newInstance(classLoader,
-                ProviderBuilderConstants.BUILDER_FACTORY_IMPL_CLASS_NAME, IPageFactory.class);
+                PageBuilderConstants.BUILDER_FACTORY_IMPL_CLASS_NAME, IPageFactory.class);
     }
 
     private static PageManger instance;
