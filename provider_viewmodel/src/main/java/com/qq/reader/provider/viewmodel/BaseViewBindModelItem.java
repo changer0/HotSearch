@@ -27,7 +27,7 @@ public abstract class BaseViewBindModelItem <Bean> extends BaseViewBindItem<Bean
     public void setData(Bean dataBean) {
         super.setData(dataBean);
         try {
-            onBindViewModel(dataBean, viewModelMap);
+            onBindViewModel(viewModelMap);
         } catch (Exception e) {
             Logger.e("BaseViewBindModelItem", "onBindViewModel 失败：" + e);
         }
@@ -47,11 +47,11 @@ public abstract class BaseViewBindModelItem <Bean> extends BaseViewBindItem<Bean
                 Logger.e(TAG, "当前 ViewModel 为空");
                 continue;
             }
-            ((IView<? extends IViewModel>) view).setModel(CastUtils.cast(viewModel));
+            ((IView<? extends IViewModel>) view).setViewModel(CastUtils.cast(viewModel));
         }
         return true;
     }
 
     /**初始化 Model*/
-    public abstract void onBindViewModel(Bean data, @NonNull Map<Integer, IViewModel> viewModelMap);
+    public abstract void onBindViewModel(@NonNull Map<Integer, IViewModel> viewModelMap);
 }

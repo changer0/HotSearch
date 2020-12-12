@@ -14,7 +14,6 @@ class ViewBindItemLIRTGroupStyle1 : BaseViewBindModelItem<SampleResultBean.Item>
     }
 
     override fun onBindViewModel(
-        data: SampleResultBean.Item?,
         viewModelMap: MutableMap<Int, IViewModel>
     ) {
         val bookList = data?.bookList!!

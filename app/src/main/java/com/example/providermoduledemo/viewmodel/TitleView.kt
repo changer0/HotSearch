@@ -36,7 +36,7 @@ class TitleView : LinearLayout, IView<TitleViewModel>{
     }
 
 
-    override fun setModel(model: TitleViewModel) {
+    override fun setViewModel(model: TitleViewModel) {
         itemTitle.text = "${model.title}"
     }
 

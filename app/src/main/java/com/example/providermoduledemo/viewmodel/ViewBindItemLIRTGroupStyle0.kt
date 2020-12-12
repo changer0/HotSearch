@@ -15,11 +15,10 @@ class ViewBindItemLIRTGroupStyle0 : BaseViewBindModelItem<SampleResultBean.Item>
     }
 
     override fun onBindViewModel(
-        data: SampleResultBean.Item?,
         viewModelMap: MutableMap<Int, IViewModel>
     ) {
-        val bookList = data?.bookList!!
-        viewModelMap[R.id.title] = TitleViewModel(data.title)
+        val bookList = mItemData?.bookList!!
+        viewModelMap[R.id.title] = TitleViewModel(mItemData.title)
         val size = bookList.size
         if (size < 1) {
             return
