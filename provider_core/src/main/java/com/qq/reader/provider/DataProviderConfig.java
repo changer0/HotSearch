@@ -22,7 +22,14 @@ public class DataProviderConfig {
     public static boolean isDebug = false;
 
     /**缓存目录*/
-    public static String cacheDir;
+    private static String cacheDir;
+
+    public static String getCacheDir() {
+        if (cacheDir == null) {
+            throw new RuntimeException("使用前 请在 Application 中执行 DataProviderConfig.init");
+        }
+        return cacheDir;
+    }
 
     public static Application getApplication() {
         if (application == null) {

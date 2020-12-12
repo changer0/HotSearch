@@ -39,7 +39,7 @@ public class CacheController {
     }
 
     private void initCache() {
-        File cacheFile = new File(DataProviderConfig.cacheDir);
+        File cacheFile = new File(DataProviderConfig.getCacheDir());
         try {
             //1. 缓存地址 2. 版本号  3. 指定同一个key可以对应多少个缓存文件 4. 指定最多可以缓存多少字节的数据
             cache = DiskLruCache.open(cacheFile, DataProviderConfig.getAppVersion(), 1, MAX_CACHE_SIZE);
