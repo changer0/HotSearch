@@ -6,10 +6,6 @@
 
 [provider_core 使用文档](provider_core/README.md)
 
-[provider_viewmodel 设计文档](provider_viewmodel/DESIGN.md)
-
-[provider_viewmodel 使用文档](provider_viewmodel/README.md)
-
 ## 示例图
 
 ![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201108224245.png)
