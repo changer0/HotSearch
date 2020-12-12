@@ -5,5 +5,5 @@ package com.qq.reader.provider.viewmodel;
  * for
  */
 public interface IView<T extends IViewModel> {
-    void setModel(T model);
+    void setViewModel(T model);
 }
