@@ -18,7 +18,7 @@ import java.util.List;
  * @author zhanglulu on 2019/2/28.
  * for RecyclerView Adapter
  */
-public class QuickRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> {
+public class QuickRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem, CommonViewHolder> {
 
     private final Context mContext;
 
@@ -29,7 +29,7 @@ public class QuickRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem,
 
 
     @Override
-    protected BaseViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
+    protected CommonViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
         View itemView = null;
         if (mContext != null) {
             itemView = LayoutInflater.from(mContext).inflate(viewType, parent, false);
@@ -39,7 +39,7 @@ public class QuickRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem,
 
     @SuppressWarnings("all")
     @Override
-    protected void convert(BaseViewHolder holder,
+    protected void convert(CommonViewHolder holder,
                            BaseViewBindItem item) {
 
         int position = holder.getLayoutPosition() - getHeaderLayoutCount();
@@ -47,7 +47,7 @@ public class QuickRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem,
             item.setIndex(position);
             try {
                 //此处需要格外注意，由于 ViewModel 模块本身采用了 CommonViewHolder，过此处需要做转换！！
-                item.attachView(new CommonViewHolder(holder.itemView));
+                item.attachView(holder);
             } catch (Exception e) {
                 //如果发生异常, 该item不显示
                 holder.itemView.setVisibility(View.GONE);

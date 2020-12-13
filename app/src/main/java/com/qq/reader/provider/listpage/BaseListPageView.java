@@ -20,6 +20,7 @@ import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView;
 import com.qq.reader.provider.BaseViewBindItem;
 import com.qq.reader.provider.loader.ObserverEntity;
 import com.example.providermoduledemo.QuickRecyclerViewAdapter;
+import com.qq.reader.provider.viewmodel.CommonViewHolder;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
 
     protected Context context;
     protected RecyclerView mRecyclerView;
-    protected BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> mAdapter;
+    protected BaseQuickAdapter<BaseViewBindItem, CommonViewHolder> mAdapter;
     protected LinearLayoutManager mLayoutManager;
     //进入时调用
     protected static final int STATE_ENTER_INIT = 0;
@@ -89,7 +90,7 @@ abstract public class BaseListPageView implements BaseQuickAdapter.RequestLoadMo
         hideDataErrorView();
     }
 
-    protected BaseQuickAdapter<BaseViewBindItem, BaseViewHolder> initAdapter() {
+    protected BaseQuickAdapter<BaseViewBindItem, CommonViewHolder> initAdapter() {
         return new QuickRecyclerViewAdapter(context, null);
     }
 
