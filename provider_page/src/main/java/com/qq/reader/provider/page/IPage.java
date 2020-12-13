@@ -14,11 +14,11 @@ public interface IPage {
      * @param params
      * @return
      */
-    public ProviderLiveData loadPageData(Bundle params);
+    ProviderLiveData loadPageData(Bundle params);
 
     /**
-     * 构建 Page 信息
+     * 构建 Page 信息 {并不是所有的场景都需要 PageInfo}
      * @return
      */
-    public PageInfo buildPageInfo();
+    default PageInfo buildPageInfo() {return new PageInfo.Builder().build();}
 }
