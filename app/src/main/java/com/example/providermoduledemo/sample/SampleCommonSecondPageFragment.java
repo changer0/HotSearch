@@ -12,11 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.providermoduledemo.build.PageBuilderParams;
-import com.qq.reader.provider.page.IPage;
-import com.qq.reader.provider.page.PageManger;
-import com.qq.reader.provider.page.PageInfo;
+import com.example.providermoduledemo.build.PageInfo;
 import com.qq.reader.provider.listpage.BaseListPageView;
 import com.qq.reader.provider.listpage.SimpleListPageView;
+import com.yuewen.dataprovider.page.IPage;
+import com.yuewen.dataprovider.page.PageManger;
 
 /**
  * 通用二级页 Fragment 示例页面
@@ -110,7 +110,7 @@ public class SampleCommonSecondPageFragment extends Fragment {
         if (pageBuilder == null) {
             throw new NullPointerException(SampleCommonSecondPageFragment.class.getSimpleName() + "Page 类型：" + pageType + "获取为空，请检查注解配置！");
         }
-        pageInfo = pageBuilder.buildPageInfo();
+        pageInfo = (PageInfo) pageBuilder.buildPageInfo();
     }
     protected BaseListPageView getListPageView() {
         if (simpleListPageView != null) {

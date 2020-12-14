@@ -3,18 +3,14 @@ package com.example.providermoduledemo.build;
 import android.os.Bundle;
 
 import com.example.providermoduledemo.sample.SampleConvertParser;
-import com.example.providermoduledemo.sample.SampleConvertResponseBean;
-import com.example.providermoduledemo.sample.SampleConverter;
 import com.example.providermoduledemo.sample.SampleGetExpiredTime;
 import com.example.providermoduledemo.sample.SampleResultBean;
 import com.example.providermoduledemo.sample.SampleViewBindItemBuilder;
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
-import com.qq.reader.provider.page.IPage;
-import com.qq.reader.provider.page.PageInfo;
 import com.qq.reader.provider.cache.CacheMode;
 import com.qq.reader.provider.page.annotations.PageBuilderType;
-
+import com.yuewen.dataprovider.page.IPage;
 /**
  * 男生 Provider 构建类 （举例说明）
  */
@@ -30,7 +26,7 @@ public class BoyPage implements IPage {
                 .parser(new SampleConvertParser())
                 .viewBindItemBuilder(new SampleViewBindItemBuilder())
                 .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
-                .load();
+               .load();
     }
 
     @Override

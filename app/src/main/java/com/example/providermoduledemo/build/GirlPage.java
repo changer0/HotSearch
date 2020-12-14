@@ -7,10 +7,9 @@ import com.example.providermoduledemo.sample.SampleResultBean;
 import com.example.providermoduledemo.sample.SampleViewBindItemBuilder;
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
-import com.qq.reader.provider.page.IPage;
-import com.qq.reader.provider.page.PageInfo;
 import com.qq.reader.provider.page.annotations.PageBuilderType;
 import com.qq.reader.provider.cache.CacheMode;
+import com.yuewen.dataprovider.page.IPage;
 
 /**
  * 女生 Provider 构建类 （举例说明）

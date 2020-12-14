@@ -8,11 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.providermoduledemo.build.PageBuilderParams;
-import com.qq.reader.provider.page.IPage;
-import com.qq.reader.provider.page.PageInfo;
+import com.example.providermoduledemo.build.PageInfo;
 import com.qq.reader.provider.listpage.BaseListPageView;
 import com.qq.reader.provider.listpage.SimpleListPageView;
-import com.qq.reader.provider.page.PageManger;
+import com.yuewen.dataprovider.page.IPage;
+import com.yuewen.dataprovider.page.PageManger;
 
 /**
  * 通用二级页 示例页面
@@ -80,7 +80,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
         if (pageBuilder == null) {
             throw new NullPointerException(SampleCommonSecondPageActivity.class.getSimpleName() + "Provider Builder 类型：" + providerType + "获取为空，请检查注解配置！");
         }
-        pageInfo = pageBuilder.buildPageInfo();
+        pageInfo = (PageInfo) pageBuilder.buildPageInfo();
     }
 
     protected BaseListPageView getListPageView() {
