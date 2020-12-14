@@ -3,7 +3,6 @@ package com.yuewen.dataprovider.page;
 import android.os.Bundle;
 
 import com.qq.reader.provider.ProviderLiveData;
-import com.yuewen.dataprovider.page.IPageInfo;
 
 /**
  * 页面构建器
