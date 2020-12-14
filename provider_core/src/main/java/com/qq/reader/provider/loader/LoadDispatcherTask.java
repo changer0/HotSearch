@@ -14,20 +14,20 @@ import java.io.InputStream;
  * for 用于分发网络/缓存
  */
 @SuppressWarnings("rawtypes")
-public class LoadDispatcherTask<R, P> implements Runnable, LoadDiskDataTask.LoadDataListener
+public class LoadDispatcherTask<R> implements Runnable, LoadDiskDataTask.LoadDataListener
         , LoadDiskDataTask.LoadExpiredDataListener, LoadNetDataTask.LoadDataListener {
     private static final String TAG = "ReaderDataTask";
 
     /**
      * 数据加载类
      */
-    private final DataProvider<R, P> provider;
+    private final DataProvider<R> provider;
 
 
     /**
      * Task 完成监听
      */
-    private ITaskFinishListener<R, P> mTaskFinishListener;
+    private ITaskFinishListener<R> mTaskFinishListener;
 
     /**
      * 缓存流
@@ -62,7 +62,7 @@ public class LoadDispatcherTask<R, P> implements Runnable, LoadDiskDataTask.Load
         return provider.getCacheMode();
     }
 
-    public LoadDispatcherTask(DataProvider<R, P> provider) {
+    public LoadDispatcherTask(DataProvider<R> provider) {
         this.provider = provider;
     }
 

@@ -2,6 +2,7 @@ package com.example.providermoduledemo.build;
 
 import android.os.Bundle;
 
+import com.example.providermoduledemo.sample.SampleConvertParser;
 import com.example.providermoduledemo.sample.SampleConvertResponseBean;
 import com.example.providermoduledemo.sample.SampleConverter;
 import com.example.providermoduledemo.sample.SampleGetExpiredTime;
@@ -24,9 +25,9 @@ public class BoyPage implements IPage {
     public ProviderLiveData loadPageData(Bundle params) {
         int index = params.getInt(PageBuilderParams.PAGE_INDEX);
         String url = String.format(SERVER_URL, index);
-        return DataProvider.with(SampleResultBean.class, SampleConvertResponseBean.class)
+        return DataProvider.with(SampleResultBean.class)
                 .url(url)
-                .converter(new SampleConverter())
+                .parser(new SampleConvertParser())
                 .viewBindItemBuilder(new SampleViewBindItemBuilder())
                 .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
                 .load();

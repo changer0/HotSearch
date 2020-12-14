@@ -14,7 +14,7 @@ public class ObserverEntity {
     public int state;
 
     /** 数据实体 */
-    public DataProvider<?, ?> provider;
+    public DataProvider<?> provider;
 
     /** 异常信息 */
     public Throwable throwable;

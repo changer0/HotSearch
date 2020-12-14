@@ -15,17 +15,17 @@ import java.util.Locale;
 /**
  * 对 Loader 的简单实现，支持本地缓存 使用方可根据自己的需求进行定制
  */
-public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
+public class SimpleProviderLoader<R> implements ILoader<R> {
     private static final String TAG = "SimpleProviderLoader";
 
-    private DataProvider<R, P> provider;
+    private DataProvider<R> provider;
     private ProviderLiveData liveData = new ProviderLiveData();
     private long lastTime = 0L;
     private ObserverEntity syncObserverEntity;
 
-    private final ITaskFinishListener<R, P> mTaskFinishListener = new ITaskFinishListener<R, P>() {
+    private final ITaskFinishListener<R> mTaskFinishListener = new ITaskFinishListener<R>() {
         @Override
-        public void onSuccess(DataProvider<R, P> provider) {
+        public void onSuccess(DataProvider<R> provider) {
             notifyLoadPageDataSuccess(provider);
         }
 
@@ -36,17 +36,17 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
     };
 
     private void sendASyncDispatcherTask() {
-        LoadDispatcherTask<R, P> dispatcher = getDispatcherTask();
+        LoadDispatcherTask<R> dispatcher = getDispatcherTask();
         dispatcher.setTaskFinishListener(mTaskFinishListener);
         TaskHandler.getInstance().enqueue(dispatcher);
     }
 
     /**
-     * 为 DataProvider<R, P> 提供分发任务的 Runnable
+     * 为 DataProvider<R> 提供分发任务的 Runnable
      */
-    private synchronized LoadDispatcherTask<R, P> getDispatcherTask() {
+    private synchronized LoadDispatcherTask<R> getDispatcherTask() {
         lastTime = System.currentTimeMillis();
-        return new LoadDispatcherTask<R, P>(provider);
+        return new LoadDispatcherTask<R>(provider);
     }
 
     //----------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
     /**
      * 通知失败回调
      */
-    public void notifyLoadPageDataFailed(DataProvider<R, P> p, Throwable e) {
+    public void notifyLoadPageDataFailed(DataProvider<R> p, Throwable e) {
         ObserverEntity observerEntity = new ObserverEntity();
         observerEntity.provider = p;
         observerEntity.throwable = e;
@@ -68,7 +68,7 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
     /**
      * 通知成功回调
      */
-    public void notifyLoadPageDataSuccess(DataProvider<R, P> p) {
+    public void notifyLoadPageDataSuccess(DataProvider<R> p) {
         ObserverEntity observerEntity = new ObserverEntity();
         observerEntity.provider = p;
         observerEntity.state = ProviderConstants.PROVIDER_DATA_SUCCESS;
@@ -95,7 +95,7 @@ public class SimpleProviderLoader<R, P> implements ILoader<R, P> {
     //----------------------------------------------------------------------------------------------
     // ILoader 的接口实现
     @Override
-    public ProviderLiveData loadData(DataProvider<R, P> provider) {
+    public ProviderLiveData loadData(DataProvider<R> provider) {
         this.provider = provider;
         if (provider == null) {
             throw new NullPointerException("provider 不可为空");

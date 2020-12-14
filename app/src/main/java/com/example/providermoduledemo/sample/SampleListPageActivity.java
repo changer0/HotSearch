@@ -40,9 +40,9 @@ public class SampleListPageActivity extends AppCompatActivity {
         String url = String.format(SERVER_URL, index);
         Log.d(TAG, "loadData: url:" + url);
 
-        DataProvider.with(SampleResultBean.class, SampleConvertResponseBean.class)
+        DataProvider.with(SampleResultBean.class)
                 .url(url)
-                .converter(new SampleConverter())
+                .parser(new SampleConvertParser())
                 .viewBindItemBuilder(new SampleViewBindItemBuilder())
                 .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
                 .load()

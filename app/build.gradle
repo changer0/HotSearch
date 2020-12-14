@@ -58,7 +58,7 @@ dependencies {
     //下拉刷新库，后续会更换成 QQ Reader 的刷新库
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-
+    implementation 'com.google.code.gson:gson:2.4'
     if (!isSourceBuildDataProviderComponent.toBoolean()) {
         implementation project(':provider_core')
         implementation project(':provider_page')
