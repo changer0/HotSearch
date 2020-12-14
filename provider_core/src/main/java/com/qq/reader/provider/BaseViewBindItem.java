@@ -34,7 +34,7 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
      * Item 在 List 中的索引
      * 默认修改为-1, 当-1时说明并没有显示出来
      */
-    public int mIndex = -1;
+    protected int mIndex = -1;
 
     public BaseViewBindItem() {
 
