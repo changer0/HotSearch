@@ -77,6 +77,11 @@ public class DataProvider<R> {
      */
     private int cacheMode;
 
+    /**
+     * 加载信号
+     */
+    private String loadSignal;
+
     private DataProvider(Class<R> responseClass) {
         this.responseClass = responseClass;
     }
@@ -136,6 +141,12 @@ public class DataProvider<R> {
         mViewBindItems = getBuilder().buildViewBindItem(mData);
     }
 
+    /**
+     * 获取加载信号
+     */
+    public String getLoadSignal() {
+        return loadSignal;
+    }
 
     //----------------------------------------------------------------------------------------------
     // 缓存
@@ -283,9 +294,19 @@ public class DataProvider<R> {
         }
 
         /**
-         * 数据加载
+         * 数据加载，此种加载方式不推荐！可使用带有加载信号的 load 方法 {@link #load(String)}
          */
+        @Deprecated
         public ProviderLiveData load() {
+            return load(null);
+        }
+
+        /**
+         * @param loadSignal 加载信号，由业务侧实现，一般可用于加载的状态信号，例如：加载更多等
+         * @return
+         */
+        public ProviderLiveData load(String loadSignal) {
+            provider.loadSignal = loadSignal;
             provider.netQuestParams = new INetQuestParams() {
                 @Override
                 public String getUrl() {
