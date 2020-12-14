@@ -3,9 +3,6 @@ package com.qq.reader.provider;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
-
-import converter.IConverter;
-
 import com.qq.reader.provider.inter.IGetExpiredTime;
 import com.qq.reader.provider.inter.IViewBindItemBuilder;
 import com.qq.reader.provider.loader.ILoader;
