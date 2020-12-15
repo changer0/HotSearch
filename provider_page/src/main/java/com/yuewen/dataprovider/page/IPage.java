@@ -2,6 +2,8 @@ package com.yuewen.dataprovider.page;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.Fragment;
+
 import com.qq.reader.provider.ProviderLiveData;
 
 /**
@@ -21,4 +23,6 @@ public interface IPage {
      * @return
      */
     default IPageInfo buildPageInfo() {return null;}
+
+    default Class<? extends Fragment> getFragment() {return null;}
 }
