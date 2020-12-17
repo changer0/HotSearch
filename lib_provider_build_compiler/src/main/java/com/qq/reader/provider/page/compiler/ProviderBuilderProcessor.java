@@ -1,7 +1,7 @@
 package com.qq.reader.provider.page.compiler;
 
 import com.qq.reader.provider.page.PageBuilderConstants;
-import com.qq.reader.provider.page.annotations.PageBuilderType;
+import com.qq.reader.provider.page.annotations.PageType;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
@@ -43,7 +43,7 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> res = new HashSet<>();
-        res.add(PageBuilderType.class.getCanonicalName());
+        res.add(PageType.class.getCanonicalName());
         return res;
     }
 
@@ -62,7 +62,7 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
 
     private void handleProviderGeneratorType(RoundEnvironment roundEnvironment) {
         //获取该注解的元素
-        Set<? extends Element> sets = roundEnvironment.getElementsAnnotatedWith(PageBuilderType.class);
+        Set<? extends Element> sets = roundEnvironment.getElementsAnnotatedWith(PageType.class);
         if (sets == null || sets.size() <= 0) {
             return;
         }
@@ -82,7 +82,7 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
         getProviderBuilder.addCode("switch (type) {\n");
 
         for (Element element : sets) {
-            String type = element.getAnnotation(PageBuilderType.class).value();
+            String type = element.getAnnotation(PageType.class).value();
             print("注解值 providerGeneratorType：" + type);
             String packageName = element.getEnclosingElement().toString();
             String simpleClazzName = element.getSimpleName().toString();
