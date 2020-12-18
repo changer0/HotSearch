@@ -2,6 +2,7 @@ package com.example.providermoduledemo.build;
 
 import android.os.Bundle;
 
+import com.example.providermoduledemo.PageLoadSignal;
 import com.example.providermoduledemo.sample.SampleConvertParser;
 import com.example.providermoduledemo.sample.SampleGetExpiredTime;
 import com.example.providermoduledemo.sample.SampleResultBean;
@@ -26,17 +27,7 @@ public class BoyPage implements IPage {
                 .parser(new SampleConvertParser())
                 .viewBindItemBuilder(new SampleViewBindItemBuilder())
                 .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
-               .load();
-    }
-
-    @Override
-    public PageInfo buildPageInfo() {
-        return new PageInfo.Builder()
-                .setTitleName("男生页面")
-                .setEnableLoadMore(true)
-                .setEnablePullDownRefresh(true)
-                .setStartIndex(1)
-                .build();
+               .load(params.getString(PageLoadSignal.LOAD_STATE));
     }
 
 }

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.providermoduledemo.PageLoadSignal;
 import com.example.providermoduledemo.build.PageBuilderParams;
 import com.example.providermoduledemo.build.PageInfo;
 import com.qq.reader.provider.listpage.BaseListPageView;
@@ -29,10 +30,7 @@ public class SampleCommonSecondPageFragment extends Fragment {
 
     private BaseListPageView simpleListPageView;
 
-    private int curIndex = 1;
-
     private IPage pageBuilder;
-    private PageInfo pageInfo;
 
     private SampleCommonSecondPageFragment() {
     }
@@ -69,27 +67,18 @@ public class SampleCommonSecondPageFragment extends Fragment {
      * 初始化加载数据
      */
     private void initLoadData() {
-        curIndex = pageInfo.getStartIndex();
-        loadData(curIndex);
-        simpleListPageView.setEnableLoadMore(pageInfo.isEnableLoadMore());
-        simpleListPageView.setEnablePullDownRefresh(pageInfo.isEnablePullDownRefresh());
-        if (pageInfo.isEnableLoadMore()) {
-            simpleListPageView.setOnLoadMoreListener(() -> {
-                curIndex++;
-                loadData(curIndex);
-            });
-        }
-        if (pageInfo.isEnablePullDownRefresh()) {
-            simpleListPageView.setOnRefreshListener(() -> {
-                curIndex = pageInfo.getStartIndex();
-                loadData(curIndex);
-            });
-        }
+        loadData(PageLoadSignal.LOAD_STATE_INIT);
+        simpleListPageView.setOnLoadMoreListener(() -> {
+            loadData(PageLoadSignal.LOAD_STATE_MORE);
+        });
+        simpleListPageView.setOnRefreshListener(() -> {
+            loadData(PageLoadSignal.LOAD_STATE_REFRESH);
+        });
     }
 
-    private void loadData(int index) {
+    private void loadData(String loadState) {
         Bundle bundle = new Bundle();
-        bundle.putInt(PageBuilderParams.PAGE_INDEX, index);
+        bundle.putString(PageLoadSignal.LOAD_STATE, loadState);
         pageBuilder.loadPageData(bundle).observe(this, simpleListPageView);
     }
 
@@ -110,7 +99,6 @@ public class SampleCommonSecondPageFragment extends Fragment {
         if (pageBuilder == null) {
             throw new NullPointerException(SampleCommonSecondPageFragment.class.getSimpleName() + "Page 类型：" + pageType + "获取为空，请检查注解配置！");
         }
-        pageInfo = (PageInfo) pageBuilder.buildPageInfo();
     }
     protected BaseListPageView getListPageView() {
         if (simpleListPageView != null) {
