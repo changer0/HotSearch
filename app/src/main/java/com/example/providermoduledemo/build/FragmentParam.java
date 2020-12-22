@@ -1,20 +1,16 @@
 package com.example.providermoduledemo.build;
 
-import com.yuewen.dataprovider.page.IPageInfo;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.yuewen.dataprovider.page.IFragmentParam;
 /**
  * 页面信息
  */
-public class PageInfo implements IPageInfo {
+public class FragmentParam implements IFragmentParam {
     private String titleName;
     private int startIndex;
     private boolean isEnablePullDownRefresh;
     private boolean isEnableLoadMore;
 
-    private PageInfo() {
+    private FragmentParam() {
     }
 
     public String getTitleName() {
@@ -38,7 +34,7 @@ public class PageInfo implements IPageInfo {
      * 构建类
      */
     public static class Builder {
-        private PageInfo P = new PageInfo();
+        private FragmentParam P = new FragmentParam();
 
         public Builder setTitleName(String titleName) {
             P.titleName = titleName;
@@ -58,7 +54,7 @@ public class PageInfo implements IPageInfo {
         }
 
 
-        public PageInfo build() {
+        public FragmentParam build() {
             return P;
         }
     }

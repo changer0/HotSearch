@@ -3,6 +3,7 @@ package com.example.providermoduledemo
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.providermoduledemo.build.BookStoreConstants
 import com.example.providermoduledemo.build.PageTypes
 import com.example.providermoduledemo.sample.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,13 +20,13 @@ class MainActivity : AppCompatActivity() {
 
         boyCommonSecondPage.setOnClickListener {
             val intent = Intent(this, SampleCommonSecondPageActivity::class.java)
-            intent.putExtra(SampleCommonSecondPageActivity.PAGE_BUILDER_TYPE, PageTypes.BOY_PAGE)
+            intent.putExtra(BookStoreConstants.PAGE_BUILDER_TYPE, PageTypes.BOY_PAGE)
             startActivity(intent)
         }
 
         girlCommonSecondPage.setOnClickListener {
             val intent = Intent(this, SampleCommonSecondPageActivity::class.java)
-            intent.putExtra(SampleCommonSecondPageActivity.PAGE_BUILDER_TYPE, PageTypes.GIRL_PAGE)
+            intent.putExtra(BookStoreConstants.PAGE_BUILDER_TYPE, PageTypes.GIRL_PAGE)
             startActivity(intent)
         }
 

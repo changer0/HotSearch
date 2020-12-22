@@ -12,8 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.providermoduledemo.PageLoadSignal;
-import com.example.providermoduledemo.build.PageBuilderParams;
-import com.example.providermoduledemo.build.PageInfo;
+import com.example.providermoduledemo.build.BookStoreConstants;
 import com.qq.reader.provider.listpage.BaseListPageView;
 import com.qq.reader.provider.listpage.SimpleListPageView;
 import com.yuewen.dataprovider.page.IPage;
@@ -24,21 +23,19 @@ import com.yuewen.dataprovider.page.PageManger;
  */
 public class SampleCommonSecondPageFragment extends Fragment {
 
-    public static String PAGE_BUILDER_TYPE = "PAGE_BUILDER_TYPE";
-
     private static final String TAG = "SampleListPageActivity";
 
     private BaseListPageView simpleListPageView;
 
     private IPage pageBuilder;
 
-    private SampleCommonSecondPageFragment() {
+    public SampleCommonSecondPageFragment() {
     }
 
     public static SampleCommonSecondPageFragment newInstance(String pageBuilderType) {
         SampleCommonSecondPageFragment fragment = new SampleCommonSecondPageFragment();
         Bundle args = new Bundle();
-        args.putString(PAGE_BUILDER_TYPE, pageBuilderType);
+        args.putString(BookStoreConstants.PAGE_BUILDER_TYPE, pageBuilderType);
         fragment.setArguments(args);
         return fragment;
     }
@@ -91,7 +88,7 @@ public class SampleCommonSecondPageFragment extends Fragment {
         if (bundle == null) {
             throw new NullPointerException(SampleCommonSecondPageFragment.class.getSimpleName() + " 启动该 Fragment 前需要传入 PROVIDER_BUILDER_TYPE");
         }
-        String pageType = bundle.getString(PAGE_BUILDER_TYPE);
+        String pageType = bundle.getString(BookStoreConstants.PAGE_BUILDER_TYPE);
         if (TextUtils.isEmpty(pageType)) {
             throw new NullPointerException(SampleCommonSecondPageFragment.class.getSimpleName() + " 启动该 Fragment 前需要传入 PROVIDER_BUILDER_TYPE");
         }

@@ -10,6 +10,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.providermoduledemo.R;
+import com.example.providermoduledemo.build.BookStoreConstants;
+import com.yuewen.dataprovider.page.IPage;
+import com.yuewen.dataprovider.page.PageManger;
 
 
 /**
@@ -34,6 +37,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
                 ft.add(R.id.fragment_content, mHoldFragment, "fragment");
                 ft.commitAllowingStateLoss();
             }
+            mHoldFragment.setArguments(intent.getExtras());
         } catch (Exception e) {
             e.printStackTrace();
             finish();
@@ -41,9 +45,10 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
     }
 
 
-    private Fragment analyzePageFragment(Bundle extras) {
-        String string = extras.getString(SampleCommonSecondPageFragment.PAGE_BUILDER_TYPE);
-
-        return null;
+    private Fragment analyzePageFragment(Bundle extras) throws Exception {
+        String pageType = extras.getString(BookStoreConstants.PAGE_BUILDER_TYPE);
+        IPage page = PageManger.getInstance(getClassLoader()).getPage(pageType);
+        Class<? extends Fragment> fragment = page.getFragment();
+        return fragment.newInstance();
     }
 }
