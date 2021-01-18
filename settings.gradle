@@ -1,4 +1,4 @@
-
+include ':other'
 rootProject.name='DataProviderComponent'
 include ':app'
 include ':provider_core'

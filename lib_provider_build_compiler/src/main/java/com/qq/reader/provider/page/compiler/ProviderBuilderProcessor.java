@@ -9,6 +9,7 @@ import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -18,21 +19,28 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
-import javax.tools.Diagnostic;
 import javax.lang.model.element.Element;
 
 /**
- * by zhanglulu
+ * DataProvider 注解处理器
+ * @author zhanglulu
  */
 public class ProviderBuilderProcessor extends AbstractProcessor {
 
     private static final String TAG = "ProviderProcessor";
     //用于生成新的java文件的对象
     private Filer filer;
+    private String curModuleName;
+    private boolean isMainProject = false;//是否为主工程
+
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
         super.init(processingEnvironment);
         filer = processingEnvironment.getFiler();
+        curModuleName = processingEnv.getOptions().get("PROVIDER_MODULE_NAME");
+        isMainProject = "true".equals(processingEnv.getOptions().get("IS_MAIN_PROJECT"));
+        print("当前模块名称: " + curModuleName);
+        print("是否为主工程: " + isMainProject);
     }
 
     /**
@@ -67,13 +75,20 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
             return;
         }
 
+        //保存当前模块
+        if (curModuleName != null && !isMainProject) {
+            OtherModuleNameSaver.putModuleName(curModuleName);
+        }
+
         //构造方法
         MethodSpec.Builder constructorBuilder = MethodSpec.constructorBuilder();
         constructorBuilder
                 .addModifiers(Modifier.PRIVATE);
 
         // getProviderBuilder 方法
-        MethodSpec.Builder getProviderBuilder = MethodSpec.methodBuilder(PageBuilderConstants.BUILDER_GET_METHOD_NAME).addModifiers(Modifier.PUBLIC);
+        MethodSpec.Builder getProviderBuilder = MethodSpec.methodBuilder(PageBuilderConstants.BUILDER_GET_METHOD_NAME)
+                .addModifiers(Modifier.STATIC)
+                .addModifiers(Modifier.PUBLIC);
         ClassName param = ClassName.get(String.class);
         getProviderBuilder.addParameter(param, "type");
         ClassName returnType = ClassName.get(PageBuilderConstants.BUILDER_PACKAGE_NAME, PageBuilderConstants.BUILDER_SIMPLE_CLASS);
@@ -94,18 +109,38 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
             getProviderBuilder.addStatement("break");
         }
         getProviderBuilder.addCode("}\n");
+
+        //在 return 前给主工程添加其他模块的 PageFactory
+        if (isMainProject) {
+            List<String> moduleNames = OtherModuleNameSaver.getModuleNames();
+            print("获取到的模块名: " + moduleNames);
+            for (String moduleName : moduleNames) {
+                String otherModulePackageName = PageBuilderConstants.BUILDER_PACKAGE_NAME + "." + moduleName + ".";
+                getProviderBuilder.addCode("if (builder == null) { \n");
+                getProviderBuilder.addStatement("\rbuilder = "+ otherModulePackageName + "PageFactory.getPage(type)");
+                getProviderBuilder.addCode("} \n");
+            }
+        }
+
         getProviderBuilder.addStatement("return builder");
 
         //class 让其实现接口
-        ClassName iGetViewModelMapInter = ClassName.get(PageBuilderConstants.BUILDER_PACKAGE_NAME, PageBuilderConstants.BUILDER_FACTORY_SIMPLE_CLASS_NAME);
+        //ClassName iGetViewModelMapInter = ClassName.get(PageBuilderConstants.BUILDER_PACKAGE_NAME, PageBuilderConstants.BUILDER_FACTORY_SIMPLE_CLASS_NAME);
         //class
         TypeSpec typeSpec = TypeSpec.classBuilder(PageBuilderConstants.BUILDER_FACTORY_IMPL_SIMPLE_CLASS_NAME)
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addMethod(getProviderBuilder.build())
-                .addSuperinterface(iGetViewModelMapInter)
+                //.addSuperinterface(iGetViewModelMapInter)
                 .build();
+
         //file
-        JavaFile javaFile = JavaFile.builder(PageBuilderConstants.BUILDER_PACKAGE_NAME, typeSpec).build();
+        String packageName = PageBuilderConstants.BUILDER_PACKAGE_NAME;
+        if (isMainProject) {
+            OtherModuleNameSaver.clear();
+        } else {
+            packageName = PageBuilderConstants.BUILDER_PACKAGE_NAME + "." + curModuleName;
+        }
+        JavaFile javaFile = JavaFile.builder(packageName, typeSpec).build();
         try {
             javaFile.writeTo(filer);
         } catch (IOException e) {
@@ -115,6 +150,7 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
     }
 
     private void print(String message) {
-        processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, message);
+        //processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, message);
+        System.out.println(message);
     }
 }
