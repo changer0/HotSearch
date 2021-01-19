@@ -3,6 +3,8 @@ package com.qq.reader.provider.page.compiler;
 import com.qq.reader.provider.page.PageBuilderConstants;
 import com.qq.reader.provider.page.annotations.PageType;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.CodeBlock;
+import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
@@ -79,6 +81,11 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
         if (curModuleName != null && !isMainProject) {
             OtherModuleNameSaver.putModuleName(curModuleName);
         }
+        //单例静态变量
+        FieldSpec instanceFiled = FieldSpec.builder(
+                ClassName.get(PageBuilderConstants.BUILDER_PACKAGE_NAME, PageBuilderConstants.BUILDER_FACTORY_SIMPLE_CLASS_NAME),
+                "instance", Modifier.PUBLIC, Modifier.STATIC
+        ).initializer(CodeBlock.builder().add("new " + PageBuilderConstants.BUILDER_FACTORY_IMPL_SIMPLE_CLASS_NAME + "()").build()).build();
 
         //构造方法
         MethodSpec.Builder constructorBuilder = MethodSpec.constructorBuilder();
@@ -87,7 +94,7 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
 
         // getProviderBuilder 方法
         MethodSpec.Builder getProviderBuilder = MethodSpec.methodBuilder(PageBuilderConstants.BUILDER_GET_METHOD_NAME)
-                .addModifiers(Modifier.STATIC)
+                //.addModifiers(Modifier.STATIC)
                 .addModifiers(Modifier.PUBLIC);
         ClassName param = ClassName.get(String.class);
         getProviderBuilder.addParameter(param, "type");
@@ -116,8 +123,8 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
             print("获取到的模块名: " + moduleNames);
             for (String moduleName : moduleNames) {
                 String otherModulePackageName = PageBuilderConstants.BUILDER_PACKAGE_NAME + "." + moduleName + ".";
-                getProviderBuilder.addCode("if (builder == null) { \n");
-                getProviderBuilder.addStatement("\rbuilder = "+ otherModulePackageName + "PageFactory.getPage(type)");
+                getProviderBuilder.addCode("if (builder == null) {");
+                getProviderBuilder.addStatement("\rbuilder = "+ otherModulePackageName + "PageFactory.instance.getPage(type)");
                 getProviderBuilder.addCode("} \n");
             }
         }
@@ -125,12 +132,14 @@ public class ProviderBuilderProcessor extends AbstractProcessor {
         getProviderBuilder.addStatement("return builder");
 
         //class 让其实现接口
-        //ClassName iGetViewModelMapInter = ClassName.get(PageBuilderConstants.BUILDER_PACKAGE_NAME, PageBuilderConstants.BUILDER_FACTORY_SIMPLE_CLASS_NAME);
+        ClassName iGetViewModelMapInter = ClassName.get(PageBuilderConstants.BUILDER_PACKAGE_NAME, PageBuilderConstants.BUILDER_FACTORY_SIMPLE_CLASS_NAME);
         //class
         TypeSpec typeSpec = TypeSpec.classBuilder(PageBuilderConstants.BUILDER_FACTORY_IMPL_SIMPLE_CLASS_NAME)
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addMethod(getProviderBuilder.build())
-                //.addSuperinterface(iGetViewModelMapInter)
+                .addMethod(constructorBuilder.build())
+                .addField(instanceFiled)
+                .addSuperinterface(iGetViewModelMapInter)
                 .build();
 
         //file

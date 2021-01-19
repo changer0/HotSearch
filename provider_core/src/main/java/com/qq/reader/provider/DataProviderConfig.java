@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import com.qq.reader.provider.inter.INetQuestParams;
@@ -68,7 +70,8 @@ public class DataProviderConfig {
     /**网络请求适配器*/
     public interface NetQuestAdapter {
         @WorkerThread
-        InputStream syncRequest(INetQuestParams params) throws Exception;
+        @Nullable
+        InputStream syncRequest(@NonNull INetQuestParams params) throws Exception;
     }
 
     /**

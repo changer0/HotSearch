@@ -47,7 +47,7 @@ public class SampleCommonSecondPageActivity extends AppCompatActivity {
 
     private Fragment analyzePageFragment(Bundle extras) throws Exception {
         String pageType = extras.getString(BookStoreConstants.PAGE_BUILDER_TYPE);
-        IPage page = PageManger.getInstance(getClassLoader()).getPage(pageType);
+        IPage page = PageManger.getPage(pageType);
         Class<? extends Fragment> fragment = page.getFragment();
         return fragment.newInstance();
     }

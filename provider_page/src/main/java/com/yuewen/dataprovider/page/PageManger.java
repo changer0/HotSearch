@@ -1,34 +1,26 @@
 package com.yuewen.dataprovider.page;
 
-import com.qq.reader.provider.page.PageBuilderConstants;
 
+/**
+ * 获取 PageManger
+ */
 public class PageManger {
 
-    private final IPageFactory providerBuilderFactory;
+    private static IPageFactory pageFactory;
 
-    private PageManger(ClassLoader classLoader) {
-        providerBuilderFactory = ClassLoaderUtils.newInstance(classLoader,
-                PageBuilderConstants.BUILDER_FACTORY_IMPL_CLASS_NAME, IPageFactory.class);
-    }
-
-    private static PageManger instance;
-
-    public static PageManger getInstance(ClassLoader classLoader) {
-        if (instance == null) {
-            synchronized (PageManger.class) {
-                if (instance == null) {
-                    instance = new PageManger(classLoader);
-                }
-            }
+    /**
+     * 获取 Page
+     * @param type
+     * @return
+     */
+    public static IPage getPage(String type) {
+        if (pageFactory == null) {
+            pageFactory = ReflectUtils.getPageFactory();
         }
-        return instance;
+        if (pageFactory == null) {
+            throw new NullPointerException("检查传入的 type 是否已经声明或检查注解配置是否正确!!");
+        }
+        return pageFactory.getPage(type);
     }
 
-    public IPage getPage(String type) {
-        IPage page = providerBuilderFactory.getPage(type);
-        if (page == null) {
-            throw new NullPointerException("请检查该类型： " + type + " 是否标注到 IPage 的实现类中");
-        }
-        return page;
-    }
 }
