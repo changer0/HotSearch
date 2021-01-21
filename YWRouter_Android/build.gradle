@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileOptions.encoding = "UTF-8"
+    // 编译SDK的版本
+    compileSdkVersion gradle_build_versions.compileSdkVersion
+    // build tools的版本
+    buildToolsVersion gradle_build_versions.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion gradle_build_versions.minSdkVersion
+        targetSdkVersion gradle_build_versions.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release_with_sign {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+
+    api "com.alibaba:arouter-api:1.5.1"
+//    implementation 'com.jeremyliao:live-event-bus:1.4.4'
+//    implementation "android.arch.lifecycle:livedata:1.1.1"
+
+}
