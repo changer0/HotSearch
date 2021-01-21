@@ -92,7 +92,7 @@ public class SampleCommonSecondPageFragment extends Fragment {
         if (TextUtils.isEmpty(pageType)) {
             throw new NullPointerException(SampleCommonSecondPageFragment.class.getSimpleName() + " 启动该 Fragment 前需要传入 PROVIDER_BUILDER_TYPE");
         }
-        pageBuilder = PageManger.getPage(pageType);
+        //pageBuilder = PageManger.getPage(pageType);
         if (pageBuilder == null) {
             throw new NullPointerException(SampleCommonSecondPageFragment.class.getSimpleName() + "Page 类型：" + pageType + "获取为空，请检查注解配置！");
         }

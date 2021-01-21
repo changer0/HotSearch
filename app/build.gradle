@@ -63,10 +63,6 @@ dependencies {
     if (!isSourceBuildDataProviderComponent.toBoolean()) {
         implementation project(':provider_core')
         implementation project(':provider_page')
-        //Provider Generator 注解
-        implementation project(':lib_provider_build_base')
-        //需要注意需要添加注解处理器！！
-        kapt project(':lib_provider_build_compiler')
     }
 }
 

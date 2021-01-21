@@ -48,7 +48,6 @@ dependencies {
         implementation project(":DataProviderComponent:lib_provider_build_base")
     } else {
         implementation project(":provider_core")
-        implementation project(":lib_provider_build_base")
     }
 
 }
