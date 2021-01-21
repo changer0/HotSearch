@@ -62,7 +62,7 @@ dependencies {
     implementation project(":other")
     if (!isSourceBuildDataProviderComponent.toBoolean()) {
         implementation project(':provider_core')
-        implementation project(':provider_page')
+        implementation project(':zebra_building')
     }
 }
 
@@ -84,7 +84,7 @@ task uniteUploadArchives {
 uniteUploadArchives.dependsOn ":lib_provider_build_base:uploadArchives"
 uniteUploadArchives.dependsOn ":lib_provider_build_compiler:uploadArchives"
 uniteUploadArchives.dependsOn ":provider_core:uploadArchives"
-uniteUploadArchives.dependsOn ":provider_page:uploadArchives"
+uniteUploadArchives.dependsOn ":zebra_building:uploadArchives"
 
 task testProject {
 //    println "主模块名字: " + project.getName()

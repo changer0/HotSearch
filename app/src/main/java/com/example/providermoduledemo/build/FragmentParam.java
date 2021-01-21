@@ -1,6 +1,6 @@
 package com.example.providermoduledemo.build;
 
-import com.yuewen.dataprovider.page.IFragmentParam;
+import com.yuewen.zebra.building.IFragmentParam;
 /**
  * 页面信息
  */

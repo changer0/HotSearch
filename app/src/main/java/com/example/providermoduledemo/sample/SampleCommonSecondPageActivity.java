@@ -11,8 +11,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.providermoduledemo.R;
 import com.example.providermoduledemo.build.BookStoreConstants;
-import com.yuewen.dataprovider.page.IPage;
-import com.yuewen.dataprovider.page.PageManger;
 
 
 /**

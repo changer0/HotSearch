@@ -12,8 +12,8 @@ import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
 import com.qq.reader.provider.page.annotations.PageType;
 import com.qq.reader.provider.cache.CacheMode;
-import com.yuewen.dataprovider.page.IFragmentParam;
-import com.yuewen.dataprovider.page.IPage;
+import com.yuewen.zebra.building.IFragmentParam;
+import com.yuewen.zebra.building.IPage;
 
 /**
  * 女生 Provider 构建类 （举例说明）

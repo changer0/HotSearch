@@ -15,8 +15,7 @@ import com.example.providermoduledemo.PageLoadSignal;
 import com.example.providermoduledemo.build.BookStoreConstants;
 import com.qq.reader.provider.listpage.BaseListPageView;
 import com.qq.reader.provider.listpage.SimpleListPageView;
-import com.yuewen.dataprovider.page.IPage;
-import com.yuewen.dataprovider.page.PageManger;
+import com.yuewen.zebra.building.IPage;
 
 /**
  * 通用二级页 Fragment 示例页面

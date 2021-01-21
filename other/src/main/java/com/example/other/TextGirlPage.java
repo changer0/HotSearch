@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment;
 
 import com.qq.reader.provider.ProviderLiveData;
 import com.qq.reader.provider.page.annotations.PageType;
-import com.yuewen.dataprovider.page.IFragmentParam;
-import com.yuewen.dataprovider.page.IPage;
+import com.yuewen.zebra.building.IFragmentParam;
+import com.yuewen.zebra.building.IPage;
 
 /**
  * @author zhanglulu
