@@ -44,10 +44,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
     if (isSourceBuildDataProviderComponent.toBoolean()) {
-        implementation project(":DataProviderComponent:provider_core")
+        implementation project(":DataProviderComponent:zebra_core")
         implementation project(":DataProviderComponent:lib_provider_build_base")
     } else {
-        implementation project(":provider_core")
+        implementation project(":zebra_core")
     }
 
 }

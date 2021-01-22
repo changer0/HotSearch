@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.providermoduledemo.PageLoadSignal;
 import com.example.providermoduledemo.build.BookStoreConstants;
-import com.qq.reader.provider.listpage.BaseListPageView;
-import com.qq.reader.provider.listpage.SimpleListPageView;
+import com.qq.reader.zebra.listpage.BaseListPageView;
+import com.qq.reader.zebra.listpage.SimpleListPageView;
 
 /**
  * 通用二级页 Fragment 示例页面

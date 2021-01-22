@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.example.providermoduledemo.R
-import com.qq.reader.provider.viewmodel.IView
+import com.qq.reader.zebra.viewmodel.IView
 import kotlinx.android.synthetic.main.view_model_item_title.view.*
 
 /**

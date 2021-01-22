@@ -2,9 +2,9 @@
 
 ## 文档
 
-[provider_core 设计文档](provider_core/DESIGN.md)
+[zebra_core 设计文档](zebra_core/DESIGN.md)
 
-[provider_core 使用文档](provider_core/README.md)
+[zebra_core 使用文档](zebra_core/README.md)
 
 ## 示例图
 

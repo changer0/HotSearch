@@ -1,6 +1,6 @@
 include ':other'
 rootProject.name='DataProviderComponent'
 include ':app'
-include ':provider_core'
+include ':zebra_core'
 include ':zebra_building'
 include ':YWRouter_Android'

@@ -1,6 +1,6 @@
 package com.example.providermoduledemo
 
-import com.qq.reader.provider.cache.CacheMode.*
+import com.qq.reader.zebra.cache.CacheMode.*
 
 object Utils {
 

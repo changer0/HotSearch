@@ -5,9 +5,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.qq.reader.provider.DataProvider;
-import com.qq.reader.provider.listpage.SimpleListPageView;
-import com.qq.reader.provider.cache.CacheMode;
+import com.qq.reader.zebra.Zebra;
+import com.qq.reader.zebra.listpage.SimpleListPageView;
+import com.qq.reader.zebra.cache.CacheMode;
 
 
 public class SampleListPageActivity extends AppCompatActivity {
@@ -40,7 +40,7 @@ public class SampleListPageActivity extends AppCompatActivity {
         String url = String.format(SERVER_URL, index);
         Log.d(TAG, "loadData: url:" + url);
 
-        DataProvider.with(SampleResultBean.class)
+        Zebra.with(SampleResultBean.class)
                 .url(url)
                 .parser(new SampleConvertParser())
                 .viewBindItemBuilder(new SampleViewBindItemBuilder())

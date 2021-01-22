@@ -1,6 +1,6 @@
 package com.example.providermoduledemo.preload
 
-import com.qq.reader.provider.ProviderLiveData
+import com.qq.reader.zebra.ZebraLiveData
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -10,19 +10,19 @@ object PreLoadLiveDataManager {
     /**
      * 存储用于预加载的 LiveData
      */
-    private val map = ConcurrentHashMap<String, ProviderLiveData>()
+    private val map = ConcurrentHashMap<String, ZebraLiveData>()
 
     /**
      * 获取预加载 LiveData
      */
-    public fun getLiveData(key: String): ProviderLiveData? {
+    public fun getLiveData(key: String): ZebraLiveData? {
         return map[key]
     }
 
     /**
      * 保存 LiveData
      */
-    public fun savePreLoadLiveData(key: String, liveData: ProviderLiveData) {
+    public fun savePreLoadLiveData(key: String, liveData: ZebraLiveData) {
         map[key] = liveData
     }
 

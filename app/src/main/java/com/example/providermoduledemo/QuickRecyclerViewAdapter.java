@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.qq.reader.provider.BaseViewBindItem;
-import com.qq.reader.provider.viewmodel.CommonViewHolder;
+import com.qq.reader.zebra.BaseViewBindItem;
+import com.qq.reader.zebra.viewmodel.CommonViewHolder;
 
 import java.util.List;
 

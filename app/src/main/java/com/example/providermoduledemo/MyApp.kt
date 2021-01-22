@@ -1,7 +1,7 @@
 package com.example.providermoduledemo
 
 import android.app.Application
-import com.qq.reader.provider.DataProviderConfig
+import com.qq.reader.zebra.ZebraConfig
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.util.concurrent.TimeUnit
@@ -21,13 +21,13 @@ class MyApp: Application() {
      * DataProvider 初始化
      */
     private fun initDataProvider() {
-        val builder = DataProviderConfig.Builder(this) { params ->
+        val builder = ZebraConfig.Builder(this) { params ->
             val request = Request.Builder().url(params.url).get().build()
             val call = client.newCall(request)
             val response = call.execute()
             response.body()?.byteStream()
         }
         builder.setDebug(true)
-        DataProviderConfig.init(builder)
+        ZebraConfig.init(builder)
     }
 }

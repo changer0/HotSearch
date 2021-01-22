@@ -1,6 +1,6 @@
 package com.example.providermoduledemo.sample
 
-import com.qq.reader.provider.inter.IGetExpiredTime
+import com.qq.reader.zebra.inter.IGetExpiredTime
 
 class SampleGetExpiredTime : IGetExpiredTime<SampleResultBean>{
     override fun getExpiredTime(mData: SampleResultBean?): Long {

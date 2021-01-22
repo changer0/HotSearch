@@ -1,6 +1,6 @@
 package com.example.providermoduledemo.viewmodel
 
-import com.qq.reader.provider.viewmodel.IViewModel
+import com.qq.reader.zebra.viewmodel.IViewModel
 
 /**
  * @author zhanglulu on 2020/10/23.
