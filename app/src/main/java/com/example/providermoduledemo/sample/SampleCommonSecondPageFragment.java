@@ -15,7 +15,6 @@ import com.example.providermoduledemo.PageLoadSignal;
 import com.example.providermoduledemo.build.BookStoreConstants;
 import com.qq.reader.provider.listpage.BaseListPageView;
 import com.qq.reader.provider.listpage.SimpleListPageView;
-import com.yuewen.zebra.building.IPage;
 
 /**
  * 通用二级页 Fragment 示例页面
@@ -26,7 +25,6 @@ public class SampleCommonSecondPageFragment extends Fragment {
 
     private BaseListPageView simpleListPageView;
 
-    private IPage pageBuilder;
 
     public SampleCommonSecondPageFragment() {
     }
@@ -75,7 +73,7 @@ public class SampleCommonSecondPageFragment extends Fragment {
     private void loadData(String loadState) {
         Bundle bundle = new Bundle();
         bundle.putString(PageLoadSignal.LOAD_STATE, loadState);
-        pageBuilder.loadPageData(bundle).observe(this, simpleListPageView);
+        //pageBuilder.loadPageData(bundle).observe(this, simpleListPageView);
     }
 
     private void initPageBuilder() {
@@ -92,9 +90,9 @@ public class SampleCommonSecondPageFragment extends Fragment {
             throw new NullPointerException(SampleCommonSecondPageFragment.class.getSimpleName() + " 启动该 Fragment 前需要传入 PROVIDER_BUILDER_TYPE");
         }
         //pageBuilder = PageManger.getPage(pageType);
-        if (pageBuilder == null) {
-            throw new NullPointerException(SampleCommonSecondPageFragment.class.getSimpleName() + "Page 类型：" + pageType + "获取为空，请检查注解配置！");
-        }
+//        if (pageBuilder == null) {
+//            throw new NullPointerException(SampleCommonSecondPageFragment.class.getSimpleName() + "Page 类型：" + pageType + "获取为空，请检查注解配置！");
+//        }
     }
     protected BaseListPageView getListPageView() {
         if (simpleListPageView != null) {
