@@ -10,7 +10,6 @@ import com.example.providermoduledemo.sample.SampleResultBean;
 import com.example.providermoduledemo.sample.SampleViewBindItemBuilder;
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
-import com.qq.reader.provider.page.annotations.PageType;
 import com.qq.reader.provider.cache.CacheMode;
 import com.yuewen.zebra.building.IFragmentParam;
 import com.yuewen.zebra.building.IPage;
@@ -18,7 +17,6 @@ import com.yuewen.zebra.building.IPage;
 /**
  * 女生 Provider 构建类 （举例说明）
  */
-@PageType(PageTypes.GIRL_PAGE)
 public class GirlPage implements IPage {
     private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/leftImgRightText (%s).json";
 

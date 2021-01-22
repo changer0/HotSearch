@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import com.qq.reader.provider.ProviderLiveData;
-import com.qq.reader.provider.page.annotations.PageType;
 import com.yuewen.zebra.building.IFragmentParam;
 import com.yuewen.zebra.building.IPage;
 
@@ -13,7 +12,6 @@ import com.yuewen.zebra.building.IPage;
  * @author zhanglulu
  * @date : 2021/1/18 5:21 PM
  */
-@PageType("TextGirlPag")
 public class TextGirlPage implements IPage {
     /**
      * 加载 Page 数据

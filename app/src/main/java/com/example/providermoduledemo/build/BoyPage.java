@@ -13,13 +13,11 @@ import com.example.providermoduledemo.sample.SampleViewBindItemBuilder;
 import com.qq.reader.provider.DataProvider;
 import com.qq.reader.provider.ProviderLiveData;
 import com.qq.reader.provider.cache.CacheMode;
-import com.qq.reader.provider.page.annotations.PageType;
 import com.yuewen.zebra.building.IFragmentParam;
 import com.yuewen.zebra.building.IPage;
 /**
  * 男生 Provider 构建类 （举例说明）
  */
-@PageType(PageTypes.BOY_PAGE)
 public class BoyPage implements IPage {
     private static final String SERVER_URL = "https://gitee.com/luluzhang/publish-json/raw/master/convertTest (%s).json";
     @Override
