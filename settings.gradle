@@ -1,3 +1,6 @@
-rootProject.name='ProviderModuleDemo'
+include ':other'
+rootProject.name='zebra'
 include ':app'
-include ':ProviderModule'
+include ':zebra_core'
+include ':zebra_building'
+include ':YWRouter_Android'

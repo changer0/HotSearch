@@ -1,0 +1,54 @@
+@startuml
+'Alice -> Bob: Authentication Request
+'Bob --> Alice: Authentication Response
+'
+'Alice -> Bob: Another authentication Request
+'Alice <-- Bob: another authentication Response
+
+'SampleActivity -> DataProviderLoader: load(BaseDataProvider)
+
+SampleActivity -> DataProvider: DataProvider.with(SampleResponseBean.class)\n    .url(url)\n    .viewBindItemBuilder(new SampleViewBindItemBuilder())\n    .cacheConfig(cacheMode, new SampleGetExpiredTime())\n    .load()\n    .observe(this, this);
+
+SampleActivity -> SimpleProviderLoader : load()
+
+SimpleProviderLoader -> LoadDispatcherTask: getDispatcherTask()
+
+LoadDispatcherTask -> LoadDispatcherTask: 获取缓存，根据缓存模式决定\n 使用 网络/缓存 数据
+
+LoadDispatcherTask -> LoadNetDataTask: tryLoadNetData()
+
+LoadNetDataTask -> LoadNetDataTask: DataProviderConfig.getNetQuestAdapter().syncRequest()\n请求网络数据
+
+LoadNetDataTask -> DataProvider:  mZebra.parseData()
+
+LoadNetDataTask -> DataProvider:  mZebra.buildViewBindItem()
+
+LoadNetDataTask -> LoadDispatcherTask: onLoadNetDataSuccess()
+
+LoadNetDataTask -> LoadDispatcherTask: onLoadNetDataFailed()
+
+LoadNetDataTask -> LoadNetDataTask: DataProviderLoader.getInstance().save()\n存入缓存
+
+
+LoadDispatcherTask -> LoadDiskDataTask: tryLoadDiskData()
+
+
+LoadDiskDataTask -> DataProvider:  mZebra.parseData()
+
+LoadDiskDataTask -> DataProvider:  mZebra.buildViewBindItem()
+
+LoadDiskDataTask -> LoadDispatcherTask: onLoadDiskExpiredDataSuccess()
+
+LoadDiskDataTask -> LoadDispatcherTask: onLoadDiskExpiredDataFailed()
+
+LoadDispatcherTask -> SimpleProviderLoader: onLoadDiskExpiredDataSuccess()
+
+LoadDispatcherTask -> SimpleProviderLoader: onLoadDiskExpiredDataFailed()
+
+SimpleProviderLoader -> SampleActivity: notifyLoadPageDataSuccess()
+
+SimpleProviderLoader -> SampleActivity: notifyLoadPageDataFailed()
+
+SampleActivity -> SampleActivity: 通知 Adapter 刷新
+
+@enduml

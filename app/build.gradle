@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-def config = rootProject.ext.android
+apply plugin: 'kotlin-kapt'
+
 android {
-    compileSdkVersion config.compileSdkVersion
-    //buildToolsVersion config.buildToolsVersion
+    compileSdkVersion gradle_build_versions.compileSdkVersion
 
     defaultConfig {
         applicationId "com.example.providermoduledemo"
-        minSdkVersion config.minSdkVersion
-        targetSdkVersion config.targetSdkVersion
+        minSdkVersion gradle_build_versions.minSdkVersion
+        targetSdkVersion gradle_build_versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -17,9 +17,6 @@ android {
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        //设置运行环境
-        buildConfigField "Integer", "RUN_ENV", "${getRunEnv()}"
     }
 
     buildTypes {
@@ -36,29 +33,62 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    repositories {
+        flatDir {
+            dirs '../app/libs/'
+        }
+    }
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    implementation 'com.yuewen.cooperate.base-ui-component:basequickadapter:1.0.0'
-    implementation project(':ProviderModule')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
 
     //OkHttp 库
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    api(name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
+    //glide 库
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    //下拉刷新库，后续会更换成 QQ Reader 的刷新库
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    implementation 'com.google.code.gson:gson:2.4'
+    implementation project(":other")
+    if (!isSourceBuildZebra.toBoolean()) {
+        implementation project(':zebra_core')
+        implementation project(':zebra_building')
+    }
 }
 
-//获取编译环境
-int getRunEnv() {
-    //println "当前运行环境: ${RUN_ENV}"
-    return hasProperty("RUN_ENV") ? RUN_ENV.toInteger() : default_run_env.toInteger()
+kapt {
+    arguments {
+        arg("PROVIDER_MODULE_NAME", project.getName())
+        arg("IS_MAIN_PROJECT", true)
+    }
+}
+
+//统一编译库
+task uniteUploadArchives {
+    doLast {
+        println "统一编译执行结束"
+    }
+
+}
+
+uniteUploadArchives.dependsOn ":lib_provider_build_base:uploadArchives"
+uniteUploadArchives.dependsOn ":lib_provider_build_compiler:uploadArchives"
+uniteUploadArchives.dependsOn ":zebra_core:uploadArchives"
+uniteUploadArchives.dependsOn ":zebra_building:uploadArchives"
+
+task testProject {
+//    println "主模块名字: " + project.getName()
+//    project.getRootProject().getSubprojects().each { subProject ->
+//        println"子模块1名字:  " + subProject.getName()
+//    }
 }

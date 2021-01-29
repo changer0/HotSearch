@@ -1,16 +1,11 @@
 ext {
-    versions = [
-            versionName     : "2.0.2.300",
-            versionNameDebug: "2.0.2.300_dev",
-            versionCode     : 20002300
-    ]
-
-    android = [
-            compileOptionsEncoding: "UTF-8",
-            // 编译SDK的版本
-            compileSdkVersion     : 28,
-            //这里oppo、vivo是14，华为是19
-            minSdkVersion         : 21,
-            targetSdkVersion      : 28,
+    gradle_build_versions = [
+            android_gradle_plugin: "3.5.0",
+            kotlin_version       : "1.3.72",
+            compileSdkVersion    : 28,
+            buildToolsVersion    : "28.0.3",
+            minSdkVersion        : 19,
+            targetSdkVersion     : 26,
+            javaVersion          : JavaVersion.VERSION_1_8,
     ]
 }

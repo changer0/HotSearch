@@ -3,61 +3,36 @@ package com.example.providermoduledemo
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.Observer
-import com.example.providermoduledemo.listdemo.ListActivity
-import com.qq.reader.provider.loader.DataProviderLoader
+import com.example.providermoduledemo.build.BookStoreConstants
+import com.example.providermoduledemo.build.PageTypes
+import com.example.providermoduledemo.sample.*
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONObject
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val provider = MyDataProvider(MyRequestDataBean())
-        DataProviderLoader.getInstance().loadData(provider)
-
-        removeCacheBtn.setOnClickListener {
-            provider.removeCache()
+        sampleListPageActivity.setOnClickListener {
+            startActivity(Intent(this, SampleListPageActivity::class.java))
         }
 
-        reloadData.setOnClickListener {
-            DataProviderLoader.getInstance().loadData(provider)
-            content.text = "加载中"
+        boyCommonSecondPage.setOnClickListener {
+            val intent = Intent(this, SampleCommonSecondPageActivity::class.java)
+            intent.putExtra(BookStoreConstants.PAGE_BUILDER_TYPE, PageTypes.BOY_PAGE)
+            startActivity(intent)
         }
 
-        modifyCacheModel.setOnClickListener {
-            content.text = "加载中"
-            var cacheMode = provider.cacheMode + 1
-            if (cacheMode > 3) {
-                cacheMode = 0;
-            }
-            provider.cacheMode = cacheMode
-            DataProviderLoader.getInstance().loadData(provider)
-        }
-        listActivity.setOnClickListener {
-            startActivity(Intent(this, ListActivity::class.java))
+        girlCommonSecondPage.setOnClickListener {
+            val intent = Intent(this, SampleCommonSecondPageActivity::class.java)
+            intent.putExtra(BookStoreConstants.PAGE_BUILDER_TYPE, PageTypes.GIRL_PAGE)
+            startActivity(intent)
         }
 
-        provider.liveData.observe(this, Observer {
-            if (it.isSuccess) {
-                urlTv.text = it.provider.url
-                cacheModeTv.text = it.provider.cacheMode.toString()
-                isCacheTv.text = it.provider.isCache.toString()
-                val jsonObj = JSONObject(it.provider.jsonStr)
-                content.text = jsonObj.toString(4)
-                Log.d(TAG, "接受数据：${it.provider.jsonStr}")
-            } else {
-                urlTv.text = it.provider.url
-                cacheModeTv.text = it.provider.cacheMode.toString()
-                isCacheTv.text = it.provider.isCache.toString()
-                content.text = "加载失败！"
-                Log.d(TAG, "数据异常")
-            }
-        })
+        fragmentCommonSecondPageFragment.setOnClickListener {
+            startActivity(Intent(this, SampleFragmentActivity::class.java))
+        }
     }
 }
 
