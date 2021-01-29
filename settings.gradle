@@ -1,6 +1,10 @@
-include ':other'
 rootProject.name='zebra'
-include ':app'
 include ':zebra_core'
 include ':zebra_building'
+
+//Demo 模块
 include ':YWRouter_Android'
+include ':QRBusinessBasic'
+include ':QRBookStore'
+include ':app'
+include ':other'
