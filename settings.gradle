@@ -1,5 +1,5 @@
 include ':other'
-rootProject.name='DataProviderComponent'
+rootProject.name='zebra'
 include ':app'
 include ':zebra_core'
 include ':zebra_building'

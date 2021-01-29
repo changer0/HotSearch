@@ -60,7 +60,7 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.4'
     implementation project(":other")
-    if (!isSourceBuildDataProviderComponent.toBoolean()) {
+    if (!isSourceBuildZebra.toBoolean()) {
         implementation project(':zebra_core')
         implementation project(':zebra_building')
     }
