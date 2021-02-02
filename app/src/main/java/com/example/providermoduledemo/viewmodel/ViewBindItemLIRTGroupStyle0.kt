@@ -5,6 +5,9 @@ import com.example.providermoduledemo.R
 import com.example.providermoduledemo.sample.SampleResultBean
 import com.qq.reader.bookstore.CommonViewHolder
 import com.qq.reader.zebra.BaseViewBindItem
+import com.qq.reader.zebra.cache.CacheController
+import org.json.JSONObject
+
 /**
  * 左图右文 组合样式 0
  */
@@ -18,6 +21,21 @@ class ViewBindItemLIRTGroupStyle0 : BaseViewBindItem<SampleResultBean.Item, Comm
     override fun bindView(holder: CommonViewHolder, activity: Activity): Boolean {
         val titleView = holder.getView<TitlePartView>(R.id.title) as TitlePartView
         titleView.setPartViewModel(TitlePartViewModel(mItemData.title))
+
+        titleView.setOnClickListener {
+            //缓存修改 示例!!!
+            mItemData.title = "这个标题数据已被修改!!!"
+            CacheController.getInstance().remove(mZebra.requestKey)
+            try {
+                val jsonObject = JSONObject(mZebra.jsonStr)
+                val itemObj = jsonObject.optJSONArray("list").getJSONObject(0)
+                itemObj.put("title", "这个标题数据已被修改!!!")
+                CacheController.getInstance().save(mZebra.requestKey, jsonObject.toString())
+            } catch (e: Exception) { }
+            //重新绑定
+            bindView(holder, activity)
+        }
+
         val bookList = mItemData?.bookList!!
         val size = bookList.size
         if (size < 1) {
