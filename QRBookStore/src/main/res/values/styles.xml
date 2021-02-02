@@ -15,7 +15,7 @@
         <item name="android:windowTitleStyle">@null</item>
         <item name="android:windowTitleBackgroundStyle">@null</item>
         <item name="android:windowContentOverlay">@null</item>
-<!--        <item name="android:windowBackground">@drawable/skin_gray100</item>-->
+        <item name="android:windowBackground">@drawable/skin_gray100</item>
     </style>
 
 </resources>

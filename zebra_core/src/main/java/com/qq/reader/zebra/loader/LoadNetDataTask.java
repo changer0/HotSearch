@@ -34,6 +34,7 @@ public class LoadNetDataTask implements Runnable {
         InputStream resultStream = null;
         try {
             resultStream = ZebraConfig.getNetQuestAdapter().syncRequest(provider.getNetQuestParams());
+            Logger.i("url", provider.getNetQuestParams().getUrl());
             String str = IoUtils.getString(resultStream);
             provider.parseData(str);
             provider.buildViewBindItem();

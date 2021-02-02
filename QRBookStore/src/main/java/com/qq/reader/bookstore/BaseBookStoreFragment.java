@@ -21,7 +21,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.qq.reader.bookstore.view.BaseBookStoreView;
 import com.qq.reader.module.bookstore.qweb.fragment.BaseFragment;
-import com.qq.reader.zebra.BaseViewBindItem;
 import com.qq.reader.zebra.loader.ObserverEntity;
 
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +43,7 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
     protected Context mContext;
     protected V mBookStoreView;
     protected VM mViewModel;
-    public BaseQuickAdapter<BaseViewBindItem, CommonViewHolder> mAdapter;
+    public QuickRecyclerViewAdapter mAdapter;
     protected Bundle mEnterBundle;
     private boolean isFrameworkReady;
     protected LaunchParams mLaunchParams;
@@ -186,21 +185,15 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
     /**
      * 数据加载
      */
-    public void loadData(String loadSignal) {
+    public void loadData(int loadSignal) {
         if (mEnterBundle == null) {
             return;
         }
-        Bundle params = generateLoadBundle(loadSignal, mEnterBundle);
+        Bundle params = LoadSignal.generateLoadBundle(loadSignal, mEnterBundle);
         mViewModel.getZebraLiveData(params).observe(this, this);
     }
 
-    protected Bundle generateLoadBundle(String loadSignal, Bundle bundle) {
-        if (bundle == null) {
-            bundle = new Bundle();
-        }
-        bundle.putString(LoadSignal.LOAD_SIGNAL, loadSignal);
-        return bundle;
-    }
+
 
     // 数据加载工具 end
     //----------------------------------------------------------------------------------------------
@@ -230,7 +223,7 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
             return;
         }
         mBookStoreView.pullDownView.setRefreshing(false);
-        String loadSignal = entity.provider.getLoadSignal();
+        int loadSignal = entity.provider.getLoadSignal();
         switch (loadSignal) {
             case LoadSignal.LOAD_SIGNAL_INIT:
                 onDataInit(entity);

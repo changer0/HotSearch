@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.qq.reader.bookstore.define.BookStoreConstant;
+import com.qq.reader.bookstore.define.LoadSignal;
 import com.qq.reader.bookstore.view.CommonBookStoreView;
 import com.qq.reader.zebra.utils.CastUtils;
 
@@ -30,6 +31,6 @@ public class CommonBookStoreFragment<VM extends BaseBookStoreViewModel> extends 
 
     @Override
     protected void onLaunchSuccess(View container, @NonNull Bundle enterBundle, @Nullable Bundle savedInstanceState) {
-
+        loadData(LoadSignal.LOAD_SIGNAL_INIT);
     }
 }

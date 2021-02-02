@@ -80,7 +80,7 @@ public class Zebra<R> {
     /**
      * 加载信号
      */
-    private String loadSignal;
+    private int loadSignal;
 
     private Zebra(Class<R> responseClass) {
         this.responseClass = responseClass;
@@ -144,7 +144,7 @@ public class Zebra<R> {
     /**
      * 获取加载信号
      */
-    public String getLoadSignal() {
+    public int getLoadSignal() {
         return loadSignal;
     }
 
@@ -298,14 +298,14 @@ public class Zebra<R> {
          */
         @Deprecated
         public ZebraLiveData load() {
-            return load(null);
+            return load(-1);
         }
 
         /**
          * @param loadSignal 加载信号，由业务侧实现，一般可用于加载的状态信号，例如：加载更多等
          * @return
          */
-        public ZebraLiveData load(String loadSignal) {
+        public ZebraLiveData load(int loadSignal) {
             provider.loadSignal = loadSignal;
             provider.netQuestParams = new INetQuestParams() {
                 @Override

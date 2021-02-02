@@ -37,8 +37,10 @@
     <include
         android:id="@+id/loading_failed_layout"
         layout="@layout/localstore_loading_failed"
+        android:layout_below="@id/common_titler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:visibility="visible"
         android:visibility="gone" />
 
 </RelativeLayout>
