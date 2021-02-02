@@ -268,9 +268,9 @@ public class Zebra<R> {
         /**
          * 加载器，提供默认的加载器 SimpleProviderLoader
          */
-        private ILoader<R> loader = new SimpleLoader<R>();
+        private ILoader<R> loader = new SimpleLoader();
 
-        public RequestBuilder<R> loader(ILoader loader) {
+        public RequestBuilder<R> loader(ILoader<R> loader) {
             this.loader = CastUtils.cast(loader);
             return this;
         }
@@ -278,7 +278,7 @@ public class Zebra<R> {
         /**
          * 解析器，提供默认解析器 SimpleGSONParser
          */
-        public RequestBuilder<R> parser(IParser parser) {
+        public RequestBuilder<R> parser(IParser<R> parser) {
             provider.parser = CastUtils.cast(parser);
             return this;
         }
@@ -286,17 +286,17 @@ public class Zebra<R> {
         /**
          * ViewBindItem 构建器
          */
-        public RequestBuilder<R> viewBindItemBuilder(IViewBindItemBuilder builder) {
-            provider.builder = CastUtils.cast(builder);
+        public RequestBuilder<R> viewBindItemBuilder(IViewBindItemBuilder<R> builder) {
+            provider.builder = builder;
             return this;
         }
 
         /**
          * 缓存配置
          */
-        public RequestBuilder<R> cacheConfig(int cacheMode, IGetExpiredTime expiredTime) {
+        public RequestBuilder<R> cacheConfig(int cacheMode, IGetExpiredTime<R> expiredTime) {
             provider.cacheMode = cacheMode;
-            provider.expiredTime = CastUtils.cast(expiredTime);
+            provider.expiredTime = expiredTime;
             return this;
         }
 
