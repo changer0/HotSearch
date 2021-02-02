@@ -3,6 +3,8 @@ package com.qq.reader.zebra;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.qq.reader.zebra.inter.IGetExpiredTime;
 import com.qq.reader.zebra.inter.IViewBindItemBuilder;
 import com.qq.reader.zebra.loader.ILoader;
@@ -45,7 +47,7 @@ public class Zebra<R> {
      *  ViewBindItems 列表
      */
     @Nullable
-    private List<BaseViewBindItem> mViewBindItems;
+    private List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> mViewBindItems;
 
     /**
      * 是否为缓存数据
@@ -112,7 +114,7 @@ public class Zebra<R> {
     /**
      * 获取 mViewBindItems
      */
-    public List<BaseViewBindItem> getViewBindItems() {
+    public List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> getViewBindItems() {
         return mViewBindItems;
     }
 
@@ -139,6 +141,11 @@ public class Zebra<R> {
             throw new RuntimeException("buildViewBindItem 失败，mData == null !!!");
         }
         mViewBindItems = getBuilder().buildViewBindItem(mData);
+        if (mViewBindItems != null && mViewBindItems.size() > 0) {
+            for (BaseViewBindItem<?, ? extends RecyclerView.ViewHolder> viewBindItem : mViewBindItems) {
+                viewBindItem.setZebra(this);
+            }
+        }
     }
 
     /**
@@ -294,7 +301,7 @@ public class Zebra<R> {
         }
 
         /**
-         * 数据加载，此种加载方式不推荐！可使用带有加载信号的 load 方法 {@link #load(String)}
+         * 数据加载，此种加载方式不推荐！可使用带有加载信号的 load 方法 {@link #load(int)}
          */
         @Deprecated
         public ZebraLiveData load() {

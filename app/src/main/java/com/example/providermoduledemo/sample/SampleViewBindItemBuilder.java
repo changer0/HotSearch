@@ -1,6 +1,7 @@
 package com.example.providermoduledemo.sample;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.providermoduledemo.viewmodel.ViewBindItemLIRTGroupStyle0;
 import com.example.providermoduledemo.viewmodel.ViewBindItemLIRTGroupStyle1;
@@ -16,8 +17,8 @@ import java.util.List;
  */
 public class SampleViewBindItemBuilder implements IViewBindItemBuilder<SampleResultBean> {
     @Override
-    public List<BaseViewBindItem> buildViewBindItem(@NonNull SampleResultBean data) {
-        List<BaseViewBindItem> viewBindItemList = new ArrayList<>();
+    public List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> buildViewBindItem(@NonNull SampleResultBean data) {
+        List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> viewBindItemList = new ArrayList<>();
         List<SampleResultBean.Item> dataList = data.getList();
         if (dataList == null) return viewBindItemList;
         for (SampleResultBean.Item item : dataList) {

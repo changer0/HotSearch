@@ -1,6 +1,7 @@
 package com.qq.reader.zebra.inter;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.qq.reader.zebra.BaseViewBindItem;
 import java.util.List;
@@ -10,5 +11,5 @@ import java.util.List;
  */
 public interface IViewBindItemBuilder<T> {
     /**构建ViewBindItem*/
-    List<BaseViewBindItem> buildViewBindItem(@NonNull T data);
+    List<BaseViewBindItem<?, ? extends RecyclerView.ViewHolder>> buildViewBindItem(@NonNull T data);
 }

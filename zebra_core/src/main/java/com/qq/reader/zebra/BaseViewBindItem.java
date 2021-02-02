@@ -23,6 +23,14 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
 
     private static final String TAG = "BaseDataItem";
 
+    /**
+     * 当前 Item 多对应的 Zebra
+     */
+    protected Zebra<?> mZebra;
+
+    /**
+     * 当前 Item 数据
+     */
     protected T mItemData;
 
     /**
@@ -42,6 +50,10 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
 
     public void setIndex(int pos) {
         mIndex = pos;
+    }
+
+    public void setZebra(Zebra<?> zebra) {
+        mZebra = zebra;
     }
 
     /**

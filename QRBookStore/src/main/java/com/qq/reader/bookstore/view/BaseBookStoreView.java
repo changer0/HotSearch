@@ -89,10 +89,6 @@ public abstract class BaseBookStoreView {
         }
     }
 
-    protected BaseQuickAdapter<BaseViewBindItem, CommonViewHolder> initAdapter() {
-        return new QuickRecyclerViewAdapter(context, null);
-    }
-
     public View getContentView() {
         return contentView;
     }
