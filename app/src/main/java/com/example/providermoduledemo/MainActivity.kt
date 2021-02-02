@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
                 SampleBookStoreViewModel::class.java,
                 LaunchParams.Builder()
                     .setPullRefreshEnable(true)
-                    .setTitle("测试通用页面")
+                    .setLoadMoreEnable(true)
+                    .setTitle("通用页面示例")
                     .build()
             )
 

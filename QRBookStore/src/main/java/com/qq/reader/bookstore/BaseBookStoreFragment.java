@@ -140,7 +140,6 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
         }
         mAdapter = new QuickRecyclerViewAdapter(mContext, null);
         mAdapter.setLoadMoreView(mBookStoreView.loadMoreView);
-        mAdapter.setOnLoadMoreListener(this, mBookStoreView.recyclerView);
         mBookStoreView.recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mBookStoreView.recyclerView.setAdapter(mAdapter);
         mBookStoreView.pullDownView.setOnRefreshListener(this);
@@ -152,6 +151,9 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
     protected void analyzingFragmentArguments() {
         mBookStoreView.pullDownView.setEnabled(mLaunchParams.isPullRefreshEnable());
         mAdapter.setEnableLoadMore(mLaunchParams.isLoadMoreEnable());
+        if (mLaunchParams.isLoadMoreEnable()) {
+            mAdapter.setOnLoadMoreListener(this, mBookStoreView.recyclerView);
+        }
         configActionBar();
     }
 
