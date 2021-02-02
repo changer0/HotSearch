@@ -3,7 +3,7 @@ package com.qq.reader.zebra.log;
 import static com.qq.reader.zebra.ZebraConfig.isDebug;
 
 public class Logger {
-    public static final String TAG = "TAG_DataProvider";
+    public static final String TAG = "TAG_ZEBRA";
 
     public static void d(String tag, String info) {
         if (isDebug) {

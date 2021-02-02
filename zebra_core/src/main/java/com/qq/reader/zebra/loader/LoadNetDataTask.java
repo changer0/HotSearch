@@ -21,11 +21,11 @@ import java.nio.charset.StandardCharsets;
 @SuppressWarnings("rawtypes")
 public class LoadNetDataTask implements Runnable {
     private static final String TAG = "LoadNetDataTask";
-    private final Zebra provider;
+    private final Zebra zebra;
     private LoadDataListener loadDataListener;
 
-    public LoadNetDataTask(Zebra provider) {
-        this.provider = provider;
+    public LoadNetDataTask(Zebra zebra) {
+        this.zebra = zebra;
     }
 
     @Override
@@ -33,14 +33,14 @@ public class LoadNetDataTask implements Runnable {
 
         InputStream resultStream = null;
         try {
-            resultStream = ZebraConfig.getNetQuestAdapter().syncRequest(provider.getNetQuestParams());
-            Logger.i("url", provider.getNetQuestParams().getUrl());
+            resultStream = ZebraConfig.getNetQuestAdapter().syncRequest(zebra.getNetQuestParams());
+            Logger.i("url", zebra.getNetQuestParams().getUrl());
             String str = IoUtils.getString(resultStream);
-            provider.parseData(str);
-            provider.buildViewBindItem();
+            zebra.parseData(str);
+            zebra.buildViewBindItem();
             //数据填充结束, 通知页面刷新
             if (loadDataListener != null) {
-                loadDataListener.onLoadNetDataSuccess(provider);
+                loadDataListener.onLoadNetDataSuccess(zebra);
             }
             //resultStream 已经读完了，变成 ByteArrayOutputStream 存入缓存
             ByteArrayOutputStream baos = null;
@@ -52,7 +52,7 @@ public class LoadNetDataTask implements Runnable {
                 }
                 bais = new ByteArrayInputStream(baos.toByteArray());
                 //保存缓存
-                CacheController.getInstance().save(provider.getRequestKey(), bais);
+                CacheController.getInstance().save(zebra.getRequestKey(), bais);
             } finally {
                 if (bais != null) {
                     bais.close();
