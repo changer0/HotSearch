@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.qq.reader.zebra.utils.CastUtils;
+
 /**
  * @author zhanglulu
  */
@@ -13,6 +15,7 @@ public class LaunchParams implements Parcelable {
     private boolean pullRefreshEnable = false;
     private boolean loadMoreEnable = false;
     private String title;
+    private Class<? extends BaseBookStoreViewModel> viewModelClass;
     private Bundle extras;
 
 
@@ -28,6 +31,10 @@ public class LaunchParams implements Parcelable {
         return title;
     }
 
+    public Class<? extends BaseBookStoreViewModel> getViewModelClass() {
+        return viewModelClass;
+    }
+
     public Bundle getExtras() {
         return extras;
     }
@@ -36,6 +43,7 @@ public class LaunchParams implements Parcelable {
         pullRefreshEnable = in.readByte() != 0;
         loadMoreEnable = in.readByte() != 0;
         title = in.readString();
+        viewModelClass = CastUtils.cast(in.readSerializable());
         extras = in.readBundle(getClass().getClassLoader());
     }
 
@@ -61,6 +69,7 @@ public class LaunchParams implements Parcelable {
         dest.writeByte((byte) (pullRefreshEnable ? 1:0));
         dest.writeByte((byte) (loadMoreEnable ? 1:0));
         dest.writeString(title);
+        dest.writeSerializable(viewModelClass);
         dest.writeBundle(extras);
     }
 
@@ -87,6 +96,11 @@ public class LaunchParams implements Parcelable {
 
         public Builder setTitle(String title) {
             P.title = title;
+            return this;
+        }
+
+        public Builder setViewModelClass(Class<? extends BaseBookStoreViewModel> viewModelClass) {
+            P.viewModelClass = viewModelClass;
             return this;
         }
 

@@ -26,7 +26,7 @@ public class CommonBookStoreFragment<VM extends BaseBookStoreViewModel> extends 
 
     @Override
     protected Class<VM> onCreateBookStoreViewModel(@NonNull Bundle enterBundle) {
-        return CastUtils.cast(enterBundle.getSerializable(BookStoreActivityLauncher.BOOK_STORE_VIEW_MODEL));
+        return CastUtils.cast(mLaunchParams.getViewModelClass());
     }
 
     @Override

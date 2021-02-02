@@ -27,19 +27,5 @@ public class BookStoreActivityLauncher {
         context.startActivity(intent);
     }
 
-    /**
-     * 启动通用书城二级页
-     * @param context 上下文
-     * @param viewModelClass ViewModel Class
-     * @param launchParams 启动参数
-     */
-    public static void launchCommon(Context context, Class<? extends BaseBookStoreViewModel> viewModelClass, LaunchParams launchParams) {
-        Intent intent = new Intent(context, CommonBookStoreActivity.class);
-        intent.putExtra(BookStoreActivityLauncher.BOOK_STORE_FRAGMENT_PATH, BookStoreConstant.BOOK_STORE_COMMON_FRAGMENT);
-        intent.putExtra(BookStoreActivityLauncher.BOOK_STORE_FRAGMENT_PARAMS, launchParams);
-        intent.putExtra(BookStoreActivityLauncher.BOOK_STORE_VIEW_MODEL, viewModelClass);
-        context.startActivity(intent);
-    }
-
 
 }

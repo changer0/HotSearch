@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.example.providermoduledemo.sample.*
 import com.qq.reader.bookstore.BookStoreActivityLauncher
 import com.qq.reader.bookstore.LaunchParams
+import com.qq.reader.bookstore.define.BookStoreConstant
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,12 +17,13 @@ class MainActivity : AppCompatActivity() {
 
         fragmentCommonSecondPageFragment.setOnClickListener {
             //启动通用二级页
-            BookStoreActivityLauncher.launchCommon(
+            BookStoreActivityLauncher.launch(
                 this,
-                SampleBookStoreViewModel::class.java,
+                BookStoreConstant.BOOK_STORE_COMMON_FRAGMENT,
                 LaunchParams.Builder()
                     .setPullRefreshEnable(true)
                     .setLoadMoreEnable(true)
+                    .setViewModelClass(SampleBookStoreViewModel::class.java)
                     .setTitle("通用页面示例")
                     .build()
             )
