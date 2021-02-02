@@ -1,0 +1,27 @@
+@startuml
+
+
+abstract class BaseBookStoreView
+note right: 书城 View 基类
+
+
+
+abstract class BaseBookStoreViewModel
+note right: 书城 ViewModel 基类
+
+abstract class BaseBookStoreFragment
+note right: 书城 Fragment 基类
+
+
+
+BaseBookStoreView <|-- CommonBookStoreView
+
+
+
+BaseBookStoreViewModel <|-- SampleBookStoreViewModel
+
+BaseBookStoreFragment o-- BaseBookStoreView
+BaseBookStoreFragment o-- BaseBookStoreViewModel
+
+
+@enduml

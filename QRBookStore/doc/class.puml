@@ -1,0 +1,34 @@
+@startuml
+
+
+abstract class BaseBookStoreView
+note right: 书城 View 基类
+
+
+BaseBookStoreFragment <|-- CommonBookStoreFragment
+note right: 通用二级页
+
+abstract class BaseBookStoreViewModel
+note right: 书城 ViewModel 基类
+
+abstract class BaseBookStoreFragment
+note right: 书城 Fragment 基类
+
+
+
+BaseBookStoreView <|-- CommonBookStoreView
+
+CommonBookStoreFragment o-- CommonBookStoreView
+CommonBookStoreFragment o-- SampleBookStoreViewModel
+
+BaseBookStoreViewModel <|-- SampleBookStoreViewModel
+
+BaseBookStoreFragment o-- BaseBookStoreView
+BaseBookStoreFragment o-- BaseBookStoreViewModel
+
+
+class CommonBookStoreActivity
+note right: 书城二级页 Activity
+CommonBookStoreActivity o-- BaseBookStoreFragment
+
+@enduml
