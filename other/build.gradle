@@ -40,5 +40,4 @@ dependencies {
 
 
     implementation project(':zebra_core')
-    implementation project(':zebra_building')
 }

@@ -70,7 +70,6 @@ dependencies {
     implementation project(":YWRouter_Android")
     if (!isSourceBuildZebra.toBoolean()) {
         implementation project(':zebra_core')
-        implementation project(':zebra_building')
     }
 
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'

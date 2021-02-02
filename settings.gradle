@@ -1,6 +1,5 @@
 rootProject.name='zebra'
 include ':zebra_core'
-include ':zebra_building'
 
 //Demo 模块
 include ':YWRouter_Android'
