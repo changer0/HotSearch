@@ -1,8 +1,6 @@
 package com.qq.reader.bookstore;
 
 import android.os.Bundle;
-
-import androidx.collection.LruCache;
 import androidx.lifecycle.ViewModel;
 
 import com.qq.reader.zebra.ZebraLiveData;

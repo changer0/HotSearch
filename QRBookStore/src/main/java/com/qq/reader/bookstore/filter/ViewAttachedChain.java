@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * ViewAttach 过滤器链
  * @author zhanglulu
- * @date : 2020/12/14 11:24 AM
  */
 public class ViewAttachedChain implements IViewAttachFilter {
     List<IViewAttachFilter> filters = new ArrayList<>();
@@ -26,7 +25,7 @@ public class ViewAttachedChain implements IViewAttachFilter {
 
     @Override
     public void doFilter(BaseViewBindItem<?, CommonViewHolder> viewBindItem, CommonViewHolder viewHolder, QuickRecyclerViewAdapter adapter, ViewAttachedChain chain) throws Exception{
-        if (index == filters.size()) return;
+        if (index >= filters.size()) return;
 
         IViewAttachFilter filter = filters.get(index);
         index++;

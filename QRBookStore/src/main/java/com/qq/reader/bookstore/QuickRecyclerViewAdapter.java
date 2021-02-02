@@ -22,16 +22,16 @@ public class QuickRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem,
 
     private final Context mContext;
 
-//    private ViewAttachedChain viewAttachedChain;
+    private ViewAttachedChain viewAttachedChain;
 
     public QuickRecyclerViewAdapter(Context context, @Nullable List<BaseViewBindItem> data) {
         super(data);
         mContext = context;
-//        viewAttachedChain = new ViewAttachedChain();
-//        viewAttachedChain.addFilter((viewBindItem, viewHolder, adapter, chain) -> {
-//            viewBindItem.attachView(viewHolder);
-//            chain.doFilter(viewBindItem, viewHolder, adapter, chain);
-//        });
+        viewAttachedChain = new ViewAttachedChain();
+        viewAttachedChain.addFilter((viewBindItem, viewHolder, adapter, chain) -> {
+            viewBindItem.attachView(viewHolder);
+            chain.doFilter(viewBindItem, viewHolder, adapter, chain);
+        });
     }
 
 
@@ -52,10 +52,8 @@ public class QuickRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem,
         if (item != null) {
             item.setIndex(position);
             try {
-//                viewAttachedChain.resetIndex();
-//                viewAttachedChain.doFilter(item, holder, this , viewAttachedChain);
-
-                item.attachView(holder);
+                viewAttachedChain.resetIndex();
+                viewAttachedChain.doFilter(item, holder, this , viewAttachedChain);
             } catch (Exception e) {
                 //如果发生异常, 该item不显示
                 holder.itemView.setVisibility(View.GONE);
@@ -76,11 +74,11 @@ public class QuickRecyclerViewAdapter extends BaseQuickAdapter<BaseViewBindItem,
         return type;
     }
 
-//    /**
-//     * 添加 ViewAttach 过滤器
-//     * @param filter
-//     */
-//    public void addViewAttachFilter(IViewAttachFilter filter) {
-//        viewAttachedChain.addFilter(filter);
-//    }
+    /**
+     * 添加 ViewAttach 过滤器
+     * @param filter
+     */
+    public void addViewAttachFilter(IViewAttachFilter filter) {
+        viewAttachedChain.addFilter(filter);
+    }
 }
