@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <com.example.providermoduledemo.viewmodel.TitleView
+    <com.example.providermoduledemo.viewmodel.TitlePartView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -20,15 +20,15 @@
             android:background="#841100FF"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <com.example.providermoduledemo.viewmodel.LIRTView
+            <com.example.providermoduledemo.viewmodel.LIRTPartView
                 android:id="@+id/singleBook0"
                 android:layout_width="150dp"
                 android:layout_height="match_parent" />
-            <com.example.providermoduledemo.viewmodel.LIRTView
+            <com.example.providermoduledemo.viewmodel.LIRTPartView
                 android:id="@+id/singleBook1"
                 android:layout_width="150dp"
                 android:layout_height="match_parent" />
-            <com.example.providermoduledemo.viewmodel.LIRTView
+            <com.example.providermoduledemo.viewmodel.LIRTPartView
                 android:id="@+id/singleBook2"
                 android:layout_width="150dp"
                 android:layout_height="match_parent" />

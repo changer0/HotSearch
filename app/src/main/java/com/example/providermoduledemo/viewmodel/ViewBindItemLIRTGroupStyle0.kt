@@ -3,8 +3,8 @@ package com.example.providermoduledemo.viewmodel
 import android.app.Activity
 import com.example.providermoduledemo.R
 import com.example.providermoduledemo.sample.SampleResultBean
+import com.qq.reader.bookstore.CommonViewHolder
 import com.qq.reader.zebra.BaseViewBindItem
-import com.qq.reader.zebra.viewmodel.CommonViewHolder
 /**
  * 左图右文 组合样式 0
  */
@@ -16,22 +16,22 @@ class ViewBindItemLIRTGroupStyle0 : BaseViewBindItem<SampleResultBean.Item, Comm
 
 
     override fun bindView(holder: CommonViewHolder, activity: Activity): Boolean {
-        val titleView = holder.getView<TitleView>(R.id.title) as TitleView
-        titleView.setViewModel(TitleViewModel(mItemData.title))
+        val titleView = holder.getView<TitlePartView>(R.id.title) as TitlePartView
+        titleView.setViewModel(TitlePartViewModel(mItemData.title))
         val bookList = mItemData?.bookList!!
         val size = bookList.size
         if (size < 1) {
             return false
         }
-        holder.getView<LIRTView>(R.id.singleBook0).setViewModel(LIRTViewModel(bookList[0].leftImgUrl, bookList[0].rightText))
+        holder.getView<LIRTPartView>(R.id.singleBook0).setViewModel(LIRTPartViewModel(bookList[0].leftImgUrl, bookList[0].rightText))
         if (size < 2) {
             return true
         }
-        holder.getView<LIRTView>(R.id.singleBook1).setViewModel(LIRTViewModel(bookList[1].leftImgUrl, bookList[1].rightText))
+        holder.getView<LIRTPartView>(R.id.singleBook1).setViewModel(LIRTPartViewModel(bookList[1].leftImgUrl, bookList[1].rightText))
         if (size < 3) {
             return true
         }
-        holder.getView<LIRTView>(R.id.singleBook2).setViewModel(LIRTViewModel(bookList[2].leftImgUrl, bookList[2].rightText))
+        holder.getView<LIRTPartView>(R.id.singleBook2).setViewModel(LIRTPartViewModel(bookList[2].leftImgUrl, bookList[2].rightText))
         return true
     }
 }

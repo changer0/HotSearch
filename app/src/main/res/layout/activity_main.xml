@@ -18,32 +18,22 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-<!--            <Button-->
-<!--                android:id="@+id/viewModelActivity"-->
-<!--                android:text="ViewModel 页面"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"/>-->
-<!--            <Button-->
-<!--                android:id="@+id/preLoadActivity"-->
-<!--                android:text="预加载测试页面"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"/>-->
 
-            <Button
-                android:id="@+id/sampleListPageActivity"
-                android:text="通用列表页面"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:id="@+id/boyCommonSecondPage"
-                android:text="男生二级页"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:id="@+id/girlCommonSecondPage"
-                android:text="女生二级页"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+<!--            <Button-->
+<!--                android:id="@+id/sampleListPageActivity"-->
+<!--                android:text="通用列表页面"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
+<!--            <Button-->
+<!--                android:id="@+id/boyCommonSecondPage"-->
+<!--                android:text="男生二级页"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
+<!--            <Button-->
+<!--                android:id="@+id/girlCommonSecondPage"-->
+<!--                android:text="女生二级页"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
 
 
             <Button

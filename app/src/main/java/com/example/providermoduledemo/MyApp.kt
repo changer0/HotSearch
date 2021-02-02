@@ -2,6 +2,7 @@ package com.example.providermoduledemo
 
 import android.app.Application
 import com.qq.reader.zebra.ZebraConfig
+import com.yuewen.component.router.YWRouter
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.util.concurrent.TimeUnit
@@ -15,6 +16,9 @@ class MyApp: Application() {
     override fun onCreate() {
         super.onCreate()
         initDataProvider()
+
+        //初始化 YWRouter
+        YWRouter.init(this, BuildConfig.DEBUG)
     }
 
     /**

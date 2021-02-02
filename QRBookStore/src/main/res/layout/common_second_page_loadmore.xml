@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/load_more"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/load_more_loading"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center" >
+
+        <ProgressBar
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:indeterminateDuration="1000"
+            android:indeterminateOnly="true"
+            android:maxHeight="28dp"
+            android:maxWidth="28dp"
+            android:minHeight="28dp"
+            android:minWidth="28dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正在加载.."
+            android:layout_marginLeft="3dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/load_more_end"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:gravity="center" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已加载全部"
+            android:layout_marginLeft="3dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/load_more_fail"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:gravity="center" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加载失败,点击重新加载"
+            android:layout_marginLeft="3dp"/>
+    </LinearLayout>
+
+</RelativeLayout>

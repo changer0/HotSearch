@@ -17,6 +17,11 @@ android {
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -67,6 +72,8 @@ dependencies {
         implementation project(':zebra_core')
         implementation project(':zebra_building')
     }
+
+    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 }
 
 kapt {

@@ -2,4 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qq.reader.bookstore">
 
+    <application>
+        <activity
+            android:name="com.qq.reader.bookstore.CommonBookStoreActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"
+            android:theme="@style/TitleTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+    </application>
 </manifest>

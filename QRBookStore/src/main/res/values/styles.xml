@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- TODO: 强烈建议, 将下面主题移至 QRBusinessBasic -->
+
+    <!--如果需要滑动返回功能，要继承此theme-->
+    <style name="AppTranslucentTheme" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+<!--        <item name="android:fastScrollThumbDrawable">@drawable/scroll_block</item>-->
+<!--        <item name="viewInflaterClass">@string/viewInflaterClass</item>-->
+    </style>
+
+    <style name="TitleTheme" parent="AppTranslucentTheme">
+        <!-- Window attributes -->
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowTitleBackgroundStyle">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+<!--        <item name="android:windowBackground">@drawable/skin_gray100</item>-->
+    </style>
+
+</resources>
