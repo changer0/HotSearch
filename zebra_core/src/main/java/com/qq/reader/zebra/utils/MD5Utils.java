@@ -119,7 +119,6 @@ public class MD5Utils {
 			MessageDigest md5 = MessageDigest.getInstance("SHA-256");
 			return bytes2Hex(md5.digest(str.getBytes()));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

@@ -85,6 +85,11 @@ public class Zebra<R> {
      */
     private int loadSignal;
 
+    /**
+     * 请求 Key
+     */
+    private String requestKey;
+
     private Zebra(Class<R> responseClass) {
         this.responseClass = responseClass;
     }
@@ -169,17 +174,19 @@ public class Zebra<R> {
 
     /**
      * 获取请求 Key 并编码
-     * @return
      */
-    public String getRequestKey() {
-        String originKey;
-        INetQuestParams p = getNetQuestParams();
-        if (TextUtils.equals(p.getRequestMethod(), "POST")) {
-            originKey = p.getUrl() + p.getRequestMethod() + p.getRequestContent() + p.getContentType();
-        } else {
-            originKey = p.getUrl();
+    public synchronized String getRequestKey() {
+        if (TextUtils.isEmpty(requestKey)) {
+            String originKey;
+            INetQuestParams p = getNetQuestParams();
+            if (TextUtils.equals(p.getRequestMethod(), "POST")) {
+                originKey = p.getUrl() + p.getRequestMethod() + p.getRequestContent() + p.getContentType();
+            } else {
+                originKey = p.getUrl();
+            }
+            requestKey = MD5Utils.getSHA256(originKey);
         }
-        return  MD5Utils.getSHA256(originKey);
+        return requestKey;
     }
 
     public int getCacheMode() {

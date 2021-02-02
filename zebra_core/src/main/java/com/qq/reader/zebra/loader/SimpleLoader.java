@@ -77,21 +77,6 @@ public class SimpleLoader<R> implements ILoader<R> {
     }
 
     //----------------------------------------------------------------------------------------------
-    // 暴露缓存相关操作
-
-    public void saveCache(String key,InputStream inputStream) {
-        try {
-            CacheController.getInstance().save(key, inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean removeCache() {
-        return CacheController.getInstance().remove(zebra.getRequestKey());
-    }
-
-    //----------------------------------------------------------------------------------------------
     // ILoader 的接口实现
     @Override
     public ZebraLiveData loadData(Zebra<R> provider) {
