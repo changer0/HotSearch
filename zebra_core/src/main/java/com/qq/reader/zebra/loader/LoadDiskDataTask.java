@@ -2,12 +2,7 @@ package com.qq.reader.zebra.loader;
 
 import com.qq.reader.zebra.Zebra;
 import com.qq.reader.zebra.cache.CacheController;
-import com.qq.reader.zebra.cache.core.IoUtils;
 import com.qq.reader.zebra.log.Logger;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 /**
  * @author zhanglulu on 2019/3/2.
@@ -17,74 +12,56 @@ import java.nio.charset.StandardCharsets;
 public class LoadDiskDataTask implements Runnable {
     private static final String TAG = "LoadDiskDataTask";
 
-    private final Zebra mZebra;
-    private final InputStream inputStream;
+    private final Zebra zebra;
     private LoadDataListener mLoadListener;
     private LoadExpiredDataListener mLoadExpiredListener;
-    private boolean isLoadExpired = false;
+    private boolean isLoadExpired;
 
     /**
      * @param isLoadExpired true 为加载过期文件
      */
-    public LoadDiskDataTask(Zebra mZebra, InputStream inputStream, boolean isLoadExpired) {
-        this.mZebra = mZebra;
-        this.inputStream = inputStream;
+    public LoadDiskDataTask(Zebra zebra, boolean isLoadExpired) {
+        this.zebra = zebra;
         this.isLoadExpired = isLoadExpired;
     }
 
     @Override
     public void run() {
-        InputStream is = null;
         try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            is = new BufferedInputStream(inputStream);
-            IoUtils.copyStream(is, baos, null);
-            String jsonStr = new String(baos.toByteArray(), StandardCharsets.UTF_8);
-            mZebra.parseData(jsonStr);
-            if (mZebra.isExpired() && !isLoadExpired) {
+            zebra.parseData(CacheController.getInstance().getString(zebra.getRequestKey()));
+            if (zebra.isExpired() && !isLoadExpired) {
                 if (mLoadListener != null) {
-                    mLoadListener.onLoadDiskDataFailed(mZebra);
+                    mLoadListener.onLoadDiskDataFailed(zebra);
                 }
             } else {
                 //只有加载成功后才会填充数据
-                mZebra.buildViewBindItem();
+                zebra.buildViewBindItem();
                 if (isLoadExpired) {
                     //回调过期数据
                     if (mLoadExpiredListener != null) {
-                        mLoadExpiredListener.onLoadDiskExpiredDataSuccess(mZebra);
+                        mLoadExpiredListener.onLoadDiskExpiredDataSuccess(zebra);
                     }
                 } else {
                     //回调未过期数据
                     if (mLoadListener != null) {
-                        mLoadListener.onLoadDiskDataSuccess(mZebra);
+                        mLoadListener.onLoadDiskDataSuccess(zebra);
                     }
                 }
             }
         } catch (Exception e) {
             if (isLoadExpired) {
                 if (mLoadExpiredListener != null) {
-                    mLoadExpiredListener.onLoadDiskExpiredDataFailed(mZebra);
+                    mLoadExpiredListener.onLoadDiskExpiredDataFailed(zebra);
                 }
             } else {
                 if (null != mLoadListener) {
-                    mLoadListener.onLoadDiskDataFailed(mZebra);
+                    mLoadListener.onLoadDiskDataFailed(zebra);
                 }
             }
             //此时说明可能保存了错误的缓存数据及时删除
-            CacheController.getInstance().remove(mZebra.getRequestKey());
+            CacheController.getInstance().remove(zebra.getRequestKey());
             Logger.e(TAG, "LoadDiskPageDataTask");
             e.printStackTrace();
-        } finally {
-            try {
-                if (null != is) {
-                    is.close();
-                }
-                //不要忘记关掉快照
-                inputStream.close();
-            } catch (Exception e) {
-                Logger.e(TAG, "LoadDiskPageDataTask");
-                e.printStackTrace();
-            }
         }
     }
 

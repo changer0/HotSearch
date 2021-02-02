@@ -30,31 +30,13 @@ public class LoadDispatcherTask<R> implements Runnable, LoadDiskDataTask.LoadDat
     private ITaskFinishListener<R> mTaskFinishListener;
 
     /**
-     * 缓存流
-     */
-    private InputStream cacheInputStream;
-
-    /**
      * 判断当前快照是否有缓存数据
-     * @return
      */
     private boolean hasCache() {
-        if (cacheInputStream == null) {
-            return false;
-        }
-
-        try {
-            if (cacheInputStream.available() <= 0) {
-                return false;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+        return CacheController.getInstance().hasCache(zebra.getRequestKey());
     }
 
-    public void setTaskFinishListener(ITaskFinishListener mTaskFinishListener) {
+    public void setTaskFinishListener(ITaskFinishListener<R> mTaskFinishListener) {
         this.mTaskFinishListener = mTaskFinishListener;
     }
 
@@ -68,7 +50,6 @@ public class LoadDispatcherTask<R> implements Runnable, LoadDiskDataTask.LoadDat
 
     @Override
     public void run() {
-        cacheInputStream = CacheController.getInstance().get(zebra.getRequestKey());
         if (hasCache()){
             //优先使用缓存 和 使用缓存，但不使用过期数据
             if (getCacheMode() == CacheMode.CACHE_MODE_USE_CACHE_PRIORITY || getCacheMode() == CacheMode.CACHE_MODE_USE_CACHE_NOT_EXPIRED) {
@@ -102,11 +83,10 @@ public class LoadDispatcherTask<R> implements Runnable, LoadDiskDataTask.LoadDat
      * [注] 当且仅当 网络加载失败或者网络数据解析失败时调用，否则会持续加载过期数据
      */
     private void tryLoadDiskData(boolean isLoadExpired) {
-        if (cacheInputStream == null || zebra == null) {
+        if (zebra == null) {
             return;
         }
-        LoadDiskDataTask diskTask = new LoadDiskDataTask(zebra,
-                cacheInputStream, isLoadExpired);
+        LoadDiskDataTask diskTask = new LoadDiskDataTask(zebra, isLoadExpired);
         diskTask.setLoadDataListener(this);
         diskTask.setLoadExpiredDataListener(this);
         if (ZebraUtil.isUIThread()) {

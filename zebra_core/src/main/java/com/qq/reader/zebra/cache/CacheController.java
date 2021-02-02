@@ -7,6 +7,7 @@ import com.qq.reader.zebra.cache.core.DiskLruCache;
 import com.qq.reader.zebra.cache.core.IoUtils;
 import com.qq.reader.zebra.utils.MD5Utils;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -81,7 +82,7 @@ public class CacheController {
         if (cache == null) {
             return false;
         }
-        DiskLruCache.Editor editor = cache.edit(generateKey(originKey));
+        DiskLruCache.Editor editor = cache.edit(originKey);
         if (editor == null) {
             return false;
         }
@@ -103,15 +104,10 @@ public class CacheController {
         return copied;
     }
 
-    private String generateKey(String originKey) {
-        //交由外面去做 MD5Utils.getSHA256(originKey);
-        return originKey;
-    }
-
     /**获取缓存快照，需要 close 哟*/
     public InputStream get(String originKey) {
         try {
-            DiskLruCache.Snapshot snapshot = cache.get(generateKey(originKey));
+            DiskLruCache.Snapshot snapshot = cache.get(originKey);
             if (snapshot != null) {
                 return snapshot.getInputStream(0);
             }
@@ -121,17 +117,54 @@ public class CacheController {
         return null;
     }
 
+    /**获取缓存String */
+    public String getString(String originKey) throws IOException {
+        InputStream is = get(originKey);
+        BufferedInputStream bis = new BufferedInputStream(is);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            IoUtils.copyStream(bis, baos, null);
+            return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+        } finally {
+            try {
+                bis.close();
+                baos.close();
+                //不要忘记关掉快照
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**移除缓存*/
     public boolean remove(String originKey) {
         if (cache == null) {
             return false;
         }
         try {
-            return cache.remove(generateKey(originKey));
+            return cache.remove(originKey);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /** 判断当前快照是否有缓存数据*/
+    public boolean hasCache(String originKey) {
+        InputStream cacheInputStream = get(originKey);
+        if (cacheInputStream == null) {
+            return false;
+        }
+        try {
+            if (cacheInputStream.available() <= 0) {
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     /**全部清除*/
