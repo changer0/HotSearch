@@ -22,6 +22,7 @@ import com.qq.reader.bookstore.define.LoadSignal;
 import com.qq.reader.bookstore.view.BaseBookStoreView;
 import com.qq.reader.module.bookstore.qweb.fragment.BaseFragment;
 import com.qq.reader.zebra.loader.ObserverEntity;
+import com.qq.reader.zebra.log.Logger;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -224,6 +225,7 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
         }
         mBookStoreView.pullDownView.setRefreshing(false);
         int loadSignal = entity.provider.getLoadSignal();
+        Logger.d("onChanged", "是否为缓存: " + entity.provider.isCache());
         switch (loadSignal) {
             case LoadSignal.LOAD_SIGNAL_INIT:
                 onDataInit(entity);

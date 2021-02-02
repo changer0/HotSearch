@@ -1,15 +1,20 @@
 package com.qq.reader.zebra.cache;
 
+import android.text.TextUtils;
+
 import com.qq.reader.zebra.ZebraConfig;
 import com.qq.reader.zebra.cache.core.DiskLruCache;
 import com.qq.reader.zebra.cache.core.IoUtils;
 import com.qq.reader.zebra.utils.MD5Utils;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 
 /**
@@ -48,7 +53,30 @@ public class CacheController {
         }
     }
 
-    /**保存文件*/
+    /**保存文件 String*/
+    public boolean save(String originKey, String str) throws IOException {
+        ByteArrayOutputStream baos = null;
+        ByteArrayInputStream bais = null;
+        try {
+            baos = new ByteArrayOutputStream();
+            if (!TextUtils.isEmpty(str)) {
+                baos.write(str.getBytes(StandardCharsets.UTF_8));
+            }
+            bais = new ByteArrayInputStream(baos.toByteArray());
+            //保存缓存
+            return CacheController.getInstance().save(originKey, bais);
+        } finally {
+            if (bais != null) {
+                bais.close();
+            }
+            if (baos != null) {
+                baos.close();
+            }
+        }
+    }
+
+
+    /**保存文件 Stream*/
     public boolean save(String originKey, InputStream inputStream) throws IOException {
         if (cache == null) {
             return false;

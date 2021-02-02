@@ -32,7 +32,7 @@ public class SampleBookStoreViewModel extends BaseBookStoreViewModel {
                 .url(url)
                 .parser(new SampleConvertParser())
                 .viewBindItemBuilder(new SampleViewBindItemBuilder())
-                .cacheConfig(CacheMode.CACHE_MODE_NOT_USE_CACHE, new SampleGetExpiredTime())
+                .cacheConfig(CacheMode.CACHE_MODE_USE_CACHE_PRIORITY, new SampleGetExpiredTime())
                 .load(signal);
     }
 }

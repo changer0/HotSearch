@@ -42,25 +42,7 @@ public class LoadNetDataTask implements Runnable {
             if (loadDataListener != null) {
                 loadDataListener.onLoadNetDataSuccess(zebra);
             }
-            //resultStream 已经读完了，变成 ByteArrayOutputStream 存入缓存
-            ByteArrayOutputStream baos = null;
-            ByteArrayInputStream bais = null;
-            try {
-                baos = new ByteArrayOutputStream();
-                if (!TextUtils.isEmpty(str)) {
-                    baos.write(str.getBytes(StandardCharsets.UTF_8));
-                }
-                bais = new ByteArrayInputStream(baos.toByteArray());
-                //保存缓存
-                CacheController.getInstance().save(zebra.getRequestKey(), bais);
-            } finally {
-                if (bais != null) {
-                    bais.close();
-                }
-                if (baos != null) {
-                    baos.close();
-                }
-            }
+            CacheController.getInstance().save(zebra.getRequestKey(), str);
         } catch (Exception e) {
             if (loadDataListener != null) {
                 loadDataListener.onLoadNetDataFailed(e);
