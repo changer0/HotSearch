@@ -28,7 +28,7 @@ class LIRTPartView : ConstraintLayout,
         LayoutInflater.from(context).inflate(R.layout.view_model_single_book, this, true)
     }
 
-    override fun setViewModel(model: LIRTPartViewModel) {
+    override fun setPartViewModel(model: LIRTPartViewModel) {
         rightText.text = "${model.rightText}"
         Glide.with(context).load(model.leftImgUrl).into(leftImg)
         leftImg.setOnClickListener {Toast.makeText(context, model.leftImgUrl, Toast.LENGTH_SHORT).show()}

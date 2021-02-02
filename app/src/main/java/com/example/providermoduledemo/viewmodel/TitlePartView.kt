@@ -37,7 +37,7 @@ class TitlePartView : LinearLayout,
     }
 
 
-    override fun setViewModel(modelPart: TitlePartViewModel) {
+    override fun setPartViewModel(modelPart: TitlePartViewModel) {
         itemTitle.text = "${modelPart.title}"
     }
 

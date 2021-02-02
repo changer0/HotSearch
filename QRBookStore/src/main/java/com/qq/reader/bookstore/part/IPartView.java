@@ -5,5 +5,5 @@ package com.qq.reader.bookstore.part;
  * @author zhanglulu on 2020/10/23.
  */
 public interface IPartView<T extends IPartViewModel> {
-    void setViewModel(T model);
+    void setPartViewModel(T model);
 }
