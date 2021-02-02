@@ -21,7 +21,7 @@ class CommonBookStoreView(context: Context): BaseBookStoreView(context) {
             .build()
     }
 
-    override fun onCreateView(contentView: View?) {
+    override fun onCreateView(contentView: View) {
 
     }
 }

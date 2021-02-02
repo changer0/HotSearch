@@ -5,17 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.qq.reader.bookstore.BookStoreUtil;
-import com.qq.reader.bookstore.CommonViewHolder;
-import com.qq.reader.bookstore.QuickRecyclerViewAdapter;
 import com.qq.reader.bookstore.define.BookStoreViewParams;
-import com.qq.reader.zebra.BaseViewBindItem;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -120,7 +117,7 @@ public abstract class BaseBookStoreView {
      * 用于子类创建其他自定义控件
      * @param contentView
      */
-    abstract public void onCreateView(View contentView);
+    abstract public void onCreateView(@NonNull View contentView);
 
     /**
      * 提供资源参数 {@link BookStoreViewParams.Builder}
