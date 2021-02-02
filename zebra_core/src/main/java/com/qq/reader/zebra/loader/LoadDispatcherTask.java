@@ -21,7 +21,7 @@ public class LoadDispatcherTask<R> implements Runnable, LoadDiskDataTask.LoadDat
     /**
      * 数据加载类
      */
-    private final Zebra<R> provider;
+    private final Zebra<R> zebra;
 
 
     /**
@@ -59,16 +59,16 @@ public class LoadDispatcherTask<R> implements Runnable, LoadDiskDataTask.LoadDat
     }
 
     public int getCacheMode() {
-        return provider.getCacheMode();
+        return zebra.getCacheMode();
     }
 
-    public LoadDispatcherTask(Zebra<R> provider) {
-        this.provider = provider;
+    public LoadDispatcherTask(Zebra<R> zebra) {
+        this.zebra = zebra;
     }
 
     @Override
     public void run() {
-        cacheInputStream = CacheController.getInstance().get(provider.getRequestKey());
+        cacheInputStream = CacheController.getInstance().get(zebra.getRequestKey());
         if (hasCache()){
             //优先使用缓存 和 使用缓存，但不使用过期数据
             if (getCacheMode() == CacheMode.CACHE_MODE_USE_CACHE_PRIORITY || getCacheMode() == CacheMode.CACHE_MODE_USE_CACHE_NOT_EXPIRED) {
@@ -85,10 +85,10 @@ public class LoadDispatcherTask<R> implements Runnable, LoadDiskDataTask.LoadDat
      * 网络中拉取
      */
     private void tryLoadNetData() {
-        if (provider == null) {
+        if (zebra == null) {
             return;
         }
-        LoadNetDataTask netTask = new LoadNetDataTask(provider);
+        LoadNetDataTask netTask = new LoadNetDataTask(zebra);
         netTask.setLoadDataListener(this);
         if (ZebraUtil.isUIThread()) {
             TaskHandler.getInstance().enqueue(netTask);
@@ -102,10 +102,10 @@ public class LoadDispatcherTask<R> implements Runnable, LoadDiskDataTask.LoadDat
      * [注] 当且仅当 网络加载失败或者网络数据解析失败时调用，否则会持续加载过期数据
      */
     private void tryLoadDiskData(boolean isLoadExpired) {
-        if (cacheInputStream == null || provider == null) {
+        if (cacheInputStream == null || zebra == null) {
             return;
         }
-        LoadDiskDataTask diskTask = new LoadDiskDataTask(provider,
+        LoadDiskDataTask diskTask = new LoadDiskDataTask(zebra,
                 cacheInputStream, isLoadExpired);
         diskTask.setLoadDataListener(this);
         diskTask.setLoadExpiredDataListener(this);
@@ -122,8 +122,8 @@ public class LoadDispatcherTask<R> implements Runnable, LoadDiskDataTask.LoadDat
      */
     private void notifyLoadPageDataSuccess(boolean isCache) {
         if (mTaskFinishListener != null) {
-            provider.setCache(isCache);
-            mTaskFinishListener.onSuccess(provider);
+            zebra.setCache(isCache);
+            mTaskFinishListener.onSuccess(zebra);
         }
     }
 
