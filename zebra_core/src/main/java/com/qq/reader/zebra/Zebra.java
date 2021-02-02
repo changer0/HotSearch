@@ -14,6 +14,7 @@ import com.qq.reader.zebra.log.Logger;
 import com.qq.reader.zebra.inter.INetQuestParams;
 import com.qq.reader.zebra.parser.SimpleGSONParser;
 import com.qq.reader.zebra.utils.CastUtils;
+import com.qq.reader.zebra.utils.MD5Utils;
 
 import java.util.List;
 /**
@@ -166,12 +167,19 @@ public class Zebra<R> {
         isCache = cache;
     }
 
+    /**
+     * 获取请求 Key 并编码
+     * @return
+     */
     public String getRequestKey() {
+        String originKey;
         INetQuestParams p = getNetQuestParams();
         if (TextUtils.equals(p.getRequestMethod(), "POST")) {
-            return p.getUrl() + p.getRequestMethod() + p.getRequestContent() + p.getContentType();
+            originKey = p.getUrl() + p.getRequestMethod() + p.getRequestContent() + p.getContentType();
+        } else {
+            originKey = p.getUrl();
         }
-        return p.getUrl();
+        return  MD5Utils.getSHA256(originKey);
     }
 
     public int getCacheMode() {

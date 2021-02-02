@@ -104,7 +104,8 @@ public class CacheController {
     }
 
     private String generateKey(String originKey) {
-        return MD5Utils.getSHA256(originKey);
+        //交由外面去做 MD5Utils.getSHA256(originKey);
+        return originKey;
     }
 
     /**获取缓存快照，需要 close 哟*/
