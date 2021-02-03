@@ -182,14 +182,14 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
     /**
      * 用于上报的信息
      */
-    private SparseArray mStatInfo;
+    private SparseArray statInfo;
 
     public void setStatInfo(SparseArray mStatInfo) {
-        this.mStatInfo = mStatInfo;
+        this.statInfo = mStatInfo;
     }
 
     public SparseArray getStatInfo() {
-        return mStatInfo;
+        return statInfo;
     }
 
     /**

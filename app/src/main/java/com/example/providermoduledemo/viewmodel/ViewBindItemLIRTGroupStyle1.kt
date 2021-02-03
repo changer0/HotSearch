@@ -16,8 +16,8 @@ class ViewBindItemLIRTGroupStyle1 : BaseViewBindItem<SampleResultBean.Item, Comm
 
     override fun bindView(holder: CommonViewHolder, activity: Activity): Boolean {
         val titleView = holder.getView<TitlePartView>(R.id.title) as TitlePartView
-        titleView.setPartViewModel(TitlePartViewModel(mItemData.title))
-        val bookList = mItemData?.bookList!!
+        titleView.setPartViewModel(TitlePartViewModel(itemData.title))
+        val bookList = itemData?.bookList!!
         val size = bookList.size
         if (size < 1) {
             return false

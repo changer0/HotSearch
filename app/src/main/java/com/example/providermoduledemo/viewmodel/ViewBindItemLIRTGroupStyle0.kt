@@ -20,23 +20,23 @@ class ViewBindItemLIRTGroupStyle0 : BaseViewBindItem<SampleResultBean.Item, Comm
 
     override fun bindView(holder: CommonViewHolder, activity: Activity): Boolean {
         val titleView = holder.getView<TitlePartView>(R.id.title) as TitlePartView
-        titleView.setPartViewModel(TitlePartViewModel(mItemData.title))
+        titleView.setPartViewModel(TitlePartViewModel(itemData.title))
 
         titleView.setOnClickListener {
             //缓存修改 示例!!!
-            mItemData.title = "这个标题数据已被修改!!!"
-            CacheController.getInstance().remove(mZebra.requestKey)
+            itemData.title = "这个标题数据已被修改!!!"
+            CacheController.getInstance().remove(zebra.requestKey)
             try {
-                val jsonObject = JSONObject(mZebra.jsonStr)
+                val jsonObject = JSONObject(zebra.jsonStr)
                 val itemObj = jsonObject.optJSONArray("list").getJSONObject(0)
                 itemObj.put("title", "这个标题数据已被修改!!!")
-                CacheController.getInstance().save(mZebra.requestKey, jsonObject.toString())
+                CacheController.getInstance().save(zebra.requestKey, jsonObject.toString())
             } catch (e: Exception) { }
             //重新绑定
             bindView(holder, activity)
         }
 
-        val bookList = mItemData?.bookList!!
+        val bookList = itemData?.bookList!!
         val size = bookList.size
         if (size < 1) {
             return false
