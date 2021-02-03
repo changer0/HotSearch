@@ -226,8 +226,8 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
             return;
         }
         mBookStoreView.pullDownView.setRefreshing(false);
-        int loadSignal = entity.provider.getLoadSignal();
-        Logger.d("onChanged", "是否为缓存: " + entity.provider.isCache());
+        int loadSignal = entity.zebra.getLoadSignal();
+        Logger.d("onChanged", "是否为缓存: " + entity.zebra.isCache());
         switch (loadSignal) {
             case LoadSignal.LOAD_SIGNAL_INIT:
                 onDataInit(entity);
@@ -247,11 +247,11 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
      */
     public void onDataInit(ObserverEntity entity) {
         if(!entity.isSuccess()
-                || entity.provider.getViewBindItems() == null
-                || entity.provider.getViewBindItems().isEmpty()) {
+                || entity.zebra.getViewBindItems() == null
+                || entity.zebra.getViewBindItems().isEmpty()) {
             mBookStoreView.showMutexStateView(mBookStoreView.dataErrorView);
         } else {
-            mAdapter.setNewData(entity.provider.getViewBindItems());
+            mAdapter.setNewData(entity.zebra.getViewBindItems());
             mAdapter.loadMoreComplete();
             mBookStoreView.showMutexStateView(mBookStoreView.recyclerView);
         }
@@ -272,11 +272,11 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
      */
     public void onDataAddMore(ObserverEntity entity) {
         if (entity.isSuccess()) {
-            if (entity.provider.getViewBindItems() == null
-                    || entity.provider.getViewBindItems().isEmpty()) {
+            if (entity.zebra.getViewBindItems() == null
+                    || entity.zebra.getViewBindItems().isEmpty()) {
                 mAdapter.loadMoreEnd();
             } else {
-                mAdapter.addData(entity.provider.getViewBindItems());
+                mAdapter.addData(entity.zebra.getViewBindItems());
                 mAdapter.loadMoreComplete();
             }
         } else {
