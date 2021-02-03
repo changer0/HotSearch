@@ -1,4 +1,4 @@
-# DataProvider 组件设计文档 
+# Zebra 组件设计文档 
 
 ## 特点
 
@@ -11,7 +11,7 @@
 请求示例：
 
 ``` kotlin
-DataProvider.with(SampleResponseBean::class.java)
+Zebra.with(SampleResponseBean::class.java)
     .url(url).get()
     .viewBindItemBuilder(SampleViewBindItemBuilder())
     .cacheConfig(cacheMode, SampleGetExpiredTime())
@@ -21,23 +21,22 @@ DataProvider.with(SampleResponseBean::class.java)
 
 ## 类图
 
-![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201107212401.png)
-
+![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20210203114658.png)
 ## 时序图
 
 ![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201107214219.png)
 
 ## 核心类
 
-**DataProviderConfig**
+**ZebraConfig**
 
-> DataProvider 配置类，需要在 Application 中进行配置！
+> Zebra 配置类，需要在 Application 中进行配置！
 
-- 配置 Provider 所需的 Application
-- 配置 Provider 所需的网络请求接口（Provider 本身并不支持网络请求，需要用户自行提供接口）
-- 配置 Provider 缓存路径
+- 配置 Zebra 所需的 Application
+- 配置 Zebra 所需的网络请求接口（Zebra 本身并不支持网络请求，需要用户自行提供接口）
+- 配置 Zebra 缓存路径
 
-**DataProvider**
+**Zebra**
 
 > 数据加载中间层
 
@@ -61,7 +60,7 @@ DataProvider.with(SampleResponseBean::class.java)
 
 **ILoader**
 
-用于加载 Provider 的开放接口，用户可通过实现该接口自由实现请求逻辑。目前框架内默认提供支持缓存的 SimpleProviderLoader
+用于加载 Zebra 的开放接口，用户可通过实现该接口自由实现请求逻辑。目前框架内默认提供支持缓存的 SimpleLoader
 
 **IParser**
 

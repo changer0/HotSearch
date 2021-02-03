@@ -5,9 +5,8 @@
 'Alice -> Bob: Another authentication Request
 'Alice <-- Bob: another authentication Response
 
-'SampleActivity -> DataProviderLoader: load(BaseDataProvider)
 
-SampleActivity -> DataProvider: DataProvider.with(SampleResponseBean.class)\n    .url(url)\n    .viewBindItemBuilder(new SampleViewBindItemBuilder())\n    .cacheConfig(cacheMode, new SampleGetExpiredTime())\n    .load()\n    .observe(this, this);
+SampleActivity -> Zebra: Zebra.with(SampleResponseBean.class)\n    .url(url)\n    .viewBindItemBuilder(new SampleViewBindItemBuilder())\n    .cacheConfig(cacheMode, new SampleGetExpiredTime())\n    .load()\n    .observe(this, this);
 
 SampleActivity -> SimpleProviderLoader : load()
 
@@ -17,25 +16,25 @@ LoadDispatcherTask -> LoadDispatcherTask: 获取缓存，根据缓存模式决�
 
 LoadDispatcherTask -> LoadNetDataTask: tryLoadNetData()
 
-LoadNetDataTask -> LoadNetDataTask: DataProviderConfig.getNetQuestAdapter().syncRequest()\n请求网络数据
+LoadNetDataTask -> LoadNetDataTask: ZebraConfig.getNetQuestAdapter().syncRequest()\n请求网络数据
 
-LoadNetDataTask -> DataProvider:  mZebra.parseData()
+LoadNetDataTask -> Zebra:  mZebra.parseData()
 
-LoadNetDataTask -> DataProvider:  mZebra.buildViewBindItem()
+LoadNetDataTask -> Zebra:  mZebra.buildViewBindItem()
 
 LoadNetDataTask -> LoadDispatcherTask: onLoadNetDataSuccess()
 
 LoadNetDataTask -> LoadDispatcherTask: onLoadNetDataFailed()
 
-LoadNetDataTask -> LoadNetDataTask: DataProviderLoader.getInstance().save()\n存入缓存
+LoadNetDataTask -> LoadNetDataTask: CacheController.getInstance().save()\n存入缓存
 
 
 LoadDispatcherTask -> LoadDiskDataTask: tryLoadDiskData()
 
 
-LoadDiskDataTask -> DataProvider:  mZebra.parseData()
+LoadDiskDataTask -> Zebra:  mZebra.parseData()
 
-LoadDiskDataTask -> DataProvider:  mZebra.buildViewBindItem()
+LoadDiskDataTask -> Zebra:  mZebra.buildViewBindItem()
 
 LoadDiskDataTask -> LoadDispatcherTask: onLoadDiskExpiredDataSuccess()
 

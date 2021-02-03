@@ -1,29 +1,29 @@
-# DataProvider 组件使用文档 
+# Zebra 组件使用文档 
 
 ## 1. 初始化配置
 
-进行初始化配置，DataProvider 本身并不提供网络请求能力，需要用户自行提供，**需在 Application 中进行初始化**：
+进行初始化配置，Zebra 本身并不提供网络请求能力，需要用户自行提供，**需在 Application 中进行初始化**：
 
 ``` kotlin
 class MyApp: Application() {
     private val client = OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build()
     override fun onCreate() {
         super.onCreate()
-        initDataProvider()
+        initZebra()
     }
 
     /**
-     * DataProvider 初始化
+     * Zebra 初始化
      */
-    private fun initDataProvider() {
-        val builder = DataProviderConfig.Builder(this) { params ->
+    private fun initZebra() {
+        val builder = ZebraConfig.Builder(this) { params ->
             val request = Request.Builder().url(params.url).get().build()
             val call = client.newCall(request)
             val response = call.execute()
             response.body()?.byteStream()
         }
         builder.setDebug(true)
-        DataProviderConfig.init(builder)
+        ZebraConfig.init(builder)
     }
 }
 ```
@@ -54,9 +54,9 @@ class ViewBindItemStyle0 : BaseViewBindItem<ListResponseDataBean.ListData, BaseV
 }
 ```
 
-## 3. 构建 DataProvider 请求数据
+## 3. 构建 Zebra 请求数据
 
-通过 DataProvider 链式调用配置所需参数，示例如下：
+通过 Zebra 链式调用配置所需参数，示例如下：
 
 ``` kotlin
 
@@ -73,7 +73,7 @@ class SampleActivity : ReaderBaseListProviderActivity(), Observer<ObserverEntity
         val url = String.format(SERVER_URL, index)
         Log.d(TAG, "loadData: url: $url")
 
-        DataProvider.with(SampleResponseBean::class.java)
+        Zebra.with(SampleResponseBean::class.java)
             .url(url)
             .viewBindItemBuilder(SampleViewBindItemBuilder())
             .cacheConfig(cacheMode, SampleGetExpiredTime())
