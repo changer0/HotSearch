@@ -5,9 +5,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.providermoduledemo.viewmodel.ViewBindItemLIRTGroupStyle0;
 import com.example.providermoduledemo.viewmodel.ViewBindItemLIRTGroupStyle1;
-import com.qq.reader.bookstore.CommonViewHolder;
-import com.qq.reader.zebra.BaseViewBindItem;
-import com.qq.reader.zebra.inter.IViewBindItemBuilder;
+import com.yuewen.reader.bookstore.CommonViewHolder;
+import com.yuewen.reader.zebra.BaseViewBindItem;
+import com.yuewen.reader.zebra.inter.IViewBindItemBuilder;
 
 import java.util.ArrayList;
 import java.util.List;

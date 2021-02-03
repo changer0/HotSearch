@@ -1,6 +1,6 @@
 package com.example.providermoduledemo.viewmodel
 
-import com.qq.reader.bookstore.part.IPartViewModel
+import com.yuewen.reader.bookstore.part.IPartViewModel
 
 /**
  * @author zhanglulu on 2020/10/23.

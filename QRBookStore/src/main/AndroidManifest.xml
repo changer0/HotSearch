@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.qq.reader.bookstore">
+    package="com.yuewen.reader.bookstore">
 
     <application>
         <activity
-            android:name="com.qq.reader.bookstore.CommonBookStoreActivity"
+            android:name="com.yuewen.reader.bookstore.CommonBookStoreActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:theme="@style/TitleTheme"
