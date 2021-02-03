@@ -294,8 +294,26 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
         return isFrameworkReady;
     }
 
-
     // 其他工具方法 end
+    //----------------------------------------------------------------------------------------------
+
+    //----------------------------------------------------------------------------------------------
+    // BaseFragment 抽象方法
+    @Override
+    public void onPreLoad() {
+
+    }
+
+    @Override
+    public void onLoading() {
+
+    }
+
+    @Override
+    public void onLoadFinished() {
+
+    }
+    // BaseFragment 抽象方法 end
     //----------------------------------------------------------------------------------------------
 
     //----------------------------------------------------------------------------------------------

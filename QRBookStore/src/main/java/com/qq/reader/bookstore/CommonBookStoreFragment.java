@@ -1,6 +1,8 @@
 package com.qq.reader.bookstore;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,9 @@ import com.qq.reader.zebra.utils.CastUtils;
  */
 @Route(path = BookStoreConstant.BOOK_STORE_COMMON_FRAGMENT)
 public class CommonBookStoreFragment<VM extends BaseBookStoreViewModel> extends BaseBookStoreFragment<CommonBookStoreView, VM> {
+    private Handler loadingHandler = new Handler(Looper.getMainLooper());
+
+    private Runnable loadingRunnable = () -> loadData(LoadSignal.LOAD_SIGNAL_INIT);
 
     @Override
     protected CommonBookStoreView onCreateBookStoreView() {
@@ -37,4 +42,16 @@ public class CommonBookStoreFragment<VM extends BaseBookStoreViewModel> extends 
     protected void onLaunchSuccess(View container, @NonNull Bundle enterBundle, @Nullable Bundle savedInstanceState) {
         loadData(LoadSignal.LOAD_SIGNAL_INIT);
     }
+
+    @Override
+    public void onLoading() {
+        loadingHandler.post(loadingRunnable);
+    }
+
+    @Override
+    public void cancleLoadData() {
+        super.cancleLoadData();
+        loadingHandler.removeCallbacks(loadingRunnable);
+    }
+
 }
