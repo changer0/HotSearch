@@ -21,8 +21,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.qq.reader.bookstore.view.BaseBookStoreView;
 import com.qq.reader.module.bookstore.qweb.fragment.BaseFragment;
-import com.qq.reader.zebra.loader.ObserverEntity;
-import com.qq.reader.zebra.log.Logger;
+import com.yuewen.reader.zebra.loader.ObserverEntity;
+import com.yuewen.reader.zebra.log.Logger;
 
 import org.jetbrains.annotations.NotNull;
 

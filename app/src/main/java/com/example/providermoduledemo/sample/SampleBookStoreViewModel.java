@@ -4,9 +4,9 @@ import android.os.Bundle;
 
 import com.qq.reader.bookstore.BaseBookStoreViewModel;
 import com.qq.reader.bookstore.define.LoadSignal;
-import com.qq.reader.zebra.Zebra;
-import com.qq.reader.zebra.ZebraLiveData;
-import com.qq.reader.zebra.cache.CacheMode;
+import com.yuewen.reader.zebra.Zebra;
+import com.yuewen.reader.zebra.ZebraLiveData;
+import com.yuewen.reader.zebra.cache.CacheMode;
 
 /**
  * @author zhanglulu

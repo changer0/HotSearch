@@ -3,7 +3,7 @@ package com.qq.reader.bookstore;
 import android.os.Bundle;
 import androidx.lifecycle.ViewModel;
 
-import com.qq.reader.zebra.ZebraLiveData;
+import com.yuewen.reader.zebra.ZebraLiveData;
 
 /**
  * 承载 Fragment 的 ViewModel, zebraLiveDataCache 可选使用

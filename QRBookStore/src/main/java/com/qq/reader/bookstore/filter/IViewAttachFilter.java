@@ -3,7 +3,7 @@ package com.qq.reader.bookstore.filter;
 
 import com.qq.reader.bookstore.CommonViewHolder;
 import com.qq.reader.bookstore.QuickRecyclerViewAdapter;
-import com.qq.reader.zebra.BaseViewBindItem;
+import com.yuewen.reader.zebra.BaseViewBindItem;
 
 /**
  * ViewAttach 过滤器

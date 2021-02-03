@@ -1,7 +1,7 @@
 package com.example.providermoduledemo
 
 import android.app.Application
-import com.qq.reader.zebra.ZebraConfig
+import com.yuewen.reader.zebra.ZebraConfig
 import com.yuewen.component.router.YWRouter
 import okhttp3.OkHttpClient
 import okhttp3.Request

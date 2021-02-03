@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qq.reader.bookstore.filter.IViewAttachFilter;
 import com.qq.reader.bookstore.filter.ViewAttachedChain;
-import com.qq.reader.zebra.BaseViewBindItem;
+import com.yuewen.reader.zebra.BaseViewBindItem;
 
 import java.util.List;
 

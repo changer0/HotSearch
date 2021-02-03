@@ -12,7 +12,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.qq.reader.bookstore.define.BookStoreConstant;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.qq.reader.bookstore.view.CommonBookStoreView;
-import com.qq.reader.zebra.utils.CastUtils;
+import com.yuewen.reader.zebra.utils.CastUtils;
 
 
 /**

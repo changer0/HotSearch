@@ -4,7 +4,7 @@ import android.view.View;
 
 import androidx.annotation.IdRes;
 
-import com.qq.reader.zebra.utils.CastUtils;
+import com.yuewen.reader.zebra.utils.CastUtils;
 
 /**
  * 书城工具方法

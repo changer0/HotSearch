@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.qq.reader.zebra.utils.CastUtils;
+import com.yuewen.reader.zebra.utils.CastUtils;
 
 /**
  * @author zhanglulu
