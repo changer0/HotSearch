@@ -4,9 +4,9 @@ package com.example.providermoduledemo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.providermoduledemo.sample.*
-import com.yuewen.reader.bookstore.BookStoreActivityLauncher
-import com.yuewen.reader.bookstore.LaunchParams
-import com.yuewen.reader.bookstore.define.BookStoreConstant
+import com.qq.reader.bookstore.BookStoreActivityLauncher
+import com.qq.reader.bookstore.LaunchParams
+import com.qq.reader.bookstore.define.BookStoreConstant
 
 import kotlinx.android.synthetic.main.activity_main.*
 

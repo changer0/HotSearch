@@ -1,7 +1,7 @@
 package com.example.providermoduledemo.sample;
 
-import com.yuewen.reader.zebra.parser.IParser;
-import com.yuewen.reader.zebra.utils.GSONUtil;
+import com.qq.reader.zebra.parser.IParser;
+import com.qq.reader.zebra.utils.GSONUtil;
 
 import java.util.ArrayList;
 import java.util.List;

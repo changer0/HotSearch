@@ -3,8 +3,8 @@ package com.example.providermoduledemo.viewmodel
 import android.app.Activity
 import com.example.providermoduledemo.R
 import com.example.providermoduledemo.sample.SampleResultBean
-import com.yuewen.reader.bookstore.CommonViewHolder
-import com.yuewen.reader.zebra.BaseViewBindItem
+import com.qq.reader.bookstore.CommonViewHolder
+import com.qq.reader.zebra.BaseViewBindItem
 
 /**
  * 左图右文 组合样式 1

@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.example.providermoduledemo.R
-import com.yuewen.reader.bookstore.part.IPartView
+import com.qq.reader.bookstore.part.IPartView
 import kotlinx.android.synthetic.main.view_model_item_title.view.*
 
 /**

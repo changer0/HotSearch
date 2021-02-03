@@ -1,6 +1,6 @@
 package com.example.providermoduledemo.sample
 
-import com.yuewen.reader.zebra.bean.BaseBean
+import com.qq.reader.zebra.bean.BaseBean
 
 class SampleResultBean : BaseBean() {
     var time: Long = 0

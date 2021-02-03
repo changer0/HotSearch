@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.example.providermoduledemo.R
-import com.yuewen.reader.bookstore.part.IPartView
+import com.qq.reader.bookstore.part.IPartView
 import kotlinx.android.synthetic.main.view_model_single_book.view.*
 
 /**
