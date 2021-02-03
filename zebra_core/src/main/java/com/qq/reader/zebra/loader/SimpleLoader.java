@@ -2,13 +2,10 @@ package com.qq.reader.zebra.loader;
 
 import com.qq.reader.zebra.Zebra;
 import com.qq.reader.zebra.ZebraLiveData;
-import com.qq.reader.zebra.cache.CacheController;
 import com.qq.reader.zebra.define.ZebraConstants;
 import com.qq.reader.zebra.log.Logger;
 import com.qq.reader.zebra.task.TaskHandler;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Locale;
 
 /**
@@ -56,7 +53,7 @@ public class SimpleLoader<R> implements ILoader<R> {
      */
     public void notifyLoadPageDataFailed(Zebra<R> p, Throwable e) {
         ObserverEntity observerEntity = new ObserverEntity();
-        observerEntity.provider = p;
+        observerEntity.zebra = p;
         observerEntity.throwable = e;
         observerEntity.state = ZebraConstants.ZEBRA_DATA_ERROR;
         liveData.postValue(observerEntity);
@@ -69,7 +66,7 @@ public class SimpleLoader<R> implements ILoader<R> {
      */
     public void notifyLoadPageDataSuccess(Zebra<R> p) {
         ObserverEntity observerEntity = new ObserverEntity();
-        observerEntity.provider = p;
+        observerEntity.zebra = p;
         observerEntity.state = ZebraConstants.ZEBRA_DATA_SUCCESS;
         liveData.postValue(observerEntity);
         syncObserverEntity = observerEntity;

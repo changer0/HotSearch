@@ -26,34 +26,34 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
     /**
      * 当前 Item 多对应的 Zebra
      */
-    protected Zebra<?> mZebra;
+    protected Zebra<?> zebra;
 
     /**
      * 当前 Item 数据
      */
-    protected T mItemData;
+    protected T itemData;
 
     /**
      * RecyclerView Holder
      */
-    private WeakReference<Holder> mHolderWeakRef;
+    private WeakReference<Holder> holderWeakRef;
 
     /**
      * Item 在 List 中的索引
      * 默认修改为-1, 当-1时说明并没有显示出来
      */
-    protected int mIndex = -1;
+    protected int index = -1;
 
     public BaseViewBindItem() {
 
     }
 
     public void setIndex(int pos) {
-        mIndex = pos;
+        index = pos;
     }
 
     public void setZebra(Zebra<?> zebra) {
-        mZebra = zebra;
+        this.zebra = zebra;
     }
 
     /**
@@ -66,7 +66,7 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
     }
 
     public int getIndex() {
-        return mIndex;
+        return index;
     }
 
     /**
@@ -75,12 +75,12 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
      * @param holder
      */
     public void attachView(final Holder holder) throws Exception {
-        mHolderWeakRef = new WeakReference<>(holder);
+        holderWeakRef = new WeakReference<>(holder);
 
         if (holder.itemView.getVisibility() == View.GONE) {
             holder.itemView.setVisibility(View.VISIBLE);
         }
-        Logger.d(TAG, "attachView: isDisplay: " + isDisplay + " mIndex:" + mIndex);
+        Logger.d(TAG, "attachView: isDisplay: " + isDisplay + " mIndex:" + index);
         if (isDisplay){
             //只有当前页面显示才会曝光
             try {
@@ -118,8 +118,8 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
      * {@link #isSupportHideItem()}
      */
     public void hideItemView() {
-        if (mHolderWeakRef != null && isSupportHideItem()) {
-            Holder holder = mHolderWeakRef.get();
+        if (holderWeakRef != null && isSupportHideItem()) {
+            Holder holder = holderWeakRef.get();
             if (holder != null) {
                 RecyclerView.LayoutParams param = new RecyclerView.LayoutParams(0,0);
                 holder.itemView.setLayoutParams(param);
@@ -133,7 +133,7 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
      * @param
      */
     public void setData(T bean ){
-        mItemData = bean;
+        itemData = bean;
     }
 
     /**
@@ -142,7 +142,7 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
      * @param
      */
     public T getData() {
-        return mItemData;
+        return itemData;
     }
 
     /**
@@ -151,10 +151,10 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
     @Nullable
     private Activity getActivity() {
         Activity activity = null;
-        if (mHolderWeakRef == null) {
+        if (holderWeakRef == null) {
             return null;
         }
-        Holder baseViewHolder = mHolderWeakRef.get();
+        Holder baseViewHolder = holderWeakRef.get();
         if (baseViewHolder == null) {
             return null;
         }
