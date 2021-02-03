@@ -26,7 +26,11 @@ public class CommonBookStoreFragment<VM extends BaseBookStoreViewModel> extends 
 
     @Override
     protected Class<VM> onCreateBookStoreViewModel(@NonNull Bundle enterBundle) {
-        return CastUtils.cast(mLaunchParams.getViewModelClass());
+        Class<? extends BaseBookStoreViewModel> viewModelClass = mLaunchParams.getViewModelClass();
+        if (viewModelClass == null) {
+            throw new RuntimeException("启动通用 Fragment 时,需在 LaunchParams 中传递 viewModelClass!!!");
+        }
+        return CastUtils.cast(viewModelClass);
     }
 
     @Override

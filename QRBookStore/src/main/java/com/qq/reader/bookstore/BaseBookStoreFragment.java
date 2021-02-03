@@ -78,11 +78,11 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
             try {
                 launchSuccess(view, savedInstanceState);
             } catch (Exception e) {
-                launchFailed();
+                launchFailed(e.getMessage());
                 e.printStackTrace();
             }
         } else {
-            launchFailed();
+            launchFailed("initEnterData 失败");
         }
     }
 
@@ -108,10 +108,10 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
     /**
      * Fragment 首次启动失败
      */
-    protected void launchFailed() {
+    protected void launchFailed(String msg) {
         mBookStoreView.showMutexStateView(mBookStoreView.dataErrorView);
         if (BuildConfig.DEBUG) {
-            Toast.makeText(mContext, "启动 " + this.getClass().getName() + " 发生错误，未能成功初始化 initEnterData", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "启动 " + this.getClass().getName() + " 发生错误: " + msg, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -122,7 +122,6 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
         analyzingFragmentArguments();
         mViewModel = new ViewModelProvider(this).get(onCreateBookStoreViewModel(mEnterBundle));
         onLaunchSuccess(view, mEnterBundle, savedInstanceState);
-        //onLaunchSuccess 之后调用 onCreateBookStoreViewModel, 用户主动解析 mEnterBundle
     }
 
     // Fragment 配置 end
