@@ -28,21 +28,21 @@ public class ZebraConfig {
 
     public static String getCacheDir() {
         if (cacheDir == null) {
-            throw new RuntimeException("使用前 请在 Application 中执行 DataProviderConfig.init");
+            throw new RuntimeException("使用前 请在 Application 中执行 ZebraConfig.init");
         }
         return cacheDir;
     }
 
     public static Application getApplication() {
         if (application == null) {
-            throw new RuntimeException("使用前 请在 Application 中执行 DataProviderConfig.init");
+            throw new RuntimeException("使用前 请在 Application 中执行 ZebraConfig.init");
         }
         return application;
     }
 
     public static NetQuestAdapter getNetQuestAdapter() {
         if (netQuestAdapter == null) {
-            throw new RuntimeException("使用前 请在 Application 中执行 DataProviderConfig.init");
+            throw new RuntimeException("使用前 请在 Application 中执行 ZebraConfig.init");
         }
         return netQuestAdapter;
     }
