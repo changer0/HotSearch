@@ -236,10 +236,10 @@ public class Zebra<R> {
      * @param <R>
      */
     public static class RequestBuilder<R> {
-        private Zebra<R> provider;
+        private Zebra<R> zebra;
 
         private RequestBuilder(Class<R> responseClass) {
-            this.provider = new Zebra<>(responseClass);
+            this.zebra = new Zebra<>(responseClass);
         }
 
         /**
@@ -294,7 +294,7 @@ public class Zebra<R> {
          * 解析器，提供默认解析器 SimpleGSONParser
          */
         public RequestBuilder<R> parser(IParser<R> parser) {
-            provider.parser = CastUtils.cast(parser);
+            zebra.parser = CastUtils.cast(parser);
             return this;
         }
 
@@ -302,7 +302,7 @@ public class Zebra<R> {
          * ViewBindItem 构建器
          */
         public RequestBuilder<R> viewBindItemBuilder(IViewBindItemBuilder<R> builder) {
-            provider.builder = builder;
+            zebra.builder = builder;
             return this;
         }
 
@@ -310,8 +310,8 @@ public class Zebra<R> {
          * 缓存配置
          */
         public RequestBuilder<R> cacheConfig(int cacheMode, IGetExpiredTime<R> expiredTime) {
-            provider.cacheMode = cacheMode;
-            provider.expiredTime = expiredTime;
+            zebra.cacheMode = cacheMode;
+            zebra.expiredTime = expiredTime;
             return this;
         }
 
@@ -328,8 +328,8 @@ public class Zebra<R> {
          * @return
          */
         public ZebraLiveData load(int loadSignal) {
-            provider.loadSignal = loadSignal;
-            provider.netQuestParams = new INetQuestParams() {
+            zebra.loadSignal = loadSignal;
+            zebra.netQuestParams = new INetQuestParams() {
                 @Override
                 public String getUrl() {
                     return url;
@@ -351,7 +351,21 @@ public class Zebra<R> {
                     return needGzip;
                 }
             };
-            return loader.loadData(provider);
+            checkNecessaryParams();
+            return loader.loadData(zebra);
+        }
+
+        /**
+         * 检查必传参数
+         */
+        private void checkNecessaryParams() {
+            if (TextUtils.isEmpty(zebra.netQuestParams.getUrl())) {
+                throw new RuntimeException("检查传入的 url 是否为空 ？？？");
+            }
+
+            if (zebra.builder == null) {
+                throw new RuntimeException("检查是否传入 ViewBindItemBuilder ？？？");
+            }
         }
     }
 }

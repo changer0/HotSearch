@@ -11,7 +11,8 @@ import org.json.JSONObject
 /**
  * 左图右文 组合样式 0
  */
-class ViewBindItemLIRTGroupStyle0 : BaseViewBindItem<SampleResultBean.Item, CommonViewHolder>() {
+class ViewBindItemLIRTGroupStyle0(itemData: SampleResultBean.Item?) :
+    BaseViewBindItem<SampleResultBean.Item, CommonViewHolder>(itemData) {
 
     override fun getResLayoutId(): Int {
         return R.layout.view_model_data_item_style0

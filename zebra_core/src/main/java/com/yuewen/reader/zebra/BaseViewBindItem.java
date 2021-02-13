@@ -44,8 +44,8 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
      */
     protected int index = -1;
 
-    public BaseViewBindItem() {
-
+    public BaseViewBindItem(T itemData) {
+        this.itemData = itemData;
     }
 
     public void setIndex(int pos) {
@@ -89,6 +89,9 @@ public abstract class BaseViewBindItem<T, Holder extends RecyclerView.ViewHolder
                 Logger.e(TAG, "exposeDataItem 抛出异常！" + this);
                 e.printStackTrace();
             }
+        }
+        if (itemData == null) {
+            throw new RuntimeException("检查 ViewBindItemBuilder 是否已经调用 setData ???");
         }
         Activity activity = getActivity();
         if (activity == null || !bindView(holder, activity)) {

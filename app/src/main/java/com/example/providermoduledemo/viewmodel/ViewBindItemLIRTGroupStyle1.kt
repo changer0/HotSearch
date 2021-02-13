@@ -9,7 +9,8 @@ import com.yuewen.reader.zebra.BaseViewBindItem
 /**
  * 左图右文 组合样式 1
  */
-class ViewBindItemLIRTGroupStyle1 : BaseViewBindItem<SampleResultBean.Item, CommonViewHolder>() {
+class ViewBindItemLIRTGroupStyle1(itemData: SampleResultBean.Item?) :
+    BaseViewBindItem<SampleResultBean.Item, CommonViewHolder>(itemData) {
     override fun getResLayoutId(): Int {
         return R.layout.view_model_data_item_style1
     }
