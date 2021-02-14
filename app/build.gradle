@@ -86,7 +86,7 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.4'
     implementation project(':List')
-    implementation project(':BusinessBasic')
+    implementation project(':Basic')
     implementation project(":YWRouter_Android")
     if (!isSourceBuildZebra.toBoolean()) {
         implementation project(':zebra_core')

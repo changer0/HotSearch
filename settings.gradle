@@ -2,6 +2,6 @@ include ':zebra_core'
 
 //Demo 模块
 include ':YWRouter_Android'
-include ':BusinessBasic'
+include ':Basic'
 include ':List'
 include ':app'
