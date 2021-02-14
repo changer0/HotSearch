@@ -95,7 +95,7 @@ public class Zebra<R> {
     }
 
     public boolean isExpired() {
-        if (expiredTime == null) {
+        if (expiredTime == null || mData == null) {
             Logger.w(TAG, "未配置过期时间，数据将不会缓存！");
             return true;
         }

@@ -4,5 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:empty="http://schemas.android.com/apk/res-auto"
     android:text="加载失败"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
