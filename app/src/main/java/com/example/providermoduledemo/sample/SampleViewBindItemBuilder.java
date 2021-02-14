@@ -25,14 +25,13 @@ public class SampleViewBindItemBuilder implements IViewBindItemBuilder<SampleRes
             BaseViewBindItem<SampleResultBean.Item, CommonViewHolder> bindViewItem = null;
             switch (item.getStyle()) {
                 case 0:
-                    bindViewItem = new ViewBindItemLIRTGroupStyle0();
+                    bindViewItem = new ViewBindItemLIRTGroupStyle0(item);
                     break;
                 case 1:
-                    bindViewItem = new ViewBindItemLIRTGroupStyle1();
+                    bindViewItem = new ViewBindItemLIRTGroupStyle1(item);
                     break;
             }
             if (bindViewItem != null) {
-                bindViewItem.setData(item);
                 viewBindItemList.add(bindViewItem);
             }
         }

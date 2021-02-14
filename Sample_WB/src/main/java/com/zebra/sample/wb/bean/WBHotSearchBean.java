@@ -14,6 +14,8 @@ public class WBHotSearchBean {
 
     private int code;
     private String msg;
+    private double expired_time;
+
     private List<Result> result;
     public void setCode(int code) {
          this.code = code;
@@ -36,4 +38,11 @@ public class WBHotSearchBean {
          return result;
      }
 
+    public double getExpired_time() {
+        return expired_time;
+    }
+
+    public void setExpired_time(double expired_time) {
+        this.expired_time = expired_time;
+    }
 }
