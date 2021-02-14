@@ -21,15 +21,15 @@
     <application
         android:name=".MyApp"
         android:allowBackup="true"
-        android:icon="@drawable/sina_weibo"
+        android:icon="@drawable/ic_launch"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/sina_weibo"
+        android:roundIcon="@drawable/ic_launch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
-            android:label="微博热搜"
+            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateHidden">

@@ -16,14 +16,15 @@
             android:layout_height="44dp"
             android:transitionName="anim_weibo_img"
             android:layout_marginStart="10dp"
-            android:src="@drawable/sina_weibo"
+            android:src="@drawable/ic_launch"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:scaleType="centerInside"/>
 
         <RelativeLayout
             android:id="@+id/ll_profile_header_title"
-            android:layout_width="fill_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true">
 
@@ -38,7 +39,10 @@
                 android:textColor="#000"
                 android:textStyle="bold"
                 android:textSize="18dp"
-                tools:text="test" />
+                android:maxLines="1"
+                android:maxWidth="280dp"
+                android:ellipsize="end"
+                tools:text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" />
 
             <ImageView
                 android:id="@+id/profile_header_title_sort"

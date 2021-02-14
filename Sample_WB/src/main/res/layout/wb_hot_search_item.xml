@@ -17,7 +17,7 @@
             android:id="@+id/hotIndex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#D900FF"
+            android:textColor="@color/colorAccent"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +31,7 @@
             android:maxLines="1"
             android:paddingStart="10dp"
             android:paddingEnd="5dp"
-            android:textColor="#0048FF"
+            android:textColor="@color/item_title"
             android:textSize="15dp"
             android:transitionName="anim_weibo_item"
             app:layout_constraintStart_toEndOf="@id/hotIndex"
@@ -45,7 +45,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/hotTag"
             tools:text="1232354"
-            android:textColor="#534B4E"
+            android:textColor="@color/item_title"
             android:layout_marginEnd="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -56,7 +56,7 @@
 
             android:id="@+id/hotTag"
             tools:text="荐"
-            android:textColor="#E91E63"
+            android:textColor="@color/item_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
