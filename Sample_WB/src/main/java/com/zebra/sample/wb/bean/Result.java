@@ -9,7 +9,7 @@ package com.zebra.sample.wb.bean;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Result {
+public class Result extends BaseBean{
     private String url;
     private String title;
     private String hotNum;
