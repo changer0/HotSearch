@@ -1,7 +1,7 @@
 /**
   * Copyright 2021 bejson.com 
   */
-package com.zebra.sample.wb.bean;
+package com.lulu.hotsearch.wb.bean;
 import java.util.List;
 
 /**

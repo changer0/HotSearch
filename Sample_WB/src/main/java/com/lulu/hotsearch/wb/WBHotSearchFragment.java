@@ -1,6 +1,5 @@
-package com.zebra.sample.wb;
+package com.lulu.hotsearch.wb;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 

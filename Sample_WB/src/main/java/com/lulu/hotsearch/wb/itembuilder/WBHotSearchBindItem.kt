@@ -1,16 +1,15 @@
-package com.zebra.sample.wb.itembuilder
+package com.lulu.hotsearch.wb.itembuilder
 
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.widget.TextView
-import android.widget.Toast
 import com.qq.reader.bookstore.CommonViewHolder
 import com.yuewen.reader.zebra.BaseViewBindItem
-import com.zebra.sample.wb.Constant
-import com.zebra.sample.wb.R
-import com.zebra.sample.wb.WebActivity
-import com.zebra.sample.wb.bean.Result
+import com.lulu.hotsearch.wb.Constant
+import com.lulu.hotsearch.wb.R
+import com.lulu.hotsearch.wb.WebActivity
+import com.lulu.hotsearch.wb.bean.Result
 
 class WBHotSearchBindItem(itemData: Result?) :
     BaseViewBindItem<Result, CommonViewHolder>(itemData) {

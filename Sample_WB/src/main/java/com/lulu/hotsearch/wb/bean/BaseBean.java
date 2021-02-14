@@ -1,4 +1,4 @@
-package com.zebra.sample.wb.bean;
+package com.lulu.hotsearch.wb.bean;
 
 /**
  * Author: zhanglulu

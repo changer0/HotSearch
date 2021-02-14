@@ -1,4 +1,4 @@
-package com.zebra.sample.wb
+package com.lulu.hotsearch.wb
 
 import android.app.Application
 import com.yuewen.reader.zebra.ZebraConfig

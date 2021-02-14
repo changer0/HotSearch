@@ -1,4 +1,4 @@
-package com.zebra.sample.wb
+package com.lulu.hotsearch.wb
 
 object Constant {
     const val WEB_URL = "web_url"

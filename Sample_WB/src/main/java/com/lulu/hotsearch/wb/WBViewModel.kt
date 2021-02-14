@@ -1,4 +1,4 @@
-package com.zebra.sample.wb
+package com.lulu.hotsearch.wb
 
 import android.os.Bundle
 import com.qq.reader.bookstore.BaseBookStoreViewModel
@@ -6,8 +6,8 @@ import com.qq.reader.bookstore.define.LoadSignal
 import com.yuewen.reader.zebra.Zebra
 import com.yuewen.reader.zebra.ZebraLiveData
 import com.yuewen.reader.zebra.cache.CacheMode
-import com.zebra.sample.wb.bean.WBHotSearchBean
-import com.zebra.sample.wb.itembuilder.WBViewBindItemBuilder
+import com.lulu.hotsearch.wb.bean.WBHotSearchBean
+import com.lulu.hotsearch.wb.itembuilder.WBViewBindItemBuilder
 
 /**
  * 微博 ViewModel

@@ -1,7 +1,7 @@
 /**
   * Copyright 2021 bejson.com 
   */
-package com.zebra.sample.wb.bean;
+package com.lulu.hotsearch.wb.bean;
 
 /**
  * Auto-generated: 2021-02-13 11:22:35

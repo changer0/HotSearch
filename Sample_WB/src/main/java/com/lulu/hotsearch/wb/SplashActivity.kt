@@ -1,14 +1,12 @@
-package com.zebra.sample.wb
+package com.lulu.hotsearch.wb
 
 import android.app.ActivityOptions
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
 import com.qq.reader.activity.ReaderBaseActivity
 import com.qq.reader.bookstore.BookStoreActivityLauncher
 import com.qq.reader.bookstore.LaunchParams
-import com.yuewen.reader.zebra.log.Logger
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val TAG = "SplashActivity"

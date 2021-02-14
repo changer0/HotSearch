@@ -1,7 +1,7 @@
-package com.zebra.sample.wb
+package com.lulu.hotsearch.wb
 
 import com.yuewen.reader.zebra.inter.IGetExpiredTime
-import com.zebra.sample.wb.bean.WBHotSearchBean
+import com.lulu.hotsearch.wb.bean.WBHotSearchBean
 
 class WBGetExpiredTime : IGetExpiredTime<WBHotSearchBean> {
     override fun getExpiredTime(mData: WBHotSearchBean): Long {

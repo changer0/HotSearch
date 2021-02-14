@@ -1,9 +1,9 @@
-package com.zebra.sample.wb.itembuilder
+package com.lulu.hotsearch.wb.itembuilder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.yuewen.reader.zebra.BaseViewBindItem
 import com.yuewen.reader.zebra.inter.IViewBindItemBuilder
-import com.zebra.sample.wb.bean.WBHotSearchBean
+import com.lulu.hotsearch.wb.bean.WBHotSearchBean
 
 class WBViewBindItemBuilder: IViewBindItemBuilder<WBHotSearchBean> {
     override fun buildViewBindItem(data: WBHotSearchBean): MutableList<BaseViewBindItem<*, out RecyclerView.ViewHolder>> {
