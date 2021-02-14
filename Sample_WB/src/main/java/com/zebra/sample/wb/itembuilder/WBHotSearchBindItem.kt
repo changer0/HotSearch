@@ -1,6 +1,7 @@
 package com.zebra.sample.wb.itembuilder
 
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
 import android.widget.TextView
 import android.widget.Toast
@@ -30,7 +31,9 @@ class WBHotSearchBindItem(itemData: Result?) :
             val intent = Intent(activity, WebActivity::class.java)
             intent.putExtra(Constant.WEB_URL, itemData.url)
             intent.putExtra(Constant.WEB_TITLE, itemData.title)
-            activity.startActivity(intent)
+            activity.startActivity(intent,
+                ActivityOptions.makeSceneTransitionAnimation(activity, hotTitle, "anim_weibo_item")
+                .toBundle())
             activity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         }
         return true

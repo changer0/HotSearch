@@ -33,6 +33,7 @@
             android:paddingEnd="5dp"
             android:textColor="#0048FF"
             android:textSize="15dp"
+            android:transitionName="anim_weibo_item"
             app:layout_constraintStart_toEndOf="@id/hotIndex"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

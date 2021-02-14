@@ -21,7 +21,7 @@ class SplashActivity : ReaderBaseActivity() {
                     .setPullRefreshEnable(true)
                     .build(),
                 //转场动画 https://blog.csdn.net/w630886916/article/details/78319502
-                ActivityOptions.makeSceneTransitionAnimation(this, findViewById(R.id.img), "weibo")
+                ActivityOptions.makeSceneTransitionAnimation(this, findViewById(R.id.img), "anim_weibo_img")
                     .toBundle())
             finish()
         }, 500)
