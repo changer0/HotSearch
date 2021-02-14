@@ -43,4 +43,10 @@ public class ReaderBaseActivity extends FragmentActivity {
         }
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        InputMethodManagerLastSrvView.fixLeak(this);
+    }
 }
