@@ -16,7 +16,7 @@ class SplashActivity : ReaderBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        text.text = getString(R.string.splash_text, getString(R.string.app_name))
+        text.text = getString(R.string.splash_text)
 
         handler.postDelayed({
             BookStoreActivityLauncher.launch(this, Constant.WB_HOT_SEARCH,
