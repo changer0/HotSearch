@@ -23,14 +23,32 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+    signingConfigs {
+        debug {
+            keyAlias 'Lulu'
+            keyPassword '941007zll'
+            storeFile file('sign.jks')
+            storePassword '941007zll'
+        }
+        release {
+            keyAlias 'Lulu'
+            keyPassword '941007zll'
+            storeFile file('sign.jks')
+            storePassword '941007zll'
+        }
+
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release //问题出在这里，打包没有应用签名
         }
     }
     compileOptions {

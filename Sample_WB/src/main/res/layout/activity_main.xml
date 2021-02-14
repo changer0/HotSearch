@@ -23,7 +23,7 @@
         android:id="@+id/text"
         app:layout_constraintTop_toBottomOf="@+id/img"
         android:gravity="center"
-        android:text="欢迎使用微博热搜"
+        android:text="只给你想要的热搜"
         android:layout_marginTop="10dp"
         android:textColor="#7D7D7D"
         android:layout_width="match_parent"
