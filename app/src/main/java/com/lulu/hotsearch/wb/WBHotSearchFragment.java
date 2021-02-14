@@ -35,14 +35,21 @@ public class WBHotSearchFragment extends BaseBookStoreFragment<WBHotSearchView, 
     @Override
     protected void onLaunchSuccess(@NonNull View container, @NonNull Bundle enterBundle, @Nullable Bundle savedInstanceState) {
         loadData(LoadSignal.LOAD_SIGNAL_INIT);
-
+        //https://www.cnblogs.com/sanfeng4476/p/6112284.html
     }
 
     @Override
     public void onDataInit(ObserverEntity entity) {
         super.onDataInit(entity);
-        WBHotSearchBean bean = entity.zebra.getData();
+        configUpdateTime(entity.zebra.getData());
+    }
 
+
+    /**
+     * 配置更新时间
+     * @param bean
+     */
+    private void configUpdateTime(WBHotSearchBean bean) {
         //添加更新时间
         mBookStoreView.titleRightTime.setVisibility(View.VISIBLE);
         CharSequence timeStr = DateFormat.format("kk:mm:ss", (long) bean.getTime_stamp());
