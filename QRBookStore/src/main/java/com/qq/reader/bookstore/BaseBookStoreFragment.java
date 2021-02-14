@@ -118,7 +118,7 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
     /**
      * Fragment 启动成功
      */
-    protected void launchSuccess(View view, @Nullable Bundle savedInstanceState) {
+    protected void launchSuccess(@NonNull View view, @Nullable Bundle savedInstanceState) {
         analyzingFragmentArguments();
         mViewModel = new ViewModelProvider(this).get(onCreateBookStoreViewModel(mEnterBundle));
         onLaunchSuccess(view, mEnterBundle, savedInstanceState);
@@ -160,22 +160,22 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
      * ActionBar 的配置
      */
     protected void configActionBar() {
-        if (mBookStoreView.actionBarBackView == null
-                || mBookStoreView.actionBarContainer == null
-                || mBookStoreView.actionBarTitle == null) {
-            return;
+        if (mBookStoreView.actionBarBackView != null) {
+            mBookStoreView.actionBarBackView.setOnClickListener(v -> {
+                FragmentActivity activity = getActivity();
+                if (activity != null) {
+                    activity.finish();
+                }
+            });
         }
-        mBookStoreView.actionBarBackView.setOnClickListener(v -> {
-            FragmentActivity activity = getActivity();
-            if (activity != null) {
-                activity.finish();
+        if (mBookStoreView.actionBarContainer != null
+                && mBookStoreView.actionBarTitle != null) {
+            if (!TextUtils.isEmpty(mLaunchParams.getTitle())) {
+                mBookStoreView.actionBarTitle.setText(mLaunchParams.getTitle());
+                mBookStoreView.actionBarContainer.setVisibility(View.VISIBLE);
+            } else {
+                mBookStoreView.actionBarContainer.setVisibility(View.GONE);
             }
-        });
-        if (!TextUtils.isEmpty(mLaunchParams.getTitle())) {
-            mBookStoreView.actionBarTitle.setText(mLaunchParams.getTitle());
-            mBookStoreView.actionBarContainer.setVisibility(View.VISIBLE);
-        } else {
-            mBookStoreView.actionBarContainer.setVisibility(View.GONE);
         }
     }
 
@@ -333,5 +333,5 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
     /**
      * Fragment 成功启动, 交互逻辑可在后续处理
      */
-    protected abstract void onLaunchSuccess(View container,@NonNull Bundle enterBundle, @Nullable Bundle savedInstanceState);
+    protected abstract void onLaunchSuccess(@NonNull View container,@NonNull Bundle enterBundle, @Nullable Bundle savedInstanceState);
 }

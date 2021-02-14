@@ -31,7 +31,7 @@ class MyApp: Application() {
             val response = call.execute()
             response.body()?.byteStream()
         }
-        builder.setDebug(true)
+        builder.setDebug(BuildConfig.DEBUG)
         ZebraConfig.init(builder)
     }
 }

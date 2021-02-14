@@ -39,7 +39,7 @@ public class CommonBookStoreFragment<VM extends BaseBookStoreViewModel> extends 
     }
 
     @Override
-    protected void onLaunchSuccess(View container, @NonNull Bundle enterBundle, @Nullable Bundle savedInstanceState) {
+    protected void onLaunchSuccess(@NonNull View container, @NonNull Bundle enterBundle, @Nullable Bundle savedInstanceState) {
         loadData(LoadSignal.LOAD_SIGNAL_INIT);
     }
 

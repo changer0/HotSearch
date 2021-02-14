@@ -31,6 +31,7 @@ class WBHotSearchBindItem(itemData: Result?) :
             intent.putExtra(Constant.WEB_URL, itemData.url)
             intent.putExtra(Constant.WEB_TITLE, itemData.title)
             activity.startActivity(intent)
+            activity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         }
         return true
     }
