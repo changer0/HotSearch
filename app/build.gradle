@@ -7,21 +7,37 @@ android {
     compileSdkVersion gradle_build_versions.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.example.providermoduledemo"
+        applicationId "com.lulu.hotsearch"
         minSdkVersion gradle_build_versions.minSdkVersion
         targetSdkVersion gradle_build_versions.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+
+        versionCode app_version_code.toInteger()
+        versionName app_version_name.toString().trim()
+
+        println("versionName：" + app_version_name.toString().trim())
+        println("versionName：" + app_version_code.toInteger())
 
         // Enabling multidex support.
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
+    }
+
+
+    signingConfigs {
+        debug {
+            keyAlias 'Lulu'
+            keyPassword '941007zll'
+            storeFile file('sign.jks')
+            storePassword '941007zll'
         }
+        release {
+            keyAlias 'Lulu'
+            keyPassword '941007zll'
+            storeFile file('sign.jks')
+            storePassword '941007zll'
+        }
+
     }
 
     buildTypes {
@@ -30,8 +46,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release //问题出在这里，打包没有应用签名
         }
     }
     compileOptions {
@@ -42,6 +59,9 @@ android {
         flatDir {
             dirs '../app/libs/'
         }
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 
 }
@@ -57,6 +77,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     api(name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
     //glide 库
     implementation 'com.github.bumptech.glide:glide:3.7.0'
@@ -71,11 +94,12 @@ dependencies {
         implementation project(':zebra_core')
     }
 
-    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
+    kapt 'com.alibaba:arouter-compiler:1.5.1'
 }
 
 kapt {
     arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
     }
 }
 
