@@ -59,16 +59,16 @@ dependencies {
     compileOnly(name: 'BaseRecyclerViewAdapterHelper-2.9.30', ext: 'aar')
 
 
-    //TODO: 暂时使用系统的 RefreshLayout !!! 等 QRBusinessBasic 下沉后使用
+    //TODO: 暂时使用系统的 RefreshLayout !!! 等 BusinessBasic 下沉后使用
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
     if (isSourceBuildZebra.toBoolean()) {
         implementation project(":zebra:zebra_core")
-        implementation project(":zebra:QRBusinessBasic")
+        implementation project(":zebra:BusinessBasic")
         implementation project(":zebra:YWRouter_Android")
     } else {
         implementation project(":zebra_core")
-        implementation project(":QRBusinessBasic")
+        implementation project(":BusinessBasic")
         implementation project(":YWRouter_Android")
     }
 
