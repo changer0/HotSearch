@@ -4,5 +4,5 @@ include ':zebra_core'
 //Demo 模块
 include ':YWRouter_Android'
 include ':BusinessBasic'
-include ':QRBookStore'
+include ':ListModule'
 include ':app'

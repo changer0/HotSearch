@@ -85,7 +85,7 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     implementation 'com.google.code.gson:gson:2.4'
-    implementation project(":QRBookStore")
+    implementation project(':ListModule')
     implementation project(':BusinessBasic')
     implementation project(":YWRouter_Android")
     if (!isSourceBuildZebra.toBoolean()) {
