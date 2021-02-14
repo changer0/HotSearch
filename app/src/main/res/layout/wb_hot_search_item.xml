@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorAccent"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="1" />
@@ -35,7 +35,7 @@
             android:paddingStart="10dp"
             android:paddingEnd="5dp"
             android:textColor="@color/item_title"
-            android:textSize="15dp"
+            android:textSize="@dimen/text_size_3"
             android:transitionName="anim_weibo_item"
             app:layout_constraintStart_toEndOf="@id/hotIndex"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,6 +49,7 @@
             app:layout_constraintEnd_toStartOf="@id/hotTag"
             tools:text="1232354"
             android:textColor="@color/item_title"
+            android:textSize="@dimen/text_size_2"
             android:layout_marginEnd="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

@@ -106,8 +106,12 @@ public class Zebra<R> {
      * 获取解析实例 注意判空
      */
     @Nullable
-    public R getData() {
-        return mData;
+    @SuppressWarnings("unchecked")
+    public<C> C getData() {
+        if (mData == null) {
+            return null;
+        }
+        return (C) mData;
     }
 
     /**

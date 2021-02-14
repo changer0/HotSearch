@@ -15,6 +15,7 @@ public class WBHotSearchBean extends BaseBean{
     private int code;
     private String msg;
     private double expired_time;
+    private double time_stamp;
 
     private List<Result> result;
     public void setCode(int code) {
@@ -44,5 +45,13 @@ public class WBHotSearchBean extends BaseBean{
 
     public void setExpired_time(double expired_time) {
         this.expired_time = expired_time;
+    }
+
+    public double getTime_stamp() {
+        return time_stamp;
+    }
+
+    public void setTime_stamp(double time_stamp) {
+        this.time_stamp = time_stamp;
     }
 }

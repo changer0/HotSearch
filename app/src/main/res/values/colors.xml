@@ -7,4 +7,10 @@
 
     <color name="item_title">#5E5E5E</color>
     <color name="item_tag">#FF216C</color>
+
+    <color name="text_color_1">#D3D3D3</color>
+    <color name="text_color_2">#ABABAB</color>
+    <color name="text_color_3">#919191</color>
+    <color name="text_color_4">#5F5F5F</color>
+    <color name="text_color_5">#3D3D3D</color>
 </resources>

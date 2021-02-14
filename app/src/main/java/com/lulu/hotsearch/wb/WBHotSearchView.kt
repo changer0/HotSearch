@@ -2,6 +2,7 @@ package com.lulu.hotsearch.wb
 
 import android.content.Context
 import android.view.View
+import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.qq.reader.bookstore.define.BookStoreViewParams
 import com.qq.reader.bookstore.view.BaseBookStoreView
@@ -10,6 +11,7 @@ import com.qq.reader.bookstore.view.CommonLoadMoreView
 class WBHotSearchView(context: Context) : BaseBookStoreView(context) {
 
     public lateinit var searchBtn: FloatingActionButton
+    public lateinit var titleRightTime: TextView
 
     override fun onCreateParams(): BookStoreViewParams {
         return BookStoreViewParams.Builder(
@@ -27,5 +29,6 @@ class WBHotSearchView(context: Context) : BaseBookStoreView(context) {
 
     override fun onCreateView(contentView: View) {
         searchBtn = contentView.findViewById(R.id.searchBtn)
+        titleRightTime = contentView.findViewById(R.id.title_right_time)
     }
 }

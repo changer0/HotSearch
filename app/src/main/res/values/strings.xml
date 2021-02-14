@@ -3,4 +3,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="splash_text">只给你想要的热搜</string>
 
+    <string name="update_time">更新时间：%s</string>
+
 </resources>
