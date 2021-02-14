@@ -24,6 +24,9 @@
         <RelativeLayout
             android:id="@+id/ll_profile_header_title"
             android:layout_centerHorizontal="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toEndOf="@id/leftImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true">
@@ -31,16 +34,14 @@
 
             <TextView
                 android:id="@+id/profile_header_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:transitionName="anim_weibo_item"
-                android:gravity="center"
                 android:textColor="#000"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:maxLines="1"
-                android:maxWidth="280dp"
                 android:ellipsize="end"
                 tools:text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" />
 
