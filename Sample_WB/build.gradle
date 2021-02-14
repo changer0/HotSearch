@@ -10,8 +10,12 @@ android {
         applicationId "com.lulu.hotsearch"
         minSdkVersion gradle_build_versions.minSdkVersion
         targetSdkVersion gradle_build_versions.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+
+        versionCode app_version_code.toInteger()
+        versionName app_version_name.toString().trim()
+
+        println("versionName：" + app_version_name.toString().trim())
+        println("versionName：" + app_version_code.toInteger())
 
         // Enabling multidex support.
         multiDexEnabled true
