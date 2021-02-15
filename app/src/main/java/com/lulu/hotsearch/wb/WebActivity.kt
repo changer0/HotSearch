@@ -1,5 +1,7 @@
 package com.lulu.hotsearch.wb
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
@@ -20,12 +22,14 @@ class WebActivity : ReaderBaseActivity() {
         findViewById<TextView>(R.id.profile_header_title).text = intent.getStringExtra(Constant.WEB_TITLE)
         webView.loadUrl(url)
         webView.webViewClient = object : WebViewClient() {
-            override fun onReceivedError(
-                view: WebView?,
-                request: WebResourceRequest?,
-                error: WebResourceError?
-            ) {
-                super.onReceivedError(view, request, error)
+
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                val uri: Uri = Uri.parse(url)
+                if (uri.scheme == "weixin") {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                    return false
+                }
+                return super.shouldOverrideUrlLoading(webView, request)
             }
         }
         val webSettings = webView.settings
