@@ -23,22 +23,25 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
     private var isAdd = false
     private val llId = intArrayOf(
         R.id.ll01,
-        R.id.ll02
+        R.id.ll02,
+        R.id.ll03
     )
     public val ll = arrayOfNulls<LinearLayout>(llId.size)
     private val fabId = intArrayOf(
         R.id.miniFab01,
-        R.id.miniFab02
+        R.id.miniFab02,
+        R.id.miniFab03
     )
     public val fab = arrayOfNulls<FloatingActionButton>(fabId.size)
     //动画
     private lateinit var addBillTranslate1: AnimatorSet
     private lateinit var addBillTranslate2: AnimatorSet
+    private lateinit var addBillTranslate3: AnimatorSet
     private var lastIsIdle = true
     private var displayAnim: ObjectAnimator? = null
 
     public lateinit var fabRoot: FloatingActionButton
-    private lateinit var rlAddBill: RelativeLayout
+    private lateinit var rlAddBill: View
     public lateinit var titleRightTime: TextView
     public lateinit var leftImage: ImageView
 
@@ -75,12 +78,9 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
 
     private fun initAnim() {
         //https://www.cnblogs.com/sanfeng4476/p/6112284.html
-        addBillTranslate1 = AnimatorInflater.loadAnimator(context,
-            R.animator.add_bill_anim
-        ) as AnimatorSet
-        addBillTranslate2 = AnimatorInflater.loadAnimator(context,
-            R.animator.add_bill_anim
-        ) as AnimatorSet
+        addBillTranslate1 = AnimatorInflater.loadAnimator(context, R.animator.add_bill_anim) as AnimatorSet
+        addBillTranslate2 = AnimatorInflater.loadAnimator(context, R.animator.add_bill_anim) as AnimatorSet
+        addBillTranslate3 = AnimatorInflater.loadAnimator(context, R.animator.add_bill_anim) as AnimatorSet
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -118,6 +118,9 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
                     addBillTranslate2.setTarget(ll[1])
                     addBillTranslate2.start()
                     addBillTranslate2.startDelay = 150
+                    addBillTranslate3.setTarget(ll[2])
+                    addBillTranslate3.start()
+                    addBillTranslate3.startDelay = 200
                 }
             }
             else -> hideFABMenu()
@@ -134,6 +137,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
         when(type) {
             Constant.HOT_SEARCH_WB -> leftImage.setImageResource(R.drawable.sina_wb)
             Constant.HOT_SEARCH_DOUYIN -> leftImage.setImageResource(R.drawable.douyin)
+            Constant.HOT_SEARCH_ZHIHU -> leftImage.setImageResource(R.drawable.zhihu)
         }
     }
 
@@ -141,6 +145,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
         when(type) {
             Constant.HOT_SEARCH_WB -> actionBarTitle.setText(R.string.hot_search_wb)
             Constant.HOT_SEARCH_DOUYIN -> actionBarTitle.setText(R.string.hot_search_douyin)
+            Constant.HOT_SEARCH_ZHIHU -> actionBarTitle.setText(R.string.hot_search_zhihu)
         }
     }
 

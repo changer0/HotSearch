@@ -4,21 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rlAddBill"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="bottom"
         android:background="#80000000"
+        android:orientation="vertical"
         android:visibility="gone"
         tools:visibility="visible"
         >
-
+        <LinearLayout
+            android:id="@+id/ll03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_toLeftOf="@id/miniFab03"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="知乎热搜"
+                android:textSize="15sp"
+                android:textColor="@android:color/white"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:layout_marginEnd="5dp"
+                />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/miniFab03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/zhihu"
+                android:layout_marginRight="25dp"
+                app:fabSize="mini"
+                app:elevation="5dp"
+                app:backgroundTint="#FFF"/>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/ll01"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             >
@@ -49,7 +78,7 @@
             android:id="@+id/ll01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
             android:layout_marginBottom="100dp"
             android:orientation="horizontal"
             >
@@ -76,7 +105,7 @@
                 app:backgroundTint="#FFF"/>
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabRoot"
         android:layout_width="wrap_content"

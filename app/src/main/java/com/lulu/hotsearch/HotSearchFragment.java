@@ -45,6 +45,10 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
             mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_DOUYIN);
             innerLoadData(mEnterBundle);
         });
+        mBookStoreView.getLl()[2].setOnClickListener(v -> {//知乎
+            mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_ZHIHU);
+            innerLoadData(mEnterBundle);
+        });
     }
 
     private void innerLoadData(@NonNull Bundle enterBundle) {

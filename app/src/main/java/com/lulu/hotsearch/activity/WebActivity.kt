@@ -145,6 +145,7 @@ class WebActivity : ReaderBaseActivity() {
         when(type) {
             Constant.HOT_SEARCH_WB -> leftImage.setImageResource(R.drawable.sina_wb)
             Constant.HOT_SEARCH_DOUYIN -> leftImage.setImageResource(R.drawable.douyin)
+            Constant.HOT_SEARCH_ZHIHU -> leftImage.setImageResource(R.drawable.zhihu)
         }
     }
 

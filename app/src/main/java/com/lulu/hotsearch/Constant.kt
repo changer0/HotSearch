@@ -13,4 +13,5 @@ object Constant {
     const val HOT_SEARCH_TYPE = "HOT_SEARCH_TYPE"
     const val HOT_SEARCH_DOUYIN = "douyin"
     const val HOT_SEARCH_WB = "weibo"
+    const val HOT_SEARCH_ZHIHU = "zhihu"
 }
