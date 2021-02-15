@@ -11,10 +11,10 @@ import com.lulu.hotsearch.wb.R
 import com.lulu.hotsearch.WebActivity
 import com.lulu.hotsearch.bean.Result
 
-class WBHotSearchBindItem(itemData: Result?) :
+class HotSearchBindItem(itemData: Result?) :
     BaseViewBindItem<Result, CommonViewHolder>(itemData) {
     override fun getResLayoutId(): Int {
-        return R.layout.wb_hot_search_item
+        return R.layout.hot_search_item
     }
 
     override fun bindView(holder: CommonViewHolder, activity: Activity): Boolean {

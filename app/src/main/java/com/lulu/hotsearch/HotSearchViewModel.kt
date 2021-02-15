@@ -7,7 +7,7 @@ import com.yuewen.reader.zebra.Zebra
 import com.yuewen.reader.zebra.ZebraLiveData
 import com.yuewen.reader.zebra.cache.CacheMode
 import com.lulu.hotsearch.bean.HotSearchBean
-import com.lulu.hotsearch.itembuilder.WBViewBindItemBuilder
+import com.lulu.hotsearch.itembuilder.ViewBindItemBuilder
 
 /**
  * 微博 ViewModel
@@ -23,7 +23,7 @@ class HotSearchViewModel : BaseBookStoreViewModel() {
             .cacheConfig(CacheMode.CACHE_MODE_USE_CACHE_PRIORITY,
                 HotSearchGetExpiredTime()
             )
-            .viewBindItemBuilder(WBViewBindItemBuilder())
+            .viewBindItemBuilder(ViewBindItemBuilder())
             .load(LoadSignal.parseSignal(params))
     }
 }
