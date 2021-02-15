@@ -7,15 +7,6 @@
 
     <include layout="@layout/wb_list_layout"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/searchBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="20dp"
-        android:src="@android:drawable/ic_search_category_default"
-        android:layout_marginBottom="20dp"/>
+    <include layout="@layout/layout_float_button"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

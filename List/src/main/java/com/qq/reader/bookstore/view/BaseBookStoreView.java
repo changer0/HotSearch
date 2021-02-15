@@ -45,14 +45,13 @@ public abstract class BaseBookStoreView {
         params = onCreateParams();
         this.context = context;
         this.contentView = LayoutInflater.from(context).inflate(params.getContentViewLayoutRes(), null);
-        createView(contentView);
-        onCreateView(contentView);
     }
 
-    protected void createView(View contentView) {
+    public void createView() {
         initView(contentView);
         initStatViewSet();
         showMutexStateView(loadingView);
+        onCreateView(contentView);
     }
 
     private void initView(View contentView) {

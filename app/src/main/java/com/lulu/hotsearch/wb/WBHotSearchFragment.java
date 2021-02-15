@@ -1,5 +1,6 @@
 package com.lulu.hotsearch.wb;
 
+import android.animation.AnimatorSet;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;

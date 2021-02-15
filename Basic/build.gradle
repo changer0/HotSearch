@@ -51,6 +51,7 @@ dependencies {
 
     //OkHttp 库
     api 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'androidx.palette:palette:1.0.0'
 
     if (isSourceBuildZebra.toBoolean()) {
         implementation project(":zebra:zebra_core")
