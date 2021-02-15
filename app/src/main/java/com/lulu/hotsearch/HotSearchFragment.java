@@ -32,8 +32,26 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
 
     @Override
     protected void onLaunchSuccess(@NonNull View container, @NonNull Bundle enterBundle, @Nullable Bundle savedInstanceState) {
+
+        mBookStoreView.actionBarContainer.setVisibility(View.VISIBLE);
+        innerLoadData(enterBundle);
+
+        mBookStoreView.getLl()[0].setOnClickListener(v -> {//WB
+            mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_WB);
+            innerLoadData(mEnterBundle);
+        });
+        mBookStoreView.getLl()[1].setOnClickListener(v -> {//DOUYIN
+            mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_DOUYIN);
+            innerLoadData(mEnterBundle);
+        });
+    }
+
+    private void innerLoadData(@NonNull Bundle enterBundle) {
+        String type = enterBundle.getString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_WB);
+        mBookStoreView.refreshActionBar(type);
         loadData(LoadSignal.LOAD_SIGNAL_INIT);
-        //https://www.cnblogs.com/sanfeng4476/p/6112284.html
+        mBookStoreView.hideFABMenu();
+        HotSearchKVStorage.setLastType(type);
     }
 
     @Override

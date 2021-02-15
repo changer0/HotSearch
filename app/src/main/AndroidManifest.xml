@@ -27,7 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.lulu.hotsearch.SplashActivity"
+            android:name="com.lulu.hotsearch.activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.lulu.hotsearch.WebActivity"
+            android:name="com.lulu.hotsearch.activity.WebActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"

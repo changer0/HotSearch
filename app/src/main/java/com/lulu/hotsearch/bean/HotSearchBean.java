@@ -15,6 +15,7 @@ public class HotSearchBean extends BaseBean {
 
     private int code;
     private String msg;
+    private String type;
     private double expired_time;
     private double time_stamp;
 
@@ -54,5 +55,13 @@ public class HotSearchBean extends BaseBean {
 
     public void setTime_stamp(double time_stamp) {
         this.time_stamp = time_stamp;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

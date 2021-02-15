@@ -27,6 +27,7 @@ public class BookStoreActivityLauncher {
         Intent intent = new Intent(context, CommonBookStoreActivity.class);
         intent.putExtra(BookStoreActivityLauncher.BOOK_STORE_FRAGMENT_PATH, path);
         intent.putExtra(BookStoreActivityLauncher.BOOK_STORE_FRAGMENT_PARAMS, launchParams);
+        intent.putExtras(launchParams.getExtras());
         context.startActivity(intent, options);
     }
 

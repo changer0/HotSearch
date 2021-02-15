@@ -4,6 +4,7 @@ import android.animation.*
 import android.content.Context
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -22,12 +23,12 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
         R.id.ll01,
         R.id.ll02
     )
-    private val ll = arrayOfNulls<LinearLayout>(llId.size)
+    public val ll = arrayOfNulls<LinearLayout>(llId.size)
     private val fabId = intArrayOf(
         R.id.miniFab01,
         R.id.miniFab02
     )
-    private val fab = arrayOfNulls<FloatingActionButton>(fabId.size)
+    public val fab = arrayOfNulls<FloatingActionButton>(fabId.size)
     //动画
     private lateinit var addBillTranslate1: AnimatorSet
     private lateinit var addBillTranslate2: AnimatorSet
@@ -37,6 +38,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
     public lateinit var fabRoot: FloatingActionButton
     private lateinit var rlAddBill: RelativeLayout
     public lateinit var titleRightTime: TextView
+    public lateinit var leftImage: ImageView
 
 
     override fun onCreateParams(): BookStoreViewParams {
@@ -58,6 +60,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
         fabRoot = contentView.findViewById(R.id.fabRoot)
         titleRightTime = contentView.findViewById(R.id.title_right_time)
         rlAddBill = contentView.findViewById(R.id.rlAddBill)
+        leftImage = contentView.findViewById(R.id.leftImage)
         for (i in llId.indices) {
             ll[i] = contentView.findViewById(llId[i]) as LinearLayout?
         }
@@ -69,6 +72,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
     }
 
     private fun initAnim() {
+        //https://www.cnblogs.com/sanfeng4476/p/6112284.html
         addBillTranslate1 = AnimatorInflater.loadAnimator(context,
             R.animator.add_bill_anim
         ) as AnimatorSet
@@ -95,9 +99,6 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
     private fun bindEvents() {
         fabRoot.setOnClickListener(this)
         rlAddBill.setOnClickListener(this)
-        for (i in fabId.indices) {
-            fab[i]?.setOnClickListener(this)
-        }
     }
 
     override fun onClick(v: View) {
@@ -118,9 +119,28 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
         }
     }
 
-    private fun hideFABMenu() {
+    public fun hideFABMenu() {
         rlAddBill.visibility = View.GONE
         fabRoot.setImageResource(R.drawable.ic_add_24px)
         isAdd = false
+    }
+
+    public fun setLeftImage(type: String) {
+        when(type) {
+            Constant.HOT_SEARCH_WB -> leftImage.setImageResource(R.drawable.sina_wb)
+            Constant.HOT_SEARCH_DOUYIN -> leftImage.setImageResource(R.drawable.douyin)
+        }
+    }
+
+    public fun setTitle(type: String) {
+        when(type) {
+            Constant.HOT_SEARCH_WB -> actionBarTitle.setText(R.string.hot_search_wb)
+            Constant.HOT_SEARCH_DOUYIN -> actionBarTitle.setText(R.string.hot_search_douyin)
+        }
+    }
+
+    public fun refreshActionBar(type: String) {
+        setTitle(type)
+        setLeftImage(type)
     }
 }

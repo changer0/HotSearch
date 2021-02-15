@@ -14,12 +14,14 @@ import com.lulu.hotsearch.itembuilder.ViewBindItemBuilder
  */
 class HotSearchViewModel : BaseBookStoreViewModel() {
 
-    val URL = "http://changer2.uicp.io/hotSearch"
+    val URL = ServerUrl.DOMAIN + "hotSearch?type="
 
     override fun getZebraLiveData(params: Bundle?): ZebraLiveData {
+        val type = params?.getString(Constant.HOT_SEARCH_TYPE,
+            Constant.HOT_SEARCH_WB)?:Constant.HOT_SEARCH_WB
         return Zebra.with(HotSearchBean::class.java)
             .get()
-            .url(URL)
+            .url(URL+type)
             .cacheConfig(CacheMode.CACHE_MODE_USE_CACHE_PRIORITY,
                 HotSearchGetExpiredTime()
             )

@@ -1,24 +1,30 @@
-package com.lulu.hotsearch
+package com.lulu.hotsearch.activity
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.webkit.*
+import android.widget.ImageView
 import android.widget.TextView
+import com.lulu.hotsearch.Constant
 import com.lulu.hotsearch.wb.R
 import com.qq.reader.activity.ReaderBaseActivity
 
 class WebActivity : ReaderBaseActivity() {
 
     private lateinit var webView: WebView
+    public lateinit var leftImage: ImageView
+    public lateinit var actionBarTitle: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
         val url = intent.getStringExtra(Constant.WEB_URL)
         webView = findViewById(R.id.webView)
-        findViewById<TextView>(R.id.profile_header_title).text = intent.getStringExtra(
-            Constant.WEB_TITLE)
+        leftImage = findViewById(R.id.leftImage)
+        actionBarTitle = findViewById(R.id.profile_header_title)
+        setLeftImage(intent.getStringExtra(Constant.HOT_SEARCH_TYPE))
+        actionBarTitle.text = intent.getStringExtra(Constant.WEB_TITLE)
         webView.loadUrl(url)
         webView.webViewClient = object : WebViewClient() {
 
@@ -61,4 +67,13 @@ class WebActivity : ReaderBaseActivity() {
             super.onBackPressed()
         }
     }
+
+
+    public fun setLeftImage(type: String) {
+        when(type) {
+            Constant.HOT_SEARCH_WB -> leftImage.setImageResource(R.drawable.sina_wb)
+            Constant.HOT_SEARCH_DOUYIN -> leftImage.setImageResource(R.drawable.douyin)
+        }
+    }
+
 }
