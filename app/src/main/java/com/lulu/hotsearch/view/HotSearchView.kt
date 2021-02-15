@@ -1,4 +1,4 @@
-package com.lulu.hotsearch
+package com.lulu.hotsearch.view
 
 import android.animation.*
 import android.content.Context
@@ -10,6 +10,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.lulu.hotsearch.Constant
+import com.lulu.hotsearch.FabAnimUtil
 import com.lulu.hotsearch.wb.R
 import com.qq.reader.bookstore.define.BookStoreViewParams
 import com.qq.reader.bookstore.view.BaseBookStoreView
@@ -90,7 +92,10 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
                 if (displayAnim?.isRunning == true) {
                     displayAnim?.cancel()
                 }
-                displayAnim = FabAnimUtil.startDisplayAnim(fabRoot, isIdle)
+                displayAnim = FabAnimUtil.startDisplayAnim(
+                    fabRoot,
+                    isIdle
+                )
 
             }
         })

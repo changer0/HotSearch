@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lulu.hotsearch.bean.HotSearchBean;
+import com.lulu.hotsearch.view.HotSearchView;
 import com.lulu.hotsearch.wb.R;
 import com.qq.reader.bookstore.BaseBookStoreFragment;
 import com.qq.reader.bookstore.define.LoadSignal;
