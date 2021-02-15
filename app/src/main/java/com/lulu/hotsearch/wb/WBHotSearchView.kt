@@ -95,7 +95,7 @@ class WBHotSearchView(context: Context) : BaseBookStoreView(context), View.OnCli
     override fun onClick(v: View) {
         when(v.id) {
             R.id.fabRoot -> {
-                fabRoot.setImageResource(if (isAdd) R.drawable.ic_switch_24px else R.drawable.ic_close_24px)
+                fabRoot.setImageResource(if (isAdd) R.drawable.ic_add_24px else R.drawable.ic_close_24px)
                 isAdd = !isAdd
                 rlAddBill.visibility = (if (isAdd) View.VISIBLE else View.GONE)
                 if (isAdd) {
@@ -112,7 +112,7 @@ class WBHotSearchView(context: Context) : BaseBookStoreView(context), View.OnCli
 
     private fun hideFABMenu() {
         rlAddBill.visibility = View.GONE
-        fabRoot.setImageResource(R.drawable.ic_switch_24px)
+        fabRoot.setImageResource(R.drawable.ic_add_24px)
         isAdd = false
     }
 }
