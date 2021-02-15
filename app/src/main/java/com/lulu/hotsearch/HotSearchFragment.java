@@ -1,4 +1,4 @@
-package com.lulu.hotsearch.wb;
+package com.lulu.hotsearch;
 
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -8,7 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.lulu.hotsearch.wb.bean.HotSearchBean;
+import com.lulu.hotsearch.bean.HotSearchBean;
+import com.lulu.hotsearch.wb.R;
 import com.qq.reader.bookstore.BaseBookStoreFragment;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.yuewen.reader.zebra.loader.ObserverEntity;

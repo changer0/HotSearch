@@ -1,9 +1,10 @@
-package com.lulu.hotsearch.wb
+package com.lulu.hotsearch
 
 import android.app.ActivityOptions
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.lulu.hotsearch.wb.R
 import com.qq.reader.activity.ReaderBaseActivity
 import com.qq.reader.bookstore.BookStoreActivityLauncher
 import com.qq.reader.bookstore.LaunchParams

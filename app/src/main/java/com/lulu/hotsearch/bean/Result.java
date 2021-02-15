@@ -1,7 +1,9 @@
 /**
   * Copyright 2021 bejson.com 
   */
-package com.lulu.hotsearch.wb.bean;
+package com.lulu.hotsearch.bean;
+
+import com.lulu.hotsearch.bean.BaseBean;
 
 /**
  * Auto-generated: 2021-02-13 11:22:35
@@ -9,7 +11,7 @@ package com.lulu.hotsearch.wb.bean;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Result extends BaseBean{
+public class Result extends BaseBean {
     private String url;
     private String title;
     private String hotNum;

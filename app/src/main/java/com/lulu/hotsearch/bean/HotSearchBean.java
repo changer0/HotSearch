@@ -1,7 +1,8 @@
 /**
   * Copyright 2021 bejson.com 
   */
-package com.lulu.hotsearch.wb.bean;
+package com.lulu.hotsearch.bean;
+
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class HotSearchBean extends BaseBean{
+public class HotSearchBean extends BaseBean {
 
     private int code;
     private String msg;

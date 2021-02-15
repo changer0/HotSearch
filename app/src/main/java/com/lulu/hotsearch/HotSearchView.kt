@@ -1,4 +1,4 @@
-package com.lulu.hotsearch.wb
+package com.lulu.hotsearch
 
 import android.animation.*
 import android.content.Context
@@ -9,6 +9,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.lulu.hotsearch.wb.R
 import com.qq.reader.bookstore.define.BookStoreViewParams
 import com.qq.reader.bookstore.view.BaseBookStoreView
 import com.qq.reader.bookstore.view.CommonLoadMoreView
@@ -17,7 +18,10 @@ import com.qq.reader.bookstore.view.CommonLoadMoreView
 private const val TAG = "WBHotSearchView"
 class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClickListener {
     private var isAdd = false
-    private val llId = intArrayOf(R.id.ll01, R.id.ll02)
+    private val llId = intArrayOf(
+        R.id.ll01,
+        R.id.ll02
+    )
     private val ll = arrayOfNulls<LinearLayout>(llId.size)
     private val fabId = intArrayOf(
         R.id.miniFab01,
@@ -65,8 +69,12 @@ class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClick
     }
 
     private fun initAnim() {
-        addBillTranslate1 = AnimatorInflater.loadAnimator(context, R.animator.add_bill_anim) as AnimatorSet
-        addBillTranslate2 = AnimatorInflater.loadAnimator(context, R.animator.add_bill_anim) as AnimatorSet
+        addBillTranslate1 = AnimatorInflater.loadAnimator(context,
+            R.animator.add_bill_anim
+        ) as AnimatorSet
+        addBillTranslate2 = AnimatorInflater.loadAnimator(context,
+            R.animator.add_bill_anim
+        ) as AnimatorSet
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

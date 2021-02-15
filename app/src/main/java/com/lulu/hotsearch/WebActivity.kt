@@ -1,10 +1,11 @@
-package com.lulu.hotsearch.wb
+package com.lulu.hotsearch
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.webkit.*
 import android.widget.TextView
+import com.lulu.hotsearch.wb.R
 import com.qq.reader.activity.ReaderBaseActivity
 
 class WebActivity : ReaderBaseActivity() {
@@ -16,7 +17,8 @@ class WebActivity : ReaderBaseActivity() {
         setContentView(R.layout.activity_web)
         val url = intent.getStringExtra(Constant.WEB_URL)
         webView = findViewById(R.id.webView)
-        findViewById<TextView>(R.id.profile_header_title).text = intent.getStringExtra(Constant.WEB_TITLE)
+        findViewById<TextView>(R.id.profile_header_title).text = intent.getStringExtra(
+            Constant.WEB_TITLE)
         webView.loadUrl(url)
         webView.webViewClient = object : WebViewClient() {
 

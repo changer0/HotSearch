@@ -1,8 +1,9 @@
-package com.lulu.hotsearch.wb
+package com.lulu.hotsearch
 
 import android.app.Application
 import com.lulu.basic.Init
 import com.lulu.basic.net.Http
+import com.lulu.hotsearch.wb.BuildConfig
 import com.yuewen.reader.zebra.ZebraConfig
 import com.yuewen.component.router.YWRouter
 

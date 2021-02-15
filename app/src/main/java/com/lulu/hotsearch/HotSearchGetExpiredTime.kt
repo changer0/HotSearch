@@ -1,7 +1,7 @@
-package com.lulu.hotsearch.wb
+package com.lulu.hotsearch
 
 import com.yuewen.reader.zebra.inter.IGetExpiredTime
-import com.lulu.hotsearch.wb.bean.HotSearchBean
+import com.lulu.hotsearch.bean.HotSearchBean
 
 class HotSearchGetExpiredTime : IGetExpiredTime<HotSearchBean> {
     override fun getExpiredTime(mData: HotSearchBean): Long {

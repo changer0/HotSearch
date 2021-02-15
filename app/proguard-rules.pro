@@ -19,5 +19,5 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
--keep class * extends com.lulu.hotsearch.wb.bean.BaseBean {*;}
+-keep class * extends com.lulu.hotsearch.bean.BaseBean {*;}
 -keep class * extends com.chad.library.adapter.base.BaseViewHolder {*;}

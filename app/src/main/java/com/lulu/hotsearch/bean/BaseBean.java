@@ -1,4 +1,4 @@
-package com.lulu.hotsearch.wb.bean;
+package com.lulu.hotsearch.bean;
 
 /**
  * Author: zhanglulu
