@@ -5,19 +5,16 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.text.TextUtils
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import com.lulu.basic.net.CoroutineScopeManager
-import com.lulu.basic.net.HttpCoroutineUtils
+import com.lulu.basic.utils.ToastUtil
 import com.qq.reader.bookstore.CommonViewHolder
 import com.yuewen.reader.zebra.BaseViewBindItem
 import com.lulu.hotsearch.Constant
-import com.lulu.hotsearch.ServerUrl
+import com.lulu.hotsearch.HotSearchRealUrlUtil
 import com.lulu.hotsearch.wb.R
 import com.lulu.hotsearch.activity.WebActivity
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.bean.Result
-import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.lang.Exception
 
@@ -61,18 +58,9 @@ class HotSearchBindItem(itemData: Result?) :
         activity: FragmentActivity,
         hotSearchBean: HotSearchBean,
         hotTitle: TextView?) {
-        val url = ServerUrl.DOMAIN + "obtainRealUrl?destUrl=" + itemData.url
-        CoroutineScopeManager.getScope(activity).launch {
-            val doRequestGet = HttpCoroutineUtils.doRequestGet(url)
-            var realUrl = ""
-            try {
-                val jsonObject = JSONObject(doRequestGet.jsonStr)
-                realUrl = jsonObject.optString("url");
-            } catch (e: Exception){
-                e.printStackTrace()
-            }
+        HotSearchRealUrlUtil.parseReadUrl(activity, itemData.url) { realUrl ->
             if (TextUtils.isEmpty(realUrl)) {
-                Toast.makeText(activity, "跳转失败", Toast.LENGTH_SHORT).show()
+                ToastUtil.showShortToast("跳转失败")
             } else {
                 goWeb(activity, hotSearchBean, hotTitle, realUrl)
             }
@@ -87,8 +75,9 @@ class HotSearchBindItem(itemData: Result?) :
     ) {
         val intent = Intent(activity, WebActivity::class.java)
         intent.putExtra(Constant.WEB_URL, url)
+        intent.putExtra(Constant.WEB_CUR_ORDER, itemData.order)
         intent.putExtra(Constant.WEB_TITLE, itemData.title)
-        intent.putExtra(Constant.HOT_SEARCH_TYPE, hotSearchBean.type)
+        intent.putExtra(Constant.WEB_HOT_SEARCH_DATA, hotSearchBean)
         activity.startActivity(
             intent,
             ActivityOptions.makeSceneTransitionAnimation(activity, hotTitle, "anim_weibo_item")

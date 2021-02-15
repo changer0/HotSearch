@@ -78,7 +78,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
-            app:tint="#000000" />
+            app:tint="#FF000000" />
 
 
     </RelativeLayout>

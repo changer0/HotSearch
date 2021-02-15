@@ -7,7 +7,7 @@
         android:id="@+id/common_titler"
         layout="@layout/wb_titler"
         android:visibility="visible" />
-    <WebView
+    <com.lulu.hotsearch.view.HotSearchWebView
         android:id="@+id/webView"
         app:layout_constraintTop_toBottomOf="@id/common_titler"
         app:layout_constraintBottom_toBottomOf="parent"
