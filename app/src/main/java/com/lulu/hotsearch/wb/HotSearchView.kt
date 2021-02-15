@@ -15,7 +15,7 @@ import com.qq.reader.bookstore.view.CommonLoadMoreView
 
 
 private const val TAG = "WBHotSearchView"
-class WBHotSearchView(context: Context) : BaseBookStoreView(context), View.OnClickListener {
+class HotSearchView(context: Context) : BaseBookStoreView(context), View.OnClickListener {
     private var isAdd = false
     private val llId = intArrayOf(R.id.ll01, R.id.ll02)
     private val ll = arrayOfNulls<LinearLayout>(llId.size)

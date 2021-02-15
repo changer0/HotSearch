@@ -12,7 +12,7 @@ import com.lulu.hotsearch.wb.itembuilder.WBViewBindItemBuilder
 /**
  * 微博 ViewModel
  */
-class WBViewModel : BaseBookStoreViewModel() {
+class HotSearchViewModel : BaseBookStoreViewModel() {
 
     val URL = "http://changer2.uicp.io/hotSearch"
 
@@ -20,7 +20,7 @@ class WBViewModel : BaseBookStoreViewModel() {
         return Zebra.with(WBHotSearchBean::class.java)
             .get()
             .url(URL)
-            .cacheConfig(CacheMode.CACHE_MODE_USE_CACHE_PRIORITY, WBGetExpiredTime())
+            .cacheConfig(CacheMode.CACHE_MODE_USE_CACHE_PRIORITY, HotSearchGetExpiredTime())
             .viewBindItemBuilder(WBViewBindItemBuilder())
             .load(LoadSignal.parseSignal(params))
     }

@@ -1,6 +1,5 @@
 package com.lulu.hotsearch.wb;
 
-import android.animation.AnimatorSet;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -13,24 +12,21 @@ import com.lulu.hotsearch.wb.bean.WBHotSearchBean;
 import com.qq.reader.bookstore.BaseBookStoreFragment;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.yuewen.reader.zebra.loader.ObserverEntity;
-import com.yuewen.reader.zebra.utils.CastUtils;
-
-import java.util.Calendar;
 
 /**
  * Author: zhanglulu
  * Time: 2021/2/14
  */
 @Route(path = Constant.WB_HOT_SEARCH)
-public class WBHotSearchFragment extends BaseBookStoreFragment<WBHotSearchView, WBViewModel> {
+public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotSearchViewModel> {
     @Override
-    protected WBHotSearchView onCreateBookStoreView() {
-        return new WBHotSearchView(mContext);
+    protected HotSearchView onCreateBookStoreView() {
+        return new HotSearchView(mContext);
     }
 
     @Override
-    protected Class<WBViewModel> onCreateBookStoreViewModel(@NonNull Bundle enterBundle) {
-        return WBViewModel.class;
+    protected Class<HotSearchViewModel> onCreateBookStoreViewModel(@NonNull Bundle enterBundle) {
+        return HotSearchViewModel.class;
     }
 
     @Override
