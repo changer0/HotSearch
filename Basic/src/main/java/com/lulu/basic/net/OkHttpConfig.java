@@ -1,6 +1,7 @@
 package com.lulu.basic.net;
 
-import com.lulu.basic.Init;
+
+import com.lulu.baseutil.Init;
 
 import java.io.IOException;
 import java.io.InputStream;

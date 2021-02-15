@@ -1,4 +1,4 @@
-package com.lulu.basic.utils;
+package com.lulu.baseutil.bezelless;
 
 import android.content.res.Resources;
 

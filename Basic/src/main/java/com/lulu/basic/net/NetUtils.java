@@ -7,7 +7,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 
-import com.lulu.basic.Init;
+import com.lulu.baseutil.Init;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;

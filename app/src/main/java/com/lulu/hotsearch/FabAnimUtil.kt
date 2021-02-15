@@ -4,7 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.view.View
-import com.lulu.basic.utils.DensityUtil
+import com.lulu.baseutil.bezelless.DensityUtil
 
 object FabAnimUtil {
     fun startDisplayAnim(fabRoot: View, isIdle: Boolean): ObjectAnimator {

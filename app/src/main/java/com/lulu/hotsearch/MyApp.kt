@@ -1,11 +1,13 @@
 package com.lulu.hotsearch
 
 import android.app.Application
-import com.lulu.basic.Init
+import com.lulu.baseutil.Init
+import com.lulu.basic.kvstorage.KVStorage
 import com.lulu.basic.net.Http
 import com.lulu.hotsearch.wb.BuildConfig
-import com.yuewen.reader.zebra.ZebraConfig
 import com.yuewen.component.router.YWRouter
+import com.yuewen.reader.zebra.ZebraConfig
+import java.io.File
 
 /**
  * Created by zhanglulu on 2020/3/16.
@@ -16,10 +18,17 @@ class MyApp: Application() {
         super.onCreate()
         Init.app = this
         Init.context = this
-        initZebra()
 
+        initMMKV()
+        initZebra()
         //初始化 YWRouter
         YWRouter.init(this, BuildConfig.DEBUG)
+    }
+
+    private fun initMMKV() {
+        val innerRootPath: String =
+            filesDir.absolutePath + File.separator
+        KVStorage.init(this, innerRootPath)
     }
 
     /**

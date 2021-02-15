@@ -1,4 +1,4 @@
-package com.lulu.basic;
+package com.lulu.baseutil;
 
 import android.app.Application;
 import android.content.Context;

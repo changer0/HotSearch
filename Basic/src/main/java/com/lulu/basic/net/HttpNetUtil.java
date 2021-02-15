@@ -10,7 +10,7 @@ import android.net.wifi.WifiManager;
 import android.util.Log;
 
 
-import com.lulu.basic.Init;
+import com.lulu.baseutil.Init;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

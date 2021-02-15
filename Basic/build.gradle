@@ -53,6 +53,12 @@ dependencies {
     api 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'androidx.palette:palette:1.0.0'
 
+    //MMKV
+    api 'com.tencent:mmkv-static:1.2.7'
+    implementation 'com.getkeepsafe.relinker:relinker:1.4.1'
+
+    api project(":BaseUtil")
+
     if (isSourceBuildZebra.toBoolean()) {
         implementation project(":zebra:zebra_core")
         implementation project(":zebra:lib_provider_build_base")
