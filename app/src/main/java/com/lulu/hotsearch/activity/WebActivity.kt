@@ -3,8 +3,12 @@ package com.lulu.hotsearch.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
-import android.webkit.*
+import android.webkit.WebResourceRequest
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.TextView
 import com.lulu.hotsearch.Constant
@@ -31,6 +35,15 @@ class WebActivity : ReaderBaseActivity() {
                 if (uri.scheme == "weixin") {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
                 }
+                if (TextUtils.equals("www.iesdouyin.com", uri.host)) {
+                    val intent = Intent()
+                    intent.action = "android.intent.action.VIEW"
+                    intent.data = uri
+                    startActivity(intent)
+                    return true
+                }
+                //返回false，意味着请求过程里，不管有多少次的跳转请求（即新的请求地址），均交给webView自己处理，这也是此方法的默认处理
+                //返回true，说明你自己想根据url，做新的跳转，比如在判断url符合条件的情况下，我想让webView加载http://ask.csdn.net/questions/178242
                 return super.shouldOverrideUrlLoading(webView, request)
             }
         }
