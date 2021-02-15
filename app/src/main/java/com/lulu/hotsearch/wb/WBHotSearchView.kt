@@ -1,18 +1,20 @@
 package com.lulu.hotsearch.wb
 
-import android.animation.AnimatorInflater
-import android.animation.AnimatorSet
+import android.animation.*
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.qq.reader.bookstore.define.BookStoreViewParams
 import com.qq.reader.bookstore.view.BaseBookStoreView
 import com.qq.reader.bookstore.view.CommonLoadMoreView
 
 
+private const val TAG = "WBHotSearchView"
 class WBHotSearchView(context: Context) : BaseBookStoreView(context), View.OnClickListener {
     private var isAdd = false
     private val llId = intArrayOf(R.id.ll01, R.id.ll02)
@@ -25,10 +27,13 @@ class WBHotSearchView(context: Context) : BaseBookStoreView(context), View.OnCli
     //动画
     private lateinit var addBillTranslate1: AnimatorSet
     private lateinit var addBillTranslate2: AnimatorSet
+    private var lastIsIdle = true
+    private var displayAnim: ObjectAnimator? = null
 
     public lateinit var fabRoot: FloatingActionButton
     private lateinit var rlAddBill: RelativeLayout
     public lateinit var titleRightTime: TextView
+
 
     override fun onCreateParams(): BookStoreViewParams {
         return BookStoreViewParams.Builder(
@@ -62,6 +67,21 @@ class WBHotSearchView(context: Context) : BaseBookStoreView(context), View.OnCli
     private fun initAnim() {
         addBillTranslate1 = AnimatorInflater.loadAnimator(context, R.animator.add_bill_anim) as AnimatorSet
         addBillTranslate2 = AnimatorInflater.loadAnimator(context, R.animator.add_bill_anim) as AnimatorSet
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val isIdle = newState == RecyclerView.SCROLL_STATE_IDLE
+                Log.d(TAG, "newState SCROLL_STATE_IDLE: $isIdle")
+                if (isIdle == lastIsIdle) return
+                lastIsIdle = isIdle
+                if (displayAnim?.isRunning == true) {
+                    displayAnim?.cancel()
+                }
+                displayAnim = FabAnimUtil.startDisplayAnim(fabRoot, isIdle)
+
+            }
+        })
     }
 
     private fun bindEvents() {
@@ -75,7 +95,7 @@ class WBHotSearchView(context: Context) : BaseBookStoreView(context), View.OnCli
     override fun onClick(v: View) {
         when(v.id) {
             R.id.fabRoot -> {
-                fabRoot.setImageResource(if (isAdd) R.drawable.ic_add_24px else R.drawable.ic_close_24px)
+                fabRoot.setImageResource(if (isAdd) R.drawable.ic_switch_24px else R.drawable.ic_close_24px)
                 isAdd = !isAdd
                 rlAddBill.visibility = (if (isAdd) View.VISIBLE else View.GONE)
                 if (isAdd) {
@@ -92,7 +112,7 @@ class WBHotSearchView(context: Context) : BaseBookStoreView(context), View.OnCli
 
     private fun hideFABMenu() {
         rlAddBill.visibility = View.GONE
-        fabRoot.setImageResource(R.drawable.ic_add_24px)
+        fabRoot.setImageResource(R.drawable.ic_switch_24px)
         isAdd = false
     }
 }
