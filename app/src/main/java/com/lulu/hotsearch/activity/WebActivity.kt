@@ -3,6 +3,7 @@ package com.lulu.hotsearch.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.webkit.*
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,17 +15,14 @@ class WebActivity : ReaderBaseActivity() {
 
     private lateinit var webView: WebView
     public lateinit var leftImage: ImageView
+    public lateinit var rightImage: ImageView
     public lateinit var actionBarTitle: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
         val url = intent.getStringExtra(Constant.WEB_URL)
-        webView = findViewById(R.id.webView)
-        leftImage = findViewById(R.id.leftImage)
-        actionBarTitle = findViewById(R.id.profile_header_title)
-        setLeftImage(intent.getStringExtra(Constant.HOT_SEARCH_TYPE))
-        actionBarTitle.text = intent.getStringExtra(Constant.WEB_TITLE)
+        initView()
         webView.loadUrl(url)
         webView.webViewClient = object : WebViewClient() {
 
@@ -58,6 +56,17 @@ class WebActivity : ReaderBaseActivity() {
         webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW); // 允许https中加载http
 
 
+    }
+
+    private fun initView() {
+        webView = findViewById(R.id.webView)
+        leftImage = findViewById(R.id.leftImage)
+        rightImage = findViewById(R.id.rightImage)
+        actionBarTitle = findViewById(R.id.profile_header_title)
+        setLeftImage(intent.getStringExtra(Constant.HOT_SEARCH_TYPE))
+        actionBarTitle.text = intent.getStringExtra(Constant.WEB_TITLE)
+        rightImage.visibility = View.VISIBLE
+        rightImage.setOnClickListener { finish() }
     }
 
     override fun onBackPressed() {
