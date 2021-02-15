@@ -10,7 +10,7 @@ import java.util.List;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class WBHotSearchBean extends BaseBean{
+public class HotSearchBean extends BaseBean{
 
     private int code;
     private String msg;

@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.lulu.hotsearch.wb.bean.WBHotSearchBean;
+import com.lulu.hotsearch.wb.bean.HotSearchBean;
 import com.qq.reader.bookstore.BaseBookStoreFragment;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.yuewen.reader.zebra.loader.ObserverEntity;
@@ -46,7 +46,7 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
      * 配置更新时间
      * @param bean
      */
-    private void configUpdateTime(WBHotSearchBean bean) {
+    private void configUpdateTime(HotSearchBean bean) {
         //添加更新时间
         mBookStoreView.titleRightTime.setVisibility(View.VISIBLE);
         CharSequence timeStr = DateFormat.format("kk:mm:ss", (long) bean.getTime_stamp());
