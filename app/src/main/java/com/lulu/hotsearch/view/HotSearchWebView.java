@@ -7,6 +7,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.webkit.WebView;
 
+import com.lulu.baseutil.bezelless.DensityUtil;
+
 /**
  * Author: zhanglulu
  * Time: 2021/2/15
@@ -44,17 +46,19 @@ public class HotSearchWebView extends WebView {
         int action = event.getAction();
         //Log.d(TAG, "dispatchTouchEvent: action :" + action + " event.getX():" + event.getX() + " event.getRawX():" + event.getRawX());
         float curX = event.getX();
+        float curY = event.getY();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 downX = curX;
+                downY = curY;
                 break;
             case MotionEvent.ACTION_UP:
-                if (downX - curX > STEP) {
+                if (downX - curX > STEP && Math.abs(curY - downY) < STEP) {
                     Log.d(TAG, "dispatchTouchEvent: 下一个");
                     if (listener != null) {
                         listener.onNext();
                     }
-                } else if (curX - downX > STEP) {
+                } else if (curX - downX > STEP && Math.abs(curY - downY) < STEP) {
                     Log.d(TAG, "dispatchTouchEvent: 上一个");
                     if (listener != null) {
                         listener.onPre();
@@ -67,6 +71,7 @@ public class HotSearchWebView extends WebView {
     }
 
     private float downX;
+    private float downY;
     private OnSwitchListener listener;
 
     public void setOnSwitchListener(OnSwitchListener listener) {

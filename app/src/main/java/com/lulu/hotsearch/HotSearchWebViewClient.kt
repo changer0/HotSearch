@@ -40,10 +40,26 @@ class HotSearchWebViewClient(private val activity: Activity): WebViewClient() {
         Log.d(TAG, "onPageFinished: url: $url")
         //https://blog.csdn.net/niubitianping/article/details/51212541
         if (url.contains("www.zhihu.com")) {
-            view.loadUrl("javascript:function clearAd(){" +
-                    "document.getElementsByClassName('ModalWrap')[0].style.display==\"none\";" +
-                    "}" +
-                    "clearAd();")
+//            view.loadUrl("javascript:" +
+//                    "function clearAd(){\n" +
+//                    "    setInterval(() => {\n" +
+//                    "        document.getElementsByClassName('ModalWrap')[0].style.display=\"none\";\n" +
+//                    "    }, 500);\n" +
+//                    "}\n" +
+//                    "clearAd();"
+//            )
+            view.loadUrl("javascript:" +
+                    "function clearAd(){\n" +
+                    "    document.getElementsByClassName('ModalWrap')[0].style.display=\"none\";\n" +
+                    "}\n" +
+                    "clearAd();"
+            )
+            view.loadUrl("javascript:" +
+                    "function clearAd(){\n" +
+                    "    document.getElementsByClassName('Sticky MobileAppHeader')[0].style.display=\"none\";\n" +
+                    "}\n" +
+                    "clearAd();"
+            )
         }
         super.onPageFinished(view, url)
     }
