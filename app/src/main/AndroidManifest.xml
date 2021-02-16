@@ -44,13 +44,14 @@
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <!--因为要使用 Material Design 主题-->
         <activity
             android:name="com.qq.reader.bookstore.CommonBookStoreActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:theme="@style/AppTheme"
-            tools:replace="theme" />
+            tools:replace="theme,windowSoftInputMode" />
     </application>
 
 </manifest>
