@@ -1,6 +1,5 @@
 package com.qq.reader.activity;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -10,12 +9,16 @@ import android.view.WindowManager;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import static android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+import com.lulu.basic.view.ProgressDialogFragment;
+
 
 /**
  * @author zhanglulu
  */
 public class ReaderBaseActivity extends FragmentActivity {
+
+    private ProgressDialogFragment progress;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -42,11 +45,30 @@ public class ReaderBaseActivity extends FragmentActivity {
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         InputMethodManagerLastSrvView.fixLeak(this);
+    }
+
+
+    //----------------------------------------------------------------------------------------------
+    // 其他 UI 工具
+    public void showProgress(String msg) {
+        if (progress == null) {
+            progress = new ProgressDialogFragment();
+        }
+        progress.setMsg(msg);
+        progress.show(getSupportFragmentManager());
+    }
+
+    public void hideProgress() {
+        if (progress != null) {
+            progress.dismiss();
+        }
     }
 }

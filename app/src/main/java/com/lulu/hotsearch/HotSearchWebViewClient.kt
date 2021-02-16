@@ -9,13 +9,14 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.lulu.basic.utils.AssetsUtil
+import com.lulu.hotsearch.activity.WebActivity
 import com.lulu.hotsearch.bean.FilterRule
 import com.yuewen.reader.zebra.utils.GSONUtil
 import java.lang.StringBuilder
 
 private const val TAG = "HotSearchWebViewClient"
 private const val AD_RULES = "auto_invoke_rules.json"
-class HotSearchWebViewClient(private val activity: Activity): WebViewClient() {
+class HotSearchWebViewClient(private val activity: WebActivity): WebViewClient() {
     private val assetsFileToString: String = AssetsUtil.getAssetsFileToString(AD_RULES)
     private val filterRules = GSONUtil.parseJsonToList<FilterRule>(assetsFileToString, FilterRule::class.java)
 
@@ -44,7 +45,10 @@ class HotSearchWebViewClient(private val activity: Activity): WebViewClient() {
     override fun onPageFinished(view: WebView, url: String) {
 
         Log.d(TAG, "onPageFinished: url: $url")
-        filterRule(url, view)
+        view.postDelayed({
+            filterRule(url, view)
+            activity.hideProgress()
+        }, 500)
         super.onPageFinished(view, url)
     }
 
@@ -56,8 +60,7 @@ class HotSearchWebViewClient(private val activity: Activity): WebViewClient() {
                 val invokeMethod = "filterRule${methodIndex++}"
                 val invokeRules = StringBuilder()
                 for (rule in filterRule.rules) {
-                    invokeRules.append(rule)
-                        .append("; ")
+                    invokeRules.append(rule).append("; ")
                 }
                 val filterUrl = "javascript:" +
                         "function $invokeMethod() { \n$invokeRules}\n" +

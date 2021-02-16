@@ -6,4 +6,6 @@
     <string name="hot_search_wb">微博热搜榜</string>
     <string name="hot_search_douyin">抖音热搜榜</string>
     <string name="hot_search_zhihu">知乎热搜榜</string>
+    <string name="filter_msg">请耐心等待, 正在为您屏蔽无用信息...</string>
+
 </resources>

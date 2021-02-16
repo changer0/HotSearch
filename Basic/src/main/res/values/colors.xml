@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--http://tool.c7sky.com/webcolor/#character_0-->
+    <color name="colorPrimary">#666699</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#FF9999</color>
+
+    <color name="text_color_1">#D3D3D3</color>
+    <color name="text_color_2">#ABABAB</color>
+    <color name="text_color_3">#919191</color>
+    <color name="text_color_4">#5F5F5F</color>
+    <color name="text_color_5">#3D3D3D</color>
+</resources>

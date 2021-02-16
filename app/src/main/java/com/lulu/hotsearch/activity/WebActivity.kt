@@ -34,6 +34,7 @@ class WebActivity : ReaderBaseActivity() {
         val url = intent.getStringExtra(Constant.WEB_URL)
         parseIntent()
         initView()
+        showProgress(getString(R.string.filter_msg))
         webView.loadUrl(url)
         webView.webViewClient = HotSearchWebViewClient(this)
         val webSettings = webView.settings
@@ -116,6 +117,7 @@ class WebActivity : ReaderBaseActivity() {
      * 滑动切换内容
      */
     private fun switchContent() {
+        showProgress(getString(R.string.filter_msg))
         val url = hotSearchBean?.result?.get(curIndex)?.url ?: return
         actionBarTitle.text = hotSearchBean?.result?.get(curIndex)?.title
         if (TextUtils.equals(hotSearchBean?.type, Constant.HOT_SEARCH_WB)) {
