@@ -9,14 +9,12 @@ import androidx.fragment.app.FragmentActivity
 import com.lulu.basic.utils.ToastUtil
 import com.qq.reader.bookstore.CommonViewHolder
 import com.yuewen.reader.zebra.BaseViewBindItem
-import com.lulu.hotsearch.Constant
-import com.lulu.hotsearch.HotSearchRealUrlUtil
+import com.lulu.hotsearch.define.Constant
+import com.lulu.hotsearch.utils.HotSearchRealUrlUtil
 import com.lulu.hotsearch.wb.R
 import com.lulu.hotsearch.activity.WebActivity
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.bean.Result
-import org.json.JSONObject
-import java.lang.Exception
 
 class HotSearchBindItem(itemData: Result?) :
     BaseViewBindItem<Result, CommonViewHolder>(itemData) {

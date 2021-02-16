@@ -7,6 +7,8 @@ import com.yuewen.reader.zebra.Zebra
 import com.yuewen.reader.zebra.ZebraLiveData
 import com.yuewen.reader.zebra.cache.CacheMode
 import com.lulu.hotsearch.bean.HotSearchBean
+import com.lulu.hotsearch.define.Constant
+import com.lulu.hotsearch.define.ServerUrl
 import com.lulu.hotsearch.itembuilder.ViewBindItemBuilder
 
 /**
@@ -17,8 +19,9 @@ class HotSearchViewModel : BaseBookStoreViewModel() {
     val URL = ServerUrl.DOMAIN + "hotSearch?type="
 
     override fun getZebraLiveData(params: Bundle?): ZebraLiveData {
-        val type = params?.getString(Constant.HOT_SEARCH_TYPE,
-            Constant.HOT_SEARCH_WB)?:Constant.HOT_SEARCH_WB
+        val type = params?.getString(
+            Constant.HOT_SEARCH_TYPE,
+            Constant.HOT_SEARCH_WB)?: Constant.HOT_SEARCH_WB
         return Zebra.with(HotSearchBean::class.java)
             .get()
             .url(URL+type)

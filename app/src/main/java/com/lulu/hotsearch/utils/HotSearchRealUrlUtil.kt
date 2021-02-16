@@ -1,9 +1,9 @@
-package com.lulu.hotsearch
+package com.lulu.hotsearch.utils
 
-import android.text.TextUtils
 import androidx.fragment.app.FragmentActivity
 import com.lulu.basic.net.CoroutineScopeManager
 import com.lulu.basic.net.HttpCoroutineUtils
+import com.lulu.hotsearch.define.ServerUrl
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.lang.Exception

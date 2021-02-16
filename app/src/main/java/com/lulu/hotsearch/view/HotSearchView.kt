@@ -6,12 +6,11 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.lulu.hotsearch.Constant
-import com.lulu.hotsearch.FabAnimUtil
+import com.lulu.hotsearch.define.Constant
+import com.lulu.hotsearch.utils.FabAnimUtil
 import com.lulu.hotsearch.wb.R
 import com.qq.reader.bookstore.define.BookStoreViewParams
 import com.qq.reader.bookstore.view.BaseBookStoreView

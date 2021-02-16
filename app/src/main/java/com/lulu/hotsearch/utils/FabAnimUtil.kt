@@ -1,4 +1,4 @@
-package com.lulu.hotsearch
+package com.lulu.hotsearch.utils
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter

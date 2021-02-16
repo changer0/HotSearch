@@ -4,7 +4,7 @@ import android.app.ActivityOptions
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.lulu.hotsearch.Constant
+import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.HotSearchKVStorage
 import com.lulu.hotsearch.wb.R
 import com.qq.reader.activity.ReaderBaseActivity

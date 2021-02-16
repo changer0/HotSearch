@@ -1,4 +1,4 @@
-package com.lulu.hotsearch;
+package com.lulu.hotsearch.define;
 
 /**
  * Author: zhanglulu

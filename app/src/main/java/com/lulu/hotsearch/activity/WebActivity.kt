@@ -12,8 +12,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.lulu.baseutil.DrawableUtil
 import com.lulu.basic.utils.ToastUtil
-import com.lulu.hotsearch.Constant
-import com.lulu.hotsearch.HotSearchRealUrlUtil
+import com.lulu.hotsearch.define.Constant
+import com.lulu.hotsearch.utils.HotSearchRealUrlUtil
 import com.lulu.hotsearch.HotSearchWebViewClient
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.view.HotSearchWebView
@@ -93,7 +93,7 @@ class WebActivity : ReaderBaseActivity() {
         tvLoadMsg = findViewById(R.id.tvLoadMsg)
         actionBarTitle = findViewById(R.id.profile_header_title)
 
-        setLeftImage(hotSearchBean?.type?:Constant.HOT_SEARCH_WB)
+        setLeftImage(hotSearchBean?.type?: Constant.HOT_SEARCH_WB)
         actionBarTitle.text = intent.getStringExtra(Constant.WEB_TITLE)
         ivRightImage.visibility = View.VISIBLE
         ivRightImage.setImageDrawable( DrawableUtil.tintDrawable(ivRightImage.drawable, Color.parseColor("#FF000000")))

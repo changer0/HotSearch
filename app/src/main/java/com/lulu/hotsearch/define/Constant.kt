@@ -1,4 +1,4 @@
-package com.lulu.hotsearch
+package com.lulu.hotsearch.define
 
 object Constant {
     const val WEB_URL = "web_url"

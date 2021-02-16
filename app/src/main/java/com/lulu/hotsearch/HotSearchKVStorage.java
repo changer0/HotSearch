@@ -1,7 +1,7 @@
 package com.lulu.hotsearch;
 
 import com.lulu.basic.kvstorage.KVStorage;
-import com.qq.reader.bookstore.define.LoadSignal;
+import com.lulu.hotsearch.define.Constant;
 
 /**
  * Author: zhanglulu
