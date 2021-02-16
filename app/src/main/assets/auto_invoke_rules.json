@@ -3,6 +3,7 @@
     "filter": "www.zhihu.com",
     "rules": [
       "document.getElementsByClassName('ModalWrap-itemBtn')[0].click()",
+      "document.getElementsByClassName('Button ContentItem-rightButton ContentItem-expandButton Button--plain')[0].click()",
       "document.getElementsByClassName('MobileAppHeader-inner')[0].style.display=\"none\"",
       "document.getElementsByClassName('MBannerAd')[0].style.display=\"none\""
     ]
