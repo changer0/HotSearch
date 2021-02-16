@@ -11,12 +11,10 @@ import android.webkit.WebViewClient
 import com.lulu.basic.utils.AssetsUtil
 import com.lulu.hotsearch.bean.FilterRule
 import com.yuewen.reader.zebra.utils.GSONUtil
-import com.yuewen.reader.zebra.utils.MD5Utils
 import java.lang.StringBuilder
-import java.net.URLEncoder
 
 private const val TAG = "HotSearchWebViewClient"
-private const val AD_RULES = "local_ad_filter_rules.json"
+private const val AD_RULES = "auto_invoke_rules.json"
 class HotSearchWebViewClient(private val activity: Activity): WebViewClient() {
     private val assetsFileToString: String = AssetsUtil.getAssetsFileToString(AD_RULES)
     private val filterRules = GSONUtil.parseJsonToList<FilterRule>(assetsFileToString, FilterRule::class.java)
@@ -46,22 +44,28 @@ class HotSearchWebViewClient(private val activity: Activity): WebViewClient() {
     override fun onPageFinished(view: WebView, url: String) {
 
         Log.d(TAG, "onPageFinished: url: $url")
+        filterRule(url, view)
+        super.onPageFinished(view, url)
+    }
+
+    private fun filterRule(url: String, view: WebView) {
         //https://blog.csdn.net/niubitianping/article/details/51212541
+        var methodIndex = 0
         for (filterRule in filterRules) {
             if (url.contains(filterRule.filter)) {
-                val invokeMethod = MD5Utils.getMD5ByStr(filterRule.filter)
+                val invokeMethod = "filterRule${methodIndex++}"
                 val invokeRules = StringBuilder()
                 for (rule in filterRule.rules) {
-                    invokeRules.append(rule).append("; ")
+                    invokeRules.append(rule)
+                        .append("; ")
                 }
                 val filterUrl = "javascript:" +
-                        "function $invokeMethod() { $invokeRules}\n" +
+                        "function $invokeMethod() { \n$invokeRules}\n" +
                         "$invokeMethod();"
                 view.loadUrl(filterUrl)
                 Log.d(TAG, "onPageFinished: $filterUrl")
             }
 
         }
-        super.onPageFinished(view, url)
     }
 }

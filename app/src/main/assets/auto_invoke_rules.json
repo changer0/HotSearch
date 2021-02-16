@@ -1,0 +1,26 @@
+[
+  {
+    "filter": "www.zhihu.com",
+    "rules": [
+      "document.getElementsByClassName('OpenInAppButton OpenInApp is-shown')[0].style.display=\"none\""
+    ]
+  },
+  {
+    "filter": "www.zhihu.com",
+    "rules": [
+      "document.getElementsByClassName('ModalWrap-itemBtn')[0].click()"
+    ]
+  },
+  {
+    "filter": "www.iesdouyin.com",
+    "rules": [
+      "document.getElementsByClassName('img-container--1EDVT play-icon--1rDTE')[0].click()"
+    ]
+  },
+  {
+    "filter": "www.iesdouyin.com",
+    "rules": [
+      "document.getElementsByClassName('header--3IVpR')[0].style.display=\"none\""
+    ]
+  }
+]

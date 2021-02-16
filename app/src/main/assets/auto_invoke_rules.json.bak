@@ -1,0 +1,11 @@
+[
+  {
+    "action": 0,
+    "filter": "www.zhihu.com",
+    "rules": [
+      "document.getElementsByClassName('ModalWrap')[0]",
+      "document.getElementsByClassName('Sticky MobileAppHeader')[0]",
+      "document.getElementsByClassName('OpenInAppButton OpenInApp is-shown')[0]"
+    ]
+  }
+]

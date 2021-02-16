@@ -11,7 +11,6 @@ import java.util.List;
  * @website http://www.bejson.com/java2pojo/
  */
 public class FilterRule extends BaseBean{
-
     private String filter;
     private List<String> rules;
     public void setFilter(String filter) {
