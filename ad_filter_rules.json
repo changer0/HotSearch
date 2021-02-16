@@ -1,0 +1,9 @@
+[
+  {
+    "filter": "www.zhihu.com",
+    "rules": [
+      "document.getElementsByClassName('ModalWrap')[0].style.display=\"none\"",
+      "document.getElementsByClassName('Sticky MobileAppHeader')[0].style.display=\"none\""
+    ]
+  }
+]

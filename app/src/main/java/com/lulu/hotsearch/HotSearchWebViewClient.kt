@@ -8,10 +8,18 @@ import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.lulu.basic.utils.AssetsUtil
+import com.lulu.hotsearch.bean.FilterRule
+import com.yuewen.reader.zebra.utils.GSONUtil
+import com.yuewen.reader.zebra.utils.MD5Utils
+import java.lang.StringBuilder
+import java.net.URLEncoder
 
 private const val TAG = "HotSearchWebViewClient"
+private const val AD_RULES = "local_ad_filter_rules.json"
 class HotSearchWebViewClient(private val activity: Activity): WebViewClient() {
-
+    private val assetsFileToString: String = AssetsUtil.getAssetsFileToString(AD_RULES)
+    private val filterRules = GSONUtil.parseJsonToList<FilterRule>(assetsFileToString, FilterRule::class.java)
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest): Boolean {
         val uri: Uri = request.url
@@ -39,27 +47,20 @@ class HotSearchWebViewClient(private val activity: Activity): WebViewClient() {
 
         Log.d(TAG, "onPageFinished: url: $url")
         //https://blog.csdn.net/niubitianping/article/details/51212541
-        if (url.contains("www.zhihu.com")) {
-//            view.loadUrl("javascript:" +
-//                    "function clearAd(){\n" +
-//                    "    setInterval(() => {\n" +
-//                    "        document.getElementsByClassName('ModalWrap')[0].style.display=\"none\";\n" +
-//                    "    }, 500);\n" +
-//                    "}\n" +
-//                    "clearAd();"
-//            )
-            view.loadUrl("javascript:" +
-                    "function clearAd(){\n" +
-                    "    document.getElementsByClassName('ModalWrap')[0].style.display=\"none\";\n" +
-                    "}\n" +
-                    "clearAd();"
-            )
-            view.loadUrl("javascript:" +
-                    "function clearAd(){\n" +
-                    "    document.getElementsByClassName('Sticky MobileAppHeader')[0].style.display=\"none\";\n" +
-                    "}\n" +
-                    "clearAd();"
-            )
+        for (filterRule in filterRules) {
+            if (url.contains(filterRule.filter)) {
+                val invokeMethod = MD5Utils.getMD5ByStr(filterRule.filter)
+                val invokeRules = StringBuilder()
+                for (rule in filterRule.rules) {
+                    invokeRules.append(rule).append("; ")
+                }
+                val filterUrl = "javascript:" +
+                        "function $invokeMethod() { $invokeRules}\n" +
+                        "$invokeMethod();"
+                view.loadUrl(filterUrl)
+                Log.d(TAG, "onPageFinished: $filterUrl")
+            }
+
         }
         super.onPageFinished(view, url)
     }
