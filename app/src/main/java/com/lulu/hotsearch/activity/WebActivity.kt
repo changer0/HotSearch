@@ -4,11 +4,13 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.view.animation.LinearInterpolator
 import android.webkit.WebSettings
 import android.widget.ImageView
 import android.widget.TextView
 import com.lulu.baseutil.DrawableUtil
-import com.lulu.basic.utils.ColorDrawableUtils
 import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.Constant
 import com.lulu.hotsearch.HotSearchRealUrlUtil
@@ -18,24 +20,32 @@ import com.lulu.hotsearch.view.HotSearchWebView
 import com.lulu.hotsearch.wb.R
 import com.qq.reader.activity.ReaderBaseActivity
 
+
 class WebActivity : ReaderBaseActivity() {
 
     private lateinit var webView: HotSearchWebView
-    public lateinit var leftImage: ImageView
-    public lateinit var rightImage: ImageView
+    public lateinit var ivLeftImage: ImageView
+    public lateinit var ivRightImage: ImageView
+    public lateinit var ivRefreshBtn: ImageView
     public lateinit var actionBarTitle: TextView
+    public lateinit var tvLoadMsg: TextView
     private var hotSearchBean: HotSearchBean? = null
     private var curIndex = 0
     private var curOrder = "0"
+
+    private lateinit var refreshAnim: Animation
+
+    private var curUrl = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
         val url = intent.getStringExtra(Constant.WEB_URL)
+        refreshAnim = AnimationUtils.loadAnimation(this, R.anim.refrsh_anim)
         parseIntent()
         initView()
-        showProgress(getString(R.string.filter_msg))
-        webView.loadUrl(url)
+        loadUrl(url)
         webView.webViewClient = HotSearchWebViewClient(this)
         val webSettings = webView.settings
         //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
@@ -76,16 +86,18 @@ class WebActivity : ReaderBaseActivity() {
 
     private fun initView() {
         webView = findViewById(R.id.webView)
-        leftImage = findViewById(R.id.leftImage)
-        rightImage = findViewById(R.id.rightImage)
+        ivLeftImage = findViewById(R.id.leftImage)
+        ivRefreshBtn = findViewById(R.id.ivRefreshBtn)
+        ivRightImage = findViewById(R.id.rightImage)
+        tvLoadMsg = findViewById(R.id.tvLoadMsg)
         actionBarTitle = findViewById(R.id.profile_header_title)
 
         setLeftImage(hotSearchBean?.type?:Constant.HOT_SEARCH_WB)
         actionBarTitle.text = intent.getStringExtra(Constant.WEB_TITLE)
-        rightImage.visibility = View.VISIBLE
-        rightImage.setImageDrawable( DrawableUtil.tintDrawable(rightImage.drawable, Color.parseColor("#FF000000")))
-        rightImage.setOnClickListener { finish() }
-
+        ivRightImage.visibility = View.VISIBLE
+        ivRightImage.setImageDrawable( DrawableUtil.tintDrawable(ivRightImage.drawable, Color.parseColor("#FF000000")))
+        ivRightImage.setOnClickListener { finish() }
+        initRefreshBtn()
         hotSearchBean?.let {
             webView.setOnSwitchListener(object : HotSearchWebView.OnSwitchListener {
                 override fun onPre() {
@@ -114,24 +126,53 @@ class WebActivity : ReaderBaseActivity() {
     }
 
     /**
+     * 刷新控制
+     */
+    private fun initRefreshBtn() {
+        refreshAnim.interpolator = LinearInterpolator()
+        ivRefreshBtn.setOnClickListener {
+            loadUrl(curUrl)
+        }
+    }
+
+    /**
      * 滑动切换内容
      */
     private fun switchContent() {
-        showProgress(getString(R.string.filter_msg))
         val url = hotSearchBean?.result?.get(curIndex)?.url ?: return
         actionBarTitle.text = hotSearchBean?.result?.get(curIndex)?.title
         if (TextUtils.equals(hotSearchBean?.type, Constant.HOT_SEARCH_WB)) {
-            webView.loadUrl(url)
+            loadUrl(url)
         } else {
             HotSearchRealUrlUtil.parseReadUrl(this@WebActivity, url) { realUrl ->
                 if (TextUtils.isEmpty(realUrl)) {
                     ToastUtil.showShortToast("跳转失败")
                 } else {
-                    webView.loadUrl(realUrl)
+                    loadUrl(realUrl)
                 }
             }
         }
 
+    }
+
+    /**
+     * 加载 URL
+     */
+    public fun loadUrl(url: String) {
+        ivRefreshBtn.startAnimation(refreshAnim)
+        tvLoadMsg.setText(R.string.filter_msg)
+        //showProgress(getString(R.string.filter_msg))
+        curUrl = url
+        webView.loadUrl(url)
+    }
+
+
+    private fun setLeftImage(type: String) {
+        when(type) {
+            Constant.HOT_SEARCH_WB -> ivLeftImage.setImageResource(R.drawable.sina_wb)
+            Constant.HOT_SEARCH_DOUYIN -> ivLeftImage.setImageResource(R.drawable.douyin)
+            Constant.HOT_SEARCH_ZHIHU -> ivLeftImage.setImageResource(R.drawable.zhihu)
+        }
     }
 
     override fun onBackPressed() {
@@ -142,13 +183,11 @@ class WebActivity : ReaderBaseActivity() {
         }
     }
 
-
-    public fun setLeftImage(type: String) {
-        when(type) {
-            Constant.HOT_SEARCH_WB -> leftImage.setImageResource(R.drawable.sina_wb)
-            Constant.HOT_SEARCH_DOUYIN -> leftImage.setImageResource(R.drawable.douyin)
-            Constant.HOT_SEARCH_ZHIHU -> leftImage.setImageResource(R.drawable.zhihu)
-        }
+    public fun loadFinish() {
+        ivRefreshBtn.clearAnimation()
+        tvLoadMsg.setText(R.string.load_finish)
+        //hideProgress()
     }
+
 
 }

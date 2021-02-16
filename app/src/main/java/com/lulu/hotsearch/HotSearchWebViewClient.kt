@@ -47,7 +47,7 @@ class HotSearchWebViewClient(private val activity: WebActivity): WebViewClient()
         Log.d(TAG, "onPageFinished: url: $url")
         view.postDelayed({
             filterRule(url, view)
-            activity.hideProgress()
+            activity.loadFinish()
         }, 500)
         super.onPageFinished(view, url)
     }
