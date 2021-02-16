@@ -32,6 +32,7 @@ class WebActivity : ReaderBaseActivity() {
     private var hotSearchBean: HotSearchBean? = null
     private var curIndex = 0
     private var curOrder = "0"
+    private var isLoading = true
 
     private lateinit var refreshAnim: Animation
 
@@ -131,6 +132,9 @@ class WebActivity : ReaderBaseActivity() {
     private fun initRefreshBtn() {
         refreshAnim.interpolator = LinearInterpolator()
         ivRefreshBtn.setOnClickListener {
+            if (isLoading) {
+                return@setOnClickListener
+            }
             loadUrl(curUrl)
         }
     }
@@ -159,6 +163,7 @@ class WebActivity : ReaderBaseActivity() {
      * 加载 URL
      */
     public fun loadUrl(url: String) {
+        isLoading = true
         ivRefreshBtn.startAnimation(refreshAnim)
         tvLoadMsg.setText(R.string.filter_msg)
         //showProgress(getString(R.string.filter_msg))
@@ -184,7 +189,9 @@ class WebActivity : ReaderBaseActivity() {
     }
 
     public fun loadFinish() {
+        isLoading = false
         ivRefreshBtn.clearAnimation()
+        ivRefreshBtn.rotation = 0F
         tvLoadMsg.setText(R.string.load_finish)
         //hideProgress()
     }
