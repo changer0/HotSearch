@@ -7,6 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
 import com.lulu.basic.view.ProgressDialogFragment;
@@ -64,6 +65,10 @@ public class ReaderBaseActivity extends FragmentActivity {
         }
         progress.setMsg(msg);
         progress.show(getSupportFragmentManager());
+    }
+
+    public void showProgress(@StringRes int stringId) {
+        showProgress(getString(stringId));
     }
 
     public void hideProgress() {

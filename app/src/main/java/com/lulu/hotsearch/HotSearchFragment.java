@@ -35,23 +35,26 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
     protected void onLaunchSuccess(@NonNull View container, @NonNull Bundle enterBundle, @Nullable Bundle savedInstanceState) {
 
         mBookStoreView.actionBarContainer.setVisibility(View.VISIBLE);
-        innerLoadData(enterBundle);
+        innerLoadData(enterBundle, false);
 
         mBookStoreView.getLl()[0].setOnClickListener(v -> {//WB
             mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_WB);
-            innerLoadData(mEnterBundle);
+            innerLoadData(mEnterBundle, true);
         });
         mBookStoreView.getLl()[1].setOnClickListener(v -> {//DOUYIN
             mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_DOUYIN);
-            innerLoadData(mEnterBundle);
+            innerLoadData(mEnterBundle, true);
         });
         mBookStoreView.getLl()[2].setOnClickListener(v -> {//知乎
             mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_ZHIHU);
-            innerLoadData(mEnterBundle);
+            innerLoadData(mEnterBundle, true);
         });
     }
 
-    private void innerLoadData(@NonNull Bundle enterBundle) {
+    private void innerLoadData(@NonNull Bundle enterBundle, boolean showProgress) {
+        if (showProgress) {
+            showProgress(R.string.loading);
+        }
         String type = enterBundle.getString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_WB);
         mBookStoreView.refreshActionBar(type);
         loadData(LoadSignal.LOAD_SIGNAL_INIT);
@@ -63,6 +66,7 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
     public void onDataInit(ObserverEntity entity) {
         super.onDataInit(entity);
         configUpdateTime(entity.zebra.getData());
+        hideProgress();
     }
 
 
