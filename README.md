@@ -1,13 +1,9 @@
-# DataProvider 组件 Demo 工程
+# 更新日志
 
-## 文档
+## 1.0.0
 
-[zebra_core 设计文档](zebra_core/DESIGN.md)
+只给你想要的热搜
 
-[zebra_core 使用文档](zebra_core/README.md)
+## 2.0.0
 
-## 示例图
-
-![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201108224245.png)
-
-![](https://gitee.com/luluzhang/ImageCDN/raw/master/blog/20201112211149.png)
+重大更新，支持可动态配置各种热搜类型
