@@ -190,6 +190,7 @@ class WebActivity : ReaderBaseActivity() {
      * 加载 URL
      */
     public fun loadUrl(url: String) {
+        curUrl = url
         webView.loadUrl(url)
     }
 
@@ -201,8 +202,6 @@ class WebActivity : ReaderBaseActivity() {
         ivRefreshBtn.startAnimation(refreshAnim)
         tvLoadMsg.setText(R.string.filter_msg)
         //showProgress(getString(R.string.filter_msg))
-        curUrl = url
-
     }
 
 
