@@ -14,7 +14,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lulu.baseutil.bezelless.DensityUtil
 import com.lulu.basic.image.ImageUtils
 import com.lulu.hotsearch.bean.HotSearchConfigBean
-import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.utils.FabAnimUtil
 import com.lulu.hotsearch.wb.R
@@ -112,7 +111,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
                 if (displayAnim?.isRunning == true) {
                     displayAnim?.cancel()
                 }
-                displayAnim = FabAnimUtil.startDisplayAnim(
+                displayAnim = FabAnimUtil.startDisplayAnimForTranslation(
                     fabRoot,
                     isIdle
                 )

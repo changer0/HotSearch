@@ -1,18 +1,14 @@
 package com.lulu.hotsearch.view;
 
-import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.webkit.WebView;
 
-import com.lulu.baseutil.CommonUtil;
-import com.lulu.baseutil.bezelless.DensityUtil;
 import com.lulu.hotsearch.OnStartLoadingListener;
-import com.lulu.hotsearch.activity.WebActivity;
-import com.lulu.hotsearch.wb.R;
 
 /**
  * Author: zhanglulu
@@ -69,6 +65,7 @@ public class HotSearchWebView extends WebView {
                         listener.onPre();
                     }
                 }
+
                 break;
 
         }
@@ -101,4 +98,34 @@ public class HotSearchWebView extends WebView {
     public void setOnStartLoadingListener(OnStartLoadingListener listener) {
         onStartLoadingListener = listener;
     }
+
+    public interface OnScrollChangedListener {
+        default public void onScrollChanged(int l, int t, int oldl, int oldt){}
+        default public void onScrollStateChanged(boolean isIdle){}
+    }
+    private OnScrollChangedListener onScrollChangedListener;
+
+    public void seOnScrollChangedListener(OnScrollChangedListener listener) {
+        onScrollChangedListener = listener;
+    }
+
+    private Handler idleHandler = new Handler(Looper.myLooper());
+    private Runnable runnable = () -> {
+        if (onScrollChangedListener != null) {
+            onScrollChangedListener.onScrollStateChanged(true);
+        }
+    };
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        onScrollChangedListener.onScrollChanged(l, t, oldl, oldt);
+        if (onScrollChangedListener != null) {
+            onScrollChangedListener.onScrollStateChanged(false);
+        }
+        idleHandler.removeCallbacks(runnable);
+        idleHandler.postDelayed(runnable, 500);
+    }
+
+
 }

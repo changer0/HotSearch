@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -26,11 +27,12 @@ import com.lulu.hotsearch.OnFinishLoadingListener
 import com.lulu.hotsearch.OnStartLoadingListener
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.manager.HotSearchConfigManager
+import com.lulu.hotsearch.utils.FabAnimUtil
 import com.lulu.hotsearch.view.HotSearchWebView
 import com.lulu.hotsearch.wb.R
 import com.qq.reader.activity.ReaderBaseActivity
 
-
+private const val TAG = "WebActivity"
 class WebActivity : ReaderBaseActivity() {
 
     private lateinit var webView: HotSearchWebView
@@ -51,7 +53,8 @@ class WebActivity : ReaderBaseActivity() {
     private lateinit var hotSearchWebViewClient: HotSearchWebViewClient
 
     private var curUrl = ""
-
+    private var displayAnim: ObjectAnimator? = null
+    private var lastIsIdle = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +93,19 @@ class WebActivity : ReaderBaseActivity() {
         webView.setOnStartLoadingListener(object : OnStartLoadingListener {
             override fun onStartLoading(url: String?) {
                 startLoading(url?:"")
+            }
+        })
+
+        webView.seOnScrollChangedListener(object : HotSearchWebView.OnScrollChangedListener {
+            override fun onScrollStateChanged(isIdle: Boolean) {
+                super.onScrollStateChanged(isIdle)
+                Log.d(TAG, "onIdle: $isIdle")
+                if (isIdle == lastIsIdle) return
+                lastIsIdle = isIdle
+                if (displayAnim?.isRunning == true) {
+                    displayAnim?.cancel()
+                }
+                displayAnim = FabAnimUtil.startDisplayAnimForAlpha(ivOpen, isIdle)
             }
         })
 
