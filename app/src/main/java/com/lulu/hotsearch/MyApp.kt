@@ -1,10 +1,12 @@
 package com.lulu.hotsearch
 
 import android.app.Application
+import com.lulu.baseutil.FileUtil
 import com.lulu.baseutil.Init
 import com.lulu.basic.image.ImageUtils
 import com.lulu.basic.kvstorage.KVStorage
 import com.lulu.basic.net.Http
+import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.wb.BuildConfig
 import com.yuewen.component.router.YWRouter
 import com.yuewen.reader.zebra.ZebraConfig
@@ -15,11 +17,13 @@ import java.io.File
  * for
  */
 class MyApp: Application() {
+
+
     override fun onCreate() {
         super.onCreate()
         Init.app = this
         Init.context = this
-
+        initPath()
         initMMKV()
         initZebra()
         //初始化 YWRouter
@@ -42,6 +46,14 @@ class MyApp: Application() {
         builder.setDebug(BuildConfig.DEBUG)
         ZebraConfig.init(builder)
     }
+
+    /**
+     * 路径初始化
+     */
+    private fun initPath() {
+        Init.ROOT_PATH = FileUtil.getStorageFileDir(this)?.path
+    }
+
 
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)

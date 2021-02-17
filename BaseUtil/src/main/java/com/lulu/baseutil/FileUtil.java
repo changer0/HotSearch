@@ -1,10 +1,16 @@
 package com.lulu.baseutil;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.WorkerThread;
@@ -13,8 +19,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class FileUtil {
     /**
@@ -417,4 +429,123 @@ public class FileUtil {
         return false;
     }
 
+    public static boolean writeFile(File file, String content, boolean append) {
+        if (!file.exists()) {
+            try {
+                if (!file.createNewFile()) {
+                    return false;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        FileOutputStream os = null;
+        BufferedOutputStream bos = null;
+        try {
+            os = new FileOutputStream(file, append);
+            bos = new BufferedOutputStream(os);
+            bos.write(content.getBytes());
+            bos.flush();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bos != null) {
+                try {
+                    bos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (os != null) {
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean writeFile(File file, byte[] data) {
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(data);
+            fos.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean writeObject(String path, Serializable content) {
+        File file = new File(path);
+        ObjectOutputStream objectOutputStream = null;
+        if (!file.exists()) {
+            try {
+                if (!file.createNewFile()) {
+                    return false;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            objectOutputStream = new ObjectOutputStream(new FileOutputStream(path));
+
+            objectOutputStream.writeObject(content);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (objectOutputStream != null) {
+                try {
+                    objectOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
+
+    public static Object readObject(String path) {
+        Object obj = null;
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
+            obj = ois.readObject();
+            ois.close();
+            Log.e("SignupManager", "now reading disk cache data ok");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return obj;
+    }
+
+    /**
+     * 读数据
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    public static String readFile(File file) {
+        if (file == null || !file.exists()) {
+            return null;
+        }
+        String res = "";
+        try {
+            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
+            res = IoUtils.getString(fis);
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+
+    }
 }

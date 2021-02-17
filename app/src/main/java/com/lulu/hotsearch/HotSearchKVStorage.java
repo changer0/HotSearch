@@ -11,7 +11,7 @@ public class HotSearchKVStorage extends KVStorage {
     private static final String SP_NAME = "SP_NAME_HOT_SEARCH";
 
 
-    public static final String LAST_TYPE = "LAST_TYPE";
+    private static final String LAST_TYPE = "LAST_TYPE";
 
     public static void setLastType(String lastType) {
         doCommit(obtainEditor(SP_NAME).putString(LAST_TYPE, lastType));

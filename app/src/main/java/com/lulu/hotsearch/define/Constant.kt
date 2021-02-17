@@ -4,6 +4,7 @@ object Constant {
     const val WEB_URL = "web_url"
     const val WEB_TITLE = "web_title"
     const val WEB_HOT_SEARCH_DATA = "web_hot_search_data"
+
     const val WEB_CUR_ORDER = "WEB_CUR_ORDER"
 
     //Router Constant

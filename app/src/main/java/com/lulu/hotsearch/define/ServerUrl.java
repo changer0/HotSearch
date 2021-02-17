@@ -6,4 +6,6 @@ package com.lulu.hotsearch.define;
  */
 public class ServerUrl {
     public static final String DOMAIN = "http://changer2.uicp.io/";
+    //配置项域名
+    public static final String CONFIG_DOMAIN = "https://gitee.com/luluzhang/HotSearchConfigProject/raw/master/";
 }

@@ -17,8 +17,7 @@ import java.lang.StringBuilder
 private const val TAG = "HotSearchWebViewClient"
 private const val AD_RULES = "auto_invoke_rules.json"
 class HotSearchWebViewClient(private val activity: WebActivity): WebViewClient() {
-    private val assetsFileToString: String = AssetsUtil.getAssetsFileToString(AD_RULES)
-    private val filterRules = GSONUtil.parseJsonToList<FilterRule>(assetsFileToString, FilterRule::class.java)
+    private val filterRules = LaunchInfoManager.getFilterRule()
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest): Boolean {
         val uri: Uri = request.url
