@@ -176,7 +176,7 @@ class WebActivity : ReaderBaseActivity() {
 
     private fun setLeftImage(type: String) {
         val curConfigBean = HotSearchConfigManager.getCurConfigBean()
-        ImageUtils.displayImage(this, curConfigBean?.icon, ivLeftImage)
+        ImageUtils.displayImage(this, curConfigBean.icon, ivLeftImage)
     }
 
     override fun onBackPressed() {

@@ -147,8 +147,8 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
 
     public fun refreshActionBar(type: String) {
         val curConfigBean = HotSearchConfigManager.getCurConfigBean()
-        ImageUtils.displayImage(context, curConfigBean?.icon, leftImage)
-        actionBarTitle.text = curConfigBean?.title
+        ImageUtils.displayImage(context, curConfigBean.icon, leftImage)
+        actionBarTitle.text = curConfigBean.title
 
     }
 

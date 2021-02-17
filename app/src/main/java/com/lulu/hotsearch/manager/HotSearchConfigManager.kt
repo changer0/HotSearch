@@ -7,6 +7,7 @@ import com.lulu.baseutil.Init
 import com.lulu.basic.utils.AssetsUtil
 import com.lulu.hotsearch.HotSearchKVStorage
 import com.lulu.hotsearch.bean.HotSearchConfigBean
+import com.lulu.hotsearch.define.Constant
 import com.yuewen.reader.zebra.utils.GSONUtil
 import java.io.File
 
@@ -61,13 +62,26 @@ object HotSearchConfigManager {
 
     @JvmStatic
     public fun getCurType(): String{
-        return HotSearchKVStorage.getLastType()
+        return getCurConfigBean().type
     }
 
     @JvmStatic
-    public fun getCurConfigBean(): HotSearchConfigBean?{
+    public fun getCurConfigBean(): HotSearchConfigBean{
+        var curBean = checkHasConfigBeanByType(HotSearchKVStorage.getLastType())
+        if (curBean == null) {
+            saveCurType(Constant.HOT_SEARCH_WB)
+            curBean = HotSearchConfigBean()
+            curBean.name = "微博"
+            curBean.title = "微博热搜榜"
+            curBean.icon = "https://gitee.com/luluzhang/HotSearchConfigProject/raw/master/icon/sina_wb.png"
+            curBean.type = "weibo"
+        }
+        return curBean
+    }
+
+    private fun checkHasConfigBeanByType(type: String): HotSearchConfigBean? {
         for (bean in configInfo) {
-            if (TextUtils.equals(getCurType(), bean.type)) {
+            if (TextUtils.equals(type, bean.type)) {
                 return bean
             }
         }
