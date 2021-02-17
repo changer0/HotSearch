@@ -1,7 +1,9 @@
 package com.lulu.baseutil;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.IBinder;
@@ -13,6 +15,22 @@ import android.view.inputmethod.InputMethodManager;
  * 通用型工具
  */
 public class CommonUtil {
+    /**
+     * 根据当前context获取Activity, 主要处理Dialog相获取不到的问题
+     * 未来放到 CommonUtility
+     * @param cont
+     * @return
+     */
+    public static Activity getActivity(Context cont) {
+        if (cont == null)
+            return null;
+        else if (cont instanceof Activity)
+            return (Activity) cont;
+        else if (cont instanceof ContextWrapper)
+            return getActivity(((ContextWrapper) cont).getBaseContext());
+
+        return null;
+    }
     /**
      * 根据读书位置获取当前进度
      */

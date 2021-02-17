@@ -1,5 +1,6 @@
 package com.lulu.hotsearch.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -7,7 +8,11 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.webkit.WebView;
 
+import com.lulu.baseutil.CommonUtil;
 import com.lulu.baseutil.bezelless.DensityUtil;
+import com.lulu.hotsearch.OnStartLoadingListener;
+import com.lulu.hotsearch.activity.WebActivity;
+import com.lulu.hotsearch.wb.R;
 
 /**
  * Author: zhanglulu
@@ -81,5 +86,19 @@ public class HotSearchWebView extends WebView {
     public interface OnSwitchListener {
         public void onPre();
         public void onNext();
+    }
+
+    @Override
+    public void loadUrl(String url) {
+        super.loadUrl(url);
+        if (onStartLoadingListener != null) {
+            onStartLoadingListener.onStartLoading(url);
+        }
+    }
+
+    private OnStartLoadingListener onStartLoadingListener;
+
+    public void setOnStartLoadingListener(OnStartLoadingListener listener) {
+        onStartLoadingListener = listener;
     }
 }

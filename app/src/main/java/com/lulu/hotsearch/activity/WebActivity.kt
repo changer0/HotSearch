@@ -20,6 +20,7 @@ import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.utils.HotSearchRealUrlUtil
 import com.lulu.hotsearch.HotSearchWebViewClient
+import com.lulu.hotsearch.OnStartLoadingListener
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.view.HotSearchWebView
@@ -42,6 +43,7 @@ class WebActivity : ReaderBaseActivity() {
     private var isLoading = true
 
     private lateinit var refreshAnim: Animation
+    private lateinit var hotSearchWebViewClient: HotSearchWebViewClient
 
     private var curUrl = ""
 
@@ -57,11 +59,27 @@ class WebActivity : ReaderBaseActivity() {
         refreshAnim = AnimationUtils.loadAnimation(this, R.anim.refrsh_anim)
         parseIntent()
         initView()
+        initWebView()
         loadUrl(url)
-        webView.webViewClient = HotSearchWebViewClient(this)
+    }
+
+    private fun initWebView() {
+        hotSearchWebViewClient = HotSearchWebViewClient(this)
+        webView.webViewClient = hotSearchWebViewClient
+
+        hotSearchWebViewClient.setOnStartLoadingListener(object : OnStartLoadingListener {
+            override fun onStartLoading(url: String?) {
+                startLoading(url?:"")
+            }
+        })
+        webView.setOnStartLoadingListener(object : OnStartLoadingListener {
+            override fun onStartLoading(url: String?) {
+                startLoading(url?:"")
+            }
+        })
+
         val webSettings = webView.settings
         //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
-
         webSettings.setJavaScriptEnabled(true);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
@@ -79,8 +97,6 @@ class WebActivity : ReaderBaseActivity() {
         webSettings.setAllowFileAccessFromFileURLs(false); // 本地文件能否通过ajax访问别的本地文件
         webSettings.setAllowUniversalAccessFromFileURLs(true); // 本地文件能否通过ajax跨域访问http/https
         webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW); // 允许https中加载http
-
-
     }
 
     private fun parseIntent() {
@@ -174,12 +190,19 @@ class WebActivity : ReaderBaseActivity() {
      * 加载 URL
      */
     public fun loadUrl(url: String) {
+        webView.loadUrl(url)
+    }
+
+    /**
+     * 由 WebView 通知 loading
+     */
+    private fun startLoading(url: String) {
         isLoading = true
         ivRefreshBtn.startAnimation(refreshAnim)
         tvLoadMsg.setText(R.string.filter_msg)
         //showProgress(getString(R.string.filter_msg))
         curUrl = url
-        webView.loadUrl(url)
+
     }
 
 

@@ -10,12 +10,17 @@ import android.webkit.WebViewClient
 import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.activity.WebActivity
 import com.lulu.hotsearch.manager.FilterRuleManager
-import java.lang.StringBuilder
 
 private const val TAG = "HotSearchWebViewClient"
 private const val AD_RULES = "auto_invoke_rules.json"
 class HotSearchWebViewClient(private val activity: WebActivity): WebViewClient() {
     private val filterRules = FilterRuleManager.getFilterRule()
+
+    private var onStartLoadingListener: OnStartLoadingListener? = null
+
+    fun setOnStartLoadingListener(listener: OnStartLoadingListener?) {
+        onStartLoadingListener = listener
+    }
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest): Boolean {
         val uri: Uri = request.url
@@ -46,6 +51,7 @@ class HotSearchWebViewClient(private val activity: WebActivity): WebViewClient()
             }
             return true
         }
+        onStartLoadingListener?.onStartLoading(uri.toString())
         //返回false，意味着请求过程里，不管有多少次的跳转请求（即新的请求地址），均交给webView自己处理，这也是此方法的默认处理
         //返回true，说明你自己想根据url，做新的跳转，比如在判断url符合条件的情况下，我想让webView加载http://ask.csdn.net/questions/178242
         return super.shouldOverrideUrlLoading(view, request)
