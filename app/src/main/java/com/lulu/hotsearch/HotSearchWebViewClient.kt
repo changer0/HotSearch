@@ -38,17 +38,11 @@ class HotSearchWebViewClient(private val activity: WebActivity): WebViewClient()
 //            return true
 //        }
         if ((!TextUtils.equals(uri.scheme,"http") && !TextUtils.equals(uri.scheme,"https"))
-            || TextUtils.equals(uri.host, "www.zhihu.com")//知乎
-            || TextUtils.equals(uri.host, "www.iesdouyin.com")//抖音
+            || TextUtils.equals(uri.host, "www.zhihu.com")//知乎，这个知乎是真恶心！
+//            || TextUtils.equals(uri.host, "www.iesdouyin.com")//抖音
+//            || TextUtils.equals(uri.host, "z.douyin.com")//抖音
         ) {
-            activity.showOpenBtn()
-            activity.setOnClickOpenListener {
-                try {
-                    activity.startActivity(Intent(Intent.ACTION_VIEW, uri))
-                } catch (e: Exception) {
-                    ToastUtil.showShortToast("对应应用可能未安装，请安装后重试")
-                }
-            }
+            activity.handleOpenBtn(uri)
             return true
         }
         onStartLoadingListener?.onStartLoading(uri.toString())

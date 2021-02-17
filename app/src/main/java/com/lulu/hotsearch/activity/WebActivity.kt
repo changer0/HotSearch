@@ -4,13 +4,16 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
+import android.webkit.DownloadListener
 import android.webkit.WebSettings
 import android.widget.ImageView
 import android.widget.TextView
@@ -66,7 +69,10 @@ class WebActivity : ReaderBaseActivity() {
     private fun initWebView() {
         hotSearchWebViewClient = HotSearchWebViewClient(this)
         webView.webViewClient = hotSearchWebViewClient
-
+        webView.setDownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
+            handleOpenBtn(Uri.parse(url))
+            loadFinish()
+        }
         hotSearchWebViewClient.setOnStartLoadingListener(object : OnStartLoadingListener {
             override fun onStartLoading(url: String?) {
                 startLoading(url?:"")
@@ -226,7 +232,18 @@ class WebActivity : ReaderBaseActivity() {
         //hideProgress()
     }
 
-    public fun showOpenBtn() {
+    public fun handleOpenBtn(uri: Uri) {
+        showOpenBtn()
+        setOnClickOpenListener {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, uri))
+            } catch (e: Exception) {
+                ToastUtil.showShortToast("对应应用可能未安装，请安装后重试")
+            }
+        }
+    }
+
+    private fun showOpenBtn() {
         if(ivOpen.visibility == View.VISIBLE) {
             return
         }
@@ -252,7 +269,7 @@ class WebActivity : ReaderBaseActivity() {
         set.start()
     }
 
-    public fun setOnClickOpenListener(i: (v: View) -> Unit) {
+    private fun setOnClickOpenListener(i: (v: View) -> Unit) {
         ivOpen.setOnClickListener(i)
     }
 
