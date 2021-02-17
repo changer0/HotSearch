@@ -1,10 +1,9 @@
-package com.lulu.hotsearch
+package com.lulu.hotsearch.manager
 
 import android.text.TextUtils
 import android.util.Log
 import com.lulu.baseutil.FileUtil
 import com.lulu.baseutil.Init
-import com.lulu.baseutil.ParcelUtil
 import com.lulu.basic.utils.AssetsUtil
 import com.lulu.hotsearch.bean.FilterRule
 import com.yuewen.reader.zebra.utils.GSONUtil
@@ -46,7 +45,9 @@ object FilterRuleManager {
         }
 
         if (filterRules.isEmpty()) {
-            filterRules = GSONUtil.parseJsonToList<FilterRule>(AssetsUtil.getAssetsFileToString(AD_RULES), FilterRule::class.java)
+            filterRules = GSONUtil.parseJsonToList<FilterRule>(AssetsUtil.getAssetsFileToString(
+                AD_RULES
+            ), FilterRule::class.java)
         }
         return filterRules
     }

@@ -8,6 +8,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.lulu.hotsearch.activity.WebActivity
+import com.lulu.hotsearch.manager.FilterRuleManager
 import java.lang.StringBuilder
 
 private const val TAG = "HotSearchWebViewClient"
