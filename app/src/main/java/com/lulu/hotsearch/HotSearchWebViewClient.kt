@@ -1,6 +1,5 @@
 package com.lulu.hotsearch
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.text.TextUtils
@@ -8,16 +7,13 @@ import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.lulu.basic.utils.AssetsUtil
 import com.lulu.hotsearch.activity.WebActivity
-import com.lulu.hotsearch.bean.FilterRule
-import com.yuewen.reader.zebra.utils.GSONUtil
 import java.lang.StringBuilder
 
 private const val TAG = "HotSearchWebViewClient"
 private const val AD_RULES = "auto_invoke_rules.json"
 class HotSearchWebViewClient(private val activity: WebActivity): WebViewClient() {
-    private val filterRules = LaunchInfoManager.getFilterRule()
+    private val filterRules = FilterRuleManager.getFilterRule()
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest): Boolean {
         val uri: Uri = request.url

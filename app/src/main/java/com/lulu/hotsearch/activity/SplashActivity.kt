@@ -9,18 +9,15 @@ import com.lulu.basic.net.CoroutineScopeManager
 import com.lulu.basic.net.HttpCoroutineUtils
 import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.HotSearchKVStorage
-import com.lulu.hotsearch.LaunchInfoManager
+import com.lulu.hotsearch.FilterRuleManager
 import com.lulu.hotsearch.define.ServerUrl
 import com.lulu.hotsearch.wb.R
 import com.qq.reader.activity.ReaderBaseActivity
 import com.qq.reader.bookstore.BookStoreActivityLauncher
 import com.qq.reader.bookstore.LaunchParams
-import com.yuewen.reader.zebra.utils.GSONUtil
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 private const val TAG = "SplashActivity"
 class SplashActivity : ReaderBaseActivity() {
@@ -71,7 +68,7 @@ class SplashActivity : ReaderBaseActivity() {
             HttpCoroutineUtils.doRequestGet(ServerUrl.CONFIG_DOMAIN + "filter_rule.json")
         if (result.isSuccess) {
             Log.d(TAG, "requestFilterRule: 请求过滤规则信息：${result.jsonStr}")
-            LaunchInfoManager.saveFilterRule(result.jsonStr)
+            FilterRuleManager.saveFilterRule(result.jsonStr)
         }
     }
     /**
