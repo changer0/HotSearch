@@ -9,7 +9,7 @@ package com.lulu.hotsearch.bean;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class HotSearchConfigBean {
+public class HotSearchConfigBean extends BaseBean{
 
     private String name;
     private String title;
