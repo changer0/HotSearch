@@ -11,6 +11,7 @@ import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.HotSearchKVStorage
 import com.lulu.hotsearch.manager.FilterRuleManager
 import com.lulu.hotsearch.define.ServerUrl
+import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.wb.R
 import com.qq.reader.activity.ReaderBaseActivity
 import com.qq.reader.bookstore.BookStoreActivityLauncher
@@ -45,7 +46,7 @@ class SplashActivity : ReaderBaseActivity() {
         val bundle = Bundle()
         bundle.putString(
             Constant.HOT_SEARCH_TYPE,
-            HotSearchKVStorage.getLastType())
+            HotSearchConfigManager.getCurType())
         BookStoreActivityLauncher.launch(this,
             Constant.WB_HOT_SEARCH,
             LaunchParams.Builder()
@@ -80,7 +81,7 @@ class SplashActivity : ReaderBaseActivity() {
             HttpCoroutineUtils.doRequestGet(ServerUrl.CONFIG_DOMAIN + "config.json")
         if (result.isSuccess) {
             Log.d(TAG, "requestConfigInfo: 请求配置信息：${result.jsonStr}")
-            //HotSearchKVStorage.setFilterRule(result.jsonStr)
+            HotSearchConfigManager.saveConfigInfo(result.jsonStr)
         }
     }
 }

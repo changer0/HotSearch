@@ -15,9 +15,8 @@ private const val TAG = "LaunchInfoManager"
  * 过滤规则管理类
  */
 object FilterRuleManager {
-    private const val AD_RULES = "auto_invoke_rules.json"
+    private const val LOCAL_RULES = "auto_invoke_rules.json"
     private val FILTER_RULE_PATH = Init.ROOT_PATH + "filterRule.json"
-    private val CONFIG_INFO_PATH = Init.ROOT_PATH + "continueReadMark.json"
 
     public fun saveFilterRule(jsonStr: String) {
         try {
@@ -46,7 +45,7 @@ object FilterRuleManager {
 
         if (filterRules.isEmpty()) {
             filterRules = GSONUtil.parseJsonToList<FilterRule>(AssetsUtil.getAssetsFileToString(
-                AD_RULES
+                LOCAL_RULES
             ), FilterRule::class.java)
         }
         return filterRules

@@ -1,0 +1,8 @@
+[
+  {
+    "name": "微博",
+    "title": "微博热搜榜",
+    "icon": "https://gitee.com/luluzhang/HotSearchConfigProject/raw/master/icon/sina_wb.png",
+    "type": "weibo"
+  }
+]

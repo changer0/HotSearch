@@ -11,11 +11,13 @@ import android.webkit.WebSettings
 import android.widget.ImageView
 import android.widget.TextView
 import com.lulu.baseutil.DrawableUtil
+import com.lulu.basic.image.ImageUtils
 import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.utils.HotSearchRealUrlUtil
 import com.lulu.hotsearch.HotSearchWebViewClient
 import com.lulu.hotsearch.bean.HotSearchBean
+import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.view.HotSearchWebView
 import com.lulu.hotsearch.wb.R
 import com.qq.reader.activity.ReaderBaseActivity
@@ -173,11 +175,8 @@ class WebActivity : ReaderBaseActivity() {
 
 
     private fun setLeftImage(type: String) {
-        when(type) {
-            Constant.HOT_SEARCH_WB -> ivLeftImage.setImageResource(R.drawable.sina_wb)
-            Constant.HOT_SEARCH_DOUYIN -> ivLeftImage.setImageResource(R.drawable.douyin)
-            Constant.HOT_SEARCH_ZHIHU -> ivLeftImage.setImageResource(R.drawable.zhihu)
-        }
+        val curConfigBean = HotSearchConfigManager.getCurConfigBean()
+        ImageUtils.displayImage(this, curConfigBean?.icon, ivLeftImage)
     }
 
     override fun onBackPressed() {

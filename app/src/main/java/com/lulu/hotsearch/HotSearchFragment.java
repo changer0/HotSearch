@@ -9,12 +9,16 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lulu.hotsearch.bean.HotSearchBean;
+import com.lulu.hotsearch.bean.HotSearchConfigBean;
 import com.lulu.hotsearch.define.Constant;
+import com.lulu.hotsearch.manager.HotSearchConfigManager;
 import com.lulu.hotsearch.view.HotSearchView;
 import com.lulu.hotsearch.wb.R;
 import com.qq.reader.bookstore.BaseBookStoreFragment;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.yuewen.reader.zebra.loader.ObserverEntity;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Author: zhanglulu
@@ -38,18 +42,11 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
         mBookStoreView.actionBarContainer.setVisibility(View.VISIBLE);
         innerLoadData(enterBundle, false);
 
-        mBookStoreView.getLl()[0].setOnClickListener(v -> {//WB
-            mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_WB);
+        mBookStoreView.setOnFabClickListener((view, bean) -> {
+            mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, bean.getType());
             innerLoadData(mEnterBundle, true);
         });
-        mBookStoreView.getLl()[1].setOnClickListener(v -> {//DOUYIN
-            mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_DOUYIN);
-            innerLoadData(mEnterBundle, true);
-        });
-        mBookStoreView.getLl()[2].setOnClickListener(v -> {//知乎
-            mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_ZHIHU);
-            innerLoadData(mEnterBundle, true);
-        });
+
     }
 
     private void innerLoadData(@NonNull Bundle enterBundle, boolean showProgress) {
@@ -57,10 +54,12 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
             showProgress(R.string.loading);
         }
         String type = enterBundle.getString(Constant.HOT_SEARCH_TYPE, Constant.HOT_SEARCH_WB);
+        HotSearchConfigManager.saveCurType(type);
+
         mBookStoreView.refreshActionBar(type);
         loadData(LoadSignal.LOAD_SIGNAL_INIT);
         mBookStoreView.hideFABMenu();
-        HotSearchKVStorage.setLastType(type);
+
     }
 
     @Override

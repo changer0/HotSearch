@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/leftImage"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:transitionName="anim_weibo_img"
             android:layout_marginStart="10dp"
             android:src="@drawable/ic_launch"

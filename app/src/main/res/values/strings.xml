@@ -3,9 +3,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="splash_text">只给你想要的热搜</string>
     <string name="update_time">更新时间：%s</string>
-    <string name="hot_search_wb">微博热搜榜</string>
-    <string name="hot_search_douyin">抖音热搜榜</string>
-    <string name="hot_search_zhihu">知乎热搜榜</string>
     <string name="filter_msg">请耐心等待, 正在为您屏蔽无用信息...</string>
     <string name="loading">正在加载...</string>
     <string name="load_finish">加载完成</string>
