@@ -1,6 +1,5 @@
 package com.lulu.hotsearch
 
-import android.content.Intent
 import android.net.Uri
 import android.text.TextUtils
 import android.util.Log
@@ -16,9 +15,14 @@ class HotSearchWebViewClient(private val activity: WebActivity): WebViewClient()
     private val filterRules = FilterRuleManager.getFilterRule()
 
     private var onStartLoadingListener: OnStartLoadingListener? = null
+    private var onFinishLoadingListener: OnFinishLoadingListener? = null
 
     fun setOnStartLoadingListener(listener: OnStartLoadingListener?) {
         onStartLoadingListener = listener
+    }
+
+    fun setOnFinishLoadingListener(listener: OnFinishLoadingListener) {
+        onFinishLoadingListener = listener
     }
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest): Boolean {
@@ -55,7 +59,7 @@ class HotSearchWebViewClient(private val activity: WebActivity): WebViewClient()
         Log.d(TAG, "onPageFinished: url: $url")
         view.postDelayed({
             filterRule(url, view)
-            activity.loadFinish()
+            onFinishLoadingListener?.onFinishLoading(url)
         }, 500)
         super.onPageFinished(view, url)
     }

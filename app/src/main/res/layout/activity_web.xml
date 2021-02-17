@@ -62,6 +62,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        <ImageView
+            android:id="@+id/ivPre"
+            android:src="@drawable/ic_navigate_before_24px"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivNext"
+            android:layout_marginEnd="10dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"/>
+
+        <ImageView
+            android:id="@+id/ivNext"
+            android:src="@drawable/ic_navigate_next_24px"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,6 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
-import android.webkit.DownloadListener
 import android.webkit.WebSettings
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,6 +22,7 @@ import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.utils.HotSearchRealUrlUtil
 import com.lulu.hotsearch.HotSearchWebViewClient
+import com.lulu.hotsearch.OnFinishLoadingListener
 import com.lulu.hotsearch.OnStartLoadingListener
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.manager.HotSearchConfigManager
@@ -36,6 +36,8 @@ class WebActivity : ReaderBaseActivity() {
     private lateinit var webView: HotSearchWebView
     public lateinit var ivLeftImage: ImageView
     public lateinit var ivRightImage: ImageView
+    public lateinit var ivPre: ImageView
+    public lateinit var ivNext: ImageView
     public lateinit var ivRefreshBtn: ImageView
     public lateinit var actionBarTitle: TextView
     public lateinit var tvLoadMsg: TextView
@@ -64,6 +66,7 @@ class WebActivity : ReaderBaseActivity() {
         initView()
         initWebView()
         loadUrl(url)
+        refreshPreNextControl()
     }
 
     private fun initWebView() {
@@ -73,6 +76,12 @@ class WebActivity : ReaderBaseActivity() {
             handleOpenBtn(Uri.parse(url))
             loadFinish()
         }
+        hotSearchWebViewClient.setOnFinishLoadingListener(object : OnFinishLoadingListener {
+            override fun onFinishLoading(url: String?) {
+                loadFinish()
+            }
+
+        })
         hotSearchWebViewClient.setOnStartLoadingListener(object : OnStartLoadingListener {
             override fun onStartLoading(url: String?) {
                 startLoading(url?:"")
@@ -121,6 +130,8 @@ class WebActivity : ReaderBaseActivity() {
     private fun initView() {
         webView = findViewById(R.id.webView)
         ivLeftImage = findViewById(R.id.leftImage)
+        ivPre = findViewById(R.id.ivPre)
+        ivNext = findViewById(R.id.ivNext)
         ivOpen = findViewById(R.id.ivOpen)
         ivRefreshBtn = findViewById(R.id.ivRefreshBtn)
         ivRightImage = findViewById(R.id.rightImage)
@@ -189,7 +200,20 @@ class WebActivity : ReaderBaseActivity() {
                 }
             }
         }
+    }
 
+    /**
+     * 刷新 前后 加载控制
+     */
+    private fun refreshPreNextControl() {
+        ivPre.isEnabled = webView.canGoBack()
+        ivNext.isEnabled = webView.canGoForward()
+        ivPre.setOnClickListener {
+            if (webView.canGoBack()) webView.goBack()
+        }
+        ivNext.setOnClickListener {
+            if (webView.canGoForward()) webView.goForward()
+        }
     }
 
     /**
@@ -230,6 +254,7 @@ class WebActivity : ReaderBaseActivity() {
         ivRefreshBtn.rotation = 0F
         tvLoadMsg.setText(R.string.load_finish)
         //hideProgress()
+        refreshPreNextControl()
     }
 
     public fun handleOpenBtn(uri: Uri) {
