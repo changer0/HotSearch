@@ -40,14 +40,10 @@ class HotSearchBindItem(itemData: Result?) :
     private fun goDetail(activity: Activity, hotTitle: TextView?) {
         val hotSearchBean: HotSearchBean? = zebra.getData<HotSearchBean>()
         hotSearchBean?:return
-        when(hotSearchBean.type){
-            Constant.HOT_SEARCH_WB -> {
-                //微博无需解析
-                goWeb(activity, hotSearchBean, hotTitle, itemData.url)
-            }
-            else -> {
-                goOtherHotSearch(activity as FragmentActivity, hotSearchBean, hotTitle)
-            }
+        if (TextUtils.isEmpty(itemData.realUrl)) {
+            goOtherHotSearch(activity as FragmentActivity, hotSearchBean, hotTitle)
+        } else {
+            goWeb(activity, hotSearchBean, hotTitle, itemData.realUrl)
         }
 
     }

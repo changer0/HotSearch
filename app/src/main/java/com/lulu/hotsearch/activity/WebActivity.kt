@@ -45,6 +45,10 @@ class WebActivity : ReaderBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
         val url = intent.getStringExtra(Constant.WEB_URL)
+        if (TextUtils.isEmpty(url)) {
+            finish()
+            return
+        }
         refreshAnim = AnimationUtils.loadAnimation(this, R.anim.refrsh_anim)
         parseIntent()
         initView()

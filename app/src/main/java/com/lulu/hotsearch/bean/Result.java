@@ -13,6 +13,7 @@ import com.lulu.hotsearch.bean.BaseBean;
  */
 public class Result extends BaseBean {
     private String url;
+    private String realUrl;
     private String title;
     private String hotNum;
     private String tag;
@@ -55,5 +56,13 @@ public class Result extends BaseBean {
 
     public void setOrder(String order) {
         this.order = order;
+    }
+
+    public String getRealUrl() {
+        return realUrl;
+    }
+
+    public void setRealUrl(String realUrl) {
+        this.realUrl = realUrl;
     }
 }
