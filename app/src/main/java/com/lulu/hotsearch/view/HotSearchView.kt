@@ -122,7 +122,12 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
     }
 
     private fun fabRootClick() {
-        fabRoot.setImageResource(if (isAdd) R.drawable.ic_add_24px else R.drawable.ic_close_24px)
+        //fabRoot.setImageResource(if (isAdd) R.drawable.ic_add_24px else R.drawable.ic_close_24px)
+        if (isAdd) {
+            ObjectAnimator.ofFloat(fabRoot, "rotation", -45F, 0F).start()
+        } else {
+            ObjectAnimator.ofFloat(fabRoot, "rotation", 0F, -45F).start()
+        }
         isAdd = !isAdd
         llFloatContainer.visibility = (if (isAdd) View.VISIBLE else View.GONE)
         if (isAdd) {
@@ -135,7 +140,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
 
     public fun hideFABMenu() {
         llFloatContainer.visibility = View.GONE
-        fabRoot.setImageResource(R.drawable.ic_add_24px)
+        ObjectAnimator.ofFloat(fabRoot, "rotation", -45F, 0F).start()
         isAdd = false
     }
 
