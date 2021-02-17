@@ -12,7 +12,6 @@ import com.lulu.hotsearch.activity.WebActivity
 import com.lulu.hotsearch.manager.FilterRuleManager
 
 private const val TAG = "HotSearchWebViewClient"
-private const val AD_RULES = "auto_invoke_rules.json"
 class HotSearchWebViewClient(private val activity: WebActivity): WebViewClient() {
     private val filterRules = FilterRuleManager.getFilterRule()
 
