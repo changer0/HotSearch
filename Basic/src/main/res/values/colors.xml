@@ -11,4 +11,7 @@
     <color name="text_color_3">#919191</color>
     <color name="text_color_4">#5F5F5F</color>
     <color name="text_color_5">#3D3D3D</color>
+
+    <!-- 书封，广告等图片默认 Loading色 -->
+    <color name="localstore_img_loading">#f2f2f2</color>
 </resources>

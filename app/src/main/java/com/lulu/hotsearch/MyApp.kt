@@ -2,6 +2,7 @@ package com.lulu.hotsearch
 
 import android.app.Application
 import com.lulu.baseutil.Init
+import com.lulu.basic.image.ImageUtils
 import com.lulu.basic.kvstorage.KVStorage
 import com.lulu.basic.net.Http
 import com.lulu.hotsearch.wb.BuildConfig
@@ -40,5 +41,18 @@ class MyApp: Application() {
         }
         builder.setDebug(BuildConfig.DEBUG)
         ZebraConfig.init(builder)
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        if (level == TRIM_MEMORY_UI_HIDDEN) {
+            ImageUtils.clearMemory(this)
+        }
+        ImageUtils.trimMemory(this, level)
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        ImageUtils.clearMemory(this)
     }
 }
