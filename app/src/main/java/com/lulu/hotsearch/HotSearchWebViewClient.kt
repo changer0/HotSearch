@@ -7,6 +7,7 @@ import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.activity.WebActivity
 import com.lulu.hotsearch.manager.FilterRuleManager
 import java.lang.StringBuilder
@@ -18,20 +19,31 @@ class HotSearchWebViewClient(private val activity: WebActivity): WebViewClient()
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest): Boolean {
         val uri: Uri = request.url
-         if (TextUtils.equals(uri.scheme,"weixin")) {
-            activity.startActivity(Intent(Intent.ACTION_VIEW, uri))
-             return true
-        } else if (TextUtils.equals(uri.scheme, "zhihu") || TextUtils.equals(uri.host, "www.zhihu.com")) {
-            //https://blog.csdn.net/qq_41188773/article/details/89669354?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
-            //当返回false，表示不进行阻止，webview认为当前的url需要进行处理，会继续加载；返回 true，表示阻止webview继续加载url，等待我们进行处理
-            return true
-        }
-        if (TextUtils.equals("www.iesdouyin.com", uri.host)
-            || TextUtils.equals("snssdk1128", uri.scheme)) {
-            val intent = Intent()
-            intent.action = "android.intent.action.VIEW"
-            intent.data = uri
-            activity.startActivity(intent)
+//        if (TextUtils.equals(uri.scheme, "zhihu") || TextUtils.equals(uri.host, "www.zhihu.com")) {
+//            //https://blog.csdn.net/qq_41188773/article/details/89669354?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
+//            //当返回false，表示不进行阻止，webview认为当前的url需要进行处理，会继续加载；返回 true，表示阻止webview继续加载url，等待我们进行处理
+//            return true
+//        }
+//        if (TextUtils.equals("www.iesdouyin.com", uri.host)
+//            || TextUtils.equals("snssdk1128", uri.scheme)) {
+//            val intent = Intent()
+//            intent.action = "android.intent.action.VIEW"
+//            intent.data = uri
+//            activity.startActivity(intent)
+//            return true
+//        }
+        if ((!TextUtils.equals(uri.scheme,"http") && !TextUtils.equals(uri.scheme,"https"))
+            || TextUtils.equals(uri.host, "www.zhihu.com")//知乎
+            || TextUtils.equals(uri.host, "www.iesdouyin.com")//抖音
+        ) {
+            activity.showOpenBtn()
+            activity.setOnClickOpenListener {
+                try {
+                    activity.startActivity(Intent(Intent.ACTION_VIEW, uri))
+                } catch (e: Exception) {
+                    ToastUtil.showShortToast("对应应用可能未安装，请安装后重试")
+                }
+            }
             return true
         }
         //返回false，意味着请求过程里，不管有多少次的跳转请求（即新的请求地址），均交给webView自己处理，这也是此方法的默认处理

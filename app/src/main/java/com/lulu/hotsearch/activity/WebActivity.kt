@@ -1,5 +1,9 @@
 package com.lulu.hotsearch.activity
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
@@ -31,6 +35,7 @@ class WebActivity : ReaderBaseActivity() {
     public lateinit var ivRefreshBtn: ImageView
     public lateinit var actionBarTitle: TextView
     public lateinit var tvLoadMsg: TextView
+    public lateinit var ivOpen: ImageView
     private var hotSearchBean: HotSearchBean? = null
     private var curIndex = 0
     private var curOrder = "0"
@@ -94,6 +99,7 @@ class WebActivity : ReaderBaseActivity() {
     private fun initView() {
         webView = findViewById(R.id.webView)
         ivLeftImage = findViewById(R.id.leftImage)
+        ivOpen = findViewById(R.id.ivOpen)
         ivRefreshBtn = findViewById(R.id.ivRefreshBtn)
         ivRightImage = findViewById(R.id.rightImage)
         tvLoadMsg = findViewById(R.id.tvLoadMsg)
@@ -128,7 +134,6 @@ class WebActivity : ReaderBaseActivity() {
                 }
 
             })
-
         }
     }
 
@@ -199,5 +204,34 @@ class WebActivity : ReaderBaseActivity() {
         //hideProgress()
     }
 
+    public fun showOpenBtn() {
+        if(ivOpen.visibility == View.VISIBLE) {
+            return
+        }
+        ivOpen.visibility = View.VISIBLE
+        tvLoadMsg.text = "点击右侧按钮打开应用"
+        val set = AnimatorSet()
+        set.playTogether(
+            ObjectAnimator.ofFloat(ivOpen, "alpha", 0F, 1F)
+            ,ObjectAnimator.ofFloat(ivOpen, "scaleX", 1F, 1.5F)
+            ,ObjectAnimator.ofFloat(ivOpen, "scaleY", 1F, 1.5F)
+        )
+        set.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                super.onAnimationEnd(animation)
+                val set2 = AnimatorSet()
+                set2.playTogether(
+                    ObjectAnimator.ofFloat(ivOpen, "scaleX", 1.5F, 1F)
+                    ,ObjectAnimator.ofFloat(ivOpen, "scaleY", 1.5F, 1F)
+                )
+                set2.start()
+            }
+        })
+        set.start()
+    }
+
+    public fun setOnClickOpenListener(i: (v: View) -> Unit) {
+        ivOpen.setOnClickListener(i)
+    }
 
 }

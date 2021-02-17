@@ -80,7 +80,7 @@ object HotSearchConfigManager {
     }
 
     private fun checkHasConfigBeanByType(type: String): HotSearchConfigBean? {
-        for (bean in configInfo) {
+        for (bean in getConfigList()) {
             if (TextUtils.equals(type, bean.type)) {
                 return bean
             }
