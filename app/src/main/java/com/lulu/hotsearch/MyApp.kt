@@ -62,13 +62,9 @@ class MyApp: Application() {
      */
     private fun initBugly() {
         val strategy = UserStrategy(this)
-        var versionName = CommonUtil.getVersionName(this)
-        versionName =  if (BuildConfig.DEBUG) {
-            "${versionName}.666"
-        } else {
-            "${versionName}.888"
+        if (BuildConfig.DEBUG) {
+            strategy.appVersion = "${CommonUtil.getVersionName(this)}_debug"
         }
-        strategy.appVersion = versionName
         CrashReport.initCrashReport(this, "1b2b486e59", BuildConfig.DEBUG, strategy)
 
     }
