@@ -1,16 +1,18 @@
 package com.lulu.hotsearch
 
 import android.app.Application
+import com.lulu.baseutil.CommonUtil
 import com.lulu.baseutil.FileUtil
 import com.lulu.baseutil.Init
 import com.lulu.basic.image.ImageUtils
 import com.lulu.basic.kvstorage.KVStorage
 import com.lulu.basic.net.Http
-import com.lulu.hotsearch.define.Constant
-import com.lulu.hotsearch.wb.BuildConfig
+import com.tencent.bugly.crashreport.CrashReport
+import com.tencent.bugly.crashreport.CrashReport.UserStrategy
 import com.yuewen.component.router.YWRouter
 import com.yuewen.reader.zebra.ZebraConfig
 import java.io.File
+
 
 /**
  * Created by zhanglulu on 2020/3/16.
@@ -24,6 +26,7 @@ class MyApp: Application() {
         Init.app = this
         Init.context = this
         initPath()
+        initBugly()
         initMMKV()
         initZebra()
         //初始化 YWRouter
@@ -52,6 +55,22 @@ class MyApp: Application() {
      */
     private fun initPath() {
         Init.ROOT_PATH = FileUtil.getStorageFileDir(this)?.path
+    }
+
+    /**
+     * bugly 初始化
+     */
+    private fun initBugly() {
+        val strategy = UserStrategy(this)
+        var versionName = CommonUtil.getVersionName(this)
+        versionName =  if (BuildConfig.DEBUG) {
+            "${versionName}.666"
+        } else {
+            "${versionName}.888"
+        }
+        strategy.appVersion = versionName
+        CrashReport.initCrashReport(this, "1b2b486e59", BuildConfig.DEBUG, strategy)
+
     }
 
 
