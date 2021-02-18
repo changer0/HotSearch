@@ -15,7 +15,7 @@ android {
         versionName app_version_name.toString().trim()
 
         println("versionName：" + app_version_name.toString().trim())
-        println("versionName：" + app_version_code.toInteger())
+        println("versionCode：" + app_version_code.toInteger())
 
         // Enabling multidex support.
         multiDexEnabled true
