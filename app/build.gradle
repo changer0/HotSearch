@@ -114,3 +114,9 @@ uniteUploadArchives.dependsOn ":lib_provider_build_compiler:uploadArchives"
 uniteUploadArchives.dependsOn ":zebra_core:uploadArchives"
 uniteUploadArchives.dependsOn ":zebra_building:uploadArchives"
 
+
+apply plugin: 'bugly'
+bugly {
+    appId = '1b2b486e59' // 注册时分配的App ID
+    appKey = '795b77e3-a82a-427a-bfc5-c3bd281c1b9d' // 注册时分配的App Key
+}
