@@ -74,7 +74,10 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
      * 配置更新时间
      * @param bean
      */
-    private void configUpdateTime(HotSearchBean bean) {
+    private void configUpdateTime(@Nullable HotSearchBean bean) {
+        if (bean == null) {
+            return;
+        }
         //添加更新时间
         mBookStoreView.titleRightTime.setVisibility(View.VISIBLE);
         CharSequence timeStr = DateFormat.format("kk:mm:ss", (long) bean.getTime_stamp());
