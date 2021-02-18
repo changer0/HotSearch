@@ -44,6 +44,7 @@ class WebActivity : ReaderBaseActivity() {
     public lateinit var actionBarTitle: TextView
     public lateinit var tvLoadMsg: TextView
     public lateinit var ivOpen: ImageView
+    private var needShowOpenButton = false
     private var hotSearchBean: HotSearchBean? = null
     private var curIndex = 0
     private var curOrder = "0"
@@ -100,7 +101,7 @@ class WebActivity : ReaderBaseActivity() {
             override fun onScrollStateChanged(isIdle: Boolean) {
                 super.onScrollStateChanged(isIdle)
                 Log.d(TAG, "onIdle: $isIdle")
-                if (isIdle == lastIsIdle) return
+                if (isIdle == lastIsIdle || needShowOpenButton.not()) return
                 lastIsIdle = isIdle
                 if (displayAnim?.isRunning == true) {
                     displayAnim?.cancel()
@@ -288,6 +289,7 @@ class WebActivity : ReaderBaseActivity() {
         if(ivOpen.visibility == View.VISIBLE) {
             return
         }
+        needShowOpenButton = true
         ivOpen.visibility = View.VISIBLE
         tvLoadMsg.text = "点击右侧按钮打开应用"
         val set = AnimatorSet()
