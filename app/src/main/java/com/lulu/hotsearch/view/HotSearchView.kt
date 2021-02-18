@@ -16,7 +16,7 @@ import com.lulu.basic.image.ImageUtils
 import com.lulu.hotsearch.bean.HotSearchConfigBean
 import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.utils.FabAnimUtil
-import com.lulu.hotsearch.wb.R
+import com.lulu.hotsearch.R
 import com.qq.reader.bookstore.define.BookStoreViewParams
 import com.qq.reader.bookstore.view.BaseBookStoreView
 import com.qq.reader.bookstore.view.CommonLoadMoreView

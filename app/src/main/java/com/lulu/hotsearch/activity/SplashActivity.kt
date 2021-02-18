@@ -12,7 +12,7 @@ import com.lulu.hotsearch.HotSearchKVStorage
 import com.lulu.hotsearch.manager.FilterRuleManager
 import com.lulu.hotsearch.define.ServerUrl
 import com.lulu.hotsearch.manager.HotSearchConfigManager
-import com.lulu.hotsearch.wb.R
+import com.lulu.hotsearch.R
 import com.qq.reader.activity.ReaderBaseActivity
 import com.qq.reader.bookstore.BookStoreActivityLauncher
 import com.qq.reader.bookstore.LaunchParams

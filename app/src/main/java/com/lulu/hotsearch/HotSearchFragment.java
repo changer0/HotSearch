@@ -13,7 +13,7 @@ import com.lulu.hotsearch.bean.HotSearchConfigBean;
 import com.lulu.hotsearch.define.Constant;
 import com.lulu.hotsearch.manager.HotSearchConfigManager;
 import com.lulu.hotsearch.view.HotSearchView;
-import com.lulu.hotsearch.wb.R;
+import com.lulu.hotsearch.R;
 import com.qq.reader.bookstore.BaseBookStoreFragment;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.yuewen.reader.zebra.loader.ObserverEntity;

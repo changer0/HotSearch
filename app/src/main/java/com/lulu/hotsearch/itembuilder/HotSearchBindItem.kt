@@ -11,7 +11,7 @@ import com.qq.reader.bookstore.CommonViewHolder
 import com.yuewen.reader.zebra.BaseViewBindItem
 import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.utils.HotSearchRealUrlUtil
-import com.lulu.hotsearch.wb.R
+import com.lulu.hotsearch.R
 import com.lulu.hotsearch.activity.WebActivity
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.bean.Result

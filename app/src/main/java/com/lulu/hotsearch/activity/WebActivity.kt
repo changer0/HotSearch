@@ -29,7 +29,7 @@ import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.utils.FabAnimUtil
 import com.lulu.hotsearch.view.HotSearchWebView
-import com.lulu.hotsearch.wb.R
+import com.lulu.hotsearch.R
 import com.qq.reader.activity.ReaderBaseActivity
 
 private const val TAG = "WebActivity"
