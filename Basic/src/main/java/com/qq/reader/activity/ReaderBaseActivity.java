@@ -63,6 +63,7 @@ public class ReaderBaseActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         InputMethodManagerLastSrvView.fixLeak(this);
+        progress = null;
     }
 
 

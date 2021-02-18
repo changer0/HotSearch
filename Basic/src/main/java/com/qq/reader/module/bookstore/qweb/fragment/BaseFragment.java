@@ -55,4 +55,10 @@ public abstract class BaseFragment extends Fragment {
             progress.dismiss();
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        progress = null;
+    }
 }
