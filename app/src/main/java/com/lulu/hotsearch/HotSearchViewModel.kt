@@ -16,7 +16,7 @@ import com.lulu.hotsearch.itembuilder.ViewBindItemBuilder
  */
 class HotSearchViewModel : BaseBookStoreViewModel() {
 
-    val URL = ServerUrl.DOMAIN + "hotSearch?type="
+    val URL = ServerUrl.DOMAIN + "list?type="
 
     override fun getZebraLiveData(params: Bundle?): ZebraLiveData {
         val type = params?.getString(

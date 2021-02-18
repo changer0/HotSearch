@@ -5,7 +5,7 @@ package com.lulu.hotsearch.define;
  * Time: 2021/2/15
  */
 public class ServerUrl {
-    public static final String DOMAIN = "http://changer2.uicp.io/";
+    public static final String DOMAIN = "https://service-6qnrov8o-1256519379.gz.apigw.tencentcs.com/release/hotSearch/";
     //配置项域名
     public static final String CONFIG_DOMAIN = "https://gitee.com/luluzhang/HotSearchConfigProject/raw/master/";
 }
