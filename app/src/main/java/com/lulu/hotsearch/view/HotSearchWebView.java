@@ -50,6 +50,8 @@ public class HotSearchWebView extends WebView {
         float curY = event.getY();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
+                isUp = false;
+                notifyIdle();
                 downX = curX;
                 downY = curY;
                 break;
@@ -65,7 +67,8 @@ public class HotSearchWebView extends WebView {
                         listener.onPre();
                     }
                 }
-
+                isUp = true;
+                notifyIdle();
                 break;
 
         }
@@ -99,6 +102,8 @@ public class HotSearchWebView extends WebView {
         onStartLoadingListener = listener;
     }
 
+    //----------------------------------------------------------------------------------------------
+    // 滚动监听
     public interface OnScrollChangedListener {
         default public void onScrollChanged(int l, int t, int oldl, int oldt){}
         default public void onScrollStateChanged(boolean isIdle){}
@@ -109,10 +114,12 @@ public class HotSearchWebView extends WebView {
         onScrollChangedListener = listener;
     }
 
+    private boolean isUp = true;
+
     private Handler idleHandler = new Handler(Looper.myLooper());
     private Runnable runnable = () -> {
         if (onScrollChangedListener != null) {
-            onScrollChangedListener.onScrollStateChanged(true);
+            onScrollChangedListener.onScrollStateChanged(isUp);
         }
     };
 
@@ -123,6 +130,10 @@ public class HotSearchWebView extends WebView {
         if (onScrollChangedListener != null) {
             onScrollChangedListener.onScrollStateChanged(false);
         }
+        notifyIdle();
+    }
+
+    private void notifyIdle() {
         idleHandler.removeCallbacks(runnable);
         idleHandler.postDelayed(runnable, 500);
     }
