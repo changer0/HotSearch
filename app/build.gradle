@@ -64,6 +64,25 @@ android {
         jvmTarget = '1.8'
     }
 
+    //打包重命名
+    applicationVariants.all { variant ->
+        //def flavorName = variant.getFlavorName()
+        //def variantName = variant.name.capitalize()
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = "HotSearch_v${defaultConfig.versionName}_${variant.name}_${releaseTime()}.apk"
+                outputFileName = fileName
+            }
+        }
+    }
+
+}
+
+def releaseTime() {
+    //GMT+8是因为北京时间和GMT有8个小时时差。
+    return new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("GMT+8"))
+    //return System.currentTimeMillis()
 }
 
 dependencies {
