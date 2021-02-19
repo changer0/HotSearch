@@ -65,6 +65,7 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
     @Override
     public void onDataInit(ObserverEntity entity) {
         super.onDataInit(entity);
+        mBookStoreView.recyclerView.smoothScrollToPosition(0);
         configUpdateTime(entity.zebra.getData());
         hideProgress();
     }
