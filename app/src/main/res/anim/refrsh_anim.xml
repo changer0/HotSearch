@@ -6,5 +6,5 @@
     android:pivotY="50%"
     android:repeatMode="restart"
     android:repeatCount="infinite"
-    android:duration="2000"
+    android:duration="1000"
     />
