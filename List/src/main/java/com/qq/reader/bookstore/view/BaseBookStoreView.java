@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.lulu.basic.skin.SkinManager;
+import com.lulu.skin.ISkinUpdateListener;
 import com.qq.reader.bookstore.BookStoreUtil;
 import com.qq.reader.bookstore.define.BookStoreViewParams;
 
@@ -22,7 +23,7 @@ import java.util.Set;
  * 承载 Fragment 中所有 View
  * @author zhanglulu
  */
-public abstract class BaseBookStoreView {
+public abstract class BaseBookStoreView  implements ISkinUpdateListener {
 
     protected Context context;
 
@@ -71,9 +72,6 @@ public abstract class BaseBookStoreView {
         actionBarContainer = BookStoreUtil.findViewByIdCheckNull(contentView, params.getActionBarContainerIdRes(), View.class);
         pullDownView = BookStoreUtil.findViewByIdCheckNull(contentView, params.getPullDownViewIdRes(), SwipeRefreshLayout.class);
         loadMoreView = params.getLoadMoreView();
-
-        //使用皮肤包
-        pullDownView.setColorSchemeColors(SkinManager.get().getColor("colorAccent"));
     }
 
     private void initStatViewSet() {
@@ -99,6 +97,12 @@ public abstract class BaseBookStoreView {
 
     public boolean isRefreshing() {
         return pullDownView.isRefreshing();
+    }
+
+    @Override
+    public void onSkinUpdate() {
+        //使用皮肤包
+        pullDownView.setColorSchemeColors(SkinManager.get().getColor("colorAccent"));
     }
 
     //----------------------------------------------------------------------------------------------

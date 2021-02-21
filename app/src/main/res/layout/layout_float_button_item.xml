@@ -24,7 +24,7 @@
         android:id="@+id/fabFloat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/sina_wb"
+        tools:src="@drawable/sina_wb"
         android:layout_marginRight="25dp"
         app:fabSize="mini"
         app:elevation="5dp"

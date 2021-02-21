@@ -4,12 +4,13 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
 import com.lulu.basic.view.ProgressDialogFragment;
+import com.lulu.skin.ISkinUpdateListener;
 
 /**
  * 兼容主工程的空壳 BaseFragment
  * @author zhanglulu
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements ISkinUpdateListener {
 
     private ProgressDialogFragment progress;
 
@@ -61,4 +62,11 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroy();
         progress = null;
     }
+
+    //----------------------------------------------------------------------------------------------
+    // 换肤更新
+    @Override
+    public void onSkinUpdate() {
+    }
+
 }

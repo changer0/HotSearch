@@ -90,4 +90,10 @@ public class CommonBookStoreActivity extends BaseActivity {
             mHoldFragment.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+    @Override
+    public void onSkinUpdate() {
+        super.onSkinUpdate();
+        mHoldFragment.onSkinUpdate();
+    }
 }

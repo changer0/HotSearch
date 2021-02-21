@@ -166,4 +166,8 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
     public fun setOnFabClickListener(listener: OnFabClickListener) {
         fabClickListener = listener
     }
+
+    override fun onSkinUpdate() {
+        super.onSkinUpdate()
+    }
 }
