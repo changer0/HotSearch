@@ -32,6 +32,8 @@ public class BaseActivity extends AppCompatActivity implements ISkinUpdateListen
         getLayoutInflater().setFactory(skinFactory);//设置给 BaseActivity
         adapterStatus();
         super.onCreate(savedInstanceState);
+        //换肤初始化
+        SkinManager.get().init();
         SkinManager.get().addSkinUpdateListener(this);
     }
 
@@ -69,6 +71,7 @@ public class BaseActivity extends AppCompatActivity implements ISkinUpdateListen
     protected void onDestroy() {
         super.onDestroy();
         SkinManager.get().removeSkinUpdateListener(this);
+        skinFactory.release();
         InputMethodManagerLastSrvView.fixLeak(this);
         progress = null;
     }

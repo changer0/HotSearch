@@ -32,8 +32,6 @@ class MyApp: Application() {
         initZebra()
         //初始化 YWRouter
         YWRouter.init(this, BuildConfig.DEBUG)
-        //换肤初始化
-        SkinManager.get().init()
     }
 
     private fun initMMKV() {

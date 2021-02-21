@@ -102,4 +102,13 @@ public class SkinFactory implements LayoutInflater.Factory {
         }
     }
 
+    /**
+     * 释放
+     */
+    public void release() {
+        skinItems.clear();
+        skinItems = null;
+    }
+
+
 }
