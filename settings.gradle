@@ -1,8 +1,9 @@
 include ':zebra_core'
-
-//Demo 模块
 include ':YWRouter_Android'
 include ':Basic'
 include ':List'
-include ':app'
 include ':BaseUtil'
+include ':SkinEngine'
+
+//应用模块
+include ':app'
