@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
+import com.lulu.basic.skin.SkinManager;
 import com.qq.reader.bookstore.BookStoreUtil;
 import com.qq.reader.bookstore.define.BookStoreViewParams;
 
@@ -70,6 +71,9 @@ public abstract class BaseBookStoreView {
         actionBarContainer = BookStoreUtil.findViewByIdCheckNull(contentView, params.getActionBarContainerIdRes(), View.class);
         pullDownView = BookStoreUtil.findViewByIdCheckNull(contentView, params.getPullDownViewIdRes(), SwipeRefreshLayout.class);
         loadMoreView = params.getLoadMoreView();
+
+        //使用皮肤包
+        pullDownView.setColorSchemeColors(SkinManager.get().getColor("colorAccent"));
     }
 
     private void initStatViewSet() {

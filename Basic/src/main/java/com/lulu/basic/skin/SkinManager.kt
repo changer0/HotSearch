@@ -1,6 +1,9 @@
 package com.lulu.basic.skin
 
+import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.text.TextUtils
+import com.lulu.baseutil.CommonUtil
 import com.lulu.baseutil.Init
 import com.lulu.skin.ISkinUpdateListener
 import com.lulu.skin.SkinEngine
@@ -64,7 +67,18 @@ public class SkinManager {
         return SkinEngine.get().isExternalSkin
     }
 
-    public fun getColor() {
-        //return SkinEngine.get().getColor(Init.context, )
+    public fun getColor(resName: String): Int {
+        return SkinEngine.get().getColor(Init.context, resName, getSysResId(resName, "color"))
+    }
+    public fun getDrawable(resName: String): Drawable? {
+        return SkinEngine.get().getDrawable(Init.context, resName, getSysResId(resName, "drawable"))
+    }
+
+    public fun getColorStateList(resName: String): ColorStateList? {
+        return SkinEngine.get().getColorStateList(Init.context, resName, getSysResId(resName, "color"))
+    }
+
+    private fun getSysResId(resName: String, typeName: String): Int {
+        return Init.context.resources.getIdentifier(resName, typeName, CommonUtil.getPackageName(Init.context))
     }
 }
