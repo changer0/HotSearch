@@ -5,6 +5,7 @@ include ':List'
 include ':BaseUtil'
 include ':SkinEngine'
 include ':KVStorage'
+include ':Download'
 
 
 //皮肤包模块
