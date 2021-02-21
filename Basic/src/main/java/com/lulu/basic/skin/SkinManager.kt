@@ -5,6 +5,9 @@ import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import com.lulu.baseutil.CommonUtil
 import com.lulu.baseutil.Init
+import com.lulu.basic.utils.ToastUtil
+import com.lulu.component.download.DownloadManager
+import com.lulu.component.download.SimpleDownloadListener
 import com.lulu.skin.ISkinUpdateListener
 import com.lulu.skin.SkinEngine
 
@@ -81,4 +84,23 @@ public class SkinManager {
     private fun getSysResId(resName: String, typeName: String): Int {
         return Init.context.resources.getIdentifier(resName, typeName, CommonUtil.getPackageName(Init.context))
     }
+
+    /**
+     * 下载方法预留
+     */
+    private fun download() {
+        DownloadManager.get(Init.context).add(
+                "https://gitee.com/luluzhang/HotSearchConfigProject/raw/master/skin/skin_purple.apk",
+                SKIN_PATH + "skin.apk", true, object : SimpleDownloadListener() {
+            override fun onFailed(id: Int, msg: String?) {
+                ToastUtil.showShortToast("下载失败: $msg")
+            }
+
+            override fun onSuccess(id: Int, averageSpeed: String) {
+                ToastUtil.showShortToast("下载成功")
+            }
+        }
+        )
+    }
+
 }

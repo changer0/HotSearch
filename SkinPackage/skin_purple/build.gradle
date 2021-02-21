@@ -31,7 +31,6 @@ android {
     applicationVariants.all { variant ->
         //def flavorName = variant.getFlavorName()
         //def variantName = variant.name.capitalize()
-        //variant.na
 
         variant.outputs.all { output ->
             def outputFile = output.outputFile

@@ -28,7 +28,7 @@ public class DownloadManager {
 
     private SparseArray<DownloadTask> mUnFinishedTasks = new SparseArray<DownloadTask>();
 
-    public static DownloadManager getInstance(Context c) {
+    public static DownloadManager get(Context c) {
         if (mInstance == null) {
             synchronized (DownloadManager.class) {
                 if (mInstance == null) {

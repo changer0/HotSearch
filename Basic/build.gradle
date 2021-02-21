@@ -79,6 +79,8 @@ dependencies {
     api project(":SkinEngine")
     //皮肤资源模块
     api project(":SkinRes")
+    //下载模块
+    api project(":Download")
 
     if (isSourceBuildZebra.toBoolean()) {
         implementation project(":zebra:zebra_core")
