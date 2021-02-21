@@ -3,6 +3,7 @@ package com.lulu.skin
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
+import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -130,6 +131,23 @@ class SkinEngine private constructor(){
         }
         return try {
             skinResources?.getColor(newResId)?:originColor
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return originColor
+        }
+    }
+
+    public fun getColorStateList(context: Context, resName: String?, resId: Int): ColorStateList {
+        val originColor = context.resources.getColorStateList(resId)
+        if (!isExternalSkin) {
+            return originColor
+        }
+        val newResId: Int = skinResources?.getIdentifier(resName, "color", skinPackageName)?:resId
+        if (newResId == 0) {
+            return originColor
+        }
+        return try {
+            skinResources?.getColorStateList(newResId)?:originColor
         } catch (e: Exception) {
             e.printStackTrace()
             return originColor

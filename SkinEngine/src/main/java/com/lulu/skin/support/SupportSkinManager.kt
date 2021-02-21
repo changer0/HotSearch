@@ -15,6 +15,7 @@ public object SupportSkinManager {
     private val supportSkinAttrMap = mutableMapOf(
             pair(BackgroundAttr())
             ,pair(TextColorAttr())
+            ,pair(BackgroundTintAttr())
 
     )
 

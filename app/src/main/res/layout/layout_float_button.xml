@@ -25,7 +25,7 @@
         android:layout_marginBottom="20dp"
         app:fabSize="normal"
         app:elevation="5dp"
-        android:background="#0000FF"
+        app:backgroundTint="@color/colorPrimary"
         app:rippleColor="@color/colorPrimary"
         />
 </RelativeLayout>
