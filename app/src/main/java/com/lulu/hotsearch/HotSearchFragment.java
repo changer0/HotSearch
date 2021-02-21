@@ -46,15 +46,6 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
         mBookStoreView.setOnFabClickListener((view, bean) -> {
             mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, bean.getType());
             innerLoadData(mEnterBundle, true);
-
-
-            //切换主题
-            if (SkinManager.get().isExternalSkin()) {
-                SkinManager.get().restoreDefaultTheme();
-            } else {
-                SkinManager.get().switchSkin(SkinManager.getSKIN_PATH() +"skin_purple-release-unsigned.apk");
-            }
-
         });
 
     }
