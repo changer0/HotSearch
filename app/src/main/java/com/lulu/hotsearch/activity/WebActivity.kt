@@ -30,7 +30,7 @@ import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.utils.FabAnimUtil
 import com.lulu.hotsearch.view.HotSearchWebView
 import com.lulu.hotsearch.R
-import com.qq.reader.activity.BaseActivity
+import com.lulu.basic.activity.BaseActivity
 
 private const val TAG = "WebActivity"
 class WebActivity : BaseActivity() {

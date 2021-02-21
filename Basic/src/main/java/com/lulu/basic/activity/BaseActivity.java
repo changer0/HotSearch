@@ -1,4 +1,4 @@
-package com.qq.reader.activity;
+package com.lulu.basic.activity;
 
 import android.content.res.Resources;
 import android.os.Build;

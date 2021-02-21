@@ -1,4 +1,4 @@
-package com.qq.reader.activity;
+package com.lulu.basic.activity;
 
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;

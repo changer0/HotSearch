@@ -20,7 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.qq.reader.bookstore.view.BaseBookStoreView;
-import com.qq.reader.module.bookstore.qweb.fragment.BaseFragment;
+import com.lulu.basic.fragment.BaseFragment;
 import com.yuewen.reader.zebra.loader.ObserverEntity;
 import com.yuewen.reader.zebra.log.Logger;
 

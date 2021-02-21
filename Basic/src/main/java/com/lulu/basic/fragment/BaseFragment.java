@@ -1,4 +1,4 @@
-package com.qq.reader.module.bookstore.qweb.fragment;
+package com.lulu.basic.fragment;
 
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;

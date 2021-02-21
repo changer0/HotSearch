@@ -9,8 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.qq.reader.activity.BaseActivity;
-import com.qq.reader.module.bookstore.qweb.fragment.BaseFragment;
+import com.lulu.basic.activity.BaseActivity;
+import com.lulu.basic.fragment.BaseFragment;
 
 /**
  * 通用书城 Activity, 用于放置二级页

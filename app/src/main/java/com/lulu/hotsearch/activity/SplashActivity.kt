@@ -12,7 +12,7 @@ import com.lulu.hotsearch.manager.FilterRuleManager
 import com.lulu.hotsearch.define.ServerUrl
 import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.R
-import com.qq.reader.activity.BaseActivity
+import com.lulu.basic.activity.BaseActivity
 import com.qq.reader.bookstore.BookStoreActivityLauncher
 import com.qq.reader.bookstore.LaunchParams
 import kotlinx.android.synthetic.main.activity_main.*
