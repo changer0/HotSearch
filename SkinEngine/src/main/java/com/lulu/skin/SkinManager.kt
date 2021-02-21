@@ -7,6 +7,7 @@ import android.content.res.Resources
 import android.text.TextUtils
 import kotlinx.coroutines.*
 import java.io.File
+import java.lang.NullPointerException
 import kotlin.reflect.full.createInstance
 
 /**
@@ -25,29 +26,48 @@ class SkinManager private constructor(){
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
+    private lateinit var context: Context
+    //外部皮肤
+    private var isExternalSkin = false
+
+    private var skinPackageName = ""
+
+    private var skinResources: Resources? = null
+
+    private var skinUpdateListenerSet = mutableSetOf<ISkinUpdateListener>()
+
+    public fun init(context: Context) {
+        this.context = context.applicationContext
+    }
+
     /**
-     * 加载皮肤包
+     * 加载皮肤包 <br/>
+     * 1. 更换皮肤包时
+     * 2.
      */
-    public fun loadSkin(context: Context, skinPath: String) {
+    public fun loadSkin(skinPath: String) {
         if (TextUtils.isEmpty(skinPath)) {
             return
         }
 
         scope.launch {
-            val resources = getSkinResources(context, skinPath)
-
+            skinResources = getSkinResources(skinPath)
+            skinResources.apply {
+                isExternalSkin = true
+                notifySkinUpdate()
+            }
         }
     }
 
-    private suspend fun getSkinResources(context: Context, path: String): Resources? = withContext(Dispatchers.IO) {
+    private suspend fun getSkinResources(path: String): Resources? = withContext(Dispatchers.IO) {
         var resources: Resources? = null
 
         try {
             val file = File(path)
-            if (!file.exists()) null
+            if (!file.exists()) return@withContext null
             val pm = context.packageManager
             val info = pm.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES)
-            val pn = info.packageName
+            skinPackageName = info.packageName
             //皮肤包的 AssetManager
             val assetManager = AssetManager::class.java.newInstance()
             val addAssetPath = assetManager.javaClass.getMethod("addAssetPath", String::class.java)
@@ -60,9 +80,17 @@ class SkinManager private constructor(){
         resources
     }
 
-    private suspend fun get() {
-        withContext(Dispatchers.IO) {
+    public fun addSkinUpdateListener(listener: ISkinUpdateListener) {
+        skinUpdateListenerSet.add(listener)
+    }
 
+    /**
+     * 通知皮肤更换
+     */
+    private fun notifySkinUpdate() {
+        val listenerList = ArrayList(skinUpdateListenerSet)
+        for (listener in listenerList) {
+            listener.onSkinUpdate()
         }
     }
 

@@ -4,6 +4,7 @@ include ':Basic'
 include ':List'
 include ':BaseUtil'
 include ':SkinEngine'
+include ':KVStorage'
 
 //应用模块
 include ':app'
