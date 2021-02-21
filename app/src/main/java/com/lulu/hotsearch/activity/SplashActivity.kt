@@ -8,12 +8,11 @@ import android.util.Log
 import com.lulu.basic.net.CoroutineScopeManager
 import com.lulu.basic.net.HttpCoroutineUtils
 import com.lulu.hotsearch.define.Constant
-import com.lulu.hotsearch.HotSearchKVStorage
 import com.lulu.hotsearch.manager.FilterRuleManager
 import com.lulu.hotsearch.define.ServerUrl
 import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.R
-import com.qq.reader.activity.ReaderBaseActivity
+import com.qq.reader.activity.BaseActivity
 import com.qq.reader.bookstore.BookStoreActivityLauncher
 import com.qq.reader.bookstore.LaunchParams
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,7 +20,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 private const val TAG = "SplashActivity"
-class SplashActivity : ReaderBaseActivity() {
+class SplashActivity : BaseActivity() {
     val handler = Handler(Looper.getMainLooper())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

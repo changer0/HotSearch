@@ -75,6 +75,8 @@ dependencies {
     api project(":BaseUtil")
     //KV存储
     api project(":KVStorage")
+    //换肤模块
+    api project(":SkinEngine")
 
     if (isSourceBuildZebra.toBoolean()) {
         implementation project(":zebra:zebra_core")

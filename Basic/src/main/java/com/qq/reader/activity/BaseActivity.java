@@ -12,21 +12,27 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
 import com.lulu.basic.view.ProgressDialogFragment;
+import com.lulu.skin.ISkinUpdateListener;
+import com.lulu.skin.SkinFactory;
+import com.lulu.skin.SkinManager;
 
 
 /**
  * @author zhanglulu
  */
-public class ReaderBaseActivity extends FragmentActivity {
+public class BaseActivity extends FragmentActivity implements ISkinUpdateListener {
 
     private ProgressDialogFragment progress;
 
+    private SkinFactory skinFactory;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        skinFactory = new SkinFactory(this);
+        getLayoutInflater().setFactory(skinFactory);//设置给 BaseActivity
         adapterStatus();
         super.onCreate(savedInstanceState);
-
-
+        SkinManager.get().addSkinUpdateListener(this);
     }
 
     private void adapterStatus() {
@@ -85,5 +91,12 @@ public class ReaderBaseActivity extends FragmentActivity {
         if (progress != null) {
             progress.dismiss();
         }
+    }
+
+    //----------------------------------------------------------------------------------------------
+    // 换肤更新
+    @Override
+    public void onSkinUpdate() {
+        skinFactory.apply();
     }
 }

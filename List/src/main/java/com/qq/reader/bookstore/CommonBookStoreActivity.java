@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.qq.reader.activity.ReaderBaseActivity;
+import com.qq.reader.activity.BaseActivity;
 import com.qq.reader.module.bookstore.qweb.fragment.BaseFragment;
 
 /**
@@ -17,7 +17,7 @@ import com.qq.reader.module.bookstore.qweb.fragment.BaseFragment;
  * Author: zhanglulu
  * Time: 2020/12/13
  */
-public class CommonBookStoreActivity extends ReaderBaseActivity {
+public class CommonBookStoreActivity extends BaseActivity {
 
     private BaseFragment mHoldFragment;
     private Bundle enterBundle;

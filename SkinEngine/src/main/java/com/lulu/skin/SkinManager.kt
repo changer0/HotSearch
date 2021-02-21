@@ -4,11 +4,15 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
 import android.content.res.Resources
+import android.content.res.Resources.NotFoundException
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.text.TextUtils
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
-import java.lang.NullPointerException
-import kotlin.reflect.full.createInstance
 
 /**
  * 换肤管理类
@@ -26,32 +30,37 @@ class SkinManager private constructor(){
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
-    private lateinit var context: Context
-    //外部皮肤
-    private var isExternalSkin = false
+    /**
+     * 是否为外部皮肤
+     */
+    public var isExternalSkin = false
 
+    /**
+     * 皮肤包的包名
+     */
     private var skinPackageName = ""
 
+    /**
+     * 皮肤包的资源
+     */
     private var skinResources: Resources? = null
 
     private var skinUpdateListenerSet = mutableSetOf<ISkinUpdateListener>()
 
-    public fun init(context: Context) {
-        this.context = context.applicationContext
-    }
-
     /**
      * 加载皮肤包 <br/>
-     * 1. 更换皮肤包时
-     * 2.
+     * 建议调用时机：<br/>
+     * 1. 更换皮肤包时 <br/>
+     * 2. 进入应用时
      */
-    public fun loadSkin(skinPath: String) {
+    public fun loadSkin(_context: Context, skinPath: String) {
         if (TextUtils.isEmpty(skinPath)) {
             return
         }
+        val context = _context.applicationContext
 
         scope.launch {
-            skinResources = getSkinResources(skinPath)
+            skinResources = getSkinResources(context, skinPath)
             skinResources.apply {
                 isExternalSkin = true
                 notifySkinUpdate()
@@ -59,7 +68,7 @@ class SkinManager private constructor(){
         }
     }
 
-    private suspend fun getSkinResources(path: String): Resources? = withContext(Dispatchers.IO) {
+    private suspend fun getSkinResources(context: Context, path: String): Resources? = withContext(Dispatchers.IO) {
         var resources: Resources? = null
 
         try {
@@ -94,7 +103,48 @@ class SkinManager private constructor(){
         }
     }
 
-    public fun release() {
-        scope.cancel()
+    /**
+     * 恢复默认主题
+     */
+    public fun restoreDefaultTheme() {
+        isExternalSkin = false
+        skinResources = null
+        notifySkinUpdate()
     }
+    
+    //----------------------------------------------------------------------------------------------
+    // 工具方法
+
+    public fun getColor(context: Context, resName: String?, resId: Int): Int {
+        val originColor: Int = context.resources.getColor(resId)
+        if (!isExternalSkin) {
+            return originColor
+        }
+        val newResId: Int = skinResources?.getIdentifier(resName, "color", skinPackageName)?:resId
+        return try {
+            skinResources?.getColor(newResId)?:originColor
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return originColor
+        }
+    }
+
+    public fun getDrawable(context: Context, resName: String?, resId: Int): Drawable? {
+        val originDrawable: Drawable = context.resources.getDrawable(resId)
+        if (!isExternalSkin) {
+            return originDrawable
+        }
+        val newResId: Int = skinResources?.getIdentifier(resName, "drawable", skinPackageName)?:resId
+        return try {
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+                skinResources?.getDrawable(newResId)?:originDrawable
+            } else {
+                skinResources?.getDrawable(newResId, null)?:originDrawable
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return originDrawable
+        }
+    }
+
 }

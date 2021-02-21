@@ -30,10 +30,10 @@ import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.utils.FabAnimUtil
 import com.lulu.hotsearch.view.HotSearchWebView
 import com.lulu.hotsearch.R
-import com.qq.reader.activity.ReaderBaseActivity
+import com.qq.reader.activity.BaseActivity
 
 private const val TAG = "WebActivity"
-class WebActivity : ReaderBaseActivity() {
+class WebActivity : BaseActivity() {
 
     private lateinit var webView: HotSearchWebView
     public lateinit var ivLeftImage: ImageView
