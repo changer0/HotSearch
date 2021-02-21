@@ -10,7 +10,7 @@
 <!--        <item name="viewInflaterClass">@string/viewInflaterClass</item>-->
     </style>
 
-    <style name="TitleTheme" parent="AppTranslucentTheme">
+    <style name="TitleTheme" parent="android:Theme.Material">
         <!-- Window attributes -->
         <item name="android:windowTitleStyle">@null</item>
         <item name="android:windowTitleBackgroundStyle">@null</item>

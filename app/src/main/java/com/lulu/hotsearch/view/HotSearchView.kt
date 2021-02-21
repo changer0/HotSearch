@@ -40,7 +40,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
 
     override fun onCreateParams(): BookStoreViewParams {
         return BookStoreViewParams.Builder(
-            R.layout.wb_hot_search_fragment,
+            R.layout.hot_search_fragment,
             R.id.list_layout
         )
             .setDataErrorViewIdRes(R.id.loading_failed_layout)

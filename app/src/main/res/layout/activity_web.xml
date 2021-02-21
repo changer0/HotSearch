@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <include
         android:id="@+id/common_titler"
-        layout="@layout/wb_titler"
+        layout="@layout/hot_search_titler"
         android:visibility="visible" />
     <com.lulu.hotsearch.view.HotSearchWebView
         android:id="@+id/webView"

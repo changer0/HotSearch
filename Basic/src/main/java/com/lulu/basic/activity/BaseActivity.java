@@ -9,18 +9,18 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.lulu.basic.skin.SkinManager;
 import com.lulu.basic.view.ProgressDialogFragment;
 import com.lulu.skin.ISkinUpdateListener;
 import com.lulu.skin.SkinFactory;
-import com.lulu.skin.SkinManager;
 
 
 /**
  * @author zhanglulu
  */
-public class BaseActivity extends FragmentActivity implements ISkinUpdateListener {
+public class BaseActivity extends AppCompatActivity implements ISkinUpdateListener {
 
     private ProgressDialogFragment progress;
 
@@ -68,6 +68,7 @@ public class BaseActivity extends FragmentActivity implements ISkinUpdateListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        SkinManager.get().removeSkinUpdateListener(this);
         InputMethodManagerLastSrvView.fixLeak(this);
         progress = null;
     }

@@ -31,13 +31,13 @@ public class SkinItem {
             int resId = attr.getResId();
             if ("background".equals(attrName)) {
                 if ("color".equals(attrType)) {
-                    view.setBackgroundColor(SkinManager.get().getColor(context, resName,resId));
+                    view.setBackgroundColor(SkinEngine.get().getColor(context, resName,resId));
                 } else if ("drawable".equals(attrType)) {
-                    view.setBackground(SkinManager.get().getDrawable(context, resName,resId));
+                    view.setBackground(SkinEngine.get().getDrawable(context, resName,resId));
                 }
             } else if ("textColor".equals(attrName)) {
                 if (view instanceof TextView && "color".equals(attrType)) {
-                    ((TextView) view).setTextColor(SkinManager.get().getColor(context, resName,resId));
+                    ((TextView) view).setTextColor(SkinEngine.get().getColor(context, resName,resId));
                 }
             }
         }

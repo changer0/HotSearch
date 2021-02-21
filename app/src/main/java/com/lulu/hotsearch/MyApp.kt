@@ -7,6 +7,7 @@ import com.lulu.baseutil.Init
 import com.lulu.basic.image.ImageUtils
 import com.lulu.basic.kvstorage.KVStorage
 import com.lulu.basic.net.Http
+import com.lulu.basic.skin.SkinManager
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.bugly.crashreport.CrashReport.UserStrategy
 import com.yuewen.component.router.YWRouter
@@ -31,6 +32,8 @@ class MyApp: Application() {
         initZebra()
         //初始化 YWRouter
         YWRouter.init(this, BuildConfig.DEBUG)
+        //换肤初始化
+        SkinManager.get().init()
     }
 
     private fun initMMKV() {
@@ -54,7 +57,7 @@ class MyApp: Application() {
      * 路径初始化
      */
     private fun initPath() {
-        Init.ROOT_PATH = FileUtil.getStorageFileDir(this)?.path
+        Init.ROOT_PATH = FileUtil.getStorageFileDir(this)?.path + File.separator
     }
 
     /**

@@ -28,7 +28,7 @@
             android:layout_alignParentBottom="true"
             android:transitionName="anim_weibo_item"
             android:layout_alignParentEnd="true"
-            android:textColor="@color/text_color_3"
+            android:textColor="@color/colorAccent"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_2"
             android:layout_marginBottom="2dp"
@@ -37,7 +37,8 @@
             tools:visibility="visible"
             android:maxLines="1"
             android:ellipsize="end"
-            tools:text="12:09" />
+            style="@style/TextAppearance.AppCompat.Body2"
+            tools:text="休息休息12:09" />
 
         <RelativeLayout
             android:id="@+id/ll_profile_header_title"

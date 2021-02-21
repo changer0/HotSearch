@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
 import android.content.res.Resources
-import android.content.res.Resources.NotFoundException
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.TextUtils
@@ -15,17 +14,17 @@ import kotlinx.coroutines.withContext
 import java.io.File
 
 /**
- * 换肤管理类
+ * 换肤引擎
  */
-class SkinManager private constructor(){
+class SkinEngine private constructor(){
     companion object {
         @JvmStatic
-        public fun get(): SkinManager {
+        public fun get(): SkinEngine {
             return Holder.instance
         }
     }
     object Holder {
-        val instance = SkinManager()
+        val instance = SkinEngine()
     }
 
     private val scope = CoroutineScope(Dispatchers.Main)
@@ -53,7 +52,7 @@ class SkinManager private constructor(){
      * 1. 更换皮肤包时 <br/>
      * 2. 进入应用时
      */
-    public fun loadSkin(_context: Context, skinPath: String) {
+    public fun loadSkin(_context: Context, skinPath: String , finished: (() -> Unit)? = null) {
         if (TextUtils.isEmpty(skinPath)) {
             return
         }
@@ -61,9 +60,10 @@ class SkinManager private constructor(){
 
         scope.launch {
             skinResources = getSkinResources(context, skinPath)
-            skinResources.apply {
+            skinResources?.apply {
                 isExternalSkin = true
                 notifySkinUpdate()
+                finished?.invoke()
             }
         }
     }
@@ -91,6 +91,10 @@ class SkinManager private constructor(){
 
     public fun addSkinUpdateListener(listener: ISkinUpdateListener) {
         skinUpdateListenerSet.add(listener)
+    }
+
+    public fun removeSkinUpdateListener(listener: ISkinUpdateListener) {
+        skinUpdateListenerSet.remove(listener)
     }
 
     /**
@@ -121,6 +125,9 @@ class SkinManager private constructor(){
             return originColor
         }
         val newResId: Int = skinResources?.getIdentifier(resName, "color", skinPackageName)?:resId
+        if (newResId == 0) {
+            return originColor
+        }
         return try {
             skinResources?.getColor(newResId)?:originColor
         } catch (e: Exception) {
@@ -135,6 +142,9 @@ class SkinManager private constructor(){
             return originDrawable
         }
         val newResId: Int = skinResources?.getIdentifier(resName, "drawable", skinPackageName)?:resId
+        if (newResId == 0) {
+            return originDrawable
+        }
         return try {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
                 skinResources?.getDrawable(newResId)?:originDrawable

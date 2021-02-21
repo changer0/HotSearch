@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.lulu.basic.skin.SkinManager;
 import com.lulu.hotsearch.bean.HotSearchBean;
 import com.lulu.hotsearch.bean.HotSearchConfigBean;
 import com.lulu.hotsearch.define.Constant;
@@ -45,6 +46,10 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
         mBookStoreView.setOnFabClickListener((view, bean) -> {
             mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, bean.getType());
             innerLoadData(mEnterBundle, true);
+
+
+            //切换主题
+            SkinManager.get().switchSkin(SkinManager.getSKIN_PATH() +"skin_purple-release-unsigned.apk");
         });
 
     }

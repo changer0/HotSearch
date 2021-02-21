@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
-    <color name="item_title">#5E5E5E</color>
+    <color name="item_title">@color/colorAccent</color>
     <color name="item_tag">#FF216C</color>
-
 </resources>

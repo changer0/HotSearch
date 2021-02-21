@@ -79,12 +79,12 @@ public class SkinFactory implements LayoutInflater.Factory {
         if (!skinAttrs.isEmpty()) {
             SkinItem skinItem = new SkinItem(view, skinAttrs);
             skinItems.add(skinItem);
-            if (SkinManager.get().isExternalSkin()){
+            if (SkinEngine.get().isExternalSkin()){
                 skinItem.apply(view.getContext());
             }
         }
 
-        Log.d(TAG, "collectViewAttr: skinItems: " + skinItems.toString());
+        //Log.d(TAG, "collectViewAttr: skinItems: " + skinItems.toString());
     }
 
     private boolean isSupportedAttr(String attributeName){
