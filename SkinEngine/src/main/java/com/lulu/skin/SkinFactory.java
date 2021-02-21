@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.lulu.skin.support.SupportSkinManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,7 +90,7 @@ public class SkinFactory implements LayoutInflater.Factory {
     }
 
     private boolean isSupportedAttr(String attributeName){
-        return "background".equals(attributeName) || "textColor".equals(attributeName);
+        return SupportSkinManager.isSupportedAttr(attributeName);
     }
 
     /**

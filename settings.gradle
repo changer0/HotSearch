@@ -9,6 +9,7 @@ include ':KVStorage'
 
 //皮肤包模块
 include ':SkinPackage:skin_purple'
+include ':SkinRes'
 
 //应用模块
 include ':app'

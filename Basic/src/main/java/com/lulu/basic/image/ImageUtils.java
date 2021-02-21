@@ -146,8 +146,8 @@ public class ImageUtils {
         if (commonRoundCornerOptions4 == null) {
             commonRoundCornerOptions4 = RequestOptions
                     .bitmapTransform(new RoundedCornersTransformation(DensityUtil.dip2px(4), 0))
-                    .placeholder(R.color.localstore_img_loading)
-                    .error(R.color.localstore_img_loading);
+                    .placeholder(R.color.img_loading_placeholder)
+                    .error(R.color.img_loading_placeholder);
         }
         return commonRoundCornerOptions4;
     }
@@ -156,8 +156,8 @@ public class ImageUtils {
         if (commonRoundCornerOptions2 == null) {
             commonRoundCornerOptions2 = RequestOptions
                     .bitmapTransform(new RoundedCornersTransformation(DensityUtil.dip2px(2), 0))
-                    .placeholder(R.color.localstore_img_loading)
-                    .error(R.color.localstore_img_loading);
+                    .placeholder(R.color.img_loading_placeholder)
+                    .error(R.color.img_loading_placeholder);
         }
         return commonRoundCornerOptions2;
     }
@@ -166,8 +166,8 @@ public class ImageUtils {
         if (commonRoundCornerOptions7 == null) {
             commonRoundCornerOptions7 = RequestOptions
                     .bitmapTransform(new RoundedCornersTransformation(DensityUtil.dip2px(7), 0))
-                    .placeholder(R.color.localstore_img_loading)
-                    .error(R.color.localstore_img_loading);
+                    .placeholder(R.color.img_loading_placeholder)
+                    .error(R.color.img_loading_placeholder);
         }
         return commonRoundCornerOptions7;
     }
@@ -176,8 +176,8 @@ public class ImageUtils {
         if (commonRoundCornerOptions1000 == null) {
             commonRoundCornerOptions1000 = RequestOptions
                     .bitmapTransform(new RoundedCornersTransformation(1000, 0))
-                    .placeholder(R.color.localstore_img_loading)
-                    .error(R.color.localstore_img_loading);
+                    .placeholder(R.color.img_loading_placeholder)
+                    .error(R.color.img_loading_placeholder);
         }
         return commonRoundCornerOptions1000;
     }
@@ -187,8 +187,8 @@ public class ImageUtils {
         if (commonGaussBlurOptions == null) {
             commonGaussBlurOptions = RequestOptions
                     .bitmapTransform(new BlurTransformation(25))
-                    .placeholder(R.color.localstore_img_loading)
-                    .error(R.color.localstore_img_loading);
+                    .placeholder(R.color.img_loading_placeholder)
+                    .error(R.color.img_loading_placeholder);
         }
         return commonGaussBlurOptions;
     }

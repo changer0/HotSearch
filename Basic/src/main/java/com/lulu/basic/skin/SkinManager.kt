@@ -59,4 +59,12 @@ public class SkinManager {
         SkinKVStorage.setSkinPath(null)
         SkinEngine.get().restoreDefaultTheme()
     }
+
+    public fun isExternalSkin(): Boolean {
+        return SkinEngine.get().isExternalSkin
+    }
+
+    public fun getColor() {
+        //return SkinEngine.get().getColor(Init.context, )
+    }
 }

@@ -49,7 +49,12 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
 
 
             //切换主题
-            SkinManager.get().switchSkin(SkinManager.getSKIN_PATH() +"skin_purple-release-unsigned.apk");
+            if (SkinManager.get().isExternalSkin()) {
+                SkinManager.get().restoreDefaultTheme();
+            } else {
+                SkinManager.get().switchSkin(SkinManager.getSKIN_PATH() +"skin_purple-release-unsigned.apk");
+            }
+
         });
 
     }
