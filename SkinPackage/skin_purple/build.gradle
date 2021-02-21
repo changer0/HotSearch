@@ -26,6 +26,21 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    //打包重命名
+    applicationVariants.all { variant ->
+        //def flavorName = variant.getFlavorName()
+        //def variantName = variant.name.capitalize()
+        //variant.na
+
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = "${project.name}.apk"
+                outputFileName = fileName
+            }
+        }
+    }
 }
 
 dependencies {
