@@ -45,6 +45,11 @@ class SkinEngine private constructor(){
      */
     private var skinResources: Resources? = null
 
+    /**
+     * 皮肤包路径, 作为皮肤包的 Key
+     */
+    private var skinPath = ""
+
     private var skinUpdateListenerSet = mutableSetOf<ISkinUpdateListener>()
 
     /**
@@ -60,11 +65,14 @@ class SkinEngine private constructor(){
         val context = _context.applicationContext
 
         scope.launch {
-            skinResources = getSkinResources(context, skinPath)
+            if (!TextUtils.equals(this@SkinEngine.skinPath, skinPath) || skinResources == null) {
+                skinResources = getSkinResources(context, skinPath)
+            }
             skinResources?.apply {
                 isExternalSkin = true
                 notifySkinUpdate()
                 finished?.invoke()
+                this@SkinEngine.skinPath = skinPath
             }
         }
     }
@@ -114,6 +122,7 @@ class SkinEngine private constructor(){
     public fun restoreDefaultTheme() {
         isExternalSkin = false
         skinResources = null
+        skinPath = "";
         notifySkinUpdate()
     }
     

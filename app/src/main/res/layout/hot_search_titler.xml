@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:transitionName="anim_weibo_item"
-                android:textColor="#000"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:maxLines="1"
