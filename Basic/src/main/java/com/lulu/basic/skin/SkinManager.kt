@@ -10,6 +10,7 @@ import com.lulu.component.download.DownloadManager
 import com.lulu.component.download.SimpleDownloadListener
 import com.lulu.skin.ISkinUpdateListener
 import com.lulu.skin.SkinEngine
+import com.lulu.skin.SkinUtil
 
 
 /**
@@ -71,19 +72,16 @@ public class SkinManager {
     }
 
     public fun getColor(resName: String): Int {
-        return SkinEngine.get().getColor(Init.context, resName, getSysResId(resName, "color"))
+        return SkinEngine.get().getColor(Init.context, resName, SkinUtil.getSysResId(Init.context, resName, "color"))
     }
     public fun getDrawable(resName: String): Drawable? {
-        return SkinEngine.get().getDrawable(Init.context, resName, getSysResId(resName, "drawable"))
+        return SkinEngine.get().getDrawable(Init.context, resName, SkinUtil.getSysResId(Init.context,resName, "drawable"))
     }
 
     public fun getColorStateList(resName: String): ColorStateList? {
-        return SkinEngine.get().getColorStateList(Init.context, resName, getSysResId(resName, "color"))
+        return SkinEngine.get().getColorStateList(Init.context, resName, SkinUtil.getSysResId(Init.context, resName, "color"))
     }
 
-    private fun getSysResId(resName: String, typeName: String): Int {
-        return Init.context.resources.getIdentifier(resName, typeName, CommonUtil.getPackageName(Init.context))
-    }
 
     /**
      * 下载方法预留
