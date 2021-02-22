@@ -14,6 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lulu.baseutil.CommonUtil
 import com.lulu.baseutil.bezelless.DensityUtil
 import com.lulu.basic.image.ImageUtils
+import com.lulu.basic.skin.SkinManager
 import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.bean.HotSearchConfigBean
 import com.lulu.hotsearch.manager.HotSearchConfigManager
@@ -141,6 +142,9 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
                 animatorSet.start()
             }
         }
+
+        //Test
+        SkinManager.get().testInstall()
     }
 
     public fun hideFABMenu() {

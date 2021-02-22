@@ -3,7 +3,6 @@ package com.lulu.basic.skin
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
-import com.lulu.baseutil.CommonUtil
 import com.lulu.baseutil.Init
 import com.lulu.basic.utils.ToastUtil
 import com.lulu.component.download.DownloadManager
@@ -11,6 +10,7 @@ import com.lulu.component.download.SimpleDownloadListener
 import com.lulu.skin.ISkinUpdateListener
 import com.lulu.skin.SkinEngine
 import com.lulu.skin.SkinUtil
+import java.io.File
 
 
 /**
@@ -83,22 +83,41 @@ public class SkinManager {
     }
 
 
+    //----------------------------------------------------------------------------------------------
+    // 皮肤测试代码
+    private val testSkinFilePath = SKIN_PATH + "skin_purple.apk"
     /**
-     * 下载方法预留
+     * 下载测试
      */
-    private fun download() {
-        DownloadManager.get(Init.context).add(
-                "https://gitee.com/luluzhang/HotSearchConfigProject/raw/master/skin/skin_purple.apk",
-                SKIN_PATH + "skin.apk", true, object : SimpleDownloadListener() {
-            override fun onFailed(id: Int, msg: String?) {
-                ToastUtil.showShortToast("下载失败: $msg")
-            }
+    public fun testDownload() {
 
-            override fun onSuccess(id: Int, averageSpeed: String) {
-                ToastUtil.showShortToast("下载成功")
-            }
+        val file = File(testSkinFilePath)
+        if (file.exists()) {
+            file.delete()
         }
+        DownloadManager.get(Init.context).add(
+            "https://gitee.com/luluzhang/HotSearchConfigProject/raw/master/skin/skin_purple.apk",
+            testSkinFilePath, true, object : SimpleDownloadListener() {
+                override fun onFailed(id: Int, msg: String?) {
+                    ToastUtil.showShortToast("下载失败: $msg")
+                }
+
+                override fun onSuccess(id: Int, averageSpeed: String) {
+                    ToastUtil.showShortToast("下载成功")
+                }
+            }
         )
+    }
+
+    /**
+     * 测试安装皮肤包
+     */
+    public fun testInstall() {
+        if (isExternalSkin()) {
+            restoreDefaultTheme()
+        } else {
+            switchSkin(testSkinFilePath)
+        }
     }
 
 }

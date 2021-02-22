@@ -48,7 +48,7 @@ class SkinEngine private constructor(){
     /**
      * 皮肤包路径, 作为皮肤包的 Key
      */
-    private var skinPath = ""
+    public var skinPath = ""
 
     private var skinUpdateListenerSet = mutableSetOf<ISkinUpdateListener>()
 
