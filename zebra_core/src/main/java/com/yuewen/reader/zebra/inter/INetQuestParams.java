@@ -1,5 +1,7 @@
 package com.yuewen.reader.zebra.inter;
 
+import java.util.HashMap;
+
 /**
  * 网络请求请求参数接口
  */
@@ -26,5 +28,10 @@ public interface INetQuestParams {
     /*** Gzip */
     default boolean needGzip() {
         return false;
+    }
+
+    /*** 额外的 Header */
+    default HashMap<String, String> getHeaders() {
+        return null;
     }
 }

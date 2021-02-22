@@ -16,6 +16,7 @@ import com.yuewen.reader.zebra.parser.SimpleGSONParser;
 import com.yuewen.reader.zebra.utils.CastUtils;
 import com.yuewen.reader.zebra.utils.MD5Utils;
 
+import java.util.HashMap;
 import java.util.List;
 /**
  * @author zhanglulu on 2019/3/2.
@@ -254,6 +255,7 @@ public class Zebra<R> {
         private String requestContent;
         private String requestContentType;
         private boolean needGzip;
+        private HashMap<String, String> headers;
 
         public RequestBuilder<R> url(String url) {
             this.url = url;
@@ -281,6 +283,11 @@ public class Zebra<R> {
 
         public RequestBuilder<R> needGzip(boolean needGzip) {
             this.needGzip = needGzip;
+            return this;
+        }
+
+        public RequestBuilder<R> headers(HashMap<String, String> headers) {
+            this.headers = headers;
             return this;
         }
 
@@ -353,6 +360,10 @@ public class Zebra<R> {
                 @Override
                 public boolean needGzip() {
                     return needGzip;
+                }
+                @Override
+                public HashMap<String, String> getHeaders() {
+                    return headers;
                 }
             };
             checkNecessaryParams();
