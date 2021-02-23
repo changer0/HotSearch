@@ -64,6 +64,9 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
         rightImage = contentView.findViewById(R.id.rightImage)
         rightImage.setImageDrawable(Init.context.resources.getDrawable(R.drawable.ic_more_vert_black_24dp))
 
+        rightImage.setOnClickListener {
+            SkinManager.get().testDownload()
+        }
         initFabList(contentView)
         bindEvents()
     }

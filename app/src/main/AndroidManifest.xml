@@ -46,6 +46,14 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
+        <activity
+            android:name="com.lulu.hotsearch.activity.SkinSwitchActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+
         <!--因为要使用 Material Design 主题-->
         <activity
             android:name="com.qq.reader.bookstore.CommonBookStoreActivity"
