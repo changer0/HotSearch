@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/common_title"
-        layout="@layout/hot_search_titler"
+        layout="@layout/hot_search_title"
         android:visibility="visible" />
 
     <RelativeLayout
