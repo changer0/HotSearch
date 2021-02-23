@@ -30,8 +30,8 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="60dp"
         app:fabSize="normal"
-        app:backgroundTint="@color/colorPrimary"
-        app:rippleColor="@color/colorPrimary"
+        app:backgroundTint="@color/primaryColor"
+        app:rippleColor="@color/primaryColor"
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout

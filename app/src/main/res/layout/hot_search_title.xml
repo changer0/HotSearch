@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/common_title"
     android:fitsSystemWindows="true"
+    android:background="@color/primaryColor"
     android:layout_width="fill_parent" android:layout_height="wrap_content">
     <!--android:background="@drawable/common_title_bar_bg_shape"-->
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="48dp">
+        android:layout_height="?attr/actionBarSize">
 
         <ImageView
             android:id="@+id/leftImage"
@@ -28,7 +29,7 @@
             android:layout_alignParentBottom="true"
             android:transitionName="anim_weibo_item"
             android:layout_alignParentEnd="true"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/primaryTextColor"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_2"
             android:layout_marginBottom="2dp"
@@ -36,6 +37,7 @@
             android:visibility="gone"
             tools:visibility="visible"
             android:maxLines="1"
+            android:alpha="0.6"
             android:ellipsize="end"
             style="@style/TextAppearance.AppCompat.Body2"
             tools:text="休息休息12:09" />
@@ -58,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:transitionName="anim_weibo_item"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/primaryTextColor"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:maxLines="1"
@@ -75,14 +77,13 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:src="@drawable/ic_close_24px"
-            android:tintMode="src_in"
-            android:background="#FFFFFFFF"
+
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
-            app:tint="#FF000000" />
+            app:tint="@color/primaryTextColor" />
 
 
     </RelativeLayout>
 
-</RelativeLayout>
+</androidx.appcompat.widget.Toolbar>

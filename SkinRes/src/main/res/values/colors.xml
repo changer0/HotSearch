@@ -6,9 +6,6 @@
 
 
     <!--http://tool.c7sky.com/webcolor/#character_0-->
-    <color name="colorPrimary">@color/primaryColor</color>
-    <color name="colorPrimaryDark">@color/primaryDarkColor</color>
-    <color name="colorAccent">@color/primaryLightColor</color>
 
     <!--支持换肤的颜色值-->
     <color name="primaryColor">#212121</color>
@@ -16,7 +13,7 @@
     <color name="primaryDarkColor">#000000</color>
     <color name="primaryTextColor">#ffffff</color>
 
-    <color name="item_title">@color/colorAccent</color>
+    <color name="item_title">@color/primaryLightColor</color>
     <color name="item_tag">#FF216C</color>
 
 

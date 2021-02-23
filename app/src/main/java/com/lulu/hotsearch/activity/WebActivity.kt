@@ -158,7 +158,7 @@ class WebActivity : BaseActivity() {
         setLeftImage(hotSearchBean?.type?: Constant.HOT_SEARCH_WB)
         actionBarTitle.text = intent.getStringExtra(Constant.WEB_TITLE)
         ivRightImage.visibility = View.VISIBLE
-        ivRightImage.setImageDrawable( DrawableUtil.tintDrawable(ivRightImage.drawable, Color.parseColor("#FF000000")))
+        //ivRightImage.setImageDrawable( DrawableUtil.tintDrawable(ivRightImage.drawable, Color.parseColor("#FF000000")))
         ivRightImage.setOnClickListener { finish() }
         initRefreshBtn()
         hotSearchBean?.let {

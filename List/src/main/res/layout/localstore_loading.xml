@@ -11,7 +11,7 @@
         android:id="@+id/default_progress"
         style="@android:style/Widget.Material.ProgressBar"
         android:layout_centerHorizontal="true"
-        android:indeterminateTint="@color/colorPrimary"
+        android:indeterminateTint="@color/primaryColor"
         android:visibility="visible"
         android:layout_height="50dp"
         android:layout_width="50dp" />

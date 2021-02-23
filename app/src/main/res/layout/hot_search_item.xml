@@ -20,7 +20,7 @@
             android:id="@+id/hotIndex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/primaryLightColor"
             android:textSize="@dimen/text_size_5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

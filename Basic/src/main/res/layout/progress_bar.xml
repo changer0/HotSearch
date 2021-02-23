@@ -14,14 +14,14 @@
         <ProgressBar
             android:id="@+id/progress"
             style="?android:attr/progressBarStyle"
-            android:indeterminateTint="@color/colorAccent"
+            android:indeterminateTint="@color/primaryLightColor"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
         <TextView
             android:id="@+id/tvMsg"
             android:text="正在为您屏蔽\n无用信息..."
             android:textSize="@dimen/text_size_3"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/primaryLightColor"
             android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
