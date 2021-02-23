@@ -102,7 +102,7 @@ public abstract class BaseBookStoreView  implements ISkinUpdateListener {
     @Override
     public void onSkinUpdate() {
         //使用皮肤包
-        pullDownView.setColorSchemeColors(SkinManager.get().getColor("colorAccent"));
+        pullDownView.setColorSchemeColors(SkinManager.get().getColor("primaryLightColor"));
     }
 
     //----------------------------------------------------------------------------------------------
