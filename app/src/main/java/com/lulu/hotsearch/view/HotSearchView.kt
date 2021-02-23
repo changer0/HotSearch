@@ -48,7 +48,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
             .setPullDownViewIdRes(R.id.pull_down_list)
             .setLoadingViewIdRes(R.id.loading_layout)
             .setLoadMoreView(CommonLoadMoreView())
-            .setActionBarContainerIdRes(R.id.common_titler)
+            .setActionBarContainerIdRes(R.id.common_title)
             .setActionBarTitleViewIdRes(R.id.profile_header_title)
             .build()
     }

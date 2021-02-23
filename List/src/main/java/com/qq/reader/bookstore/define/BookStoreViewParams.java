@@ -63,7 +63,7 @@ public class BookStoreViewParams {
 
     public int getActionBarContainerIdRes() {
         if (actionBarContainerIdRes == 0) {
-            return R.id.common_titler;
+            return R.id.common_title;
         }
         return actionBarContainerIdRes;
     }

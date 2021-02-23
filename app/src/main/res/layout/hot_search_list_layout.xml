@@ -6,12 +6,12 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/common_titler"
+        android:id="@+id/common_title"
         layout="@layout/hot_search_titler"
         android:visibility="visible" />
 
     <RelativeLayout
-        android:layout_below="@id/common_titler"
+        android:layout_below="@id/common_title"
         android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/common_titler"
+        android:layout_below="@id/common_title"
         android:layout_marginTop="20dip"
         tools:visibility="visible"
         android:visibility="gone" />
@@ -37,7 +37,7 @@
     <include
         android:id="@+id/loading_failed_layout"
         layout="@layout/localstore_loading_failed"
-        android:layout_below="@id/common_titler"
+        android:layout_below="@id/common_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:visibility="visible"
