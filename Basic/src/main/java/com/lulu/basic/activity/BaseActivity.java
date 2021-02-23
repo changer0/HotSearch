@@ -117,6 +117,18 @@ public class BaseActivity extends AppCompatActivity implements ISkinUpdateListen
         }
     }
 
+    /**
+     * 全屏展示
+     */
+    public void setFullScreen(boolean isFullScreen) {
+        if (isFullScreen) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+
+    }
+
     //----------------------------------------------------------------------------------------------
     // 换肤更新
     @Override
