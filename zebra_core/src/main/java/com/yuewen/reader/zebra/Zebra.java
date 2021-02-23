@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yuewen.reader.zebra.cache.CacheMode;
 import com.yuewen.reader.zebra.inter.IGetExpiredTime;
 import com.yuewen.reader.zebra.inter.IViewBindItemBuilder;
 import com.yuewen.reader.zebra.loader.ILoader;
@@ -320,7 +321,7 @@ public class Zebra<R> {
         /**
          * 缓存配置
          */
-        public RequestBuilder<R> cacheConfig(int cacheMode, IGetExpiredTime<R> expiredTime) {
+        public RequestBuilder<R> cacheConfig(@CacheMode int cacheMode, IGetExpiredTime<R> expiredTime) {
             zebra.cacheMode = cacheMode;
             zebra.expiredTime = expiredTime;
             return this;
