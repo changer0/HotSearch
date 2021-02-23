@@ -22,16 +22,13 @@ import com.lulu.basic.image.ImageUtils
 import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.utils.HotSearchRealUrlUtil
-import com.lulu.hotsearch.HotSearchWebViewClient
-import com.lulu.hotsearch.OnFinishLoadingListener
-import com.lulu.hotsearch.OnStartLoadingListener
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.utils.FabAnimUtil
 import com.lulu.hotsearch.view.HotSearchWebView
-import com.lulu.hotsearch.R
 import com.lulu.basic.activity.BaseActivity
 import com.lulu.basic.skin.SkinManager
+import com.lulu.hotsearch.*
 
 private const val TAG = "WebActivity"
 class WebActivity : BaseActivity() {
@@ -159,7 +156,7 @@ class WebActivity : BaseActivity() {
         setLeftImage(hotSearchBean?.type?: Constant.HOT_SEARCH_WB)
         actionBarTitle.text = intent.getStringExtra(Constant.WEB_TITLE)
         ivRightImage.visibility = View.VISIBLE
-        ivRightImage.setImageDrawable(SkinManager.get().getDrawable("ic_close_24px"))
+        ivRightImage.setImageDrawable(resources.getDrawable(R.drawable.ic_close_24px))
         //ivRightImage.setImageDrawable( DrawableUtil.tintDrawable(ivRightImage.drawable, Color.parseColor("#FF000000")))
         ivRightImage.setOnClickListener { finish() }
         initRefreshBtn()
@@ -316,6 +313,11 @@ class WebActivity : BaseActivity() {
 
     private fun setOnClickOpenListener(i: (v: View) -> Unit) {
         ivOpen.setOnClickListener(i)
+    }
+
+    override fun onSkinUpdate() {
+        super.onSkinUpdate()
+        HotSearchTitle.adapter(ivRightImage)
     }
 
 }

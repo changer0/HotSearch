@@ -30,7 +30,7 @@ public class BaseActivity extends AppCompatActivity implements ISkinUpdateListen
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         skinFactory = new SkinFactory(this);
         getLayoutInflater().setFactory(skinFactory);//设置给 BaseActivity
-        adapterStatus();
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         //换肤初始化
         SkinManager.get().init();
@@ -39,8 +39,6 @@ public class BaseActivity extends AppCompatActivity implements ISkinUpdateListen
 
     protected void adapterStatus() {
         try {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-
             //R.color.primaryColor
             setStatusBgColor(SkinManager.get().getColor("primaryColor"));
             setStatusTextColor(true);
@@ -136,5 +134,6 @@ public class BaseActivity extends AppCompatActivity implements ISkinUpdateListen
     @Override
     public void onSkinUpdate() {
         skinFactory.apply();
+        adapterStatus();
     }
 }

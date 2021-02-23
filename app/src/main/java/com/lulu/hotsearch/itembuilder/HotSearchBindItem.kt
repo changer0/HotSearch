@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.text.TextUtils
+import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import com.lulu.basic.utils.ToastUtil
@@ -27,11 +28,12 @@ class HotSearchBindItem(itemData: Result?) :
         val hotTitle = holder.getView<TextView>(R.id.hotTitle)
         val hotNum = holder.getView<TextView>(R.id.hotNum)
         val hotTag = holder.getView<TextView>(R.id.hotTag)
+        val itemContainer = holder.getView<View>(R.id.itemContainer)
         hotIndex.text = itemData.order
         hotTitle.text = itemData.title
         hotNum.text = itemData.hotNum
         hotTag.text = itemData.tag
-        holder.itemView.setOnClickListener {
+        itemContainer.setOnClickListener {
             goDetail(activity, hotTitle)
         }
         return true
