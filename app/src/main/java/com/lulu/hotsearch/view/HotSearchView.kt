@@ -37,6 +37,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
     public lateinit var llFloatContainer: LinearLayout
     public lateinit var titleRightTime: TextView
     public lateinit var leftImage: ImageView
+    public lateinit var rightImage: ImageView
 
 
     override fun onCreateParams(): BookStoreViewParams {
@@ -58,6 +59,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
         fabRoot = contentView.findViewById(R.id.fabRoot)
         titleRightTime = contentView.findViewById(R.id.title_right_time)
         leftImage = contentView.findViewById(R.id.leftImage)
+        rightImage = contentView.findViewById(R.id.rightImage)
         initFabList(contentView)
         bindEvents()
     }
@@ -173,5 +175,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
 
     override fun onSkinUpdate() {
         super.onSkinUpdate()
+
+        rightImage.setImageDrawable(SkinManager.get().getDrawable("ic_more_vert_black_24dp"))
     }
 }

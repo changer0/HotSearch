@@ -37,11 +37,12 @@ public class BaseActivity extends AppCompatActivity implements ISkinUpdateListen
         SkinManager.get().addSkinUpdateListener(this);
     }
 
-    private void adapterStatus() {
+    protected void adapterStatus() {
         try {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-            setStatusBgColor(getResources().getColor(R.color.primaryColor));
+            //R.color.primaryColor
+            setStatusBgColor(SkinManager.get().getColor("primaryColor"));
             setStatusTextColor(true);
         } catch (Exception e) {
             e.printStackTrace();

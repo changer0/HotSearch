@@ -24,6 +24,7 @@ class SplashActivity : BaseActivity() {
     val handler = Handler(Looper.getMainLooper())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setFullScreen(true)
         setContentView(R.layout.activity_main)
 
         text.text = getString(R.string.splash_text)
@@ -39,6 +40,10 @@ class SplashActivity : BaseActivity() {
         }
 
 
+    }
+
+    override fun adapterStatus() {
+        //
     }
 
     private fun launchHotSearch() {

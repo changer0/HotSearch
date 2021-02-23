@@ -31,6 +31,7 @@ import com.lulu.hotsearch.utils.FabAnimUtil
 import com.lulu.hotsearch.view.HotSearchWebView
 import com.lulu.hotsearch.R
 import com.lulu.basic.activity.BaseActivity
+import com.lulu.basic.skin.SkinManager
 
 private const val TAG = "WebActivity"
 class WebActivity : BaseActivity() {
@@ -158,6 +159,7 @@ class WebActivity : BaseActivity() {
         setLeftImage(hotSearchBean?.type?: Constant.HOT_SEARCH_WB)
         actionBarTitle.text = intent.getStringExtra(Constant.WEB_TITLE)
         ivRightImage.visibility = View.VISIBLE
+        ivRightImage.setImageDrawable(SkinManager.get().getDrawable("ic_close_24px"))
         //ivRightImage.setImageDrawable( DrawableUtil.tintDrawable(ivRightImage.drawable, Color.parseColor("#FF000000")))
         ivRightImage.setOnClickListener { finish() }
         initRefreshBtn()
