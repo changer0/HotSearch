@@ -128,7 +128,7 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
     }
 
     private void showSwitchSkinDialog(String[] names,int checkItem,  List<? extends SkinPackageBean> packageBeans) {
-        new AlertDialog.Builder(mContext, R.style.CommonAlertDialogStyle).setSingleChoiceItems(names, checkItem, (dialog, which) -> {
+        new AlertDialog.Builder(mContext).setSingleChoiceItems(names, checkItem, (dialog, which) -> {
             SkinPackageBean bean = packageBeans.get(which);
             if (TextUtils.equals(bean.getId(), "default")) {
                 SkinManager.get().restoreDefaultTheme();
