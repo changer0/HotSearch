@@ -1,5 +1,6 @@
 package com.lulu.hotsearch;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -9,12 +10,19 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lulu.hotsearch.bean.HotSearchBean;
+import com.lulu.hotsearch.bean.SkinPackageBean;
 import com.lulu.hotsearch.define.Constant;
 import com.lulu.hotsearch.manager.HotSearchConfigManager;
+import com.lulu.hotsearch.utils.SwitchSkinUtil;
 import com.lulu.hotsearch.view.HotSearchView;
 import com.qq.reader.bookstore.BaseBookStoreFragment;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.yuewen.reader.zebra.loader.ObserverEntity;
+
+import java.util.List;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 /**
  * Author: zhanglulu
@@ -79,5 +87,24 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
         mBookStoreView.titleRightTime.setVisibility(View.VISIBLE);
         CharSequence timeStr = DateFormat.format("kk:mm:ss", (long) bean.getTime_stamp());
         mBookStoreView.titleRightTime.setText(getString(R.string.update_time, timeStr));
+    }
+
+    /**
+     * 配置换肤弹窗
+     */
+    private void configSwitchSkinDialog() {
+
+        mBookStoreView.rightImage.setOnClickListener(v -> {
+
+            SwitchSkinUtil.requestSkinConfig(HotSearchFragment.this, skinPackageBeans -> {
+
+
+                return null;
+            });
+        });
+    }
+
+    private void showSwitchSkinDialog(String[] names, boolean[] isChecked) {
+
     }
 }

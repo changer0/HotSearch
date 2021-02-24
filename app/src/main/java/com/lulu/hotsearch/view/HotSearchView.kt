@@ -35,11 +35,11 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
     private var lastIsIdle = true
     private var displayAnim: ObjectAnimator? = null
 
-    public lateinit var fabRoot: FloatingActionButton
-    public lateinit var llFloatContainer: LinearLayout
-    public lateinit var titleRightTime: TextView
-    public lateinit var leftImage: ImageView
-    public lateinit var rightImage: ImageView
+    lateinit var fabRoot: FloatingActionButton
+    lateinit var llFloatContainer: LinearLayout
+    lateinit var titleRightTime: TextView
+    lateinit var leftImage: ImageView
+    lateinit var rightImage: ImageView
 
 
     override fun onCreateParams(): BookStoreViewParams {
@@ -64,9 +64,6 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
         rightImage = contentView.findViewById(R.id.rightImage)
         rightImage.setImageDrawable(Init.context.resources.getDrawable(R.drawable.ic_more_vert_black_24dp))
 
-        rightImage.setOnClickListener {
-            SkinManager.get().testDownload()
-        }
         initFabList(contentView)
         bindEvents()
     }
