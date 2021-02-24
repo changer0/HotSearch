@@ -64,6 +64,7 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
         rightImage = contentView.findViewById(R.id.rightImage)
         rightImage.setImageDrawable(Init.context.resources.getDrawable(R.drawable.ic_more_vert_black_24dp))
 
+        rightImage.setOnClickListener { ToastUtil.showShortToast("新功能开发中,敬请期待...") }
         initFabList(contentView)
         bindEvents()
     }
@@ -148,9 +149,6 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
                 animatorSet.start()
             }
         }
-
-        //Test
-        SkinManager.get().testInstall()
     }
 
     public fun hideFABMenu() {

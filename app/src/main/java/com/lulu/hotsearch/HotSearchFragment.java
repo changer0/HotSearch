@@ -1,7 +1,9 @@
 package com.lulu.hotsearch;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.View;
 
@@ -9,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.lulu.basic.skin.SkinKVStorage;
+import com.lulu.basic.skin.SkinManager;
 import com.lulu.hotsearch.bean.HotSearchBean;
 import com.lulu.hotsearch.bean.SkinPackageBean;
 import com.lulu.hotsearch.define.Constant;
@@ -50,6 +54,7 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
             mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, bean.getType());
             innerLoadData(mEnterBundle, true);
         });
+        //configSwitchSkinDialog();
 
     }
 
@@ -90,14 +95,20 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
     }
 
     /**
-     * 配置换肤弹窗
+     * 配置换肤弹窗 TODO 后续直接替换为页面
      */
     private void configSwitchSkinDialog() {
 
         mBookStoreView.rightImage.setOnClickListener(v -> {
 
             SwitchSkinUtil.requestSkinConfig(HotSearchFragment.this, skinPackageBeans -> {
-
+                String[] names = new String[skinPackageBeans.size() + 1];
+                boolean[] isChecked = new boolean[skinPackageBeans.size() + 1];
+                names[0] = "默认";
+                isChecked[0] = !SkinManager.get().isExternalSkin();
+                for (int i = 0; i < skinPackageBeans.size(); i++) {
+                    names[i+1] = skinPackageBeans.get(i).getName();
+                }
 
                 return null;
             });
@@ -105,6 +116,8 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
     }
 
     private void showSwitchSkinDialog(String[] names, boolean[] isChecked) {
+        new AlertDialog.Builder(mContext).setMultiChoiceItems(names, isChecked, (dialog, which, isChecked1) -> {
 
+        }).create().show();
     }
 }
