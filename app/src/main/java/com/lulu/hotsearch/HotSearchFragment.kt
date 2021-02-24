@@ -6,13 +6,18 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.text.format.DateFormat
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.lulu.basic.net.CoroutineScopeManager
 import com.lulu.basic.skin.SkinKVStorage.getSkinId
 import com.lulu.basic.skin.SkinKVStorage.setSkinId
 import com.lulu.basic.skin.SkinManager.Companion.get
+import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.bean.HotSearchConfigBean
 import com.lulu.hotsearch.bean.SkinPackageBean
+import com.lulu.hotsearch.db.DBManager
 import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.manager.HotSearchConfigManager.saveCurType
 import com.lulu.hotsearch.utils.SwitchSkinUtil
@@ -22,7 +27,9 @@ import com.lulu.hotsearch.view.HotSearchView.OnFabClickListener
 import com.qq.reader.bookstore.BaseBookStoreFragment
 import com.qq.reader.bookstore.define.LoadSignal
 import com.yuewen.reader.zebra.loader.ObserverEntity
-import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Author: zhanglulu
@@ -98,31 +105,50 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
      */
     private fun configSwitchSkinDialog() {
         mBookStoreView.rightImage.setOnClickListener { v: View? ->
-            requestSkinConfig(this@HotSearchFragment,object : SwitchSkinUtil.LoadListener {
-                override fun invoke(beanList: List<SkinPackageBean>?) {
-                    if (beanList == null) {
-                        return
-                    }
-                    val tempList = ArrayList(beanList)
-                    val defaultBean = SkinPackageBean()
-                    defaultBean.name = "默认"
-                    defaultBean.id = "default"
-                    tempList.add(0, defaultBean)
-                    val names =
-                        arrayOfNulls<String>(tempList.size)
-                    var checkItem = 0
-                    for (i in tempList.indices) {
-                        val packageBean = tempList[i]
-                        names[i] = packageBean.name
-                        if (TextUtils.equals(getSkinId(), packageBean.id)) {
-                            checkItem = i
-                        }
-                    }
-                    showSwitchSkinDialog(names, checkItem, tempList)
-                }
 
-            })
+          CoroutineScopeManager.getScope(this).launch {
+              DBManager.get().skinPackageDao().getById("1234").observe(this@HotSearchFragment,
+                  Observer<SkinPackageBean> {
+                      if (it != null) {
+                          ToastUtil.showShortToast("name: ${it.name} id: ${it.id}")
+                      } else {
+                          ToastUtil.showShortToast("空")
+                      }
+
+                  })
+              val skinPackage = SkinPackageBean()
+              skinPackage.id = "1234"
+              skinPackage.name = "这是名字"
+              DBManager.get().skinPackageDao().insertSkinPackageSuspend(skinPackage)
+          }
+
+//            requestSkinConfig(this@HotSearchFragment,object : SwitchSkinUtil.LoadListener {
+//                override fun invoke(beanList: List<SkinPackageBean>?) {
+//                    if (beanList == null) {
+//                        return
+//                    }
+//                    val tempList = ArrayList(beanList)
+//                    val defaultBean = SkinPackageBean()
+//                    defaultBean.name = "默认"
+//                    defaultBean.id = "default"
+//                    tempList.add(0, defaultBean)
+//                    val names =
+//                        arrayOfNulls<String>(tempList.size)
+//                    var checkItem = 0
+//                    for (i in tempList.indices) {
+//                        val packageBean = tempList[i]
+//                        names[i] = packageBean.name
+//                        if (TextUtils.equals(getSkinId(), packageBean.id)) {
+//                            checkItem = i
+//                        }
+//                    }
+//                    showSwitchSkinDialog(names, checkItem, tempList)
+//                }
+//
+//            })
         }
+
+
     }
 
     private fun showSwitchSkinDialog(

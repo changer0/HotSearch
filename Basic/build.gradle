@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion gradle_build_versions.compileSdkVersion
@@ -71,6 +71,17 @@ dependencies {
     //Bugly
     api 'com.tencent.bugly:crashreport:3.3.3' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
     implementation 'com.tencent.bugly:nativecrashreport:3.7.7' //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+
+    //Room
+    def room_version = "2.2.6"
+    api "androidx.room:room-runtime:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    api "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+
+    //下拉刷新库
+    api "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     api project(":BaseUtil")
     //KV存储

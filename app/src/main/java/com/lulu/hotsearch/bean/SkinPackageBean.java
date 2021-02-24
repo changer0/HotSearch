@@ -1,6 +1,13 @@
 package com.lulu.hotsearch.bean;
 
-public class SkinPackageBean extends BaseBean{
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "skin_package_entity")
+public class SkinPackageBean extends BaseBean {
+    @PrimaryKey
+    @NonNull
     private String id;
     private String name;
     private String downloadUrl;
