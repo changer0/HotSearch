@@ -63,8 +63,6 @@ class HotSearchView(context: Context) : BaseBookStoreView(context) {
         leftImage = contentView.findViewById(R.id.leftImage)
         rightImage = contentView.findViewById(R.id.rightImage)
         rightImage.setImageDrawable(Init.context.resources.getDrawable(R.drawable.ic_more_vert_black_24dp))
-
-        rightImage.setOnClickListener { ToastUtil.showShortToast("新功能开发中,敬请期待...") }
         initFabList(contentView)
         bindEvents()
     }

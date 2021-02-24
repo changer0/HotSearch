@@ -11,22 +11,26 @@ import kotlinx.coroutines.launch
 object SwitchSkinUtil {
     const val SWITCH_SKIN_URL = ServerUrl.CONFIG_DOMAIN + "skin_config.json"
     @JvmStatic
-    fun requestSkinConfig(owner: LifecycleOwner, finished: (beanList: List<SkinPackageBean>?) -> Unit) {
+    fun requestSkinConfig(owner: LifecycleOwner, finished: LoadListener?) {
         CoroutineScopeManager.getScope(owner).launch {
             val entity = HttpCoroutineUtils.doRequestGet(SWITCH_SKIN_URL)
             try {
                 if (entity.isSuccess) {
                     val beanList =
                             GSONUtil.parseJsonToList(entity.jsonStr, SkinPackageBean::class.java)
-                    finished.invoke(beanList)
+                    finished?.invoke(beanList)
                 } else {
-                    finished.invoke(null)
+                    finished?.invoke(null)
                 }
 
             } catch (e: Exception) {
                 e.printStackTrace()
-                finished.invoke(null)
+                finished?.invoke(null)
             }
         }
+    }
+
+    interface LoadListener {
+        fun invoke(beanList: List<SkinPackageBean>?)
     }
 }

@@ -72,6 +72,7 @@ public class SkinFactory implements LayoutInflater.Factory {
             if (isSupportedAttr(attributeName)){
                 if (attributeValue.startsWith("@")){
                     int resId = Integer.parseInt(attributeValue.substring(1));
+                    if (resId == 0) continue;
                     String resName = context.getResources().getResourceEntryName(resId);
                     String attrType = context.getResources().getResourceTypeName(resId);
                     skinAttrs.add(new SkinAttr(attributeName,attrType,resName,resId));

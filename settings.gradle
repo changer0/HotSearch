@@ -10,6 +10,7 @@ include ':Download'
 
 //皮肤包模块
 include ':SkinPackage:skin_purple'
+include ':SkinPackage:skin_sienna'
 include ':SkinRes'
 
 //应用模块

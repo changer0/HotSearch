@@ -23,6 +23,7 @@ import com.qq.reader.bookstore.BaseBookStoreFragment;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.yuewen.reader.zebra.loader.ObserverEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kotlin.Unit;
@@ -54,7 +55,7 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
             mEnterBundle.putString(Constant.HOT_SEARCH_TYPE, bean.getType());
             innerLoadData(mEnterBundle, true);
         });
-        //configSwitchSkinDialog();
+        configSwitchSkinDialog();
 
     }
 
@@ -102,22 +103,39 @@ public class HotSearchFragment extends BaseBookStoreFragment<HotSearchView, HotS
         mBookStoreView.rightImage.setOnClickListener(v -> {
 
             SwitchSkinUtil.requestSkinConfig(HotSearchFragment.this, skinPackageBeans -> {
-                String[] names = new String[skinPackageBeans.size() + 1];
-                boolean[] isChecked = new boolean[skinPackageBeans.size() + 1];
-                names[0] = "默认";
-                isChecked[0] = !SkinManager.get().isExternalSkin();
-                for (int i = 0; i < skinPackageBeans.size(); i++) {
-                    names[i+1] = skinPackageBeans.get(i).getName();
-                }
 
-                return null;
+                if (skinPackageBeans == null) {
+                    return;
+                }
+                List<SkinPackageBean> tempList = new ArrayList<>(skinPackageBeans);
+                SkinPackageBean defaultBean = new SkinPackageBean();
+                defaultBean.setName("默认");
+                defaultBean.setId("default");
+                tempList.add(0, defaultBean);
+
+                String[] names = new String[tempList.size()];
+                int checkItem = 0;
+                for (int i = 0; i < tempList.size(); i++) {
+                    SkinPackageBean packageBean = tempList.get(i);
+                    names[i] = packageBean.getName();
+                    if (TextUtils.equals(SkinKVStorage.getSkinId(), packageBean.getId())) {
+                        checkItem = i;
+                    }
+                }
+                showSwitchSkinDialog(names, checkItem, tempList);
             });
         });
     }
 
-    private void showSwitchSkinDialog(String[] names, boolean[] isChecked) {
-        new AlertDialog.Builder(mContext).setMultiChoiceItems(names, isChecked, (dialog, which, isChecked1) -> {
-
+    private void showSwitchSkinDialog(String[] names,int checkItem,  List<? extends SkinPackageBean> packageBeans) {
+        new AlertDialog.Builder(mContext).setSingleChoiceItems(names, checkItem, (dialog, which) -> {
+            SkinPackageBean bean = packageBeans.get(which);
+            if (TextUtils.equals(bean.getId(), "default")) {
+                SkinManager.get().restoreDefaultTheme();
+            } else {
+                SkinManager.get().tryDownloadAndInstall(bean.getId(), bean.getDownloadUrl());
+            }
+            SkinKVStorage.setSkinId(bean.getId());
         }).create().show();
     }
 }
