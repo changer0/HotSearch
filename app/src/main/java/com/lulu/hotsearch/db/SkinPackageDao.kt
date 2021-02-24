@@ -16,6 +16,9 @@ interface SkinPackageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSkinPackageSuspend(vararg skinPackage: SkinPackageBean)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSkinPackageListSuspend(skinPackageList: List<SkinPackageBean>)
+
     @Update
     fun updateSkinPackage(vararg skinPackage: SkinPackageBean)
 
@@ -29,7 +32,10 @@ interface SkinPackageDao {
     suspend fun deleteSkinPackageSuspend(vararg skinPackage: SkinPackageBean)
 
     @Query("SELECT * FROM skin_package_entity")
-    fun getAll() : LiveData<Array<SkinPackageBean>>
+    fun getAll() : LiveData<List<SkinPackageBean>>
+
+    @Query("SELECT * FROM skin_package_entity")
+    suspend fun getAllSuspend() : List<SkinPackageBean>?
 
     @Query("SELECT * FROM skin_package_entity where id = :id LIMIT 1")
     fun getById(id: String): LiveData<SkinPackageBean>
