@@ -120,8 +120,7 @@ public class Http {
         Request request = makeRequestBody(destUrl, requestContent,
                 needGzip, mothed, mParams, contentType);
 
-        Response response = getResponse(request, applicationInterceptors, networkInterceptors);
-        return response;
+        return getResponse(request, applicationInterceptors, networkInterceptors);
     }
 
 
