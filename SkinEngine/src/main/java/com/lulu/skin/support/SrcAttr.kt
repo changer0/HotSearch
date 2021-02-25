@@ -45,30 +45,4 @@ class SrcAttr : SupportSkinManager.SupportSkinAttr() {
 
         view.setImageDrawable(SkinEngine.get().getDrawable(context, resName, resId))
     }
-
-    //下面代码暂时保留吧
-
-    //        var originConstantState: Drawable.ConstantState? = null
-    //        if (view.drawable != null) {
-    //            originConstantState = view.drawable.constantState
-    //        }
-    //
-    //        val tag = view.getTag(R.string.skin_tag)
-    //        if (context.resources.getDrawable(resId).constantState != originConstantState
-    //            && tag == null) {
-    //            //当前 View 中的 Drawable 与原资源 Drawable 不一致, 且无换肤 Tag, 说明是外部自行设置的资源
-    //            Log.d(TAG, "doAction: 与原资源 Drawable 不一致, 且无换肤 Tag: ${context.resources.getResourceName(view.id)}")
-    //            return
-    //        }
-    //        if (tag is String && TextUtils.equals(tag, SkinEngine.get().skinPath)) {
-    //            Log.d(TAG, "doAction: 与上次换肤 Tag 一致无需换肤: ${context.resources.getResourceName(view.id)}")
-    //            return
-    //        }
-    //
-    //        view.setImageDrawable(SkinEngine.get().getDrawable(context, resName, resId))
-    //        if (SkinEngine.get().isExternalSkin) {
-    //            view.setTag(R.string.skin_tag, SkinEngine.get().skinPath)
-    //        } else {
-    //            view.setTag(R.string.skin_tag, null)
-    //        }
 }
