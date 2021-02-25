@@ -143,7 +143,10 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
             if (TextUtils.equals(bean.id, "default")) {
                 SkinManager.get().restoreDefaultTheme()
             } else {
-                SkinManager.get().tryDownloadAndInstall(bean.id, bean.downloadUrl)
+                showProgress(R.string.loading)
+                SkinManager.get().tryDownloadAndInstall(bean) {
+                    hideProgress()
+                }
             }
             setSkinId(bean.id)
             dialog.cancel()

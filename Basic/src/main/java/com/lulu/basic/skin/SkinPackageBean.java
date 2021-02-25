@@ -15,7 +15,6 @@ public class SkinPackageBean extends BaseBean {
     private String name;
     private String downloadUrl;
     private int version;
-    @Ignore
     private boolean isUpdate;
 
     public String getId() {

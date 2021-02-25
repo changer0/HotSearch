@@ -7,10 +7,7 @@ import com.lulu.basic.net.HttpCoroutineUtils
 import com.lulu.basic.db.DBManager
 import com.lulu.basic.define.ServerUrl
 import com.yuewen.reader.zebra.utils.GSONUtil
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 object SwitchSkinUtil {
     private val SWITCH_SKIN_URL = ServerUrl.CONFIG_DOMAIN + "skin_config.json"
@@ -95,6 +92,14 @@ object SwitchSkinUtil {
             }
         }
         return null
+    }
+
+    fun updateSkinPackageBean(skinPackageBean: SkinPackageBean) {
+        GlobalScope.launch {
+            withContext(Dispatchers.IO) {
+                DBManager.get().skinPackageDao().insertSkinPackage(skinPackageBean)
+            }
+        }
     }
 
 

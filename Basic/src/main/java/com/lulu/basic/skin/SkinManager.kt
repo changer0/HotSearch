@@ -100,19 +100,28 @@ public class SkinManager {
     /**
      * 尝试下载并安装
      */
-    public fun tryDownloadAndInstall(id: String, url: String) {
-        val path = SKIN_PATH + "${id}.apk"
+    public fun tryDownloadAndInstall(skinPackageBean: SkinPackageBean, finished: (() -> Unit)? = null) {
+        val path = SKIN_PATH + "${skinPackageBean.id}.apk"
         val file = File(path)
         if (file.exists()) {
-            file.delete()
+            if (skinPackageBean.isUpdate) {
+                file.delete()
+            } else {
+                switchSkin(path) {
+                    skinPackageBean.isUpdate = false
+                    SwitchSkinUtil.updateSkinPackageBean(skinPackageBean)
+                    finished?.invoke()
+                }
+                return
+            }
         }
-        DownloadManager.get(Init.context).add(url, path, true, object : SimpleDownloadListener() {
+        DownloadManager.get(Init.context).add(skinPackageBean.downloadUrl, path, true, object : SimpleDownloadListener() {
             override fun onFailed(id: Int, msg: String?) {
                 ToastUtil.showShortToast("下载失败: $msg")
             }
 
             override fun onSuccess(id: Int, averageSpeed: String) {
-                switchSkin(path)
+                switchSkin(path, finished)
             }
 
             override fun onProgressChanged(
