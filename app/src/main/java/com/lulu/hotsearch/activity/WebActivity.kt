@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
@@ -17,7 +16,6 @@ import android.view.animation.LinearInterpolator
 import android.webkit.WebSettings
 import android.widget.ImageView
 import android.widget.TextView
-import com.lulu.baseutil.DrawableUtil
 import com.lulu.basic.image.ImageUtils
 import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.define.Constant
@@ -27,8 +25,10 @@ import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.utils.FabAnimUtil
 import com.lulu.hotsearch.view.HotSearchWebView
 import com.lulu.basic.activity.BaseActivity
-import com.lulu.basic.skin.SkinManager
 import com.lulu.hotsearch.*
+import com.lulu.hotsearch.web.HotSearchWebViewClient
+import com.lulu.hotsearch.web.OnFinishLoadingListener
+import com.lulu.hotsearch.web.OnStartLoadingListener
 
 private const val TAG = "WebActivity"
 class WebActivity : BaseActivity() {
@@ -72,24 +72,28 @@ class WebActivity : BaseActivity() {
     }
 
     private fun initWebView() {
-        hotSearchWebViewClient = HotSearchWebViewClient(this)
+        hotSearchWebViewClient =
+            HotSearchWebViewClient(this)
         webView.webViewClient = hotSearchWebViewClient
         webView.setDownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
             handleOpenBtn(Uri.parse(url))
             loadFinish()
         }
-        hotSearchWebViewClient.setOnFinishLoadingListener(object : OnFinishLoadingListener {
+        hotSearchWebViewClient.setOnFinishLoadingListener(object :
+            OnFinishLoadingListener {
             override fun onFinishLoading(url: String?) {
                 loadFinish()
             }
 
         })
-        hotSearchWebViewClient.setOnStartLoadingListener(object : OnStartLoadingListener {
+        hotSearchWebViewClient.setOnStartLoadingListener(object :
+            OnStartLoadingListener {
             override fun onStartLoading(url: String?) {
                 startLoading(url?:"")
             }
         })
-        webView.setOnStartLoadingListener(object : OnStartLoadingListener {
+        webView.setOnStartLoadingListener(object :
+            OnStartLoadingListener {
             override fun onStartLoading(url: String?) {
                 startLoading(url?:"")
             }

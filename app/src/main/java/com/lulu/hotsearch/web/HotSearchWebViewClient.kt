@@ -1,4 +1,4 @@
-package com.lulu.hotsearch
+package com.lulu.hotsearch.web
 
 import android.net.Uri
 import android.text.TextUtils
@@ -6,7 +6,6 @@ import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.activity.WebActivity
 import com.lulu.hotsearch.manager.FilterRuleManager
 

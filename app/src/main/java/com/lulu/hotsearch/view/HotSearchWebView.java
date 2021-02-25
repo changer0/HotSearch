@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.webkit.WebView;
 
-import com.lulu.hotsearch.OnStartLoadingListener;
+import com.lulu.hotsearch.web.OnStartLoadingListener;
 
 /**
  * Author: zhanglulu
