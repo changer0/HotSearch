@@ -3,6 +3,8 @@
   */
 package com.lulu.hotsearch.bean;
 
+import com.lulu.basic.bean.BaseBean;
+
 import java.util.List;
 
 /**

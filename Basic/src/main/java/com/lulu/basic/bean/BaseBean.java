@@ -1,4 +1,4 @@
-package com.lulu.hotsearch.bean;
+package com.lulu.basic.bean;
 
 import java.io.Serializable;
 

@@ -1,9 +1,10 @@
 package com.lulu.hotsearch.utils
 
+import android.text.TextUtils
 import androidx.lifecycle.LifecycleOwner
 import com.lulu.basic.net.CoroutineScopeManager
 import com.lulu.basic.net.HttpCoroutineUtils
-import com.lulu.hotsearch.bean.SkinPackageBean
+import com.lulu.basic.skin.SkinPackageBean
 import com.lulu.hotsearch.db.DBManager
 import com.lulu.hotsearch.define.ServerUrl
 import com.yuewen.reader.zebra.utils.GSONUtil
@@ -27,7 +28,7 @@ object SwitchSkinUtil {
             localData?.apply {
                 //本地数据有
                 netData?.apply{
-                    saveLocalData(netData)
+                    mergeLocalNetData(netData, localData)
                     requestListener?.onSuccess(netData)
                 }?: apply{
                     requestListener?.onSuccess(localData)
@@ -67,6 +68,30 @@ object SwitchSkinUtil {
     private suspend fun saveLocalData(netList: List<SkinPackageBean>) = withContext(Dispatchers.IO) {
         DBManager.get().skinPackageDao().insertSkinPackageListSuspend(netList)
     }
+
+    private suspend fun mergeLocalNetData(netList: List<SkinPackageBean>, localList: List<SkinPackageBean>) = withContext(Dispatchers.IO) {
+
+        for (netBean in netList) {
+            val localBean = findSkinPackById(netBean.id, localList)
+            localBean?.apply {
+                if (netBean.version > localBean.version) {
+                    netBean.isUpdate = true//需要升级
+                }
+            }
+        }
+        //保存本地数据
+        DBManager.get().skinPackageDao().insertSkinPackageListSuspend(netList)
+    }
+
+    private fun findSkinPackById(id: String, list: List<SkinPackageBean>): SkinPackageBean? {
+        for (skinPackageBean in list) {
+            if (TextUtils.equals(id, skinPackageBean.id)) {
+                return skinPackageBean
+            }
+        }
+        return null
+    }
+
 
     interface RequestListener {
         fun onSuccess(beanList: List<SkinPackageBean>)

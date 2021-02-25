@@ -2,8 +2,7 @@ package com.lulu.hotsearch.db
 
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteOpenHelper
-import com.lulu.baseutil.Init
-import com.lulu.hotsearch.bean.SkinPackageBean
+import com.lulu.basic.skin.SkinPackageBean
 
 /**
  * @author zhanglulu

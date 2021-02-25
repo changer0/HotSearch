@@ -2,7 +2,7 @@ package com.lulu.hotsearch.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.lulu.hotsearch.bean.SkinPackageBean
+import com.lulu.basic.skin.SkinPackageBean
 
 /**
  * @author zhanglulu

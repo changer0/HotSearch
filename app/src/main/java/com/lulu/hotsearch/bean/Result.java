@@ -3,7 +3,7 @@
   */
 package com.lulu.hotsearch.bean;
 
-import com.lulu.hotsearch.bean.BaseBean;
+import com.lulu.basic.bean.BaseBean;
 
 /**
  * Auto-generated: 2021-02-13 11:22:35

@@ -54,12 +54,13 @@ public class SkinManager {
     /**
      * 切换皮肤
      */
-    public fun switchSkin(skinPath: String) {
+    public fun switchSkin(skinPath: String, finished: (() -> Unit)? = null) {
         if (TextUtils.isEmpty(skinPath)) {
             return
         }
         SkinEngine.get().loadSkin(Init.context, skinPath) {
             SkinKVStorage.setSkinPath(skinPath)
+            finished?.invoke()
         }
     }
 
@@ -121,10 +122,7 @@ public class SkinManager {
                 speed: String?
             ) {
                 super.onProgressChanged(id, offset, totalLength, speed)
-                Log.d(
-                    TAG,
-                    "onProgressChanged() called with: id = $id, offset = $offset, totalLength = $totalLength, speed = $speed"
-                )
+                Log.d(TAG, "onProgressChanged() called with: id = $id, offset = $offset, totalLength = $totalLength, speed = $speed")
             }
         })
     }

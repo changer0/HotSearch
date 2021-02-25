@@ -7,5 +7,6 @@
     <string name="loading">正在加载...</string>
     <string name="load_finish">加载完成</string>
     <string name="cancel">取消</string>
+    <string name="net_error">网络异常,请稍候重试!</string>
 
 </resources>

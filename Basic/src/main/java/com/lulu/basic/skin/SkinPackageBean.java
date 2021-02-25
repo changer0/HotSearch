@@ -1,8 +1,11 @@
-package com.lulu.hotsearch.bean;
+package com.lulu.basic.skin;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.lulu.basic.bean.BaseBean;
 
 @Entity(tableName = "skin_package_entity")
 public class SkinPackageBean extends BaseBean {
@@ -12,6 +15,8 @@ public class SkinPackageBean extends BaseBean {
     private String name;
     private String downloadUrl;
     private int version;
+    @Ignore
+    private boolean isUpdate;
 
     public String getId() {
         return id;
@@ -43,5 +48,13 @@ public class SkinPackageBean extends BaseBean {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public boolean isUpdate() {
+        return isUpdate;
+    }
+
+    public void setUpdate(boolean update) {
+        isUpdate = update;
     }
 }

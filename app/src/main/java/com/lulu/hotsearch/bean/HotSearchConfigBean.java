@@ -3,13 +3,15 @@
   */
 package com.lulu.hotsearch.bean;
 
+import com.lulu.basic.bean.BaseBean;
+
 /**
  * Auto-generated: 2021-02-17 14:57:26
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class HotSearchConfigBean extends BaseBean{
+public class HotSearchConfigBean extends BaseBean {
 
     private String name;
     private String title;

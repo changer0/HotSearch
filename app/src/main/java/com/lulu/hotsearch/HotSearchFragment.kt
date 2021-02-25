@@ -13,7 +13,7 @@ import com.lulu.basic.skin.SkinManager
 import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.bean.HotSearchConfigBean
-import com.lulu.hotsearch.bean.SkinPackageBean
+import com.lulu.basic.skin.SkinPackageBean
 import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.manager.HotSearchConfigManager.saveCurType
 import com.lulu.hotsearch.utils.SwitchSkinUtil
@@ -53,7 +53,7 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
                 innerLoadData(mEnterBundle, true)
             }
         })
-        configSwitchSkinDialog()
+        initSwitchSkinDialog()
     }
 
     private fun innerLoadData(enterBundle: Bundle, showProgress: Boolean) {
@@ -95,15 +95,16 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
     /**
      * 配置换肤弹窗 TODO 后续直接替换为页面
      */
-    private fun configSwitchSkinDialog() {
+    private fun initSwitchSkinDialog() {
         mBookStoreView.rightImage.setOnClickListener { v: View? ->
 
+            showProgress(R.string.loading)
             //请求皮肤配置信息
             SwitchSkinUtil.requestSkinConfig(this@HotSearchFragment,object : SwitchSkinUtil.RequestListener {
                 override fun onSuccess(beanList: List<SkinPackageBean>) {
                     val tempList = ArrayList(beanList)
                     val defaultBean = SkinPackageBean()
-                    defaultBean.name = "科技黑"
+                    defaultBean.name = "科技黑(默认)"
                     defaultBean.id = "default"
                     tempList.add(0, defaultBean)
                     val names =
@@ -116,13 +117,13 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
                             checkItem = i
                         }
                     }
+                    hideProgress()
                     showSwitchSkinDialog(names, checkItem, tempList)
                 }
 
                 override fun onFailure(e: Throwable) {
-                    ToastUtil.showShortToast("网络异常,请稍候重试!")
+                    ToastUtil.showShortToast(resources.getString(R.string.net_error))
                 }
-
             })
         }
 

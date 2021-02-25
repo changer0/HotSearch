@@ -2,6 +2,8 @@
   * Copyright 2021 bejson.com 
   */
 package com.lulu.hotsearch.bean;
+import com.lulu.basic.bean.BaseBean;
+
 import java.util.List;
 
 /**
@@ -10,7 +12,7 @@ import java.util.List;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class FilterRule extends BaseBean{
+public class FilterRule extends BaseBean {
     private String filter;
     private List<String> rules;
     public void setFilter(String filter) {
