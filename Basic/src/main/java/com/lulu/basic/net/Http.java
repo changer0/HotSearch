@@ -5,6 +5,8 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -32,6 +34,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okio.BufferedSink;
 import okio.GzipSink;
 import okio.Okio;
@@ -88,16 +91,21 @@ public class Http {
      * @throws IOException
      * @throws UnsupportedEncodingException
      */
+    @Nullable
     public static InputStream sendRequest(String destUrl,
                                           String requestContent, String mothed,
-                                          HashMap<String, String> mParams, String contentType, Context context)
+                                          HashMap<String, String> mParams, String contentType)
             throws Exception {
 
         Request request = makeRequestBody(destUrl, requestContent,
                 false, mothed, mParams, contentType);
         Response response = getResponse(request, null, null);
         // 需要加入返回值判断? add by saw
-        return response.body().byteStream();
+        ResponseBody responseBody = response.body();
+        if (responseBody == null) {
+            return null;
+        }
+        return responseBody.byteStream();
 
     }
 

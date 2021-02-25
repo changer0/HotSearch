@@ -32,20 +32,11 @@ public class HttpCoroutineUtils {
                                         requestContent: String? = null,
                                         params: HashMap<String, String>? = null,
                                         contentType: String = "application/json",
-                                        needGzip: Boolean = false): HttpResponseEntity<Response> = withContext(Dispatchers.IO) {
-            var responseEntity = HttpResponseEntity<Response>()
+                                        needGzip: Boolean = false): HttpResponseEntity<String> = withContext(Dispatchers.IO) {
+            var responseEntity = HttpResponseEntity<String>()
             try {
-                val response = Http.doRequest(
-                    url,
-                    requestContent,
-                    needGzip,
-                    Http.GET,
-                    params,
-                    contentType,
-                    null,
-                    null
-                )
-                responseEntity = analyseResponseToString(response, needGzip)
+                val inputStream = Http.sendRequest(url, requestContent, Http.GET, params, contentType)
+                responseEntity = analyseInputStreamToString(inputStream, needGzip)
             } catch (e: Exception) {
                 responseEntity.throwable = e
                 Log.e(TAG, "doRequestGet: 请求异常异常")
@@ -65,20 +56,11 @@ public class HttpCoroutineUtils {
                                          requestContent: String? = null,
                                          params: HashMap<String, String>? = null,
                                          contentType: String = "application/json",
-                                         needGzip: Boolean = false): HttpResponseEntity<Response> = withContext(Dispatchers.IO) {
-            var responseEntity = HttpResponseEntity<Response>()
+                                         needGzip: Boolean = false): HttpResponseEntity<String> = withContext(Dispatchers.IO) {
+            var responseEntity = HttpResponseEntity<String>()
             try {
-                val response = Http.doRequest(
-                    url,
-                    requestContent,
-                    needGzip,
-                    Http.POST,
-                    params,
-                    contentType,
-                    null,
-                    null
-                )
-                responseEntity = analyseResponseToString(response, needGzip)
+                val inputStream = Http.sendRequest(url, requestContent, Http.POST, params, contentType)
+                responseEntity = analyseInputStreamToString(inputStream, needGzip)
             } catch (e: Exception) {
                 responseEntity.throwable = e
                 Log.e(TAG, "doRequestPost: 请求异常异常")
@@ -103,8 +85,8 @@ public class HttpCoroutineUtils {
                                                     needGzip: Boolean = false): HttpResponseEntity<T> = withContext(Dispatchers.IO) {
             var responseEntity = HttpResponseEntity<T>()
             try {
-                val response = Http.doRequest(url, requestContent, needGzip, Http.GET, params, contentType, null, null)
-                responseEntity = analyseResponse(response, needGzip, beanClass)
+                val inputStream = Http.sendRequest(url, requestContent, Http.GET, params, contentType)
+                responseEntity = analyseResponse(inputStream, needGzip, beanClass)
             } catch (e: Exception) {
                 responseEntity.throwable = e
                 Log.e(TAG, "doRequestGetGSONBean: 请求异常异常")
@@ -130,8 +112,8 @@ public class HttpCoroutineUtils {
                                                      needGzip: Boolean = false): HttpResponseEntity<T> = withContext(Dispatchers.IO) {
             var responseEntity = HttpResponseEntity<T>()
             try {
-                val response = Http.doRequest(url, requestContent, needGzip, Http.POST, params, contentType, null, null)
-                responseEntity = analyseResponse(response, needGzip, beanClass)
+                val inputStream = Http.sendRequest(url, requestContent, Http.GET, params, contentType)
+                responseEntity = analyseResponse(inputStream, needGzip, beanClass)
             } catch (e: Exception) {
                 responseEntity.throwable = e
                 Log.e(TAG, "doRequestPostGSONBean: 请求异常异常")
@@ -143,49 +125,38 @@ public class HttpCoroutineUtils {
         /**
          * 解析 Response
          */
-        private fun <T> analyseResponse(response: Response?, needGzip: Boolean, beanClass: Class<T>): HttpResponseEntity<T> {
+        private fun <T> analyseResponse(_inputStream: InputStream?, needGzip: Boolean, beanClass: Class<T>): HttpResponseEntity<T> {
             val responseEntity = HttpResponseEntity<T>()
-            response?.let {
-                var inputStream: InputStream? = null
-                var jsonStr = ""
-                try {
-                    val responseBody: ResponseBody? = response.body()
-                    responseBody?.apply {
-                        inputStream = if (needGzip) {
-                            GZIPInputStream(byteStream())
-                        } else {
-                            byteStream()
-                        }
-                        jsonStr = IoUtils.getString(inputStream)
-                        //输出 Log
-                        val contentLength = contentLength()
-                        Log.i(TAG, "协议 URL：" + response.request().url().toString() + " contentLength： " + contentLength)
-                    }
-                } catch (e: Exception) {
-                    Log.e(TAG, "analyseResponse: 解析异常")
-                    responseEntity.throwable = e
-                    e.printStackTrace()
-                } finally {
-                    response.close()
-                    try {
-                        inputStream?.close()
-                        inputStream = null
-                    } catch (var14: IOException) {
-                        responseEntity.throwable = var14
-                        Log.e(TAG, "inputStream?.close(): 异常")
-                        var14.printStackTrace()
-                    }
+            var inputStream: InputStream? = null
+            var jsonStr = ""
+            try {
+                inputStream = if (needGzip) {
+                    GZIPInputStream(_inputStream)
+                } else {
+                    _inputStream
                 }
+                jsonStr = IoUtils.getString(inputStream)
+            } catch (e: Exception) {
+                Log.e(TAG, "analyseResponse: 解析异常")
+                responseEntity.throwable = e
+                e.printStackTrace()
+            } finally {
                 try {
-                    responseEntity.jsonStr = jsonStr
-                    responseEntity.responseBean = GSONUtil.parseJsonWithGSON(jsonStr, beanClass)
-                    responseEntity.isSuccess = true
-                } catch (e: Exception) {
-                    Log.e(TAG, "analyseResponse: GSON 转换异常")
-                    responseEntity.throwable = e
-                    e.printStackTrace()
+                    inputStream?.close()
+                } catch (var14: IOException) {
+                    responseEntity.throwable = var14
+                    Log.e(TAG, "inputStream?.close(): 异常")
+                    var14.printStackTrace()
                 }
-
+            }
+            try {
+                responseEntity.jsonStr = jsonStr
+                responseEntity.responseBean = GSONUtil.parseJsonWithGSON(jsonStr, beanClass)
+                responseEntity.isSuccess = true
+            } catch (e: Exception) {
+                Log.e(TAG, "analyseResponse: GSON 转换异常")
+                responseEntity.throwable = e
+                e.printStackTrace()
             }
             return responseEntity
         }
@@ -194,50 +165,40 @@ public class HttpCoroutineUtils {
         /**
          * 解析 Response
          */
-        private fun analyseResponseToString(response: Response?, needGzip: Boolean): HttpResponseEntity<Response> {
-            val responseEntity = HttpResponseEntity<Response>()
-            response?.let {
-                var inputStream: InputStream? = null
-                var jsonStr = ""
-                try {
-                    val responseBody: ResponseBody? = response.body()
-                    responseBody?.apply {
-                        inputStream = if (needGzip) {
-                            GZIPInputStream(byteStream())
-                        } else {
-                            byteStream()
-                        }
-                        jsonStr = IoUtils.getString(inputStream)
-                        //输出 Log
-                        val contentLength = contentLength()
-                        Log.i(TAG, "协议 URL：" + response.request().url().toString() + " contentLength： " + contentLength)
-                    }
-                } catch (e: Exception) {
-                    Log.e(TAG, "analyseResponse: 解析异常")
-                    responseEntity.throwable = e
-                    e.printStackTrace()
-                } finally {
-                    response.close()
-                    try {
-                        inputStream?.close()
-                        inputStream = null
-                    } catch (var14: IOException) {
-                        responseEntity.throwable = var14
-                        Log.e(TAG, "inputStream?.close(): 异常")
-                        var14.printStackTrace()
-                    }
+        private fun analyseInputStreamToString(_inputStream: InputStream?, needGzip: Boolean): HttpResponseEntity<String> {
+            val responseEntity = HttpResponseEntity<String>()
+            var inputStream: InputStream? = null
+            var jsonStr = ""
+            try {
+                inputStream = if (needGzip) {
+                    GZIPInputStream(_inputStream)
+                } else {
+                    _inputStream
                 }
+                jsonStr = IoUtils.getString(inputStream)
+            } catch (e: Exception) {
+                Log.e(TAG, "analyseResponse: 解析异常")
+                responseEntity.throwable = e
+                e.printStackTrace()
+            } finally {
                 try {
-                    responseEntity.jsonStr = jsonStr
-                    responseEntity.responseBean = response
-                    responseEntity.isSuccess = true
-                } catch (e: Exception) {
-                    Log.e(TAG, "analyseResponse: GSON 转换异常")
-                    responseEntity.throwable = e
-                    e.printStackTrace()
+                    inputStream?.close()
+                } catch (var14: IOException) {
+                    responseEntity.throwable = var14
+                    Log.e(TAG, "inputStream?.close(): 异常")
+                    var14.printStackTrace()
                 }
-
             }
+            try {
+                responseEntity.jsonStr = jsonStr
+                responseEntity.responseBean = jsonStr
+                responseEntity.isSuccess = true
+            } catch (e: Exception) {
+                Log.e(TAG, "analyseResponse: GSON 转换异常")
+                responseEntity.throwable = e
+                e.printStackTrace()
+            }
+
             return responseEntity
         }
     }

@@ -45,7 +45,7 @@ class MyApp: Application() {
      */
     private fun initZebra() {
         val builder = ZebraConfig.Builder(this) { params ->
-            Http.sendRequest(params.url, params.requestContent, params.requestMethod, null, params.contentType, this)
+            Http.sendRequest(params.url, params.requestContent, params.requestMethod, null, params.contentType)
         }
         builder.setDebug(BuildConfig.DEBUG)
         ZebraConfig.init(builder)
