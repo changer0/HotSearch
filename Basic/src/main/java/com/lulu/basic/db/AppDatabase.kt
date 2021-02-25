@@ -1,7 +1,8 @@
-package com.lulu.hotsearch.db
+package com.lulu.basic.db
 
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteOpenHelper
+import com.lulu.basic.db.SkinPackageDao
 import com.lulu.basic.skin.SkinPackageBean
 
 /**

@@ -1,12 +1,11 @@
-package com.lulu.hotsearch.utils
+package com.lulu.basic.skin
 
 import android.text.TextUtils
 import androidx.lifecycle.LifecycleOwner
 import com.lulu.basic.net.CoroutineScopeManager
 import com.lulu.basic.net.HttpCoroutineUtils
-import com.lulu.basic.skin.SkinPackageBean
-import com.lulu.hotsearch.db.DBManager
-import com.lulu.hotsearch.define.ServerUrl
+import com.lulu.basic.db.DBManager
+import com.lulu.basic.define.ServerUrl
 import com.yuewen.reader.zebra.utils.GSONUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -14,7 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 object SwitchSkinUtil {
-    private const val SWITCH_SKIN_URL = ServerUrl.CONFIG_DOMAIN + "skin_config.json"
+    private val SWITCH_SKIN_URL = ServerUrl.CONFIG_DOMAIN + "skin_config.json"
     @JvmStatic
     fun requestSkinConfig(owner: LifecycleOwner, requestListener: RequestListener?) {
         CoroutineScopeManager.getScope(owner).launch {
@@ -28,7 +27,10 @@ object SwitchSkinUtil {
             localData?.apply {
                 //本地数据有
                 netData?.apply{
-                    mergeLocalNetData(netData, localData)
+                    mergeLocalNetData(
+                        netData,
+                        localData
+                    )
                     requestListener?.onSuccess(netData)
                 }?: apply{
                     requestListener?.onSuccess(localData)
@@ -72,7 +74,10 @@ object SwitchSkinUtil {
     private suspend fun mergeLocalNetData(netList: List<SkinPackageBean>, localList: List<SkinPackageBean>) = withContext(Dispatchers.IO) {
 
         for (netBean in netList) {
-            val localBean = findSkinPackById(netBean.id, localList)
+            val localBean = findSkinPackById(
+                netBean.id,
+                localList
+            )
             localBean?.apply {
                 if (netBean.version > localBean.version) {
                     netBean.isUpdate = true//需要升级

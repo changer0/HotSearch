@@ -1,4 +1,4 @@
-package com.lulu.hotsearch.db
+package com.lulu.basic.db
 
 import androidx.room.Room
 import com.lulu.baseutil.Init
@@ -16,5 +16,5 @@ class DBManager {
         val instance = DBManager()
     }
 
-    public var db = Room.databaseBuilder(Init.context, AppDatabase::class.java, "hot_search_db").build()
+    public var db = Room.databaseBuilder(Init.context, AppDatabase::class.java, Init.dbName).build()
 }

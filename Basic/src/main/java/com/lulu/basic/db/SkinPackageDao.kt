@@ -1,4 +1,4 @@
-package com.lulu.hotsearch.db
+package com.lulu.basic.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

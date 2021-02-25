@@ -9,7 +9,7 @@ import com.lulu.basic.net.CoroutineScopeManager
 import com.lulu.basic.net.HttpCoroutineUtils
 import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.manager.FilterRuleManager
-import com.lulu.hotsearch.define.ServerUrl
+import com.lulu.basic.define.ServerUrl
 import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.R
 import com.lulu.basic.activity.BaseActivity

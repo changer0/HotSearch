@@ -4,10 +4,10 @@ import android.app.Application
 import com.lulu.baseutil.CommonUtil
 import com.lulu.baseutil.FileUtil
 import com.lulu.baseutil.Init
+import com.lulu.basic.define.ServerUrl
 import com.lulu.basic.image.ImageUtils
 import com.lulu.basic.kvstorage.KVStorage
 import com.lulu.basic.net.Http
-import com.lulu.basic.skin.SkinManager
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.bugly.crashreport.CrashReport.UserStrategy
 import com.yuewen.component.router.YWRouter
@@ -26,7 +26,7 @@ class MyApp: Application() {
         super.onCreate()
         Init.app = this
         Init.context = this
-        initPath()
+        initDefine()
         initBugly()
         initMMKV()
         initZebra()
@@ -54,8 +54,11 @@ class MyApp: Application() {
     /**
      * 路径初始化
      */
-    private fun initPath() {
+    private fun initDefine() {
         Init.ROOT_PATH = FileUtil.getStorageFileDir(this)?.path + File.separator
+        Init.dbName = "hot_search_db"
+        ServerUrl.DOMAIN = "https://service-6qnrov8o-1256519379.gz.apigw.tencentcs.com/release/hotSearch/"
+        ServerUrl.CONFIG_DOMAIN = "https://gitee.com/luluzhang/HotSearchConfigProject/raw/master/"
     }
 
     /**

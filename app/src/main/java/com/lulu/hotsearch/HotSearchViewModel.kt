@@ -8,7 +8,7 @@ import com.yuewen.reader.zebra.ZebraLiveData
 import com.yuewen.reader.zebra.cache.CacheMode
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.define.Constant
-import com.lulu.hotsearch.define.ServerUrl
+import com.lulu.basic.define.ServerUrl
 import com.lulu.hotsearch.itembuilder.ViewBindItemBuilder
 
 /**

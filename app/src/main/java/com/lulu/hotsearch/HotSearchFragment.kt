@@ -16,7 +16,7 @@ import com.lulu.hotsearch.bean.HotSearchConfigBean
 import com.lulu.basic.skin.SkinPackageBean
 import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.manager.HotSearchConfigManager.saveCurType
-import com.lulu.hotsearch.utils.SwitchSkinUtil
+import com.lulu.basic.skin.SwitchSkinUtil
 import com.lulu.hotsearch.view.HotSearchView
 import com.lulu.hotsearch.view.HotSearchView.OnFabClickListener
 import com.qq.reader.bookstore.BaseBookStoreFragment
