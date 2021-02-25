@@ -21,22 +21,35 @@ import kotlinx.coroutines.launch
 
 private const val TAG = "SplashActivity"
 class SplashActivity : BaseActivity() {
-    val handler = Handler(Looper.getMainLooper())
+    private val handler = Handler(Looper.getMainLooper())
+    private var launchTime = 0L
+    private var isLaunch = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setFullScreen(true)
         setContentView(R.layout.activity_main)
-
+        isLaunch = false
         text.text = getString(R.string.splash_text)
-
+        launchTime = System.currentTimeMillis()
         CoroutineScopeManager.getScope(this).launch {
             val rule = async {requestFilterRule()}
             val configInfo = async { requestConfigInfo() }
+
+            //如果2s未启动 且有本地数据直接启动
+            handler.postDelayed({
+                if (HotSearchConfigManager.hasData()) {
+                    if (!isLaunch) {
+                        Log.i(TAG, "onCreate: 启动超时,直接使用本地数据加载")
+                    }
+                    launchHotSearch()
+                }
+            }, 2000)
             //并发请求
             rule.await()
             configInfo.await()
             //初始信息请求完毕，启动
             launchHotSearch()
+            Log.i(TAG, "onCreate: 启动耗时: ${(System.currentTimeMillis() - launchTime)/1000f}s")
         }
 
 
@@ -47,6 +60,10 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun launchHotSearch() {
+        if (isLaunch) {
+            return
+        }
+        isLaunch = true
         val bundle = Bundle()
         bundle.putString(
             Constant.HOT_SEARCH_TYPE,

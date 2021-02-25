@@ -20,7 +20,7 @@ object HotSearchConfigManager {
     private const val LOCAL_CONFIG_PATH = "local_config_info.json"
     private var configInfo = mutableListOf<HotSearchConfigBean>()
 
-    public fun saveConfigInfo(jsonStr: String) {
+    fun saveConfigInfo(jsonStr: String) {
         try {
             val configBeanList = GSONUtil.parseJsonToList(jsonStr, HotSearchConfigBean::class.java)
             //解析失败、为空都忽略数据
@@ -34,7 +34,17 @@ object HotSearchConfigManager {
         }
     }
 
-    public fun getConfigList(): List<HotSearchConfigBean> {
+    /**
+     * 检查是否有数据
+     */
+    fun hasData(): Boolean {
+        if (configInfo.isNotEmpty()) {
+            return true
+        }
+        return File(CONFIG_INFO_PATH).exists()
+    }
+
+    fun getConfigList(): List<HotSearchConfigBean> {
         if (configInfo.isNotEmpty()) {
             return configInfo
         }
