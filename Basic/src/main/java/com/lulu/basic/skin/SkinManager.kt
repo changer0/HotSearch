@@ -12,6 +12,7 @@ import com.lulu.skin.ISkinUpdateListener
 import com.lulu.skin.SkinEngine
 import com.lulu.skin.SkinUtil
 import java.io.File
+import java.lang.Exception
 
 
 /**
@@ -100,7 +101,7 @@ public class SkinManager {
     /**
      * 尝试下载并安装
      */
-    public fun tryDownloadAndInstall(skinPackageBean: SkinPackageBean, finished: (() -> Unit)? = null) {
+    public fun tryDownloadAndInstall(skinPackageBean: SkinPackageBean, listener: ISkinSwitchListener?) {
         val path = SKIN_PATH + "${skinPackageBean.id}.apk"
         val file = File(path)
         if (file.exists()) {
@@ -113,7 +114,7 @@ public class SkinManager {
                     skinPackageBean.isUpdate = false
                     skinPackageBean.isHasLocalFile = true
                     SwitchSkinUtil.updateSkinPackageBean(skinPackageBean)
-                    finished?.invoke()
+                    listener?.onSuccess()
                 }
                 return
             }
@@ -121,6 +122,7 @@ public class SkinManager {
         DownloadManager.get(Init.context).add(skinPackageBean.downloadUrl, path, true, object : SimpleDownloadListener() {
             override fun onFailed(id: Int, msg: String?) {
                 ToastUtil.showShortToast("下载失败: $msg")
+                listener?.onFailure(Exception(msg))
             }
 
             override fun onSuccess(id: Int, averageSpeed: String) {
@@ -131,7 +133,7 @@ public class SkinManager {
                     }
                     skinPackageBean.isHasLocalFile = true
                     SwitchSkinUtil.updateSkinPackageBean(skinPackageBean)
-                    finished?.invoke()
+                    listener?.onSuccess()
                 }
             }
 

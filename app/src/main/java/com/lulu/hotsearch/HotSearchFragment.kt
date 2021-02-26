@@ -7,16 +7,12 @@ import android.text.TextUtils
 import android.text.format.DateFormat
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.lulu.basic.skin.SkinKVStorage.getSkinId
-import com.lulu.basic.skin.SkinKVStorage.setSkinId
-import com.lulu.basic.skin.SkinManager
+import com.lulu.basic.skin.*
 import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.bean.HotSearchConfigBean
-import com.lulu.basic.skin.SkinPackageBean
 import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.manager.HotSearchConfigManager.saveCurType
-import com.lulu.basic.skin.SwitchSkinUtil
 import com.lulu.hotsearch.view.HotSearchView
 import com.lulu.hotsearch.view.HotSearchView.OnFabClickListener
 import com.qq.reader.bookstore.BaseBookStoreFragment
@@ -122,7 +118,7 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
                         } else {
                             names[i] = packageBean.name
                         }
-                        if (TextUtils.equals(getSkinId(), packageBean.id)) {
+                        if (TextUtils.equals(SkinKVStorage.getSkinId(), packageBean.id)) {
                             checkItem = i
                         }
 
@@ -132,6 +128,7 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
                 }
 
                 override fun onFailure(e: Throwable) {
+                    hideProgress()
                     ToastUtil.showShortToast(resources.getString(R.string.net_error))
                 }
             })
@@ -151,14 +148,21 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
         ) { dialog: DialogInterface, which: Int ->
             val bean = packageBeans[which]
             if (TextUtils.equals(bean.id, "default")) {
+                SkinKVStorage.setSkinId("default")
                 SkinManager.get().restoreDefaultTheme()
             } else {
                 showProgress(R.string.loading)
-                SkinManager.get().tryDownloadAndInstall(bean) {
-                    hideProgress()
-                }
+                SkinManager.get().tryDownloadAndInstall(bean, object : ISkinSwitchListener {
+                    override fun onSuccess() {
+                        SkinKVStorage.setSkinId(bean.id)
+                        hideProgress()
+                    }
+
+                    override fun onFailure(e: Throwable) {
+                        hideProgress()
+                    }
+                })
             }
-            setSkinId(bean.id)
             dialog.cancel()
         }.setNegativeButton(R.string.cancel, null).create().show()
     }
