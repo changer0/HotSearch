@@ -101,7 +101,7 @@ public class SkinManager {
      * 尝试下载并安装
      */
     public fun tryDownloadAndInstall(skinPackageBean: SkinPackageBean, finished: (() -> Unit)? = null) {
-        val path = SKIN_PATH + "${skinPackageBean.id}.apk"
+        val path = SKIN_PATH + "${skinPackageBean.name}.apk"
         val file = File(path)
         if (file.exists()) {
             if (skinPackageBean.isUpdate) {

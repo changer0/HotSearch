@@ -72,7 +72,7 @@ object SwitchSkinUtil {
 
         for (netBean in netList) {
             val localBean = findSkinPackById(
-                netBean.id,
+                netBean.name,
                 localList
             )
             localBean?.apply {
@@ -87,7 +87,7 @@ object SwitchSkinUtil {
 
     private fun findSkinPackById(id: String, list: List<SkinPackageBean>): SkinPackageBean? {
         for (skinPackageBean in list) {
-            if (TextUtils.equals(id, skinPackageBean.id)) {
+            if (TextUtils.equals(id, skinPackageBean.name)) {
                 return skinPackageBean
             }
         }

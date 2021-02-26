@@ -2,7 +2,6 @@ package com.lulu.basic.skin;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.lulu.basic.bean.BaseBean;
@@ -12,20 +11,20 @@ import com.lulu.basic.bean.BaseBean;
  */
 @Entity(tableName = "skin_package_entity")
 public class SkinPackageBean extends BaseBean {
-    @PrimaryKey
-    @NonNull
-    private String id;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String name;
+    private String title;
     private String downloadUrl;
     private int version;
     private boolean isUpdate;
     private boolean hasLocalFile;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -35,6 +34,14 @@ public class SkinPackageBean extends BaseBean {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDownloadUrl() {
