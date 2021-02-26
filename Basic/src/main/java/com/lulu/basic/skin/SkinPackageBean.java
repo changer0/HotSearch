@@ -11,20 +11,20 @@ import com.lulu.basic.bean.BaseBean;
  */
 @Entity(tableName = "skin_package_entity")
 public class SkinPackageBean extends BaseBean {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    private String id = "default";
     private String name;
-    private String title;
     private String downloadUrl;
     private int version;
     private boolean isUpdate;
     private boolean hasLocalFile;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -34,14 +34,6 @@ public class SkinPackageBean extends BaseBean {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDownloadUrl() {

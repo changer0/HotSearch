@@ -101,14 +101,17 @@ public class SkinManager {
      * 尝试下载并安装
      */
     public fun tryDownloadAndInstall(skinPackageBean: SkinPackageBean, finished: (() -> Unit)? = null) {
-        val path = SKIN_PATH + "${skinPackageBean.name}.apk"
+        val path = SKIN_PATH + "${skinPackageBean.id}.apk"
         val file = File(path)
         if (file.exists()) {
             if (skinPackageBean.isUpdate) {
+                //皮肤包有升级, Clear 掉 SkinResource 缓存
+                SkinEngine.get().clearSkinResourceMemoryCache()
                 file.delete()
             } else {
                 switchSkin(path) {
                     skinPackageBean.isUpdate = false
+                    skinPackageBean.isHasLocalFile = true
                     SwitchSkinUtil.updateSkinPackageBean(skinPackageBean)
                     finished?.invoke()
                 }
@@ -125,8 +128,9 @@ public class SkinManager {
                     //将本地升级标识重置
                     if (skinPackageBean.isUpdate) {
                         skinPackageBean.isUpdate = false
-                        SwitchSkinUtil.updateSkinPackageBean(skinPackageBean)
                     }
+                    skinPackageBean.isHasLocalFile = true
+                    SwitchSkinUtil.updateSkinPackageBean(skinPackageBean)
                     finished?.invoke()
                 }
             }

@@ -31,12 +31,15 @@ interface SkinPackageDao {
     @Delete
     suspend fun deleteSkinPackageSuspend(vararg skinPackage: SkinPackageBean)
 
+    @Query("DELETE FROM skin_package_entity")
+    suspend fun deleteAllSuspend()
+
     @Query("SELECT * FROM skin_package_entity")
     fun getAll() : LiveData<List<SkinPackageBean>>
 
     @Query("SELECT * FROM skin_package_entity")
     suspend fun getAllSuspend() : List<SkinPackageBean>?
 
-    @Query("SELECT * FROM skin_package_entity where name = :name LIMIT 1")
+    @Query("SELECT * FROM skin_package_entity where id = :name LIMIT 1")
     fun getByName(name: String): LiveData<SkinPackageBean>
 }

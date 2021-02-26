@@ -104,18 +104,23 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
                 override fun onSuccess(beanList: List<SkinPackageBean>) {
                     val tempList = ArrayList(beanList)
                     val defaultBean = SkinPackageBean()
-                    defaultBean.title = "科技黑(默认)"
-                    defaultBean.name = "default"
+                    defaultBean.name = "科技黑(默认)"
+                    defaultBean.id = "default"
                     tempList.add(0, defaultBean)
                     val names =
                         arrayOfNulls<String>(tempList.size)
                     var checkItem = 0
                     for (i in tempList.indices) {
                         val packageBean = tempList[i]
-                        names[i] = packageBean.title
-                        if (TextUtils.equals(getSkinId(), packageBean.name)) {
+                        if (packageBean.isUpdate) {
+                            names[i] = "${packageBean.name}(有更新)"
+                        } else {
+                            names[i] = packageBean.name
+                        }
+                        if (TextUtils.equals(getSkinId(), packageBean.id)) {
                             checkItem = i
                         }
+
                     }
                     hideProgress()
                     showSwitchSkinDialog(names, checkItem, tempList)
@@ -140,7 +145,7 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
             checkItem
         ) { dialog: DialogInterface, which: Int ->
             val bean = packageBeans[which]
-            if (TextUtils.equals(bean.name, "default")) {
+            if (TextUtils.equals(bean.id, "default")) {
                 SkinManager.get().restoreDefaultTheme()
             } else {
                 showProgress(R.string.loading)
@@ -148,7 +153,7 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
                     hideProgress()
                 }
             }
-            setSkinId(bean.name)
+            setSkinId(bean.id)
             dialog.cancel()
         }.setNegativeButton(R.string.cancel, null).create().show()
     }

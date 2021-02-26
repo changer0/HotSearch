@@ -119,12 +119,20 @@ class SkinEngine private constructor(){
     /**
      * 恢复默认主题
      */
-    public fun restoreDefaultTheme() {
+    fun restoreDefaultTheme() {
         isExternalSkin = false
         skinResources = null
-        skinPath = "";
+        skinPath = ""
         notifySkinUpdate()
     }
+
+    /**
+     * 清除掉当前 SkinResource 内存缓存
+     */
+    fun clearSkinResourceMemoryCache() {
+        skinResources = null
+    }
+
     
     //----------------------------------------------------------------------------------------------
     // 工具方法

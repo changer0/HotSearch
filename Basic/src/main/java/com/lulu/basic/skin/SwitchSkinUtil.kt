@@ -72,22 +72,26 @@ object SwitchSkinUtil {
 
         for (netBean in netList) {
             val localBean = findSkinPackById(
-                netBean.name,
+                netBean.id,
                 localList
             )
             localBean?.apply {
-                if (netBean.version > localBean.version) {
+                netBean.isUpdate = isUpdate
+                //网络版本高于本地版本 并且本地有文件的才需要展示升级
+                if (netBean.version > localBean.version && localBean.isHasLocalFile) {
                     netBean.isUpdate = true//需要升级
                 }
+                //将本地是否有文件的状态传递给 netBean
+                netBean.isHasLocalFile = isHasLocalFile
             }
         }
         //保存本地数据
-        BasicDBManager.get().skinPackageDao().insertSkinPackageListSuspend(netList)
+        saveLocalData(netList)
     }
 
     private fun findSkinPackById(id: String, list: List<SkinPackageBean>): SkinPackageBean? {
         for (skinPackageBean in list) {
-            if (TextUtils.equals(id, skinPackageBean.name)) {
+            if (TextUtils.equals(id, skinPackageBean.id)) {
                 return skinPackageBean
             }
         }
