@@ -1,7 +1,7 @@
 package com.lulu.hotsearch
 
 import android.os.Bundle
-import com.qq.reader.bookstore.BaseBookStoreViewModel
+import com.qq.reader.bookstore.BasePageViewModel
 import com.qq.reader.bookstore.define.LoadSignal
 import com.yuewen.reader.zebra.Zebra
 import com.yuewen.reader.zebra.ZebraLiveData
@@ -14,7 +14,7 @@ import com.lulu.hotsearch.itembuilder.ViewBindItemBuilder
 /**
  * 微博 ViewModel
  */
-class HotSearchViewModel : BaseBookStoreViewModel() {
+class HotSearchViewModel : BasePageViewModel() {
 
     val URL = ServerUrl.DOMAIN + "list?type="
 

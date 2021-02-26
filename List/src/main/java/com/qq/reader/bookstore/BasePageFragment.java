@@ -19,7 +19,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qq.reader.bookstore.define.LoadSignal;
-import com.qq.reader.bookstore.view.BaseBookStoreView;
+import com.qq.reader.bookstore.view.BasePageView;
 import com.lulu.basic.fragment.BaseFragment;
 import com.yuewen.reader.zebra.loader.ObserverEntity;
 import com.yuewen.reader.zebra.log.Logger;
@@ -37,8 +37,8 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author zhanglulu
  */
-public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
-        VM extends BaseBookStoreViewModel> extends BaseFragment implements Observer<ObserverEntity>,
+public abstract class BasePageFragment<V extends BasePageView,
+        VM extends BasePageViewModel> extends BaseFragment implements Observer<ObserverEntity>,
         SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     protected Context mContext;

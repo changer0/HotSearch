@@ -8,7 +8,7 @@ import com.qq.reader.bookstore.R
 /**
  * @author zhanglulu
  */
-class CommonBookStoreView(context: Context): BaseBookStoreView(context) {
+class CommonPageView(context: Context): BasePageView(context) {
     override fun onCreateParams(): BookStoreViewParams {
         return BookStoreViewParams.Builder(
             R.layout.bookstore_common_page_layout,

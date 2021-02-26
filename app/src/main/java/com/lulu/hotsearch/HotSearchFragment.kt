@@ -15,7 +15,7 @@ import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.manager.HotSearchConfigManager.saveCurType
 import com.lulu.hotsearch.view.HotSearchView
 import com.lulu.hotsearch.view.HotSearchView.OnFabClickListener
-import com.qq.reader.bookstore.BaseBookStoreFragment
+import com.qq.reader.bookstore.BasePageFragment
 import com.qq.reader.bookstore.define.LoadSignal
 import com.yuewen.reader.zebra.loader.ObserverEntity
 
@@ -24,7 +24,7 @@ import com.yuewen.reader.zebra.loader.ObserverEntity
  * Time: 2021/2/14
  */
 @Route(path = Constant.WB_HOT_SEARCH)
-class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewModel>() {
+class HotSearchFragment : BasePageFragment<HotSearchView, HotSearchViewModel>() {
     override fun onCreateBookStoreView(): HotSearchView {
         return HotSearchView(mContext)
     }

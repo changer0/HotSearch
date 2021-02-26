@@ -15,7 +15,6 @@ import com.lulu.baseutil.CommonUtil
 import com.lulu.baseutil.Init
 import com.lulu.baseutil.bezelless.DensityUtil
 import com.lulu.basic.image.ImageUtils
-import com.lulu.basic.skin.SkinManager
 import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.HotSearchTitle
 import com.lulu.hotsearch.bean.HotSearchConfigBean
@@ -23,12 +22,12 @@ import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.utils.FabAnimUtil
 import com.lulu.hotsearch.R
 import com.qq.reader.bookstore.define.BookStoreViewParams
-import com.qq.reader.bookstore.view.BaseBookStoreView
+import com.qq.reader.bookstore.view.BasePageView
 import com.qq.reader.bookstore.view.CommonLoadMoreView
 
 
 private const val TAG = "WBHotSearchView"
-class HotSearchView(context: Context) : BaseBookStoreView(context) {
+class HotSearchView(context: Context) : BasePageView(context) {
     private var isAdd = false
 
     private var addBillTranslateList = mutableListOf<AnimatorSet>()

@@ -9,7 +9,7 @@ import com.yuewen.reader.zebra.ZebraLiveData;
  * 承载 Fragment 的 ViewModel, zebraLiveDataCache 可选使用
  * @author zhanglulu
  */
-public abstract class BaseBookStoreViewModel extends ViewModel {
+public abstract class BasePageViewModel extends ViewModel {
 
 
     /**

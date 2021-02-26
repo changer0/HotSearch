@@ -15,7 +15,7 @@ public class LaunchParams implements Parcelable {
     private boolean pullRefreshEnable = false;
     private boolean loadMoreEnable = false;
     private String title;
-    private Class<? extends BaseBookStoreViewModel> viewModelClass;
+    private Class<? extends BasePageViewModel> viewModelClass;
     private Bundle extras;
 
 
@@ -31,7 +31,7 @@ public class LaunchParams implements Parcelable {
         return title;
     }
 
-    public Class<? extends BaseBookStoreViewModel> getViewModelClass() {
+    public Class<? extends BasePageViewModel> getViewModelClass() {
         return viewModelClass;
     }
 
@@ -99,7 +99,7 @@ public class LaunchParams implements Parcelable {
             return this;
         }
 
-        public Builder setViewModelClass(Class<? extends BaseBookStoreViewModel> viewModelClass) {
+        public Builder setViewModelClass(Class<? extends BasePageViewModel> viewModelClass) {
             P.viewModelClass = viewModelClass;
             return this;
         }

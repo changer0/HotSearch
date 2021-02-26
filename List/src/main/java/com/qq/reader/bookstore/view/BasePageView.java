@@ -23,7 +23,7 @@ import java.util.Set;
  * 承载 Fragment 中所有 View
  * @author zhanglulu
  */
-public abstract class BaseBookStoreView  implements ISkinUpdateListener {
+public abstract class BasePageView implements ISkinUpdateListener {
 
     protected Context context;
 
@@ -43,7 +43,7 @@ public abstract class BaseBookStoreView  implements ISkinUpdateListener {
     public SwipeRefreshLayout pullDownView;
     private final BookStoreViewParams params;
 
-    public BaseBookStoreView(Context context) {
+    public BasePageView(Context context) {
         params = onCreateParams();
         this.context = context;
         this.contentView = LayoutInflater.from(context).inflate(params.getContentViewLayoutRes(), null);
