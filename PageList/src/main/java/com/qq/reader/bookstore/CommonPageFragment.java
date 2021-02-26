@@ -25,7 +25,7 @@ public class CommonPageFragment<VM extends BasePageViewModel> extends BasePageFr
     private Runnable loadingRunnable = () -> loadData(LoadSignal.LOAD_SIGNAL_INIT);
 
     @Override
-    protected CommonPageView onCreateBookStoreView() {
+    protected CommonPageView onCreatePageView() {
         return new CommonPageView(mContext);
     }
 

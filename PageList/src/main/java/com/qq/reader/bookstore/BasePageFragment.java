@@ -64,7 +64,7 @@ public abstract class BasePageFragment<V extends BasePageView,
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mPageView = onCreateBookStoreView();
+        mPageView = onCreatePageView();
         mPageView.createView();
         initUI();
         return mPageView.getContentView();
@@ -332,7 +332,7 @@ public abstract class BasePageFragment<V extends BasePageView,
     /**
      * 提供一个书城专用 View
      */
-    abstract protected V onCreateBookStoreView();
+    abstract protected V onCreatePageView();
 
     /**
      * 提供一个书城专用 ViewModel

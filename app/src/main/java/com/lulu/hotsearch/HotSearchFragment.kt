@@ -25,7 +25,7 @@ import com.yuewen.reader.zebra.loader.ObserverEntity
  */
 @Route(path = Constant.WB_HOT_SEARCH)
 class HotSearchFragment : BasePageFragment<HotSearchView, HotSearchViewModel>() {
-    override fun onCreateBookStoreView(): HotSearchView {
+    override fun onCreatePageView(): HotSearchView {
         return HotSearchView(mContext)
     }
 
