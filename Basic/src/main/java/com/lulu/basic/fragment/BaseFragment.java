@@ -57,10 +57,11 @@ public abstract class BaseFragment extends Fragment implements ISkinUpdateListen
         }
     }
 
+
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
         progress = null;
+        super.onDestroyView();
     }
 
     //----------------------------------------------------------------------------------------------
