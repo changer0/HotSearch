@@ -42,7 +42,7 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
         SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     protected Context mContext;
-    protected V mBookStoreView;
+    protected V mPageView;
     protected VM mViewModel;
     public QuickRecyclerViewAdapter mAdapter;
     protected Bundle mEnterBundle;
@@ -64,10 +64,10 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBookStoreView = onCreateBookStoreView();
-        mBookStoreView.createView();
+        mPageView = onCreateBookStoreView();
+        mPageView.createView();
         initUI();
-        return mBookStoreView.getContentView();
+        return mPageView.getContentView();
     }
 
     @Override
@@ -110,7 +110,7 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
      * Fragment 首次启动失败
      */
     protected void launchFailed(String msg) {
-        mBookStoreView.showMutexStateView(mBookStoreView.dataErrorView);
+        mPageView.showMutexStateView(mPageView.dataErrorView);
         if (BuildConfig.DEBUG) {
             Toast.makeText(mContext, "启动 " + this.getClass().getName() + " 发生错误: " + msg, Toast.LENGTH_LONG).show();
         }
@@ -139,20 +139,20 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
             return;
         }
         mAdapter = new QuickRecyclerViewAdapter(mContext, null);
-        mAdapter.setLoadMoreView(mBookStoreView.loadMoreView);
-        mBookStoreView.recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        mBookStoreView.recyclerView.setAdapter(mAdapter);
-        mBookStoreView.pullDownView.setOnRefreshListener(this);
+        mAdapter.setLoadMoreView(mPageView.loadMoreView);
+        mPageView.recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        mPageView.recyclerView.setAdapter(mAdapter);
+        mPageView.pullDownView.setOnRefreshListener(this);
     }
 
     /**
      * 解析 Fragment 参数
      */
     protected void analyzingFragmentArguments() {
-        mBookStoreView.pullDownView.setEnabled(mLaunchParams.isPullRefreshEnable());
+        mPageView.pullDownView.setEnabled(mLaunchParams.isPullRefreshEnable());
         mAdapter.setEnableLoadMore(mLaunchParams.isLoadMoreEnable());
         if (mLaunchParams.isLoadMoreEnable()) {
-            mAdapter.setOnLoadMoreListener(this, mBookStoreView.recyclerView);
+            mAdapter.setOnLoadMoreListener(this, mPageView.recyclerView);
         }
         configActionBar();
     }
@@ -161,21 +161,21 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
      * ActionBar 的配置
      */
     protected void configActionBar() {
-        if (mBookStoreView.actionBarBackView != null) {
-            mBookStoreView.actionBarBackView.setOnClickListener(v -> {
+        if (mPageView.actionBarBackView != null) {
+            mPageView.actionBarBackView.setOnClickListener(v -> {
                 FragmentActivity activity = getActivity();
                 if (activity != null) {
                     activity.finish();
                 }
             });
         }
-        if (mBookStoreView.actionBarContainer != null
-                && mBookStoreView.actionBarTitle != null) {
+        if (mPageView.actionBarContainer != null
+                && mPageView.actionBarTitle != null) {
             if (!TextUtils.isEmpty(mLaunchParams.getTitle())) {
-                mBookStoreView.actionBarTitle.setText(mLaunchParams.getTitle());
-                mBookStoreView.actionBarContainer.setVisibility(View.VISIBLE);
+                mPageView.actionBarTitle.setText(mLaunchParams.getTitle());
+                mPageView.actionBarContainer.setVisibility(View.VISIBLE);
             } else {
-                mBookStoreView.actionBarContainer.setVisibility(View.GONE);
+                mPageView.actionBarContainer.setVisibility(View.GONE);
             }
         }
     }
@@ -225,7 +225,7 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
         if (mContext == null || !isFrameworkReady()) {
             return;
         }
-        mBookStoreView.pullDownView.setRefreshing(false);
+        mPageView.pullDownView.setRefreshing(false);
         int loadSignal = entity.zebra.getLoadSignal();
         Logger.d("onChanged", "是否为缓存: " + entity.zebra.isCache());
         switch (loadSignal) {
@@ -249,11 +249,11 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
         if(!entity.isSuccess()
                 || entity.zebra.getViewBindItems() == null
                 || entity.zebra.getViewBindItems().isEmpty()) {
-            mBookStoreView.showMutexStateView(mBookStoreView.dataErrorView);
+            mPageView.showMutexStateView(mPageView.dataErrorView);
         } else {
             mAdapter.setNewData(entity.zebra.getViewBindItems());
             mAdapter.loadMoreComplete();
-            mBookStoreView.showMutexStateView(mBookStoreView.recyclerView);
+            mPageView.showMutexStateView(mPageView.recyclerView);
         }
     }
 
@@ -292,7 +292,7 @@ public abstract class BaseBookStoreFragment<V extends BaseBookStoreView,
     @Override
     public void onSkinUpdate() {
         super.onSkinUpdate();
-        mBookStoreView.onSkinUpdate();
+        mPageView.onSkinUpdate();
     }
     // 皮肤
     //----------------------------------------------------------------------------------------------

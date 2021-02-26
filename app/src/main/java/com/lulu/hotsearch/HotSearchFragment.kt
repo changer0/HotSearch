@@ -38,9 +38,9 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
         enterBundle: Bundle,
         savedInstanceState: Bundle?
     ) {
-        mBookStoreView.actionBarContainer.visibility = View.VISIBLE
+        mPageView.actionBarContainer.visibility = View.VISIBLE
         innerLoadData(enterBundle, false)
-        mBookStoreView.setOnFabClickListener(object : OnFabClickListener {
+        mPageView.setOnFabClickListener(object : OnFabClickListener {
             override fun onClick(view: View, bean: HotSearchConfigBean) {
                 mEnterBundle.putString(
                     Constant.HOT_SEARCH_TYPE,
@@ -52,7 +52,7 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
         initSwitchSkinDialog()
 
         //加载重试
-        mBookStoreView.dataErrorView.setOnClickListener {
+        mPageView.dataErrorView.setOnClickListener {
             innerLoadData(mEnterBundle, true)
         }
     }
@@ -66,14 +66,14 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
             Constant.HOT_SEARCH_WB
         )
         saveCurType(type)
-        mBookStoreView.refreshActionBar(type)
+        mPageView.refreshActionBar(type)
         loadData(LoadSignal.LOAD_SIGNAL_INIT)
-        mBookStoreView.hideFABMenu()
+        mPageView.hideFABMenu()
     }
 
     override fun onDataInit(entity: ObserverEntity) {
         super.onDataInit(entity)
-        mBookStoreView.recyclerView.smoothScrollToPosition(0)
+        mPageView.recyclerView.smoothScrollToPosition(0)
         configUpdateTime(entity.zebra.getData())
         hideProgress()
     }
@@ -87,17 +87,17 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
             return
         }
         //添加更新时间
-        mBookStoreView.titleRightTime.visibility = View.VISIBLE
+        mPageView.titleRightTime.visibility = View.VISIBLE
         val timeStr =
             DateFormat.format("kk:mm:ss", bean.time_stamp.toLong())
-        mBookStoreView.titleRightTime.text = getString(R.string.update_time, timeStr)
+        mPageView.titleRightTime.text = getString(R.string.update_time, timeStr)
     }
 
     /**
      * 配置换肤弹窗 TODO 后续直接替换为页面
      */
     private fun initSwitchSkinDialog() {
-        mBookStoreView.rightImage.setOnClickListener { v: View? ->
+        mPageView.rightImage.setOnClickListener { v: View? ->
 
             showProgress(R.string.loading)
             //请求皮肤配置信息
