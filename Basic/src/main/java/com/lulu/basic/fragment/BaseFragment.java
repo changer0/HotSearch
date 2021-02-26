@@ -33,7 +33,7 @@ public abstract class BaseFragment extends Fragment implements ISkinUpdateListen
      */
     public abstract void onLoadFinished();
 
-    public void cancleLoadData() {
+    public void cancelLoadData() {
 
     }
 

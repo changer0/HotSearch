@@ -49,8 +49,8 @@ public class CommonPageFragment<VM extends BasePageViewModel> extends BasePageFr
     }
 
     @Override
-    public void cancleLoadData() {
-        super.cancleLoadData();
+    public void cancelLoadData() {
+        super.cancelLoadData();
         loadingHandler.removeCallbacks(loadingRunnable);
     }
 
