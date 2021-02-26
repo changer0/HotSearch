@@ -121,7 +121,7 @@ public abstract class BasePageFragment<V extends BasePageView,
      */
     protected void launchSuccess(@NonNull View view, @Nullable Bundle savedInstanceState) {
         analyzingFragmentArguments();
-        mViewModel = new ViewModelProvider(this).get(onCreateBookStoreViewModel(mEnterBundle));
+        mViewModel = new ViewModelProvider(this).get(onCreatePageViewModel(mEnterBundle));
         onLaunchSuccess(view, mEnterBundle, savedInstanceState);
     }
 
@@ -338,7 +338,7 @@ public abstract class BasePageFragment<V extends BasePageView,
      * 提供一个书城专用 ViewModel
      * @param enterBundle
      */
-    abstract protected Class<VM> onCreateBookStoreViewModel(@NonNull Bundle enterBundle);
+    abstract protected Class<VM> onCreatePageViewModel(@NonNull Bundle enterBundle);
 
     /**
      * Fragment 成功启动, 交互逻辑可在后续处理

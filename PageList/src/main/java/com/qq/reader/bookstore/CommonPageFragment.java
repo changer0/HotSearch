@@ -30,7 +30,7 @@ public class CommonPageFragment<VM extends BasePageViewModel> extends BasePageFr
     }
 
     @Override
-    protected Class<VM> onCreateBookStoreViewModel(@NonNull Bundle enterBundle) {
+    protected Class<VM> onCreatePageViewModel(@NonNull Bundle enterBundle) {
         Class<? extends BasePageViewModel> viewModelClass = mLaunchParams.getViewModelClass();
         if (viewModelClass == null) {
             throw new RuntimeException("启动通用 Fragment 时,需在 LaunchParams 中传递 viewModelClass!!!");

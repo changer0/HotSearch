@@ -29,7 +29,7 @@ class HotSearchFragment : BasePageFragment<HotSearchView, HotSearchViewModel>() 
         return HotSearchView(mContext)
     }
 
-    override fun onCreateBookStoreViewModel(enterBundle: Bundle): Class<HotSearchViewModel> {
+    override fun onCreatePageViewModel(enterBundle: Bundle): Class<HotSearchViewModel> {
         return HotSearchViewModel::class.java
     }
 
