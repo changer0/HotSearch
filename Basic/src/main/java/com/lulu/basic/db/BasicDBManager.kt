@@ -10,9 +10,9 @@ import com.lulu.baseutil.Init
  * @author zhanglulu
  */
 private const val TAG = "DBManager"
-class DBManager {
+class BasicDBManager {
     companion object {
-        fun get(): AppDatabase {
+        fun get(): BasicDatabase {
             return Holder.instance.db
         }
 
@@ -43,10 +43,10 @@ class DBManager {
         }
     }
     object Holder {
-        val instance = DBManager()
+        val instance = BasicDBManager()
     }
 
-    public var db = Room.databaseBuilder(Init.context, AppDatabase::class.java, Init.dbName)
+    public var db = Room.databaseBuilder(Init.context, BasicDatabase::class.java, Init.dbName)
             //.addMigrations(MIGRATION_1_2)
             .build()
 }

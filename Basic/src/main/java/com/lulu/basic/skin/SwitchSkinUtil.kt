@@ -4,7 +4,7 @@ import android.text.TextUtils
 import androidx.lifecycle.LifecycleOwner
 import com.lulu.basic.net.CoroutineScopeManager
 import com.lulu.basic.net.HttpCoroutineUtils
-import com.lulu.basic.db.DBManager
+import com.lulu.basic.db.BasicDBManager
 import com.lulu.basic.define.ServerUrl
 import com.yuewen.reader.zebra.utils.GSONUtil
 import kotlinx.coroutines.*
@@ -61,11 +61,11 @@ object SwitchSkinUtil {
     }
 
     private suspend fun requestLocalData(): List<SkinPackageBean>? = withContext(Dispatchers.IO) {
-        DBManager.get().skinPackageDao().getAllSuspend()
+        BasicDBManager.get().skinPackageDao().getAllSuspend()
     }
 
     private suspend fun saveLocalData(netList: List<SkinPackageBean>) = withContext(Dispatchers.IO) {
-        DBManager.get().skinPackageDao().insertSkinPackageListSuspend(netList)
+        BasicDBManager.get().skinPackageDao().insertSkinPackageListSuspend(netList)
     }
 
     private suspend fun mergeLocalNetData(netList: List<SkinPackageBean>, localList: List<SkinPackageBean>) = withContext(Dispatchers.IO) {
@@ -82,7 +82,7 @@ object SwitchSkinUtil {
             }
         }
         //保存本地数据
-        DBManager.get().skinPackageDao().insertSkinPackageListSuspend(netList)
+        BasicDBManager.get().skinPackageDao().insertSkinPackageListSuspend(netList)
     }
 
     private fun findSkinPackById(id: String, list: List<SkinPackageBean>): SkinPackageBean? {
@@ -97,7 +97,7 @@ object SwitchSkinUtil {
     fun updateSkinPackageBean(skinPackageBean: SkinPackageBean) {
         GlobalScope.launch {
             withContext(Dispatchers.IO) {
-                DBManager.get().skinPackageDao().insertSkinPackage(skinPackageBean)
+                BasicDBManager.get().skinPackageDao().insertSkinPackage(skinPackageBean)
             }
         }
     }

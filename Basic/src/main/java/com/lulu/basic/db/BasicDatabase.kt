@@ -9,7 +9,7 @@ import com.lulu.basic.skin.SkinPackageBean
  * @author zhanglulu
  */
 @Database(entities = [SkinPackageBean::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
+abstract class BasicDatabase : RoomDatabase() {
 
 
 
