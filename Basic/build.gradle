@@ -47,6 +47,13 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        //指定数据库schema导出的位置
+        arg("room.schemaLocation", "$projectDir/schemas".toString())
+    }
+}
+
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${gradle_build_versions.kotlin_version}"

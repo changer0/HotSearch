@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey;
 
 import com.lulu.basic.bean.BaseBean;
 
+/**
+ * @author zhanglulu
+ */
 @Entity(tableName = "skin_package_entity")
 public class SkinPackageBean extends BaseBean {
     @PrimaryKey
@@ -16,6 +19,7 @@ public class SkinPackageBean extends BaseBean {
     private String downloadUrl;
     private int version;
     private boolean isUpdate;
+    private boolean hasLocalFile;
 
     public String getId() {
         return id;
@@ -55,5 +59,13 @@ public class SkinPackageBean extends BaseBean {
 
     public void setUpdate(boolean update) {
         isUpdate = update;
+    }
+
+    public boolean isHasLocalFile() {
+        return hasLocalFile;
+    }
+
+    public void setHasLocalFile(boolean hasLocalFile) {
+        this.hasLocalFile = hasLocalFile;
     }
 }
