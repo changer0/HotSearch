@@ -1,7 +1,7 @@
 include ':zebra_core'
 include ':YWRouter_Android'
 include ':Basic'
-include ':List'
+include ':PageList'
 include ':BaseUtil'
 include ':SkinEngine'
 include ':KVStorage'
