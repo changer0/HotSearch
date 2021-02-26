@@ -121,7 +121,14 @@ public class SkinManager {
             }
 
             override fun onSuccess(id: Int, averageSpeed: String) {
-                switchSkin(path, finished)
+                switchSkin(path) {
+                    //将本地升级标识重置
+                    if (skinPackageBean.isUpdate) {
+                        skinPackageBean.isUpdate = false
+                        SwitchSkinUtil.updateSkinPackageBean(skinPackageBean)
+                    }
+                    finished?.invoke()
+                }
             }
 
             override fun onProgressChanged(
