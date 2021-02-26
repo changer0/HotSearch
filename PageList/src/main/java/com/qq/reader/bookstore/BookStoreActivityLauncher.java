@@ -6,8 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.qq.reader.bookstore.define.BookStoreConstant;
-
 /**
  * 书城启动器
  * @author zhanglulu

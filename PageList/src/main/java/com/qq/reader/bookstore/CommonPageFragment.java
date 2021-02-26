@@ -1,15 +1,13 @@
 package com.qq.reader.bookstore;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.qq.reader.bookstore.define.BookStoreConstant;
+import com.qq.reader.bookstore.define.PageConstant;
 import com.qq.reader.bookstore.define.LoadSignal;
 import com.qq.reader.bookstore.view.CommonPageView;
 import com.yuewen.reader.zebra.utils.CastUtils;
@@ -18,7 +16,7 @@ import com.yuewen.reader.zebra.utils.CastUtils;
 /**
  * @author zhanglulu
  */
-@Route(path = BookStoreConstant.BOOK_STORE_COMMON_FRAGMENT)
+@Route(path = PageConstant.BOOK_STORE_COMMON_FRAGMENT)
 public class CommonPageFragment<VM extends BasePageViewModel> extends BasePageFragment<CommonPageView, VM> {
 
     @Override
