@@ -54,6 +54,11 @@ class HotSearchFragment : BaseBookStoreFragment<HotSearchView, HotSearchViewMode
             }
         })
         initSwitchSkinDialog()
+
+        //加载重试
+        mBookStoreView.dataErrorView.setOnClickListener {
+            innerLoadData(mEnterBundle, true)
+        }
     }
 
     private fun innerLoadData(enterBundle: Bundle, showProgress: Boolean) {

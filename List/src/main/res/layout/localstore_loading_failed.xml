@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--TODO 暂时用 TextView 替代-->
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:empty="http://schemas.android.com/apk/res-auto"
-    android:text="加载失败"
+    android:text="加载失败 点击重试"
+    android:textColor="@color/primaryColor"
+    android:textSize="@dimen/text_size_3"
     android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
