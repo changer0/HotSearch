@@ -18,25 +18,6 @@ public abstract class BaseFragment extends Fragment implements ISkinUpdateListen
         return false;
     }
 
-    /**
-     * 预加载需要做的事情，UI线程
-     */
-    public abstract void onPreLoad();
-
-    /**
-     * 加载数据，子线程
-     */
-    public abstract void onLoading();
-
-    /**
-     * 数据加载完毕，UI线程
-     */
-    public abstract void onLoadFinished();
-
-    public void cancelLoadData() {
-
-    }
-
     //----------------------------------------------------------------------------------------------
     // 其他 UI 工具
     public void showProgress(String msg) {

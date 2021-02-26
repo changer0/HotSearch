@@ -20,9 +20,6 @@ import com.yuewen.reader.zebra.utils.CastUtils;
  */
 @Route(path = BookStoreConstant.BOOK_STORE_COMMON_FRAGMENT)
 public class CommonPageFragment<VM extends BasePageViewModel> extends BasePageFragment<CommonPageView, VM> {
-    private Handler loadingHandler = new Handler(Looper.getMainLooper());
-
-    private Runnable loadingRunnable = () -> loadData(LoadSignal.LOAD_SIGNAL_INIT);
 
     @Override
     protected CommonPageView onCreatePageView() {
@@ -41,17 +38,6 @@ public class CommonPageFragment<VM extends BasePageViewModel> extends BasePageFr
     @Override
     protected void onLaunchSuccess(@NonNull View container, @NonNull Bundle enterBundle, @Nullable Bundle savedInstanceState) {
         loadData(LoadSignal.LOAD_SIGNAL_INIT);
-    }
-
-    @Override
-    public void onLoading() {
-        loadingHandler.post(loadingRunnable);
-    }
-
-    @Override
-    public void cancelLoadData() {
-        super.cancelLoadData();
-        loadingHandler.removeCallbacks(loadingRunnable);
     }
 
 }
