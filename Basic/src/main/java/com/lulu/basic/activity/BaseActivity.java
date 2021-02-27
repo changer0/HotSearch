@@ -29,7 +29,8 @@ public class BaseActivity extends AppCompatActivity implements ISkinUpdateListen
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         skinFactory = new SkinFactory(this);
-        getLayoutInflater().setFactory(skinFactory);//设置给 BaseActivity
+        //设置给 BaseActivity
+        getLayoutInflater().setFactory(skinFactory);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         //换肤初始化
