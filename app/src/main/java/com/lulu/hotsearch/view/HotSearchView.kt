@@ -44,7 +44,7 @@ class HotSearchView(context: Context) : BasePageView(context) {
     override fun onCreateParams(): BookStoreViewParams {
         return BookStoreViewParams.Builder(
             R.layout.hot_search_fragment,
-            R.id.list_layout
+            R.id.common_recycler_view
         )
             .setDataErrorViewIdRes(R.id.loading_failed_layout)
             .setPullDownViewIdRes(R.id.pull_down_list)

@@ -12,7 +12,7 @@ class CommonPageView(context: Context): BasePageView(context) {
     override fun onCreateParams(): BookStoreViewParams {
         return BookStoreViewParams.Builder(
             R.layout.common_page_layout,
-            R.id.list_layout
+            R.id.common_recycler_view
         )
             .setDataErrorViewIdRes(R.id.loading_failed_layout)
             .setPullDownViewIdRes(R.id.pull_down_list)
