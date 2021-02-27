@@ -229,10 +229,16 @@ class WebActivity : BaseActivity() {
         ivPre.isEnabled = webView.canGoBack()
         ivNext.isEnabled = webView.canGoForward()
         ivPre.setOnClickListener {
-            if (webView.canGoBack()) webView.goBack()
+            if (webView.canGoBack()) {
+                webView.goBack()
+                refreshPreNextControl()
+            }
         }
         ivNext.setOnClickListener {
-            if (webView.canGoForward()) webView.goForward()
+            if (webView.canGoForward()) {
+                webView.goForward()
+                refreshPreNextControl()
+            }
         }
     }
 
@@ -252,6 +258,7 @@ class WebActivity : BaseActivity() {
         ivRefreshBtn.startAnimation(refreshAnim)
         tvLoadMsg.setText(R.string.filter_msg)
         //showProgress(getString(R.string.filter_msg))
+        refreshPreNextControl()
     }
 
 
