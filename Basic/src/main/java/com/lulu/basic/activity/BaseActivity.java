@@ -60,6 +60,7 @@ public class BaseActivity extends AppCompatActivity implements ISkinUpdateListen
 
     //----------------------------------------------------------------------------------------------
     // 其他 UI 工具
+
     public void showProgress(String msg) {
         if (progress == null) {
             progress = new ProgressDialogFragment();
