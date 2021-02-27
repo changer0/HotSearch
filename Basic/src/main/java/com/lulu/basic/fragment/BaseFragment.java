@@ -1,5 +1,7 @@
 package com.lulu.basic.fragment;
 
+import android.util.Log;
+
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
@@ -12,6 +14,7 @@ import com.lulu.skin.ISkinUpdateListener;
  */
 public abstract class BaseFragment extends Fragment implements ISkinUpdateListener {
 
+    private static final String TAG = "BaseFragment";
     private ProgressDialogFragment progress;
 
     public boolean onBackPress() {
@@ -20,12 +23,13 @@ public abstract class BaseFragment extends Fragment implements ISkinUpdateListen
 
     //----------------------------------------------------------------------------------------------
     // 其他 UI 工具
+
     public void showProgress(String msg) {
         if (progress == null) {
             progress = new ProgressDialogFragment();
         }
         progress.setMsg(msg);
-        progress.show(getFragmentManager());
+        progress.show(getChildFragmentManager());
     }
 
     public void showProgress(@StringRes int stringId) {
@@ -42,6 +46,7 @@ public abstract class BaseFragment extends Fragment implements ISkinUpdateListen
     @Override
     public void onDestroyView() {
         progress = null;
+        Log.d(TAG, "onDestroyView: ");
         super.onDestroyView();
     }
 
