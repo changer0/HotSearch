@@ -13,6 +13,7 @@
     <color name="primaryDarkColor">#000000</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="primaryTextDisableColor">#5bffffff</color>
+    <color name="primaryBodyTextColor">@color/primaryLightColor</color>
 
     <color name="item_title">@color/primaryLightColor</color>
     <color name="item_tag">#FF216C</color>
