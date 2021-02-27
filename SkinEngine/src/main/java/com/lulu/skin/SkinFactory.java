@@ -1,6 +1,8 @@
 package com.lulu.skin;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.View;
 import com.lulu.skin.support.SupportSkinManager;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -20,6 +23,9 @@ public class SkinFactory implements LayoutInflater.Factory {
     private List<SkinItem> skinItems = new ArrayList<>();
 
     private Context context;
+
+    /**是否已经启动回收*/
+    private boolean isCleanupRunning = false;
 
     public SkinFactory(Context context) {
         this.context = context;
@@ -85,10 +91,50 @@ public class SkinFactory implements LayoutInflater.Factory {
             if (SkinEngine.get().isExternalSkin()){
                 skinItem.apply(view.getContext());
             }
+
+            //启动垃圾清理
+            if (!isCleanupRunning) {
+                cleanupHandler.postDelayed(cleanupRunnable, cleanupStep);
+                isCleanupRunning = true;
+            }
         }
 
         //Log.d(TAG, "collectViewAttr: skinItems: " + skinItems.toString());
     }
+
+    //回收时间步长回收
+    private final int cleanupStep = 1000 * 60;
+
+    private Handler cleanupHandler = new Handler(Looper.getMainLooper());
+
+    private int lastCleanupSize = 0;
+
+    private Runnable cleanupRunnable = new Runnable() {
+        @Override
+        public void run() {
+            int startSize = skinItems.size();
+            Log.d(TAG, "开始垃圾回收: 回收前: " + startSize);
+            if (startSize == lastCleanupSize) {
+                Log.d(TAG, "开始垃圾回收: 与上次数量一致无需回收");
+            } else {
+                //https://www.cnblogs.com/owenma/p/13453840.html
+                //经过查阅源码可以发现，iterator也有一个remove方法如下，其中有一个重要的操作为expectedModCount = modCount;
+                // 这样就保证了两者的相等。　
+                Iterator<SkinItem> iterator = skinItems.iterator();
+                while (iterator.hasNext()) {
+                    SkinItem item = iterator.next();
+                    if (item.getViewRef().get() == null) {
+                        iterator.remove();
+                    }
+                }
+                int endSize = skinItems.size();
+                lastCleanupSize = endSize;
+                Log.d(TAG, "开始垃圾回收: 回收后: " + endSize);
+            }
+            //循环去回收
+            cleanupHandler.postDelayed(this, cleanupStep);
+        }
+    };
 
     private boolean isSupportedAttr(String attributeName){
         return SupportSkinManager.isSupportedAttr(attributeName);
@@ -107,9 +153,10 @@ public class SkinFactory implements LayoutInflater.Factory {
      * 释放
      */
     public void release() {
+        cleanupHandler.removeCallbacks(cleanupRunnable);
+        cleanupHandler = null;
+        cleanupRunnable = null;
         skinItems.clear();
         skinItems = null;
     }
-
-
 }

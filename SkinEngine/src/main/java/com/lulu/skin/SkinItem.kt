@@ -14,7 +14,7 @@ class SkinItem(view: View?, private val attrs: List<SkinAttr>?) {
     /**
      * 使用弱引用 View, 防止内存泄漏
      */
-    private val viewRef = WeakReference<View>(view)
+    val viewRef = WeakReference<View>(view)
 
     fun apply(context: Context) {
         val view = viewRef.get()
