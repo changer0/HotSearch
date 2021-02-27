@@ -11,7 +11,7 @@ import com.qq.reader.bookstore.R
 class CommonPageView(context: Context): BasePageView(context) {
     override fun onCreateParams(): BookStoreViewParams {
         return BookStoreViewParams.Builder(
-            R.layout.bookstore_common_page_layout,
+            R.layout.common_page_layout,
             R.id.list_layout
         )
             .setDataErrorViewIdRes(R.id.loading_failed_layout)

@@ -10,7 +10,7 @@ import com.qq.reader.bookstore.R
  */
 class CommonLoadMoreView: LoadMoreView() {
     override fun getLayoutId(): Int {
-        return R.layout.common_second_page_loadmore
+        return R.layout.common_load_more_layout
     }
 
     override fun getLoadingViewId(): Int {

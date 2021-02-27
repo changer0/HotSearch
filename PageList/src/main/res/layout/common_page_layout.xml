@@ -18,14 +18,14 @@
 
         <include
             android:id="@+id/pull_down_list"
-            layout="@layout/bookstore_pull_down_list_layout"
+            layout="@layout/common_list_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </RelativeLayout>
 
     <include
         android:id="@+id/loading_layout"
-        layout="@layout/localstore_loading"
+        layout="@layout/common_loading_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -36,7 +36,7 @@
 
     <include
         android:id="@+id/loading_failed_layout"
-        layout="@layout/localstore_loading_failed"
+        layout="@layout/common_load_failed"
         android:layout_below="@id/common_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

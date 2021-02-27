@@ -27,7 +27,7 @@ public class CommonPageListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.native_fragment_layout);
+        setContentView(R.layout.common_fragment_container_layout);
         try {
             Intent intent = getIntent();
             if (intent == null) {
