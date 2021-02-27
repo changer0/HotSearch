@@ -14,14 +14,14 @@ import com.lulu.basic.fragment.BaseFragment;
 
 /**
  * 通用书城 Activity, 用于放置二级页
- * Author: zhanglulu
  * Time: 2020/12/13
+ * @author zhanglulu
  */
 public class CommonBookStoreActivity extends BaseActivity {
 
     private BaseFragment mHoldFragment;
     private Bundle enterBundle;
-    //恢复用
+    /**恢复用*/
     private static final String SAVE_KEY = "enterBundleKey";
 
     @Override
