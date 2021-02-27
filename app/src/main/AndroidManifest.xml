@@ -56,7 +56,7 @@
 
         <!--因为要使用 Material Design 主题-->
         <activity
-            android:name="com.qq.reader.bookstore.CommonBookStoreActivity"
+            android:name="com.qq.reader.bookstore.CommonPageListActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"
             android:theme="@style/AppTheme"
             tools:replace="theme,windowSoftInputMode" />

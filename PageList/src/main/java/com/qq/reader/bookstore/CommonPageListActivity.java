@@ -17,7 +17,7 @@ import com.lulu.basic.fragment.BaseFragment;
  * Time: 2020/12/13
  * @author zhanglulu
  */
-public class CommonBookStoreActivity extends BaseActivity {
+public class CommonPageListActivity extends BaseActivity {
 
     private BaseFragment mHoldFragment;
     private Bundle enterBundle;

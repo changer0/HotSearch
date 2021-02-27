@@ -22,7 +22,7 @@ public class BookStoreActivityLauncher {
      * @param launchParams 启动参数
      */
     public static void launch(Context context, String path, LaunchParams launchParams, @Nullable Bundle options) {
-        Intent intent = new Intent(context, CommonBookStoreActivity.class);
+        Intent intent = new Intent(context, CommonPageListActivity.class);
         intent.putExtra(BookStoreActivityLauncher.BOOK_STORE_FRAGMENT_PATH, path);
         intent.putExtra(BookStoreActivityLauncher.BOOK_STORE_FRAGMENT_PARAMS, launchParams);
         intent.putExtras(launchParams.getExtras());
