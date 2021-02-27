@@ -16,6 +16,7 @@ public object SupportSkinManager {
             ,pair(BackgroundTintAttr())
             ,pair(SrcAttr())
             ,pair(IndeterminateTintAttr())
+            ,pair(TintAttr())
 
     )
 
