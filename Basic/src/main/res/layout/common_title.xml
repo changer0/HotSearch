@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="48dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/profile_header_left_back"
             android:layout_width="44dp"
             android:layout_height="44dp"
@@ -36,7 +36,7 @@
                 android:textSize="18dp"
                 tools:text="test" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/profile_header_title_sort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

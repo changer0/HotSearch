@@ -41,10 +41,10 @@
         android:layout_width="match_parent"
         android:layout_height="48dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivRefreshBtn"
-            android:background="@drawable/ic_refresh_24px"
-            android:backgroundTint="@color/primaryTextColor"
+            android:src="@drawable/ic_refresh_24px"
+            android:tint="@color/primaryTextColor"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivPre"
             android:background="@drawable/ic_navigate_before_24px"
             app:layout_constraintTop_toTopOf="parent"
@@ -74,7 +74,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivNext"
             android:background="@drawable/ic_navigate_next_24px"
             app:layout_constraintTop_toTopOf="parent"

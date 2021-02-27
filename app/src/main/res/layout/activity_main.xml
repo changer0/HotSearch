@@ -8,7 +8,7 @@
     tools:context="com.lulu.hotsearch.activity.SplashActivity">
 
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
