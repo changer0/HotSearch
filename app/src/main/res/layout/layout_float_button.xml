@@ -22,6 +22,7 @@
         android:layout_alignParentBottom="true"
         android:src="@drawable/ic_add_24px"
         app:tint="@color/primaryTextColor"
+        app:tintMode="src_in"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="20dp"
         app:fabSize="normal"
