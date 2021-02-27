@@ -41,7 +41,7 @@ public class BaseActivity extends AppCompatActivity implements ISkinUpdateListen
     protected void adapterStatus() {
         try {
             //R.color.primaryColor
-            setStatusBgColor(SkinManager.get().getColor("primaryColor"));
+            setStatusBgColor(SkinManager.get().getColor("primaryDarkColor"));
             setStatusTextColor(true);
         } catch (Exception e) {
             e.printStackTrace();

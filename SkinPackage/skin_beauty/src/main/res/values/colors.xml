@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--图片加载 Loading -->
+    <color name="img_loading_placeholder">#f2f2f2</color>
+
+
+    <!--http://tool.c7sky.com/webcolor/#character_0-->
+
+    <!--支持换肤的颜色值-->
+    <color name="primaryColor">#ffebee</color>
+    <color name="primaryLightColor">#ffffff</color>
+    <color name="primaryDarkColor">#ccb9bc</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="primaryTextDisableColor">#5bffffff</color>
+    <color name="primaryBodyTextColor">@color/primaryLightColor</color>
+
+    <color name="item_title">@color/primaryLightColor</color>
+    <color name="item_tag">#FF216C</color>
+
+
+</resources>
