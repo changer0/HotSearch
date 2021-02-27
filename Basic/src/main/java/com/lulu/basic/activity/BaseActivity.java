@@ -14,8 +14,6 @@ import com.lulu.basic.skin.SkinManager;
 import com.lulu.basic.view.ProgressDialogFragment;
 import com.lulu.skin.ISkinUpdateListener;
 import com.lulu.skin.SkinFactory;
-import com.qq.reader.module.bookstore.qweb.fragment.R;
-
 
 /**
  * @author zhanglulu
