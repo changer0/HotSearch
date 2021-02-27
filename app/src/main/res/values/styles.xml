@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/primaryLightColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
 <!--        <item name="android:windowIsTranslucent">true</item>-->
 <!--        <item name="android:windowContentTransitions">true</item>-->
         <item name="android:windowBackground">@android:color/white</item>
