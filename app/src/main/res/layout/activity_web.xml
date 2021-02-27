@@ -30,19 +30,21 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="60dp"
         app:fabSize="normal"
-        app:backgroundTint="@color/primaryColor"
+        app:backgroundTint="@color/primaryLightColor"
         app:rippleColor="@color/primaryColor"
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomPanel"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/primaryLightColor"
         android:layout_width="match_parent"
         android:layout_height="48dp">
 
         <ImageView
             android:id="@+id/ivRefreshBtn"
-            android:src="@drawable/ic_refresh_24px"
+            android:background="@drawable/ic_refresh_24px"
+            android:backgroundTint="@color/primaryTextColor"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,13 +59,14 @@
             app:layout_constraintStart_toEndOf="@id/ivRefreshBtn"
             android:layout_marginStart="15dp"
             android:textSize="@dimen/text_size_2"
+            android:textColor="@color/primaryTextColor"
             android:text="正在加载.."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <ImageView
             android:id="@+id/ivPre"
-            android:src="@drawable/ic_navigate_before_24px"
+            android:background="@drawable/ic_navigate_before_24px"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ivNext"
@@ -73,7 +76,7 @@
 
         <ImageView
             android:id="@+id/ivNext"
-            android:src="@drawable/ic_navigate_next_24px"
+            android:background="@drawable/ic_navigate_next_24px"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
