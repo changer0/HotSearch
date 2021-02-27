@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.lulu.basic.skin.SkinManager;
 import com.lulu.skin.ISkinUpdateListener;
 import com.qq.reader.bookstore.BookStoreUtil;
+import com.qq.reader.bookstore.R;
 import com.qq.reader.bookstore.define.BookStoreViewParams;
 
 import java.util.HashSet;
@@ -102,7 +103,10 @@ public abstract class BasePageView implements ISkinUpdateListener {
     @Override
     public void onSkinUpdate() {
         //使用皮肤包
-        pullDownView.setColorSchemeColors(SkinManager.get().getColor("primaryColor"));
+        //R.color.primaryTextColor
+        //R.color.primaryLightColor
+        pullDownView.setColorSchemeColors(SkinManager.get().getColor("primaryTextColor"));
+        pullDownView.setProgressBackgroundColorSchemeColor(SkinManager.get().getColor("primaryLightColor"));
     }
 
     //----------------------------------------------------------------------------------------------
