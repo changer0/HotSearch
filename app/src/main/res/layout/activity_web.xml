@@ -26,7 +26,7 @@
         tools:visibility="visible"
         android:src="@drawable/ic_open"
         android:tintMode="src_in"
-        android:tint="@color/primaryTextColor"
+        app:tint="@color/primaryTextColor"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="60dp"
         app:fabSize="normal"

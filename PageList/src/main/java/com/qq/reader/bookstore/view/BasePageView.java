@@ -102,7 +102,7 @@ public abstract class BasePageView implements ISkinUpdateListener {
     @Override
     public void onSkinUpdate() {
         //使用皮肤包
-        pullDownView.setColorSchemeColors(SkinManager.get().getColor("primaryLightColor"));
+        pullDownView.setColorSchemeColors(SkinManager.get().getColor("primaryColor"));
     }
 
     //----------------------------------------------------------------------------------------------
