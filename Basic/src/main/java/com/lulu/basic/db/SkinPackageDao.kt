@@ -40,6 +40,9 @@ interface SkinPackageDao {
     @Query("SELECT * FROM skin_package_entity")
     suspend fun getAllSuspend() : List<SkinPackageBean>?
 
+    @Query("SELECT * FROM skin_package_entity ORDER BY `order`")
+    suspend fun getAllByOrderSuspend() : List<SkinPackageBean>?
+
     @Query("SELECT * FROM skin_package_entity where id = :name LIMIT 1")
     fun getByName(name: String): LiveData<SkinPackageBean>
 }

@@ -19,6 +19,15 @@ public class SkinPackageBean extends BaseBean {
     private int version;
     private boolean isUpdate;
     private boolean hasLocalFile;
+    private int order;
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
 
     public String getId() {
         return id;

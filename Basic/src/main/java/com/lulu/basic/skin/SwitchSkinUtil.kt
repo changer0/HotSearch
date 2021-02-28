@@ -61,10 +61,17 @@ object SwitchSkinUtil {
     }
 
     private suspend fun requestLocalData(): List<SkinPackageBean>? = withContext(Dispatchers.IO) {
-        BasicDBManager.get().skinPackageDao().getAllSuspend()
+        BasicDBManager.get().skinPackageDao().getAllByOrderSuspend()
     }
 
     private suspend fun saveLocalData(netList: List<SkinPackageBean>) = withContext(Dispatchers.IO) {
+
+        //本地存储数据顺序
+        for (indexedValue in netList.withIndex()) {
+            val i = indexedValue.index
+            val v = indexedValue.value
+            v.order = i
+        }
         BasicDBManager.get().skinPackageDao().insertSkinPackageListSuspend(netList)
     }
 
