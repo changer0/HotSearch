@@ -17,6 +17,7 @@ public object SupportSkinManager {
             ,pair(SrcAttr())
             ,pair(IndeterminateTintAttr())
             ,pair(TintAttr())
+            ,pair(ProgressTintAttr())
 
     )
 

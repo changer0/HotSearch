@@ -17,6 +17,7 @@
 
     <color name="item_title">@color/primaryLightColor</color>
     <color name="item_tag">#FF216C</color>
+    <color name="webProgressBgColor">#FFFFFF</color>
 
 
 </resources>

@@ -27,6 +27,7 @@ import com.lulu.hotsearch.view.HotSearchWebView
 import com.lulu.basic.activity.BaseActivity
 import com.lulu.hotsearch.*
 import com.lulu.hotsearch.utils.ShareUtil
+import com.lulu.hotsearch.web.HotSearchWebChromeClient
 import com.lulu.hotsearch.web.HotSearchWebViewClient
 import com.lulu.hotsearch.web.OnFinishLoadingListener
 import com.lulu.hotsearch.web.OnStartLoadingListener
@@ -73,13 +74,13 @@ class WebActivity : BaseActivity() {
     }
 
     private fun initWebView() {
-        hotSearchWebViewClient =
-            HotSearchWebViewClient(this)
+        hotSearchWebViewClient = HotSearchWebViewClient(this)
         webView.webViewClient = hotSearchWebViewClient
         webView.setDownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
             handleOpenBtn(Uri.parse(url))
             loadFinish()
         }
+        webView.webChromeClient = HotSearchWebChromeClient(this)
         hotSearchWebViewClient.setOnFinishLoadingListener(object :
             OnFinishLoadingListener {
             override fun onFinishLoading(url: String?) {

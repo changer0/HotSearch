@@ -20,6 +20,14 @@
             android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+        <ProgressBar
+            android:id="@+id/webViewProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:max="100"
+            android:background="@color/webProgressBgColor"
+            android:progressTint="@color/primaryDarkColor"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"/>
     </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
