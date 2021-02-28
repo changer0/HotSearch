@@ -1,15 +1,14 @@
 package com.lulu.hotsearch.utils
 
+import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
 import android.view.View
 import com.lulu.baseutil.Init
 import com.lulu.basic.utils.ToastUtil
-import com.lulu.hotsearch.share.GoShareBuilder
+import com.lulu.hotsearch.share.GoShare
 import com.lulu.hotsearch.share.ShareContentType
 import com.lulu.hotsearch.share.ShareImageLayout
 import kotlinx.coroutines.Dispatchers
@@ -26,8 +25,8 @@ import java.io.FileOutputStream
  */
 object ShareUtil {
 
-    fun showShareSelectDialog(context: Context, url: String, view: View) {
-        val items = arrayOf("分享文字链接", "分享图片")
+    fun showShareSelectDialog(context: Activity, url: String, view: View) {
+        val items = arrayOf("分享链接", "分享图片")
         AlertDialog.Builder(context)
                 .setItems(items) { _, which ->
                     when (which) {
@@ -35,7 +34,7 @@ object ShareUtil {
                             shareToText(context, url)
                         }
                         1 -> {
-                            shareToImage(view)
+                            shareToImage(context, view)
                         }
                     }
                 }
@@ -43,21 +42,21 @@ object ShareUtil {
     }
 
 
-    fun shareToText(context: Context, url: String) {
-        GoShareBuilder(context)
+    fun shareToText(context: Activity, url: String) {
+        GoShare(context)
                 .setText(url)
                 .setContentType(ShareContentType.TEXT)
                 .goShare()
     }
 
-    fun shareToImage(view: View) {
+    fun shareToImage(context: Activity, view: View) {
         GlobalScope.launch {
            val path = withContext(Dispatchers.IO) { obtainShareBitmapPath(view) }
             if (path == null) {
                 ToastUtil.showShortToast("屏幕截取失败, 请重启应用重试!!!")
                 return@launch
             }
-            GoShareBuilder(view.context)
+            GoShare(context)
                     .setContentType(ShareContentType.IMAGE)
                     .setFileUri(Uri.parse(path))
                     .goShare()

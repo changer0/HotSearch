@@ -1,13 +1,15 @@
 package com.lulu.hotsearch.share;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 
-public class GoShareBuilder {
+public class GoShare {
 
-    private Context context;
+    public static final int REQUEST_SHARE_CODE = 100;
+
+    private Activity context;
 
     @ShareContentType
     private String contentType;
@@ -18,26 +20,26 @@ public class GoShareBuilder {
 
     private String text = "分享内容";
 
-    public GoShareBuilder (Context context) {
+    public GoShare(Activity context) {
         this.context = context;
     }
 
-    public GoShareBuilder setContentType(String contentType) {
+    public GoShare setContentType(String contentType) {
         this.contentType = contentType;
         return this;
     }
 
-    public GoShareBuilder setFileUri(Uri fileUri) {
+    public GoShare setFileUri(Uri fileUri) {
         this.fileUri = fileUri;
         return this;
     }
 
-    public GoShareBuilder setTitle(String title) {
+    public GoShare setTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public GoShareBuilder setText(String text) {
+    public GoShare setText(String text) {
         this.text = text;
         return this;
     }
