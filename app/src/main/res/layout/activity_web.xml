@@ -8,13 +8,19 @@
         android:id="@+id/common_title"
         layout="@layout/hot_search_web_title"
         android:visibility="visible" />
-    <com.lulu.hotsearch.view.HotSearchWebView
-        android:id="@+id/webView"
+
+    <FrameLayout
+        android:id="@+id/webViewContent"
         app:layout_constraintTop_toBottomOf="@id/common_title"
         app:layout_constraintBottom_toTopOf="@+id/bottomPanel"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp">
+        <com.lulu.hotsearch.view.HotSearchWebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/ivOpen"

@@ -26,6 +26,7 @@ import com.lulu.hotsearch.utils.FabAnimUtil
 import com.lulu.hotsearch.view.HotSearchWebView
 import com.lulu.basic.activity.BaseActivity
 import com.lulu.hotsearch.*
+import com.lulu.hotsearch.utils.ShareUtil
 import com.lulu.hotsearch.web.HotSearchWebViewClient
 import com.lulu.hotsearch.web.OnFinishLoadingListener
 import com.lulu.hotsearch.web.OnStartLoadingListener
@@ -160,7 +161,10 @@ class WebActivity : BaseActivity() {
         //setLeftImage(hotSearchBean?.type?: Constant.HOT_SEARCH_WB)
         actionBarTitle.text = intent.getStringExtra(Constant.WEB_TITLE)
         ivRightImage.visibility = View.VISIBLE
-        //ivRightImage.setImageDrawable( DrawableUtil.tintDrawable(ivRightImage.drawable, Color.parseColor("#FF000000")))
+        val webViewContent = findViewById<View>(R.id.webViewContent)
+        ivRightImage.setOnClickListener {
+            ShareUtil.showShareSelectDialog(this, curUrl, webViewContent)
+        }
         ivLeftImage.setOnClickListener { finish() }
         initRefreshBtn()
         hotSearchBean?.let {
@@ -323,11 +327,6 @@ class WebActivity : BaseActivity() {
 
     private fun setOnClickOpenListener(i: (v: View) -> Unit) {
         ivOpen.setOnClickListener(i)
-    }
-
-    override fun onSkinUpdate() {
-        super.onSkinUpdate()
-        HotSearchTitle.adapter(ivRightImage)
     }
 
 }

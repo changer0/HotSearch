@@ -56,6 +56,7 @@ class MyApp: Application() {
      */
     private fun initDefine() {
         Init.ROOT_PATH = FileUtil.getStorageFileDir(this)?.path + File.separator
+        Init.ROOT_CACHE_PATH = externalCacheDir?.path + File.separator
         Init.dbName = "hot_search_db"
         ServerUrl.DOMAIN = "https://service-6qnrov8o-1256519379.gz.apigw.tencentcs.com/release/hotSearch/"
         ServerUrl.CONFIG_DOMAIN = "https://gitee.com/luluzhang/HotSearchConfigProject/raw/master/"
