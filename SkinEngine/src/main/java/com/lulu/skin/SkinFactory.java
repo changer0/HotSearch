@@ -102,6 +102,34 @@ public class SkinFactory implements LayoutInflater.Factory {
         //Log.d(TAG, "collectViewAttr: skinItems: " + skinItems.toString());
     }
 
+    private boolean isSupportedAttr(String attributeName){
+        return SupportSkinManager.isSupportedAttr(attributeName);
+    }
+
+    /**
+     * 外部调用
+     */
+    public void apply(){
+        for (SkinItem item : skinItems) {
+            item.apply(context);
+        }
+    }
+
+    /**
+     * 释放
+     */
+    public void release() {
+        cleanupHandler.removeCallbacks(cleanupRunnable);
+        cleanupHandler = null;
+        cleanupRunnable = null;
+        skinItems.clear();
+        skinItems = null;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // 垃圾回收机制
+    ///////////////////////////////////////////////////////////////////////////
+
     //回收时间步长回收
     private final int cleanupStep = 1000 * 60;
 
@@ -136,27 +164,4 @@ public class SkinFactory implements LayoutInflater.Factory {
         }
     };
 
-    private boolean isSupportedAttr(String attributeName){
-        return SupportSkinManager.isSupportedAttr(attributeName);
-    }
-
-    /**
-     * 外部调用
-     */
-    public void apply(){
-        for (SkinItem item : skinItems) {
-            item.apply(context);
-        }
-    }
-
-    /**
-     * 释放
-     */
-    public void release() {
-        cleanupHandler.removeCallbacks(cleanupRunnable);
-        cleanupHandler = null;
-        cleanupRunnable = null;
-        skinItems.clear();
-        skinItems = null;
-    }
 }
