@@ -157,12 +157,11 @@ class WebActivity : BaseActivity() {
         tvLoadMsg = findViewById(R.id.tvLoadMsg)
         actionBarTitle = findViewById(R.id.profile_header_title)
 
-        setLeftImage(hotSearchBean?.type?: Constant.HOT_SEARCH_WB)
+        //setLeftImage(hotSearchBean?.type?: Constant.HOT_SEARCH_WB)
         actionBarTitle.text = intent.getStringExtra(Constant.WEB_TITLE)
         ivRightImage.visibility = View.VISIBLE
-        ivRightImage.setImageDrawable(resources.getDrawable(R.drawable.ic_close_24px))
         //ivRightImage.setImageDrawable( DrawableUtil.tintDrawable(ivRightImage.drawable, Color.parseColor("#FF000000")))
-        ivRightImage.setOnClickListener { finish() }
+        ivLeftImage.setOnClickListener { finish() }
         initRefreshBtn()
         hotSearchBean?.let {
             webView.setOnSwitchListener(object : HotSearchWebView.OnSwitchListener {

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="ic_weight_height">44dp</dimen>
+    <dimen name="title_start_end">5dp</dimen>
 </resources>

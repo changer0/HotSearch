@@ -172,8 +172,4 @@ class HotSearchView(context: Context) : BasePageView(context) {
         fabClickListener = listener
     }
 
-    override fun onSkinUpdate() {
-        super.onSkinUpdate()
-        HotSearchTitle.adapter(rightImage)
-    }
 }
