@@ -35,14 +35,14 @@ private const val TAG = "WebActivity"
 class WebActivity : BaseActivity() {
 
     private lateinit var webView: HotSearchWebView
-    public lateinit var ivLeftImage: ImageView
-    public lateinit var ivRightImage: ImageView
-    public lateinit var ivPre: ImageView
-    public lateinit var ivNext: ImageView
-    public lateinit var ivRefreshBtn: ImageView
-    public lateinit var actionBarTitle: TextView
-    public lateinit var tvLoadMsg: TextView
-    public lateinit var ivOpen: ImageView
+    lateinit var ivLeftImage: ImageView
+    lateinit var ivRightImage: ImageView
+    lateinit var ivPre: ImageView
+    lateinit var ivNext: ImageView
+    lateinit var ivRefreshBtn: ImageView
+    lateinit var actionBarTitle: TextView
+    lateinit var tvLoadMsg: TextView
+    lateinit var ivOpen: ImageView
     private var needShowOpenButton = false
     private var hotSearchBean: HotSearchBean? = null
     private var curIndex = 0
