@@ -32,7 +32,7 @@ public class InputMethodManagerLastSrvView {
                 field.setAccessible(true);
                 field.set(imm, null);
             } catch (Throwable t) {
-                t.printStackTrace();
+                //t.printStackTrace();
                 sHasField = false;
             }
         }

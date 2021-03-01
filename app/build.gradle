@@ -44,6 +44,7 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("Boolean", "isPluginSourceBuild", "$isPluginSourceBuild")
         }
         release {
             minifyEnabled true
@@ -104,8 +105,12 @@ dependencies {
     implementation project(':PageList')
     implementation project(':Basic')
     implementation project(":YWRouter_Android")
+    implementation project(":PluginEngine")
     if (!isSourceBuildZebra.toBoolean()) {
         implementation project(':zebra_core')
+    }
+    if (isPluginSourceBuild.toBoolean()) {
+        implementation project(':PluginLibs:TestPlugin')
     }
 
     kapt 'com.alibaba:arouter-compiler:1.5.1'

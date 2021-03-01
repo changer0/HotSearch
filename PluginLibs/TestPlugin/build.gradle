@@ -1,0 +1,62 @@
+println("isPluginSourceBuild: $isPluginSourceBuild")
+
+if (isPluginSourceBuild.toBoolean()) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+
+android {
+    compileOptions.encoding = "UTF-8"
+    // 编译SDK的版本
+    compileSdkVersion gradle_build_versions.compileSdkVersion
+    // build tools的版本
+    buildToolsVersion gradle_build_versions.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion gradle_build_versions.minSdkVersion
+        targetSdkVersion gradle_build_versions.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-android-optimize'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    if (!isPluginSourceBuild.toBoolean()) {
+        //打包重命名
+        applicationVariants.all { variant ->
+            //def flavorName = variant.getFlavorName()
+            //def variantName = variant.name.capitalize()
+
+            variant.outputs.all { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    def fileName = "${project.name}.apk"
+                    outputFileName = fileName
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compileOnly project(":Basic")
+    compileOnly project(":PluginEngine")
+
+}
