@@ -14,6 +14,10 @@ android {
     buildToolsVersion gradle_build_versions.buildToolsVersion
 
     defaultConfig {
+
+        if (!isPluginSourceBuild.toBoolean()) {
+            applicationId "com.lulu.plugin.test"
+        }
         minSdkVersion gradle_build_versions.minSdkVersion
         targetSdkVersion gradle_build_versions.targetSdkVersion
         versionCode 1
@@ -58,5 +62,6 @@ android {
 dependencies {
     compileOnly project(":Basic")
     compileOnly project(":PluginEngine")
+
 
 }
