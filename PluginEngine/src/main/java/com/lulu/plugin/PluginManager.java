@@ -19,6 +19,7 @@ import dalvik.system.DexClassLoader;
 
 /**
  * 插件管理类
+ * @author zhanglulu
  */
 public class PluginManager {
     static class PluginMgrHolder {
@@ -110,21 +111,5 @@ public class PluginManager {
         DexClassLoader loader = new DexClassLoader(apkPath, dexOutputDir.getAbsolutePath(),
                 null, mContext.getClassLoader());
         return loader;
-    }
-
-    public void startActivity(Intent intent) {
-        Intent pluginIntent = new Intent(mContext, ProxyActivity.class);
-        Bundle extra = intent.getExtras();
-        // complicate if statement
-        if (extra == null || !extra.containsKey(Constants.PLUGIN_CLASS_NAME) && !extra.containsKey(Constants.PACKAGE_NAME)) {
-            try {
-                throw new IllegalAccessException("lack class of plugin and package name");
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-        pluginIntent.putExtras(intent);
-        pluginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(pluginIntent);
     }
 }

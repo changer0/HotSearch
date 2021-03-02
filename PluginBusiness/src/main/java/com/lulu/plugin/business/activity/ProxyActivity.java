@@ -1,15 +1,17 @@
-package com.lulu.plugin;
+package com.lulu.plugin.business.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 
+import com.lulu.basic.activity.BaseActivity;
+
 /**
  * 系统会通过ProxyActivity触发对应的方法的具体实现
+ * @author zhanglulu
  */
-public class ProxyActivity extends Activity {
+public class ProxyActivity extends BaseActivity {
     LifeCircleController mPluginController = new LifeCircleController(this);
 
     @Override

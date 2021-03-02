@@ -60,8 +60,7 @@ android {
 }
 
 dependencies {
-    compileOnly project(":Basic")
-    compileOnly project(":PluginEngine")
+    compileOnly project(":PluginBusiness")
 
 
 }

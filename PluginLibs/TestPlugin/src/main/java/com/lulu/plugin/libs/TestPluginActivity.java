@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.lulu.plugin.PluginActivity;
+import com.lulu.plugin.business.activity.PluginActivity;
 import com.lulu.plugin.test.R;
 
+/**
+ * @author zhanglulu
+ */
 public class TestPluginActivity extends PluginActivity {
     @Override
     public void onCreate(Bundle bundle) {

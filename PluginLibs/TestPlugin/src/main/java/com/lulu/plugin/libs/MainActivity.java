@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 /**
  * PlaceHolder Activity
+ * @author zhanglulu
  */
 public class MainActivity extends Activity {
 

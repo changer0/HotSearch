@@ -2,7 +2,10 @@ package com.lulu.plugin;
 
 import android.os.Bundle;
 
-public interface Pluginable {
+/**
+ * @author zhanglulu
+ */
+public interface PluginAble {
     void onCreate(Bundle bundle);
 
     void onStart();

@@ -1,16 +1,22 @@
-package com.lulu.plugin;
+package com.lulu.plugin.business.activity;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 
+import com.lulu.plugin.Constants;
+import com.lulu.plugin.PluginAble;
+import com.lulu.plugin.PluginApk;
+import com.lulu.plugin.PluginManager;
+
 import java.lang.reflect.Constructor;
 
 /**
  * 系统实际启动的类
+ * @author zhanglulu
  */
-public class LifeCircleController implements Pluginable {
+public class LifeCircleController implements PluginAble {
     Activity mProxy;
     PluginActivity mPlugin;
     Resources mResources;
@@ -28,7 +34,7 @@ public class LifeCircleController implements Pluginable {
         String packageName = bundle.getString(Constants.PACKAGE_NAME);
         mPluginApk = PluginManager.get().getPluginApk(packageName);
         try {
-            mPlugin = (PluginActivity) loadPluginable(mPluginApk.classLoader, mPluginClazz);
+            mPlugin = (PluginActivity) loadPluginAble(mPluginApk.classLoader, mPluginClazz);
             mPlugin.attach(mProxy, mPluginApk);
             mResources = mPluginApk.pluginRes;
             mPlugin.onCreate(bundle);
@@ -37,7 +43,7 @@ public class LifeCircleController implements Pluginable {
         }
 
     }
-    private Object loadPluginable(ClassLoader classLoader, String pluginActivityClass)
+    private Object loadPluginAble(ClassLoader classLoader, String pluginActivityClass)
             throws Exception {
         Class<?> pluginClz = classLoader.loadClass(pluginActivityClass);
         Constructor<?> constructor = pluginClz.getConstructor(new Class[] {});

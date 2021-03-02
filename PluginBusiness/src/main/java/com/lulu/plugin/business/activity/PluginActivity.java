@@ -1,5 +1,6 @@
-package com.lulu.plugin;
+package com.lulu.plugin.business.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +13,17 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.lulu.basic.activity.BaseActivity;
+import com.lulu.plugin.Attachable;
+import com.lulu.plugin.PluginApk;
+import com.lulu.plugin.PluginAble;
+
 /**
  * 所有插件Activity都要继承一个父类PluginActivity
+ * @author zhanglulu
  */
-public abstract class PluginActivity extends Activity implements Pluginable, Attachable<Activity> {
+@SuppressLint("MissingSuperCall")
+public abstract class PluginActivity extends BaseActivity implements PluginAble, Attachable<Activity> {
     public final static String TAG = PluginActivity.class.getSimpleName();
     protected Activity mProxyActivity;
     private Resources mResources;

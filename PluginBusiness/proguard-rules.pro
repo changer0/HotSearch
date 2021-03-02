@@ -19,5 +19,3 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-# 忽略所有插件 Activity
--keep class * extends com.lulu.plugin.business.activity.PluginActivity {*;}
