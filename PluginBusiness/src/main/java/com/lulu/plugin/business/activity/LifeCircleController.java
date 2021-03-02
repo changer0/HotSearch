@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.lulu.plugin.Constants;
-import com.lulu.plugin.PluginAble;
 import com.lulu.plugin.PluginApk;
 import com.lulu.plugin.PluginManager;
 
@@ -16,7 +15,7 @@ import java.lang.reflect.Constructor;
  * 系统实际启动的类
  * @author zhanglulu
  */
-public class LifeCircleController implements PluginAble {
+public class LifeCircleController implements ActivityLifecycle {
     Activity mProxy;
     PluginActivity mPlugin;
     Resources mResources;

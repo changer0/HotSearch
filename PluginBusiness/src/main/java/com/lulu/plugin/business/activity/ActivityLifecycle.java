@@ -1,20 +1,15 @@
-package com.lulu.plugin;
+package com.lulu.plugin.business.activity;
 
 import android.os.Bundle;
 
 /**
  * @author zhanglulu
  */
-public interface PluginAble {
+public interface ActivityLifecycle {
     void onCreate(Bundle bundle);
-
     void onStart();
-
     void onResume();
-
     void onStop();
-
     void onPause();
-
     void onDestroy();
 }

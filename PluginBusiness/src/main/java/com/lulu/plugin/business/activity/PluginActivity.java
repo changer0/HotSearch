@@ -16,14 +16,13 @@ import android.view.WindowManager;
 import com.lulu.basic.activity.BaseActivity;
 import com.lulu.plugin.Attachable;
 import com.lulu.plugin.PluginApk;
-import com.lulu.plugin.PluginAble;
 
 /**
  * 所有插件Activity都要继承一个父类PluginActivity
  * @author zhanglulu
  */
 @SuppressLint("MissingSuperCall")
-public abstract class PluginActivity extends BaseActivity implements PluginAble, Attachable<Activity> {
+public abstract class PluginActivity extends BaseActivity implements ActivityLifecycle, Attachable<Activity> {
     public final static String TAG = PluginActivity.class.getSimpleName();
     protected Activity mProxyActivity;
     private Resources mResources;
