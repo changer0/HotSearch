@@ -76,5 +76,11 @@ public class ProxyActivity extends BaseActivity {
         super.onDestroy();
         mPluginController.onDestroy();
     }
+
+    @Override
+    public void onSkinUpdate() {
+        super.onSkinUpdate();
+        mPluginController.onSkinUpdate();
+    }
 }
 

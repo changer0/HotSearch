@@ -91,6 +91,10 @@ public class LifeCircleController implements ActivityLifecycle {
         return mResources.getAssets();
     }
 
+    public void onSkinUpdate() {
+        mPlugin.onSkinUpdate();
+    }
+
 }
 
 
