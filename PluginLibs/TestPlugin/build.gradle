@@ -4,6 +4,7 @@ if (isPluginSourceBuild.toBoolean()) {
     apply plugin: 'com.android.library'
 } else {
     apply plugin: 'com.android.application'
+    apply plugin: 'kotlin-android'
 }
 
 android {
@@ -61,6 +62,4 @@ android {
 
 dependencies {
     compileOnly project(":PluginBusiness")
-
-
 }

@@ -2,11 +2,13 @@ package com.lulu.hotsearch
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.text.format.DateFormat
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.lulu.baseutil.Init
 import com.lulu.basic.skin.*
 import com.lulu.basic.utils.ToastUtil
 import com.lulu.hotsearch.bean.HotSearchBean
@@ -15,6 +17,9 @@ import com.lulu.hotsearch.define.Constant
 import com.lulu.hotsearch.manager.HotSearchConfigManager.saveCurType
 import com.lulu.hotsearch.view.HotSearchView
 import com.lulu.hotsearch.view.HotSearchView.OnFabClickListener
+import com.lulu.plugin.Constants
+import com.lulu.plugin.PluginManager
+import com.lulu.plugin.business.PluginLauncher
 import com.qq.reader.bookstore.BasePageFragment
 import com.qq.reader.bookstore.define.LoadSignal
 import com.yuewen.reader.zebra.loader.ObserverEntity
@@ -135,6 +140,19 @@ class HotSearchFragment : BasePageFragment<HotSearchView, HotSearchViewModel>() 
         }
 
 
+        // TODO: 2021/3/2 插件测试
+        mPageView.rightImage.setOnLongClickListener {
+
+            PluginManager.get().init(context)
+            PluginManager.get().loadApk(Init.ROOT_PATH + "TestPlugin.apk")
+            val pn = "com.lulu.plugin.test"
+            val cn = "com.lulu.plugin.libs.TestPluginActivity"
+            val intent = Intent()
+            intent.putExtra(Constants.PACKAGE_NAME, pn)
+            intent.putExtra(Constants.PLUGIN_CLASS_NAME, cn)
+            PluginLauncher.startActivity(intent)
+            true
+        }
     }
 
     private fun showSwitchSkinDialog(

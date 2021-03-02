@@ -17,7 +17,7 @@ public class PluginLauncher {
      * 启动 Activity
      * @param intent
      */
-    public void startActivity(Intent intent) {
+    public static void startActivity(Intent intent) {
         Intent pluginIntent = new Intent(Init.context, ProxyActivity.class);
         Bundle extra = intent.getExtras();
         // complicate if statement
