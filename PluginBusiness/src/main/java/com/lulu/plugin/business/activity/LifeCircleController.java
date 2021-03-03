@@ -92,7 +92,9 @@ public class LifeCircleController implements ActivityLifecycle {
     }
 
     public void onSkinUpdate() {
-        mPlugin.onSkinUpdate();
+        if (mPlugin != null) {
+            mPlugin.onSkinUpdate();
+        }
     }
 
 }
