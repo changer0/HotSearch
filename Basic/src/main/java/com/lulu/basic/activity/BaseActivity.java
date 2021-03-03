@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.lulu.basic.skin.SkinManager;
 import com.lulu.basic.view.ProgressDialogFragment;
@@ -18,7 +18,7 @@ import com.lulu.skin.SkinFactory;
 /**
  * @author zhanglulu
  */
-public class BaseActivity extends AppCompatActivity implements ISkinUpdateListener {
+public class BaseActivity extends FragmentActivity implements ISkinUpdateListener {
 
     private ProgressDialogFragment progress;
 

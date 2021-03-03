@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+    <style name="AppTheme" parent="android:Theme.Holo.NoActionBar">
         <item name="android:windowBackground">@android:color/white</item>
     </style>
 

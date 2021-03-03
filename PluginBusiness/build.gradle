@@ -35,7 +35,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.2.1'
     api project(':Basic')
     api project(':PluginEngine')
 }
