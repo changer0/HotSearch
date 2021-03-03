@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import com.lulu.basic.activity.BaseActivity;
 import com.lulu.plugin.Attachable;
 import com.lulu.plugin.PluginApk;
+import com.lulu.skin.ISkinUpdateListener;
 
 /**
  * 所有插件Activity都要继承一个父类PluginActivity
@@ -132,6 +133,11 @@ public abstract class PluginActivity extends BaseActivity implements ActivityLif
 
     @Override
     public void onDestroy() {
+    }
+
+    @Override
+    public void onSkinUpdate() {
+        //把基类的逻辑干掉
     }
 }
 

@@ -61,5 +61,9 @@ android {
 }
 
 dependencies {
-    compileOnly project(":PluginBusiness")
+    compileOnly (project(":PluginBusiness")) {
+        exclude group: "androidx.arch.core"
+    }
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation project(":SkinRes")
 }
