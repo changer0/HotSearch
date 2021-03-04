@@ -23,6 +23,7 @@ import com.lulu.plugin.business.PluginLauncher
 import com.qq.reader.bookstore.BasePageFragment
 import com.qq.reader.bookstore.define.LoadSignal
 import com.yuewen.reader.zebra.loader.ObserverEntity
+import java.io.File
 
 /**
  * Author: zhanglulu
@@ -144,7 +145,7 @@ class HotSearchFragment : BasePageFragment<HotSearchView, HotSearchViewModel>() 
         mPageView.rightImage.setOnLongClickListener {
 
             PluginManager.get().init(context)
-            PluginManager.get().loadApk(Init.ROOT_PATH + "TestPlugin.apk")
+            PluginManager.get().loadApk(Init.ROOT_PATH + "debug" + File.separator +  "TestPlugin.apk")
             val pn = "com.lulu.plugin.test"
             val cn = "com.lulu.plugin.libs.TestPluginActivity"
             val intent = Intent()
