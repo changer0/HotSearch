@@ -7,7 +7,7 @@ android {
     compileSdkVersion gradle_build_versions.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.lulu.hotsearch"
+        applicationId "${package_name}"
         minSdkVersion gradle_build_versions.minSdkVersion
         targetSdkVersion gradle_build_versions.targetSdkVersion
 
@@ -21,6 +21,12 @@ android {
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "PACKAGE_NAME", "\"${package_name}\"")
+
+        manifestPlaceholders = [
+                "PACKAGE_NAME": "${package_name}"
+        ]
     }
 
 

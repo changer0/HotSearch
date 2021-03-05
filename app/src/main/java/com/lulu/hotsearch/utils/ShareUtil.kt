@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.net.Uri
 import android.view.View
 import com.lulu.baseutil.Init
 import com.lulu.basic.utils.ToastUtil
@@ -51,14 +50,14 @@ object ShareUtil {
 
     fun shareToImage(context: Activity, view: View) {
         GlobalScope.launch {
-           val path = withContext(Dispatchers.IO) { obtainShareBitmapPath(view) }
-            if (path == null) {
+           val file = withContext(Dispatchers.IO) { obtainShareBitmapPath(view) }
+            if (file == null) {
                 ToastUtil.showShortToast("屏幕截取失败, 请重启应用重试!!!")
                 return@launch
             }
             GoShare(context)
                     .setContentType(ShareContentType.IMAGE)
-                    .setFileUri(Uri.parse(path))
+                    .setFileUri(FileProviderUtil.getFileUri(file))
                     .goShare()
         }
     }
@@ -66,7 +65,7 @@ object ShareUtil {
     /**
      * 获取分享图片的地址
      */
-    private fun obtainShareBitmapPath(view: View):String? {
+    private fun obtainShareBitmapPath(view: View):File? {
         //https://www.jianshu.com/p/d0ef41470586
         val originBitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(originBitmap)
@@ -87,7 +86,7 @@ object ShareUtil {
             }
             fos = FileOutputStream(file)
             destBitmap.compress(Bitmap.CompressFormat.JPEG, 80, fos)
-            return file.path
+            return file
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
