@@ -8,7 +8,6 @@ import com.lulu.basic.define.ServerUrl
 import com.lulu.basic.image.ImageUtils
 import com.lulu.basic.kvstorage.KVStorage
 import com.lulu.basic.net.Http
-import com.lulu.plugin.PluginManager
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.bugly.crashreport.CrashReport.UserStrategy
 import com.yuewen.component.router.YWRouter
@@ -27,7 +26,6 @@ class MyApp: Application() {
         super.onCreate()
         Init.app = this
         Init.context = this
-        PluginManager.get().init(this)
         initDefine()
         initBugly()
         initMMKV()

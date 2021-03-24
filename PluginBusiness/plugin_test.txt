@@ -1,0 +1,13 @@
+        // TODO: 2021/3/2 插件测试
+        mPageView.rightImage.setOnLongClickListener {
+
+            PluginManager.get().init(context)
+            PluginManager.get().loadApk(Init.ROOT_PATH + "debug" + File.separator +  "TestPlugin.apk")
+            val pn = "com.lulu.plugin.test"
+            val cn = "com.lulu.plugin.libs.TestPluginActivity"
+            val intent = Intent()
+            intent.putExtra(Constants.PACKAGE_NAME, pn)
+            intent.putExtra(Constants.PLUGIN_CLASS_NAME, cn)
+            PluginLauncher.startActivity(intent)
+            true
+        }
