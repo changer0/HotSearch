@@ -58,6 +58,8 @@ class HotSearchFragment : BasePageFragment<HotSearchView, HotSearchViewModel>() 
         mPageView.dataErrorView.setOnClickListener {
             innerLoadData(mEnterBundle, true)
         }
+
+        PluginTest.testPlugin(mPageView.rightImage, activity)
     }
 
     private fun innerLoadData(enterBundle: Bundle, showProgress: Boolean) {
@@ -167,5 +169,4 @@ class HotSearchFragment : BasePageFragment<HotSearchView, HotSearchViewModel>() 
             dialog.cancel()
         }.setNegativeButton(R.string.cancel, null).create().show()
     }
-
 }

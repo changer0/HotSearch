@@ -15,5 +15,4 @@ public class PluginConstant {
     public final static String FIELD_RESOURCES = "mResources";
 
     public static final String STUB_ACTIVITY = "com.lulu.plugin.engine.StubActivity";
-    public static final String STUB_PACKAGE = "com.lulu.plugin.engine";
 }

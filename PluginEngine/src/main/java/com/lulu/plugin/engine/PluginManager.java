@@ -78,7 +78,7 @@ public class PluginManager {
                 && isPluginLoaded(targetPackageName)) {//插件包名 可做白名单配置
             if (PluginConstant.DEBUG) Log.e(TAG, "hook " +  targetClassName + " to " + PluginConstant.STUB_ACTIVITY);
 
-            intent.setClassName(PluginConstant.STUB_PACKAGE, PluginConstant.STUB_ACTIVITY);
+            intent.setClassName(mContext.getPackageName(), PluginConstant.STUB_ACTIVITY);
             intent.putExtra(PluginConstant.KEY_IS_PLUGIN, true);
             intent.putExtra(PluginConstant.KEY_PACKAGE, targetPackageName);
             intent.putExtra(PluginConstant.KEY_ACTIVITY, targetClassName);
@@ -151,6 +151,12 @@ public class PluginManager {
 
     }
 
+    /**
+     * 加载插件
+     *
+     * @param apkPath 插件路径
+     * @return 是否加载成功
+     */
     public boolean loadPlugin(String apkPath) {
         File apk = new File(apkPath);
         if (!apk.exists()) {
