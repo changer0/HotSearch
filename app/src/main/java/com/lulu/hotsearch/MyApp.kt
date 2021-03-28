@@ -8,6 +8,7 @@ import com.lulu.basic.define.ServerUrl
 import com.lulu.basic.image.ImageUtils
 import com.lulu.basic.kvstorage.KVStorage
 import com.lulu.basic.net.Http
+import com.lulu.plugin.engine.PluginManager
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.bugly.crashreport.CrashReport.UserStrategy
 import com.yuewen.component.router.YWRouter
@@ -30,6 +31,7 @@ class MyApp: Application() {
         initBugly()
         initMMKV()
         initZebra()
+        initPlugin()
         //初始化 YWRouter
         YWRouter.init(this, BuildConfig.DEBUG)
     }
@@ -72,6 +74,13 @@ class MyApp: Application() {
         }
         CrashReport.initCrashReport(this, "1b2b486e59", BuildConfig.DEBUG, strategy)
 
+    }
+
+    /**
+     * 插件初始化
+     */
+    private fun initPlugin() {
+        PluginManager.get().init(this)
     }
 
 
