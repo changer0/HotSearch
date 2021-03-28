@@ -163,7 +163,7 @@ class HotSearchView(context: Context) : BasePageView(context) {
     }
 
     interface OnFabClickListener {
-        fun onClick(view: View, bean: HotSearchConfigBean)
+        fun onClick(view: View, bean: HotSearchConfigBean.HotSearchListBean)
     }
 
     private var fabClickListener: OnFabClickListener? = null

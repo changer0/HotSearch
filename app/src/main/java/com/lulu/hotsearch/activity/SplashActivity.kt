@@ -13,6 +13,7 @@ import com.lulu.basic.define.ServerUrl
 import com.lulu.hotsearch.manager.HotSearchConfigManager
 import com.lulu.hotsearch.R
 import com.lulu.basic.activity.BaseActivity
+import com.lulu.hotsearch.AppServerUrl
 import com.qq.reader.bookstore.BookStoreActivityLauncher
 import com.qq.reader.bookstore.LaunchParams
 import kotlinx.android.synthetic.main.activity_main.*
@@ -99,7 +100,7 @@ class SplashActivity : BaseActivity() {
     private suspend fun requestConfigInfo() {
         Log.d(TAG, "requestConfigInfo: 正在配置信息")
         val result =
-            HttpCoroutineUtils.doRequestGet(ServerUrl.CONFIG_DOMAIN + "config.json")
+            HttpCoroutineUtils.doRequestGet(AppServerUrl.URL_CONFIG_INFO)
         if (result.isSuccess) {
             Log.d(TAG, "requestConfigInfo: 请求配置信息：${result.jsonStr}")
             HotSearchConfigManager.saveConfigInfo(result.jsonStr)

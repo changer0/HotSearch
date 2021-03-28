@@ -44,7 +44,7 @@ class HotSearchFragment : BasePageFragment<HotSearchView, HotSearchViewModel>() 
         mPageView.actionBarContainer.visibility = View.VISIBLE
         innerLoadData(enterBundle, false)
         mPageView.setOnFabClickListener(object : OnFabClickListener {
-            override fun onClick(view: View, bean: HotSearchConfigBean) {
+            override fun onClick(view: View, bean: HotSearchConfigBean.HotSearchListBean) {
                 mEnterBundle.putString(
                     Constant.HOT_SEARCH_TYPE,
                     bean.type

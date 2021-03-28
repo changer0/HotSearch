@@ -59,7 +59,7 @@ public class SkinFactory implements LayoutInflater.Factory {
         } catch (Exception e) {
             view = null;
         }
-        Log.d(TAG, "createView: name => " + name);
+        //Log.d(TAG, "createView: name => " + name);
         return view;
     }
 

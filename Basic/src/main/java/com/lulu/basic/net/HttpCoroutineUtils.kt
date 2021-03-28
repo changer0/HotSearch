@@ -33,13 +33,15 @@ public class HttpCoroutineUtils {
                                         params: HashMap<String, String>? = null,
                                         contentType: String = "application/json",
                                         needGzip: Boolean = false): HttpResponseEntity<String> = withContext(Dispatchers.IO) {
+            Log.i(TAG, "doRequestGet 开始请求:$url")
             var responseEntity = HttpResponseEntity<String>()
             try {
                 val inputStream = Http.sendRequest(url, requestContent, Http.GET, params, contentType)
                 responseEntity = analyseInputStreamToString(inputStream, needGzip)
+                Log.i(TAG, "doRequestGet 开始请求完成, isSuccess:${responseEntity.isSuccess}:$url")
             } catch (e: Exception) {
                 responseEntity.throwable = e
-                Log.e(TAG, "doRequestGet: 请求异常异常")
+                Log.e(TAG, "doRequestGet: 请求异常:$url")
                 e.printStackTrace()
             }
             responseEntity
@@ -63,7 +65,7 @@ public class HttpCoroutineUtils {
                 responseEntity = analyseInputStreamToString(inputStream, needGzip)
             } catch (e: Exception) {
                 responseEntity.throwable = e
-                Log.e(TAG, "doRequestPost: 请求异常异常")
+                Log.e(TAG, "doRequestPost: 请求异常:${url}")
                 e.printStackTrace()
             }
             responseEntity
@@ -89,7 +91,7 @@ public class HttpCoroutineUtils {
                 responseEntity = analyseResponse(inputStream, needGzip, beanClass)
             } catch (e: Exception) {
                 responseEntity.throwable = e
-                Log.e(TAG, "doRequestGetGSONBean: 请求异常异常")
+                Log.e(TAG, "doRequestGetGSONBean: 请求异常:${url}")
                 e.printStackTrace()
             }
             responseEntity
@@ -116,7 +118,7 @@ public class HttpCoroutineUtils {
                 responseEntity = analyseResponse(inputStream, needGzip, beanClass)
             } catch (e: Exception) {
                 responseEntity.throwable = e
-                Log.e(TAG, "doRequestPostGSONBean: 请求异常异常")
+                Log.e(TAG, "doRequestPostGSONBean: 请求异常:${url}")
                 e.printStackTrace()
             }
             responseEntity

@@ -18,13 +18,14 @@ object HotSearchConfigManager {
     private const val TAG = "HotSearchConfigManager"
     private val CONFIG_INFO_PATH = Init.ROOT_PATH + "hot_search_config.json"
     private const val LOCAL_CONFIG_PATH = "local_config_info.json"
-    private var configInfo = mutableListOf<HotSearchConfigBean>()
+    private var hotSearchList = mutableListOf<HotSearchConfigBean.HotSearchListBean>()
+    private var configInfo = HotSearchConfigBean()
 
     fun saveConfigInfo(jsonStr: String) {
         try {
-            val configBeanList = GSONUtil.parseJsonToList(jsonStr, HotSearchConfigBean::class.java)
+            val configInfo = GSONUtil.parseJsonWithGSON<HotSearchConfigBean>(jsonStr, HotSearchConfigBean::class.java)
             //解析失败、为空都忽略数据
-            if (configBeanList.isEmpty()) {
+            if (configInfo == null || configInfo.hotSearchList.isEmpty()) {
                 return
             }
             val isSuccess = FileUtil.writeFile(File(CONFIG_INFO_PATH), jsonStr, false)
@@ -38,31 +39,34 @@ object HotSearchConfigManager {
      * 检查是否有数据
      */
     fun hasData(): Boolean {
-        if (configInfo.isNotEmpty()) {
+        if (hotSearchList.isNotEmpty()) {
             return true
         }
         return File(CONFIG_INFO_PATH).exists()
     }
 
-    fun getConfigList(): List<HotSearchConfigBean> {
-        if (configInfo.isNotEmpty()) {
-            return configInfo
+    fun getConfigList(): List<HotSearchConfigBean.HotSearchListBean> {
+        if (hotSearchList.isNotEmpty()) {
+            return hotSearchList
         }
         val jsonStr = FileUtil.readFile(File(CONFIG_INFO_PATH))
         try {
             if (!TextUtils.isEmpty(jsonStr)) {
-                configInfo = GSONUtil.parseJsonToList<HotSearchConfigBean>(jsonStr, HotSearchConfigBean::class.java)
+                configInfo = GSONUtil.parseJsonWithGSON<HotSearchConfigBean>(jsonStr, HotSearchConfigBean::class.java)
+                hotSearchList.clear()
+                hotSearchList.addAll(configInfo.hotSearchList)
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
-        if (configInfo.isEmpty()) {
-            configInfo = GSONUtil.parseJsonToList<HotSearchConfigBean>(
+        if (hotSearchList.isEmpty()) {
+            configInfo = GSONUtil.parseJsonWithGSON<HotSearchConfigBean>(
                 AssetsUtil.getAssetsFileToString(LOCAL_CONFIG_PATH), HotSearchConfigBean::class.java)
+            hotSearchList.addAll(configInfo.hotSearchList)
         }
-        configInfo.reverse()
-        return configInfo
+        hotSearchList.reverse()
+        return hotSearchList
     }
 
     @JvmStatic
@@ -76,11 +80,12 @@ object HotSearchConfigManager {
     }
 
     @JvmStatic
-    public fun getCurConfigBean(): HotSearchConfigBean{
+    public fun getCurConfigBean(): HotSearchConfigBean.HotSearchListBean {
         var curBean = checkHasConfigBeanByType(HotSearchKVStorage.getLastType())
         if (curBean == null) {
             saveCurType(Constant.HOT_SEARCH_WB)
-            curBean = HotSearchConfigBean()
+            curBean =
+                HotSearchConfigBean.HotSearchListBean()
             curBean.name = "微博"
             curBean.title = "微博热搜榜"
             curBean.icon = "https://gitee.com/luluzhang/HotSearchConfigProject/raw/master/icon/sina_wb.png"
@@ -89,7 +94,7 @@ object HotSearchConfigManager {
         return curBean
     }
 
-    private fun checkHasConfigBeanByType(type: String): HotSearchConfigBean? {
+    private fun checkHasConfigBeanByType(type: String): HotSearchConfigBean.HotSearchListBean? {
         for (bean in getConfigList()) {
             if (TextUtils.equals(type, bean.type)) {
                 return bean
