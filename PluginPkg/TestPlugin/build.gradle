@@ -64,4 +64,5 @@ android {
 dependencies {
     implementation project(':PluginEngine')
     implementation project(':Basic')
+    implementation project(':PluginLib')
 }

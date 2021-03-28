@@ -111,6 +111,7 @@ dependencies {
     implementation project(':Basic')
     implementation project(":YWRouter_Android")
     implementation project(":PluginEngine")
+    implementation project(":PluginLib")
 
     if (!isSourceBuildZebra.toBoolean()) {
         implementation project(':zebra_core')
