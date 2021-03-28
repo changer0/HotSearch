@@ -7,5 +7,5 @@ object Version {
     /**
      * 配置信息版本
      */
-    const val configInfoVersion = 2
+    const val configInfoVersion = 3
 }
