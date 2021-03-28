@@ -1,6 +1,7 @@
 package com.lulu.plugin.engine;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Context;
@@ -21,6 +22,7 @@ import dalvik.system.DexClassLoader;
  */
 public class PluginManager {
     private final static String TAG = "PluginManager";
+    @SuppressLint("StaticFieldLeak")
     private static PluginManager sInstance;
     private Context mContext;
     private PluginApp mPluginApp;
@@ -158,6 +160,9 @@ public class PluginManager {
      * @return 是否加载成功
      */
     public boolean loadPlugin(String apkPath) {
+        if (mPluginApp != null) {
+            return true;
+        }
         File apk = new File(apkPath);
         if (!apk.exists()) {
             return false;

@@ -5,15 +5,14 @@ import android.content.Intent
 import android.view.View
 import com.lulu.baseutil.Init
 import com.lulu.basic.utils.ToastUtil
-import com.lulu.plugin.engine.PluginConstant
 import com.lulu.plugin.engine.PluginManager
 
 object PluginTest {
-    val PLUGIN_PATH = Init.ROOT_PATH + "plugin/" + "TestPlugin.apk"
-    val PLUGIN_PACKAGE ="com.lulu.plugin.test"
-    val PLUGIN_ACTIVITY ="com.lulu.plugin.libs.TestPluginActivity"
+    private val PLUGIN_PATH = Init.ROOT_PATH + "plugin/" + "TestPlugin.apk"
+    private const val PLUGIN_PACKAGE ="com.lulu.plugin.test"
+    private const val PLUGIN_ACTIVITY ="com.lulu.plugin.libs.TestPluginActivity"
     fun testPlugin(view: View, activity: Activity?) {
-        if (true) return
+        //if (true) return
 
         activity?:return
         //TestPlugin.apk
