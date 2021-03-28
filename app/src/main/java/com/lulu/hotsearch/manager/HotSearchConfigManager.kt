@@ -79,6 +79,13 @@ object HotSearchConfigManager {
         return getCurConfigBean().type
     }
 
+    /**
+     * 使用使用默认浏览器
+     */
+    public fun isUseDefaultBrowser() : Boolean {
+        return configInfo.isUseDefaultBrowser
+    }
+
     @JvmStatic
     public fun getCurConfigBean(): HotSearchConfigBean.HotSearchListBean {
         var curBean = checkHasConfigBeanByType(HotSearchKVStorage.getLastType())

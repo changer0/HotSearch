@@ -3,6 +3,7 @@ package com.lulu.hotsearch.itembuilder
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
+import android.net.Uri
 import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
@@ -16,6 +17,7 @@ import com.lulu.hotsearch.R
 import com.lulu.hotsearch.activity.WebActivity
 import com.lulu.hotsearch.bean.HotSearchBean
 import com.lulu.hotsearch.bean.Result
+import com.lulu.hotsearch.manager.HotSearchConfigManager
 
 class HotSearchBindItem(itemData: Result?) :
     BaseViewBindItem<Result, CommonViewHolder>(itemData) {
@@ -69,16 +71,25 @@ class HotSearchBindItem(itemData: Result?) :
         hotTitle: TextView?,
         url: String
     ) {
-        val intent = Intent(activity, WebActivity::class.java)
-        intent.putExtra(Constant.WEB_URL, url)
-        intent.putExtra(Constant.WEB_CUR_ORDER, itemData.order)
-        intent.putExtra(Constant.WEB_TITLE, itemData.title)
-        intent.putExtra(Constant.WEB_HOT_SEARCH_DATA, hotSearchBean)
-        activity.startActivity(
-            intent,
-            ActivityOptions.makeSceneTransitionAnimation(activity, hotTitle, "anim_weibo_item")
-                .toBundle()
-        )
+
+        if (url.isBlank()) {
+            return
+        }
+        if (HotSearchConfigManager.isUseDefaultBrowser()) {
+            activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        } else {
+            val intent = Intent(activity, WebActivity::class.java)
+            intent.putExtra(Constant.WEB_URL, url)
+            intent.putExtra(Constant.WEB_CUR_ORDER, itemData.order)
+            intent.putExtra(Constant.WEB_TITLE, itemData.title)
+            intent.putExtra(Constant.WEB_HOT_SEARCH_DATA, hotSearchBean)
+            activity.startActivity(
+                intent,
+                ActivityOptions.makeSceneTransitionAnimation(activity, hotTitle, "anim_weibo_item")
+                    .toBundle()
+            )
+        }
+
     }
 
 }
