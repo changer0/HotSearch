@@ -7,9 +7,8 @@ include ':SkinEngine'
 include ':KVStorage'
 include ':Download'
 include ':PluginEngine'
-include ':PluginLibs:TestPlugin'
-//include ':PluginBusiness'
-
+include ':PluginLib'
+include ':PluginPkg:TestPlugin'
 
 //皮肤包模块
 include ':SkinPackage:skin_purple'
