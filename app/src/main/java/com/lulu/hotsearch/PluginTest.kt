@@ -13,6 +13,8 @@ object PluginTest {
     val PLUGIN_PACKAGE ="com.lulu.plugin.test"
     val PLUGIN_ACTIVITY ="com.lulu.plugin.libs.TestPluginActivity"
     fun testPlugin(view: View, activity: Activity?) {
+        if (true) return
+
         activity?:return
         //TestPlugin.apk
         view.setOnLongClickListener {
