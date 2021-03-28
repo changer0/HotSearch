@@ -66,7 +66,8 @@ public class HookedInstrumentation extends Instrumentation implements Handler.Ca
     @Override
     public Activity newActivity(ClassLoader cl, String className, Intent intent) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
         if (PluginConstant.DEBUG) Log.e(TAG, "newActivity");
-
+        //把系统的 ClassLoader 塞进去,加载宿主传递的 Intent
+        intent.setExtrasClassLoader(cl);
         if (mPluginManager.hookToPluginActivity(intent)) {
             String targetClassName = intent.getComponent().getClassName();
             PluginApp pluginApp = mPluginManager.getLoadedPluginApk();

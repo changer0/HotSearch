@@ -62,5 +62,6 @@ android {
 }
 
 dependencies {
-    implementation project(':PluginBusiness')
+    implementation project(':PluginEngine')
+    implementation project(':Basic')
 }

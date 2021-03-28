@@ -41,6 +41,7 @@ public class PluginManager {
      */
     public void init(Context context) {
         mContext = context.getApplicationContext();
+        ReflectUtil.init();
         hookInstrumentation();
     }
 
@@ -170,5 +171,14 @@ public class PluginManager {
         if (mContext == null) {
             throw new RuntimeException("PluginManager::Please call the Init method before use ");
         }
+    }
+
+    /**
+     * 启动插件 Activity !
+     */
+    public void startPluginActivity(Activity activity, Intent intent) {
+        //Hook 当前 Activity 的 Instrumentation 对象
+        hookCurrentActivityInstrumentation(activity);
+        activity.startActivity(intent);
     }
 }

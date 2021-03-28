@@ -14,8 +14,6 @@ public class PluginConstant {
 
     public final static String FIELD_RESOURCES = "mResources";
 
-    public static final String STUB_ACTIVITY = "top.vimerzhao.hookplugindemo.StubActivity";
-    public static final String STUB_PACKAGE = "top.vimerzhao.hookplugindemo";
-
-    public static final String PLUGIN_PATH = Environment.getExternalStorageDirectory() + "/plugin/plugin.apk";
+    public static final String STUB_ACTIVITY = "com.lulu.plugin.engine.StubActivity";
+    public static final String STUB_PACKAGE = "com.lulu.plugin.engine";
 }
