@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -73,6 +74,7 @@ class WebActivity : BaseActivity() {
         refreshPreNextControl()
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
         hotSearchWebViewClient = HotSearchWebViewClient(this)
         webView.webViewClient = hotSearchWebViewClient
@@ -116,23 +118,23 @@ class WebActivity : BaseActivity() {
 
         val webSettings = webView.settings
         //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.javaScriptEnabled = true;
+        webSettings.cacheMode = WebSettings.LOAD_DEFAULT;
+        webSettings.javaScriptCanOpenWindowsAutomatically = true;
         webSettings.setSupportZoom(true); // 支持缩放
-        webSettings.setBuiltInZoomControls(true); // 设置内置的缩放控制 手势 + 缩放控件
-        webSettings.setDisplayZoomControls(false); // 不显示缩放控件
+        webSettings.builtInZoomControls = true; // 设置内置的缩放控制 手势 + 缩放控件
+        webSettings.displayZoomControls = false; // 不显示缩放控件
         webSettings.setSaveFormData(false);
-        webSettings.setUseWideViewPort(true); // 支持html设置viewport
-        webSettings.setLoadWithOverviewMode(true); // body宽度超出自动缩放
-        webSettings.setDatabaseEnabled(true);
-        webSettings.setDomStorageEnabled(true);
+        webSettings.useWideViewPort = true; // 支持html设置viewport
+        webSettings.loadWithOverviewMode = true; // body宽度超出自动缩放
+        webSettings.databaseEnabled = true;
+        webSettings.domStorageEnabled = true;
         webSettings.setGeolocationEnabled(true);
         webSettings.setAppCacheEnabled(true);
-        webSettings.setAllowFileAccess(true); // 支持以 file:/// 打开本地文件,file:///android_asset 是默认被允许的
-        webSettings.setAllowFileAccessFromFileURLs(false); // 本地文件能否通过ajax访问别的本地文件
-        webSettings.setAllowUniversalAccessFromFileURLs(true); // 本地文件能否通过ajax跨域访问http/https
-        webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW); // 允许https中加载http
+        webSettings.allowFileAccess = true; // 支持以 file:/// 打开本地文件,file:///android_asset 是默认被允许的
+        webSettings.allowFileAccessFromFileURLs = false; // 本地文件能否通过ajax访问别的本地文件
+        webSettings.allowUniversalAccessFromFileURLs = true; // 本地文件能否通过ajax跨域访问http/https
+        webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW; // 允许https中加载http
     }
 
     private fun parseIntent() {
